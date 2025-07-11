@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({super.key});
@@ -46,7 +47,14 @@ class ResetPassword extends StatelessWidget {
                   width: screenWidth * 0.5,
                   height: 52,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignInScreen(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff8E6CEF),
                       shape: RoundedRectangleBorder(
