@@ -9,7 +9,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -32,7 +32,7 @@ class SignInScreen extends StatelessWidget {
               ),
               SizedBox(height: 32),
               CustomTextField(
-                emailController: _emailController,
+                emailController: emailController,
                 isPassword: false,
                 hint: 'Email Address',
               ),
