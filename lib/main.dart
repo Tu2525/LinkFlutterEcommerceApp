@@ -12,16 +12,8 @@ class EcommerceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        fontFamily: 'Circular',
-        primarySwatch: Colors.blue,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        fontFamily: 'Circular',
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
+      darkTheme: ThemeData(brightness: Brightness.dark, fontFamily: 'Circular'),
       themeMode: ThemeMode.system,
       home: const SplashScreen(),
     );
