@@ -10,8 +10,8 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
+
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 23),
         child: SingleChildScrollView(
@@ -41,31 +41,28 @@ class SignInScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const PasswordScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const PasswordScreen(),
+                    ),
                   );
                 },
               ),
               const SizedBox(height: 16),
               Row(
                 children: [
-                  const Text(
-                    'Dont have an Account ?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Circular',
-                      fontSize: 12,
-                      color: Color(0xff000000),
-                    ),
+                  Text(
+                    'Don\'t have an Account?',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: const Text(
+                    child: Text(
                       ' Create One',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
-                        fontSize: 12,
-                        color: Colors.black,
                       ),
                     ),
                   ),
