@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/reset_password%20screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
@@ -42,7 +43,14 @@ class ForgotPassword extends StatelessWidget {
                   hint: 'Enter Email address',
                 ),
                 SizedBox(height: screenHeight * 0.03),
-                ContinueButton(onPressed: () {}),
+                ContinueButton(onPressed: () {
+                   Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ResetPassword(),
+                      ),
+                    );
+                }),
               ],
             ),
           ),
