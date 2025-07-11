@@ -15,7 +15,7 @@ class EcommerceApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Circular',
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

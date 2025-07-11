@@ -8,10 +8,10 @@ class ContinueButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xff8E6CEF),
+        backgroundColor: const Color(0xff8E6CEF),
 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        minimumSize: Size(double.infinity, 49),
+        minimumSize: const Size(double.infinity, 49),
         elevation: 0, // Full width button
       ),
       child: const Text(
