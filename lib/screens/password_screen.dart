@@ -22,9 +22,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 123),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+              const SizedBox(height: 123),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   'Sign In',
                   style: TextStyle(
@@ -34,25 +34,25 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               CustomTextField(
                 emailController: _passwordController,
                 isPassword: true,
                 hint: 'Password',
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ContinueButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PasswordScreen()),
+                    MaterialPageRoute(builder: (context) => const PasswordScreen()),
                   );
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
-                  Text(
+                  const Text(
                     'Forgot Password ?',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
@@ -69,7 +69,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                             builder: (context) =>  ForgotPassword()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       ' Reset',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,

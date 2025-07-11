@@ -10,16 +10,16 @@ class CustomIcon extends StatelessWidget {
     return Container(
       width: 40,
       height: 40,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xffF4F4F4),
         shape: BoxShape.circle,
       ),
       child: Center(
         child: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios_new, size: 16, color: Colors.black),
+          icon: const Icon(Icons.arrow_back_ios_new, size: 16, color: Colors.black),
           padding: EdgeInsets.zero,
-          constraints: BoxConstraints(),
+          constraints: const BoxConstraints(),
         ),
       ),
     );
