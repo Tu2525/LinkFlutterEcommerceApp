@@ -10,7 +10,6 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 23),
