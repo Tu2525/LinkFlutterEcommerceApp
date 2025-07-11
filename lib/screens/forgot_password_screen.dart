@@ -6,7 +6,47 @@ class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Custom_Icon(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
+class Custom_Icon extends StatelessWidget {
+  const Custom_Icon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: Color(0xffF4F4F4),
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            size: 16,
+            color: Colors.black,
+          ),
+          padding: EdgeInsets.zero,
+          constraints: BoxConstraints(),
+        ),
+      ),
     );
   }
 }
