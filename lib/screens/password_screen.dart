@@ -15,7 +15,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 23),
         child: SingleChildScrollView(
@@ -45,7 +44,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const PasswordScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const PasswordScreen(),
+                    ),
                   );
                 },
               ),
@@ -66,7 +67,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  ForgotPassword()),
+                          builder: (context) => ForgotPassword(),
+                        ),
                       );
                     },
                     child: const Text(

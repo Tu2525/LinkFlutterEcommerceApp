@@ -15,7 +15,6 @@ class ForgotPassword extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -43,14 +42,16 @@ class ForgotPassword extends StatelessWidget {
                   hint: 'Enter Email address',
                 ),
                 SizedBox(height: screenHeight * 0.03),
-                ContinueButton(onPressed: () {
-                   Navigator.push(
+                ContinueButton(
+                  onPressed: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const ResetPassword(),
                       ),
                     );
-                }),
+                  },
+                ),
               ],
             ),
           ),
