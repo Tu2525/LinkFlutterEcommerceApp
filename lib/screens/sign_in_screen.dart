@@ -18,9 +18,9 @@ class SignInScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 123),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+              const SizedBox(height: 123),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   'Sign In',
                   style: TextStyle(
@@ -30,25 +30,25 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               CustomTextField(
                 emailController: emailController,
                 isPassword: false,
                 hint: 'Email Address',
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ContinueButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PasswordScreen()),
+                    MaterialPageRoute(builder: (context) => const PasswordScreen()),
                   );
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
-                  Text(
+                  const Text(
                     'Dont have an Account ?',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
@@ -59,7 +59,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       ' Create One',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
@@ -71,19 +71,19 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 71),
+              const SizedBox(height: 71),
               SigninWithButton(
                 text: 'Continue With Apple',
                 icon: Image.asset('images/apple.png', height: 25, width: 20),
                 onPressed: () {},
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SigninWithButton(
                 text: 'Continue With Google',
                 icon: Image.asset('images/google.png', height: 25, width: 20),
                 onPressed: () {},
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SigninWithButton(
                 text: 'Continue With Facebook',
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
