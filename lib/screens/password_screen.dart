@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
-import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+class PasswordScreen extends StatefulWidget {
+  const PasswordScreen({super.key});
 
   @override
+  State<PasswordScreen> createState() => _PasswordScreenState();
+}
+
+class _PasswordScreenState extends State<PasswordScreen> {
+  final TextEditingController _passwordController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -32,9 +35,9 @@ class SignInScreen extends StatelessWidget {
               ),
               SizedBox(height: 32),
               CustomTextField(
-                emailController: _emailController,
-                isPassword: false,
-                hint: 'Email Address',
+                emailController: _passwordController,
+                isPassword: true,
+                hint: 'Password',
               ),
               SizedBox(height: 16),
               ContinueButton(
@@ -49,7 +52,7 @@ class SignInScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Dont have an Account ?',
+                    'Forgot Password ?',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontFamily: 'Circular',
@@ -60,7 +63,7 @@ class SignInScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () {},
                     child: Text(
-                      ' Create One',
+                      ' Reset',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontFamily: 'Circular',
@@ -70,24 +73,6 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-              SizedBox(height: 71),
-              SigninWithButton(
-                text: 'Continue With Apple',
-                icon: Image.asset('images/apple.png', height: 25, width: 20),
-                onPressed: () {},
-              ),
-              SizedBox(height: 12),
-              SigninWithButton(
-                text: 'Continue With Google',
-                icon: Image.asset('images/google.png', height: 25, width: 20),
-                onPressed: () {},
-              ),
-              SizedBox(height: 12),
-              SigninWithButton(
-                text: 'Continue With Facebook',
-                icon: Image.asset('images/facebook.png', height: 25, width: 20),
-                onPressed: () {},
               ),
             ],
           ),
