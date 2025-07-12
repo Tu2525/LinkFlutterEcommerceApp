@@ -89,26 +89,44 @@ class _UserInfoState extends State<UserInfo> {
                         DropdownButtonFormField<String>(
                           value: selectedAgeRange,
                           decoration: InputDecoration(
-                            focusColor: const Color(0xffF4F4F4),
-                            fillColor: const Color(0xffF4F4F4),
+                            focusColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? const Color(0xFF342F3F)
+                                    : const Color(0xffF4F4F4),
+                            fillColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? const Color(0xFF342F3F)
+                                    : const Color(0xffF4F4F4),
                             filled: true,
                             contentPadding: const EdgeInsets.all(16),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(24),
-                              borderSide: const BorderSide(
-                                color: Color(0xffF4F4F4),
+                              borderSide: BorderSide(
+                                color:
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xFF342F3F)
+                                        : const Color(0xffF4F4F4),
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(24),
-                              borderSide: const BorderSide(
-                                color: Color(0xffF4F4F4),
+                              borderSide: BorderSide(
+                                color:
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xFF342F3F)
+                                        : const Color(0xffF4F4F4),
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(24),
-                              borderSide: const BorderSide(
-                                color: Color(0xffF4F4F4),
+                              borderSide: BorderSide(
+                                color:
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xFF342F3F)
+                                        : const Color(0xffF4F4F4),
                               ),
                             ),
                           ),
@@ -136,7 +154,10 @@ class _UserInfoState extends State<UserInfo> {
           },
         ),
         bottomNavigationBar: Container(
-          color: const Color(0xffF4F4F4),
+          color:
+              Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xFF342F3F)
+                  : const Color(0xffF4F4F4),
           padding: const EdgeInsets.only(
             bottom: 16,
             top: 16,
