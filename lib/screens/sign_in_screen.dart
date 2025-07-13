@@ -3,6 +3,7 @@ import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
+import 'create_account_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -56,7 +57,14 @@ class SignInScreen extends StatelessWidget {
                     ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateAccountScreen(),
+                    ),
+                  );
+                },
                     child: Text(
                       ' Create One',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
