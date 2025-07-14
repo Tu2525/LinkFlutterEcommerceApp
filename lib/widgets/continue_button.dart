@@ -15,9 +15,9 @@ class ContinueButton extends StatelessWidget {
         minimumSize: const Size(double.infinity, 49),
         elevation: 0, // Full width button
       ),
-      child: const Text(
+      child:  Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'Circular',
           fontWeight: FontWeight.w500,
           fontSize: 16,
