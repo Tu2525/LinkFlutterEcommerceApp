@@ -1,17 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ask_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen>
+    with WidgetsBindingObserver {
+  bool isDarkMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateDarkMode();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    _updateDarkMode();
+  }
+
+  void _updateDarkMode() {
+    setState(() {
+      isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
 
     return Scaffold(
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 23),
         child: SingleChildScrollView(
@@ -19,11 +58,12 @@ class SignInScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 123),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   'Sign In',
                   style: TextStyle(
+                    color: isDarkMode ? Colors.white : Colors.black,
                     fontFamily: 'Circular',
                     fontWeight: FontWeight.w700,
                     fontSize: 32,
@@ -34,7 +74,8 @@ class SignInScreen extends StatelessWidget {
               CustomTextField(
                 emailController: emailController,
                 isPassword: false,
-                hint: 'Email Address', isdark: Theme.of(context).brightness == Brightness.dark,
+                hint: 'Email Address',
+                isdark: isDarkMode,
               ),
               const SizedBox(height: 16),
               ContinueButton(
@@ -48,40 +89,31 @@ class SignInScreen extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 16),
-              Row(
-                children: [
-                  Text(
-                    'Don\'t have an Account?',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      ' Create One',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Circular',
-                      ),
-                    ),
-                  ),
-                ],
+              AskButton(
+                text: 'Don\'t have an Account?',
+                button: ' Create One',
+                onpressed: () {
+                  // Navigate to SignUp screen here
+                },
+                isdark: isDarkMode,
               ),
               const SizedBox(height: 71),
               SigninWithButton(
+                isdark: isDarkMode,
                 text: 'Continue With Apple',
                 icon: Image.asset('images/apple.png', height: 25, width: 20),
                 onPressed: () {},
               ),
               const SizedBox(height: 12),
               SigninWithButton(
+                isdark: isDarkMode,
                 text: 'Continue With Google',
                 icon: Image.asset('images/google.png', height: 25, width: 20),
                 onPressed: () {},
               ),
               const SizedBox(height: 12),
               SigninWithButton(
+                isdark: isDarkMode,
                 text: 'Continue With Facebook',
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
                 onPressed: () {},
