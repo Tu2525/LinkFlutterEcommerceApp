@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ContinueButton extends StatelessWidget {
-  const ContinueButton({super.key, required this.onPressed});
+  const ContinueButton({super.key, required this.onPressed, this.text= 'Continue'});
   final VoidCallback onPressed;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
+import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     final screenWidth = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
@@ -47,31 +47,16 @@ class ResetPassword extends StatelessWidget {
                   SizedBox(
                     width: screenWidth * 0.5,
                     height: 52,
-                    child: ElevatedButton(
+                    child: ContinueButton(
                       onPressed: () {
-                         Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const SignInScreen(),
                           ),
                         );
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff8E6CEF),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: const Text(
-                        'Return to Login',
-                        style: TextStyle(
-                          fontFamily: 'Circular',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
+                      text: 'Return to Login',
                     ),
                   ),
                 ],
