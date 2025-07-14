@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
-
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 
@@ -65,14 +63,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ForgotPassword(),
-                        ),
-                      );
-                    },
+                    onTap: () {},
                     child: const Text(
                       ' Reset',
                       style: TextStyle(
