@@ -90,7 +90,7 @@ class _PasswordScreenState extends State<PasswordScreen>
               const SizedBox(height: 16),
               AskButton(
                 isdark: isDarkMode,
-                text: 'Forgot Password',
+                text: 'Forgot Password? ',
                 button: 'Reset',
                 onpressed: () {
                   Navigator.push(
