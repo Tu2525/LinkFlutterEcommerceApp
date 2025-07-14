@@ -4,6 +4,7 @@ import 'package:link_flutter_ecommerce_app/widgets/ask_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
+import 'create_account_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -48,7 +49,6 @@ class _SignInScreenState extends State<SignInScreen>
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
-
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
@@ -90,13 +90,32 @@ class _SignInScreenState extends State<SignInScreen>
               ),
 
               const SizedBox(height: 16),
-              AskButton(
-                text: 'Dont have an Account ?',
-                button: ' Create One',
-                onpressed: () {
-                  // Navigate to sign up screen or perform action
+              Row(
+                children: [
+                  Text(
+                    'Don\'t have an Account?',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateAccountScreen(),
+                    ),
+                  );
                 },
-                isdark: isDarkMode,
+                    child: Text(
+                      ' Create One',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Circular',
+                      ),
+                    ),
+                  ),
+                ],
               ),
               
 
