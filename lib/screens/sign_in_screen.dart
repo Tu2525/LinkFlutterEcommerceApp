@@ -9,18 +9,18 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 23),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 123),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+              const SizedBox(height: 123),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   'Sign In',
                   style: TextStyle(
@@ -30,60 +30,57 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               CustomTextField(
-                emailController: _emailController,
+                emailController: emailController,
                 isPassword: false,
                 hint: 'Email Address',
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ContinueButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PasswordScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const PasswordScreen(),
+                    ),
                   );
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Text(
-                    'Dont have an Account ?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Circular',
-                      fontSize: 12,
-                      color: Color(0xff000000),
-                    ),
+                    'Don\'t have an Account?',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
                   ),
                   GestureDetector(
                     onTap: () {},
                     child: Text(
                       ' Create One',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
-                        fontSize: 12,
-                        color: Colors.black,
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 71),
+              const SizedBox(height: 71),
               SigninWithButton(
                 text: 'Continue With Apple',
                 icon: Image.asset('images/apple.png', height: 25, width: 20),
                 onPressed: () {},
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SigninWithButton(
                 text: 'Continue With Google',
                 icon: Image.asset('images/google.png', height: 25, width: 20),
                 onPressed: () {},
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SigninWithButton(
                 text: 'Continue With Facebook',
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
