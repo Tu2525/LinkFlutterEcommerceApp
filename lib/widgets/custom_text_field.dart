@@ -19,6 +19,7 @@ class CustomTextField extends StatelessWidget {
       controller: _emailController, // Linking the controller
       obscureText: isPassword, // If this is a password field
       decoration: InputDecoration(
+<<<<<<< HEAD
         fillColor: isdark ? Color(0xff342F3F) : Color(0xffF4F4F4),
         filled: true, // To apply the fill color
 
@@ -27,6 +28,14 @@ class CustomTextField extends StatelessWidget {
           color: isdark ? Color(0xffFFFFFF8) : const Color(0xff27272780),
         ),
         border: OutlineInputBorder(
+=======
+        fillColor: const Color(0xffF4F4F4),
+        filled: true, // To apply the fill color
+
+        hintText: hint,
+        hintStyle: const TextStyle(color: Color(0xff27272780)),
+        border: const OutlineInputBorder(
+>>>>>>> origin/develop
           borderRadius: BorderRadius.all(Radius.circular(4)),
           borderSide: BorderSide.none,
         ),
