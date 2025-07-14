@@ -34,7 +34,7 @@ class SignInScreen extends StatelessWidget {
               CustomTextField(
                 emailController: emailController,
                 isPassword: false,
-                hint: 'Email Address',
+                hint: 'Email Address', isdark: Theme.of(context).brightness == Brightness.dark,
               ),
               const SizedBox(height: 16),
               ContinueButton(

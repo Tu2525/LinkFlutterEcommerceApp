@@ -39,7 +39,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
               CustomTextField(
                 emailController: _passwordController,
                 isPassword: true,
-                hint: 'Password',
+                hint: 'Password', isdark: Theme.of(context).brightness == Brightness.dark,
               ),
               const SizedBox(height: 16),
               ContinueButton(

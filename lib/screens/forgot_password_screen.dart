@@ -40,6 +40,7 @@ class ForgotPassword extends StatelessWidget {
                   emailController: emailController,
                   isPassword: false,
                   hint: 'Enter Email address',
+                  isdark: Theme.of(context).brightness == Brightness.dark,
                 ),
                 SizedBox(height: screenHeight * 0.03),
                 ContinueButton(
