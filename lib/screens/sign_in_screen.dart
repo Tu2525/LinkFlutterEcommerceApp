@@ -89,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen>
                 },
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               AskButton(
                 text: 'Dont have an Account ?',
                 button: ' Create One',
@@ -98,28 +98,8 @@ class _SignInScreenState extends State<SignInScreen>
                 },
                 isdark: isDarkMode,
               ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Text(
-                    'Don\'t have an Account?',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      ' Create One',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Circular',
-                      ),
-                    ),
-                  ),
-                ],
+              
 
-              ),
               const SizedBox(height: 71),
               SigninWithButton(
                 isdark: isDarkMode,
