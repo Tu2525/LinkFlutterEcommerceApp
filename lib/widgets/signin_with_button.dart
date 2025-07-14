@@ -17,11 +17,9 @@ class SigninWithButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-<<<<<<< HEAD
-        backgroundColor: isdark ? Color(0xff342F3F) : Color(0xffF4F4F4),
-=======
-        backgroundColor: const Color(0xffF4F4F4),
->>>>>>> origin/develop
+
+        backgroundColor: isdark ? const Color(0xff342F3F) : const Color(0xffF4F4F4),
+
 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         minimumSize: const Size(double.infinity, 49),
@@ -34,7 +32,7 @@ class SigninWithButton extends StatelessWidget {
           const SizedBox(width: 40),
           Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Circular',
               fontWeight: FontWeight.w500,
               fontSize: 16,
