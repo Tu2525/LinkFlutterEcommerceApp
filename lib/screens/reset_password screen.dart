@@ -6,8 +6,8 @@ class ResetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final screenWidth = size.width;
+
+    final screenWidth = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
       body: Center(
