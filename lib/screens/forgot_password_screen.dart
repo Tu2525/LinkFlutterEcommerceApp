@@ -14,6 +14,8 @@ class ForgotPassword extends StatelessWidget {
     final screenHeight = MediaQuery.sizeOf(context).height;
     final screenWidth = MediaQuery.sizeOf(context).width;
 
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -40,6 +42,7 @@ class ForgotPassword extends StatelessWidget {
                   emailController: emailController,
                   isPassword: false,
                   hint: 'Enter Email address',
+                  isdark: isDarkMode,
                 ),
                 SizedBox(height: screenHeight * 0.03),
                 ContinueButton(
