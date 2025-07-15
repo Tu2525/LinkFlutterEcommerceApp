@@ -26,7 +26,10 @@ class _UserInfoState extends State<UserInfo> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
+        backgroundColor:
+            Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
@@ -167,14 +170,7 @@ class _UserInfoState extends State<UserInfo> {
             right: 24,
           ),
           child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CategoriesList(),
-                    ),
-              );
-            },
+            onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xff8E6CEF),
               padding: const EdgeInsets.symmetric(vertical: 16),
