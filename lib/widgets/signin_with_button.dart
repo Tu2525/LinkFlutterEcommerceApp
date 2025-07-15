@@ -24,7 +24,7 @@ class SigninWithButton extends StatelessWidget {
         elevation: 0, // Full width button
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           icon,
           SizedBox(width: 40),
