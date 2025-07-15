@@ -47,7 +47,8 @@ class _SignInScreenState extends State<SignInScreen>
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
@@ -56,7 +57,7 @@ class _SignInScreenState extends State<SignInScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 123),
+              const SizedBox(height: 123),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
@@ -69,30 +70,49 @@ class _SignInScreenState extends State<SignInScreen>
                   ),
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               CustomTextField(
-                emailController: _emailController,
+                emailController: emailController,
                 isPassword: false,
                 hint: 'Email Address',
                 isdark: isDarkMode,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ContinueButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PasswordScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const PasswordScreen(),
+                    ),
                   );
                 },
               ),
               SizedBox(height: 16),
-              AskButton(
-                text: 'Dont have an Account ?',
-                button: ' Create One',
-                onpressed: () {
-                  // Navigate to sign up screen or perform action
-                },
-                isdark: isDarkMode,
+              Row(
+                children: [
+                  Text(
+                    'Dont have an Account ?',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Circular',
+                      fontSize: 12,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      ' Create One',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Circular',
+                        fontSize: 12,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 71),
               SigninWithButton(
@@ -101,14 +121,14 @@ class _SignInScreenState extends State<SignInScreen>
                 icon: Image.asset('images/apple.png', height: 25, width: 20),
                 onPressed: () {},
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SigninWithButton(
                 isdark: isDarkMode,
                 text: 'Continue With Google',
                 icon: Image.asset('images/google.png', height: 25, width: 20),
                 onPressed: () {},
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               SigninWithButton(
                 isdark: isDarkMode,
                 text: 'Continue With Facebook',
