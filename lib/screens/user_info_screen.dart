@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/gender_button.dart';
 
 class UserInfo extends StatefulWidget {
@@ -25,6 +26,10 @@ class _UserInfoState extends State<UserInfo> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor:
+            Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(

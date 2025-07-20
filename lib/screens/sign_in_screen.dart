@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
-import 'package:link_flutter_ecommerce_app/widgets/ask_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
@@ -89,6 +88,7 @@ class _SignInScreenState extends State<SignInScreen>
                 },
               ),
 
+
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -112,14 +112,13 @@ class _SignInScreenState extends State<SignInScreen>
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
+
                       ),
                     ),
                   ),
                 ],
               ),
-              
-
-              const SizedBox(height: 71),
+              SizedBox(height: 71),
               SigninWithButton(
                 isdark: isDarkMode,
                 text: 'Continue With Apple',
