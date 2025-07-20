@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
-import 'package:link_flutter_ecommerce_app/widgets/ask_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
+import 'create_account_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -48,7 +48,6 @@ class _SignInScreenState extends State<SignInScreen>
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
-
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
@@ -88,27 +87,32 @@ class _SignInScreenState extends State<SignInScreen>
                   );
                 },
               ),
-              SizedBox(height: 16),
+
+
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Text(
-                    'Dont have an Account ?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Circular',
-                      fontSize: 12,
-                      color: Color(0xff000000),
-                    ),
+                    'Don\'t have an Account?',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateAccountScreen(),
+                    ),
+                  );
+                },
                     child: Text(
                       ' Create One',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
-                        fontSize: 12,
-                        color: Colors.black,
+
                       ),
                     ),
                   ),
