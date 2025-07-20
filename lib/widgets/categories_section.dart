@@ -14,8 +14,11 @@ class CategoriesSection extends StatelessWidget {
     CategoryModel(categoryName:'Accessories', imgPath: 'images/Ellipse 3 (1).png', ontap: (){}),
   ];
 
+
   @override
   Widget build(BuildContext context) {
+
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final screenHeight = MediaQuery.of(context).size.height;
     return  Scaffold(
       body: Padding(
@@ -28,13 +31,17 @@ class CategoriesSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(children: [
-              const Text("Categories",style: TextStyle(
+              Text("Categories",
+              style: TextStyle(
+                color: isDarkMode ? Colors.white : Colors.black,
                 fontWeight: FontWeight.bold
               ),),
               const Spacer(flex: 1,),
               GestureDetector(
                 onTap: (){  },
-                child:const Text("See All")),
+                child: Text("See All",style: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),)),
             ],),
           ),
           Row(
@@ -47,11 +54,10 @@ class CategoriesSection extends StatelessWidget {
 
 
   List<Categories> getAllCategories(){
-    List<Categories> categoriesList=[];
-    for(int i=0;i <allCategories.length;i++){
-      categoriesList.add(Categories(imgPath:allCategories[i].imgPath
-    , title: allCategories[i].categoryName));
-    } 
-    return categoriesList;
+    return allCategories.map((e) => Categories(
+    imgPath: e.imgPath,
+    title: e.categoryName,
+    ontap: e.ontap,
+    )).toList();
   }
 }

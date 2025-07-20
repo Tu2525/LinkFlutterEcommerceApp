@@ -5,17 +5,18 @@ class Categories extends StatelessWidget {
     super.key,
     required this.imgPath,
     required this.title,
+    required this.ontap,
   });
 
   final String title;
   final String imgPath;
-
+  final VoidCallback ontap;
   @override
   Widget build(BuildContext context) {
 
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+    
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -37,6 +38,9 @@ class Categories extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
+            color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : Colors.black,
             fontSize: screenWidth * 0.03,
           ),
           textAlign: TextAlign.center,
