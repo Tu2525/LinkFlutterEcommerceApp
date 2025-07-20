@@ -14,6 +14,7 @@ class CreateAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -40,28 +41,36 @@ class CreateAccountScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               CustomTextField(
-                isdark: Theme.of(context).brightness == Brightness.dark,
+
+                isdark: isDarkMode,
+
                 emailController: firstnameController,
                 isPassword: false,
                 hint: "Firstname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                isdark: Theme.of(context).brightness == Brightness.dark,
+
+                isdark: isDarkMode,
+
                 emailController: lastnameController,
                 isPassword: false,
                 hint: "Lastname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                isdark: Theme.of(context).brightness == Brightness.dark,
+
+                isdark: isDarkMode,
+
                 emailController: emailController,
                 isPassword: false,
                 hint: "Email Address",
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                isdark: Theme.of(context).brightness == Brightness.dark,
+
+                isdark: isDarkMode,
+
                 emailController: passwordController,
                 isPassword: true,
                 hint: "Password",
