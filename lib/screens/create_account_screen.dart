@@ -14,6 +14,7 @@ class CreateAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -40,31 +41,35 @@ class CreateAccountScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               CustomTextField(
+                isdark: isDarkMode,
                 emailController: firstnameController,
                 isPassword: false,
                 hint: "Firstname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
+                isdark: isDarkMode,
                 emailController: lastnameController,
                 isPassword: false,
                 hint: "Lastname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
+                isdark: isDarkMode,
                 emailController: emailController,
                 isPassword: false,
                 hint: "Email Address",
               ),
               const SizedBox(height: 16),
               CustomTextField(
+                isdark: isDarkMode,
                 emailController: passwordController,
                 isPassword: true,
                 hint: "Password",
               ),
               const SizedBox(height: 40),
-              ContinueButton(onPressed: (){}),
-              const SizedBox(height: 40,),
+              ContinueButton(onPressed: () {}),
+              const SizedBox(height: 40),
               Row(
                 children: [
                   Text(
@@ -75,13 +80,13 @@ class CreateAccountScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ResetPassword(),
-                    ),
-                  );
-                },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ResetPassword(),
+                        ),
+                      );
+                    },
                     child: Text(
                       ' Reset',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
