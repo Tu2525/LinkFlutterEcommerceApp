@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/onboarding_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ask_button.dart';
 import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
@@ -54,7 +56,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>  const UserInfo(),
+                      
+                      builder: (context) =>  const OnBoardingScreen(),
                     ),
                   );
                 },
