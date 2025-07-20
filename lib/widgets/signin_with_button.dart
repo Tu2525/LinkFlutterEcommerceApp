@@ -17,16 +17,14 @@ class SigninWithButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-
-        backgroundColor: isdark ? const Color(0xff342F3F) : const Color(0xffF4F4F4),
-
+        backgroundColor: Color(0xffF4F4F4),
 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         minimumSize: const Size(double.infinity, 49),
         elevation: 0, // Full width button
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           icon,
           const SizedBox(width: 40),

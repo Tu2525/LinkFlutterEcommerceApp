@@ -88,6 +88,7 @@ class _SignInScreenState extends State<SignInScreen>
                 },
               ),
 
+
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -111,14 +112,13 @@ class _SignInScreenState extends State<SignInScreen>
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
+
                       ),
                     ),
                   ),
                 ],
               ),
-              
-
-              const SizedBox(height: 71),
+              SizedBox(height: 71),
               SigninWithButton(
                 isdark: isDarkMode,
                 text: 'Continue With Apple',
