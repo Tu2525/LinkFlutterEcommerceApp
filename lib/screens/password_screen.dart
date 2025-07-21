@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/onboarding_screen.dart';
-import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 
@@ -58,10 +55,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   );
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
-                  Text(
+                  const Text(
                     'Forgot Password ?',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
