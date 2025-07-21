@@ -14,33 +14,31 @@ class GenderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          decoration: BoxDecoration(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        decoration: BoxDecoration(
+          color:
+              isSelected
+                  ? const Color(0xff8E6CEF)
+                  : Theme.of(context).brightness == Brightness.dark
+                  ? const Color(0xFF342F3F)
+                  : const Color(0xffF4F4F4),
+          borderRadius: BorderRadius.circular(24),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          gender,
+          style: TextStyle(
             color:
                 isSelected
-                    ? const Color(0xff8E6CEF)
+                    ? Colors.white
                     : Theme.of(context).brightness == Brightness.dark
-                    ? const Color(0xFF342F3F)
-                    : const Color(0xffF4F4F4),
-            borderRadius: BorderRadius.circular(24),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            gender,
-            style: TextStyle(
-              color:
-                  isSelected
-                      ? Colors.white
-                      : Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
+                    ? Colors.white
+                    : Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
           ),
         ),
       ),
