@@ -41,28 +41,36 @@ class CreateAccountScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               CustomTextField(
+
                 isdark: isDarkMode,
+
                 emailController: firstnameController,
                 isPassword: false,
                 hint: "Firstname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
+
                 isdark: isDarkMode,
+
                 emailController: lastnameController,
                 isPassword: false,
                 hint: "Lastname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
+
                 isdark: isDarkMode,
+
                 emailController: emailController,
                 isPassword: false,
                 hint: "Email Address",
               ),
               const SizedBox(height: 16),
               CustomTextField(
+
                 isdark: isDarkMode,
+
                 emailController: passwordController,
                 isPassword: true,
                 hint: "Password",
