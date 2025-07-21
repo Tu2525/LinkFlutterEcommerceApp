@@ -88,7 +88,6 @@ class ReceiptPage extends StatelessWidget {
   }
 }
 
-// A simple placeholder widget for the "Profile" page.
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
