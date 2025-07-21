@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:link_flutter_ecommerce_app/screens/main_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 
 void main() {

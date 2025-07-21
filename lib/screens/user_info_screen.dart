@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/gender_button.dart';
 
 class UserInfo extends StatefulWidget {
@@ -26,10 +26,6 @@ class _UserInfoState extends State<UserInfo> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor:
-            Theme.of(context).brightness == Brightness.dark
-                ? Colors.black
-                : Colors.white,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
@@ -170,7 +166,14 @@ class _UserInfoState extends State<UserInfo> {
             right: 24,
           ),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MainScreen(),
+                          ),
+                        );
+                      },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xff8E6CEF),
               padding: const EdgeInsets.symmetric(vertical: 16),

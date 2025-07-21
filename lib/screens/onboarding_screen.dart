@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/screens/home_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/onboarding_screen_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -102,7 +102,7 @@ void initState() {
             TextButton(onPressed: ()=> Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>  const HomeScreen(),
+                builder: (context) =>  const MainScreen(),
               ))
             , child: const Text('Skip')),
             Center(
@@ -124,7 +124,7 @@ void initState() {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
+                      builder: (context) => const MainScreen(),
                     ),
                   );
                 } else {
@@ -141,4 +141,8 @@ void initState() {
       ),
     );
   }
+}
+
+class HomeScreen {
+  const HomeScreen();
 }
