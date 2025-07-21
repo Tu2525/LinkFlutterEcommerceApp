@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+import 'package:link_flutter_ecommerce_app/widgets/categories.dart';
+import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,68 +19,71 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 24.0),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Avatar
-                const CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage(
-                    'https://picsum.photos/536/354',
-                  ),
-                ),
-
-                PopupMenuButton<String>(
-                  onSelected: (String result) {
-                    setState(() {
-                      _selectedCategory = result;
-                    });
-                  },
-                  itemBuilder:
-                      (BuildContext context) =>
-                          _categories.map((String category) {
-                            return PopupMenuItem<String>(
-                              value: category,
-                              child: Text(category),
-                            );
-                          }).toList(),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          _selectedCategory,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(width: 4),
-                        const Icon(IconsaxPlusBroken.arrow_down_2, size: 20),
-                      ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Avatar
+                  const CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(
+                      'https://picsum.photos/536/354',
                     ),
                   ),
-                ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    color: AppColors.primary,
-                    shape: BoxShape.circle,
+              
+                  PopupMenuButton<String>(
+                    onSelected: (String result) {
+                      setState(() {
+                        _selectedCategory = result;
+                      });
+                    },
+                    itemBuilder:
+                        (BuildContext context) =>
+                            _categories.map((String category) {
+                              return PopupMenuItem<String>(
+                                value: category,
+                                child: Text(category),
+                              );
+                            }).toList(),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            _selectedCategory,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(width: 4),
+                          const Icon(IconsaxPlusBroken.arrow_down_2, size: 20),
+                        ],
+                      ),
+                    ),
                   ),
-                  child: const Icon(
-                    IconsaxPlusBroken.bag_2,
-                    color: Colors.white,
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      color: AppColors.primary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      IconsaxPlusBroken.bag_2,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
 
             const SizedBox(height: 20),
@@ -87,7 +92,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: AppColors.grey,
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: const TextField(
                 decoration: InputDecoration(
@@ -97,12 +102,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-
-            const SizedBox(height: 20),
-
-            const Expanded(
-              child: Center(child: Text('7oto el 7agat el taniya')),
-            ),
+            CategoriesSection(),
           ],
         ),
       ),
