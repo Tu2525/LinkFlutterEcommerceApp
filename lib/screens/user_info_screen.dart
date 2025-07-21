@@ -26,10 +26,6 @@ class _UserInfoState extends State<UserInfo> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor:
-            Theme.of(context).brightness == Brightness.dark
-                ? Colors.black
-                : Colors.white,
         body: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
