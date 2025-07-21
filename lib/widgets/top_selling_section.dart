@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import '../models/product.dart';
 import 'product_card.dart';
 
@@ -30,6 +31,7 @@ class TopSellingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,23 +42,21 @@ class TopSellingSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onSurface,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  title,
+                  style: AppTextStyles.sectionTitle(isDarkMode),
                 ),
               ),
               if (showSeeAll)
                 GestureDetector(
                   onTap: onSeeAllTap,
-                  child: Text(
-                    'See All',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: theme.colorScheme.onSurface.withOpacity(0.7),
-                      fontWeight: FontWeight.w500,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      'See All',
+                      style: AppTextStyles.seeAll(isDarkMode),
                     ),
                   ),
                 ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/model/category_model.dart';
+import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories.dart';
 
 class CategoriesSection extends StatelessWidget {
@@ -36,7 +38,6 @@ class CategoriesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final screenHeight = MediaQuery.of(context).size.height;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -44,26 +45,27 @@ class CategoriesSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
-              SizedBox(height: screenHeight * 0.09),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Text(
                       "Categories",
-                      style: TextStyle(
-                        color: isDarkMode ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
+                      style: AppTextStyles.sectionTitle(isDarkMode),
                       ),
-                    ),
                     const Spacer(flex: 1),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CategoriesList(),
+                    ),
+                  );
+                },
                       child: Text(
                         "See All",
-                        style: TextStyle(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
+                        style: AppTextStyles.seeAll(isDarkMode),
                       ),
                     ),
                   ],
