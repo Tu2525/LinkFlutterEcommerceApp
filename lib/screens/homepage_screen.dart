@@ -96,17 +96,20 @@ class _HomePageState extends State<HomePage> {
 
                 const SizedBox(height: 20),
                 //Search
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: AppColors.grey,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const TextField(
-                    decoration: InputDecoration(
-                      icon: Icon(IconsaxPlusBroken.search_normal_1),
-                      hintText: 'Search',
-                      border: InputBorder.none,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: AppColors.grey,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const TextField(
+                      decoration: InputDecoration(
+                        icon: Icon(IconsaxPlusBroken.search_normal_1),
+                        hintText: 'Search',
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                 ),
