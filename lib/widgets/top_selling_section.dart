@@ -43,7 +43,6 @@ class TopSellingSection extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontFamily: 'Circular',
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: theme.colorScheme.onSurface,

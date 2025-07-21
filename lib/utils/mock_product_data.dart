@@ -1,6 +1,6 @@
 import '../models/product.dart';
 
-class SampleData {
+class MockProductData {
   static List<Product> getTopSellingProducts() {
     return [
       Product(

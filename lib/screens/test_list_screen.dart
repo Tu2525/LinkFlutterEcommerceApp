@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/widgets/horizontal_list.dart';
-import 'package:link_flutter_ecommerce_app/utils/sample_data.dart';
+import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
 
 class TestListScreen extends StatelessWidget {
   const TestListScreen({super.key});
@@ -15,7 +15,7 @@ class TestListScreen extends StatelessWidget {
               const SizedBox(height: 20),
               HorizontalList(
                 title: 'Top Selling',
-                products: SampleData.getTopSellingProducts(),
+                products: MockProductData.getTopSellingProducts(),
                 onSeeAllTap: () {
                   print('Top Selling - See All tapped');
                 },
@@ -29,7 +29,7 @@ class TestListScreen extends StatelessWidget {
               const SizedBox(height: 30),
               HorizontalList(
                 title: 'New Arrivals',
-                products: SampleData.getNewArrivals(),
+                products: MockProductData.getNewArrivals(),
                 onSeeAllTap: () {
                   print('New Arrivals - See All tapped');
                 },
