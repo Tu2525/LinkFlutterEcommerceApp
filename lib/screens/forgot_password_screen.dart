@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/screens/reset_password%20screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 
-class ForgotPassword extends StatelessWidget {
+class ForgotPassword extends ConsumerWidget {
   ForgotPassword({super.key});
 
   final TextEditingController emailController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenHeight = MediaQuery.sizeOf(context).height;
     final screenWidth = MediaQuery.sizeOf(context).width;
 
@@ -39,6 +40,7 @@ class ForgotPassword extends StatelessWidget {
                 ),
                 SizedBox(height: screenHeight * 0.04),
                 CustomTextField(
+                  
                   emailController: emailController,
                   isPassword: false,
                   hint: 'Enter Email address',
