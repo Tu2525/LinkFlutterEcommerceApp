@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
-import 'package:link_flutter_ecommerce_app/providors/category_section_providor.dart';
+import 'package:link_flutter_ecommerce_app/providers/category_section_providor.dart';
 import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
 
 class CategoriesSection extends StatelessWidget {
