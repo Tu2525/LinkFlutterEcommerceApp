@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 
 class CustomRadioButtonCheck extends StatelessWidget {
-  const CustomRadioButtonCheck({super.key});
-
+  const CustomRadioButtonCheck({super.key, required this.isChecked});
+  final bool isChecked;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 24,
       height: 24,
-      decoration: const BoxDecoration(
-        color: AppColors.primary,
+      decoration: BoxDecoration(
+        color: isChecked ? const Color(0xff8E6CEF) : const Color(0xffEFEAF5),
         shape: BoxShape.circle,
       ),
       child: const Center(

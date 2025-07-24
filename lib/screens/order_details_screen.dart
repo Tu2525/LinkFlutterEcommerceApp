@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
-import 'package:link_flutter_ecommerce_app/widgets/custom_radio_button_check.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_status_card.dart';
 
 class OrderDetails extends StatelessWidget {
@@ -36,13 +34,16 @@ class OrderDetails extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20.h),
               child: Column(
                 children: [
-                  const OrderStatusCard(text: 'Delivered'),
+                  const OrderStatusCard(text: 'Delivered', isChecked: false),
                   SizedBox(height: 14.h),
-                  const OrderStatusCard(text: 'Shipped'),
+                  const OrderStatusCard(text: 'Shipped', isChecked: true),
                   SizedBox(height: 14.h),
-                  const OrderStatusCard(text: 'Order confirmed'),
+                  const OrderStatusCard(
+                    text: 'Order confirmed',
+                    isChecked: true,
+                  ),
                   SizedBox(height: 14.h),
-                  const OrderStatusCard(text: 'Order placed'),
+                  const OrderStatusCard(text: 'Order placed', isChecked: true),
                 ],
               ),
             ),
