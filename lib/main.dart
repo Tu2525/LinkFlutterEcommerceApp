@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 // import 'package:link_flutter_ecommerce_app/screens/main_screen.dart';
-import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 
 void main() {
   runApp(const EcommerceApp());
@@ -16,7 +16,7 @@ class EcommerceApp extends StatelessWidget {
       theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
       darkTheme: ThemeData(brightness: Brightness.dark, fontFamily: 'Circular'),
       themeMode: ThemeMode.system,
-      home: const SplashScreen(),
+      home: const OrderDetails(),
     );
   }
 }

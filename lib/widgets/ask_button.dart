@@ -24,7 +24,7 @@ class AskButton extends StatelessWidget {
             fontWeight: FontWeight.w400,
             fontFamily: 'Circular',
             fontSize: 12,
-            color: isdark ? Colors.white : Color(0xff000000),
+            color: isdark ? Colors.white : const Color(0xff000000),
           ),
         ),
         GestureDetector(
