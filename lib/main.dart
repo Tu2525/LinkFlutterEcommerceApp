@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 // import 'package:link_flutter_ecommerce_app/screens/main_screen.dart';
 
@@ -11,12 +12,20 @@ class EcommerceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
-      darkTheme: ThemeData(brightness: Brightness.dark, fontFamily: 'Circular'),
-      themeMode: ThemeMode.system,
-      home: const OrderDetails(),
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          fontFamily: 'Circular',
+        ),
+        themeMode: ThemeMode.system,
+        home: const OrderDetails(),
+      ),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_radio_button_check.dart';
+import 'package:link_flutter_ecommerce_app/widgets/order_status_card.dart';
 
 class OrderDetails extends StatelessWidget {
   const OrderDetails({super.key});
@@ -12,28 +14,37 @@ class OrderDetails extends StatelessWidget {
     return Scaffold(
       backgroundColor:
           isDarkMode ? const Color(0xff1D182A) : const Color(0xffFFFFFF),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 36),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
         child: Column(
           children: [
             Row(
               children: [
-                CustomIcon(),
-                SizedBox(width: 80),
+                const CustomIcon(),
+                SizedBox(width: 80.w),
                 Text(
                   'Order #00545',
                   style: TextStyle(
                     fontFamily: 'Circular',
                     fontWeight: FontWeight.w700,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                   ),
                 ),
               ],
             ),
-            ListTile(
-              leading: CustomRadioButtonCheck(),
-              title: Text('Order placed'),
-              trailing: Text('28 May ', style: TextStyle(color: Colors.grey)),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: Column(
+                children: [
+                  const OrderStatusCard(text: 'Delivered'),
+                  SizedBox(height: 14.h),
+                  const OrderStatusCard(text: 'Shipped'),
+                  SizedBox(height: 14.h),
+                  const OrderStatusCard(text: 'Order confirmed'),
+                  SizedBox(height: 14.h),
+                  const OrderStatusCard(text: 'Order placed'),
+                ],
+              ),
             ),
           ],
         ),
