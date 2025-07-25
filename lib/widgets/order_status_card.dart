@@ -7,9 +7,15 @@ class OrderStatusCard extends StatelessWidget {
     super.key,
     required this.text,
     required this.isChecked,
+    required this.date,
+    required this.isDarkMode,
   });
+
+  final bool isDarkMode;
   final String text;
   final bool isChecked;
+  final String date;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -21,21 +27,21 @@ class OrderStatusCard extends StatelessWidget {
           fontFamily: 'Circular',
           fontSize: 16.sp,
           color:
-              isChecked
-                  ? const Color(0xfffffffF)
-                  : const Color(0xffFFffff).withOpacity(0.5),
+              isDarkMode
+                  ? (isChecked ? Colors.white : Colors.white.withOpacity(0.5))
+                  : (isChecked ? Colors.black : Colors.black.withOpacity(0.5)),
         ),
       ),
       trailing: Text(
-        '28 May ',
+        date,
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontFamily: 'Circular',
           fontSize: 16.sp,
           color:
-              isChecked
-                  ? const Color(0xfffffffF)
-                  : const Color(0xffFFffff).withOpacity(0.5),
+              isDarkMode
+                  ? (isChecked ? Colors.white : Colors.white.withOpacity(0.5))
+                  : (isChecked ? Colors.black : Colors.black.withOpacity(0.5)),
         ),
       ),
     );

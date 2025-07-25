@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 
 class ShippingDetails extends StatelessWidget {
   final bool isDarkMode;
+  final List<ShippingInfo> shippingInfo;
 
-  const ShippingDetails({super.key, required this.isDarkMode});
+  const ShippingDetails({
+    super.key,
+    required this.isDarkMode,
+    required this.shippingInfo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +46,7 @@ class ShippingDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '2715 Ash Dr. San Jose, South Dakota 83475',
+                  '${shippingInfo[0].name}, ${shippingInfo[0].address}',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 12.sp,
@@ -49,7 +55,7 @@ class ShippingDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  '121-224-7890',
+                  shippingInfo[0].phone,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 12.sp,
