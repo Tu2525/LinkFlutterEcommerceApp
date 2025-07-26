@@ -118,7 +118,7 @@ class _SignInScreenState extends State<SignInScreen>
                   ),
                 ],
               ),
-              SizedBox(height: 71),
+              const SizedBox(height: 71),
               SigninWithButton(
                 isdark: isDarkMode,
                 text: 'Continue With Apple',
