@@ -32,7 +32,7 @@ class VisaDataBottomSheet extends StatelessWidget {
       height: 700.h,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: const Color(0xff342F3F),
+        color: isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20.r),
           topRight: Radius.circular(20.r),
