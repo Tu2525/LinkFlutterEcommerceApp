@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
 
@@ -11,7 +13,9 @@ class VisaDataBottomSheet extends StatelessWidget {
     required this.cvvController,
     required this.expiryController,
     required this.formKey,
+    required this.ref,
   });
+  final WidgetRef ref;
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
   final TextEditingController cardnumberController;
@@ -119,7 +123,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                             hint: ' Expiry',
                             validator:
                                 (value) =>
-                                    value == null || value.length != 5
+                                    value == null || value.length < 4
                                         ? 'Enter valid expiry date/Use format MM/YY'
                                         : null,
                           ),
@@ -173,6 +177,8 @@ class VisaDataBottomSheet extends StatelessWidget {
                 child: ContinueButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
+                      ref.read(cardNumberProvider.notifier).state =
+                          cardnumberController.text;
                       Navigator.pop(context);
                     }
                   },

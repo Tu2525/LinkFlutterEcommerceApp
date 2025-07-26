@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/visa_data_bottom_sheet.dart';
 
-class Paymentscreen extends StatefulWidget {
+class Paymentscreen extends ConsumerStatefulWidget {
   const Paymentscreen({super.key});
 
   @override
-  State<Paymentscreen> createState() => _PaymentscreenState();
+  ConsumerState<Paymentscreen> createState() => _PaymentscreenState();
 }
 
-class _PaymentscreenState extends State<Paymentscreen> {
+class _PaymentscreenState extends ConsumerState<Paymentscreen> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController cardnumberController = TextEditingController();
@@ -42,6 +43,7 @@ class _PaymentscreenState extends State<Paymentscreen> {
                         cardnumberController: cardnumberController,
                         cvvController: cvvController,
                         expiryController: expiryController,
+                        ref: ref,
                       ),
                 ),
           ),
