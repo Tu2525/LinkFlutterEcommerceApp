@@ -1,6 +1,6 @@
 // lib/constants/app_styles.dart
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+
 
 class AppTextStyles {
   AppTextStyles._();
