@@ -1,31 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/screens/reset_password%20screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/providers/forgot_password_Provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 
-class ForgotPassword extends StatefulWidget {
+class ForgotPassword extends ConsumerWidget {
   const ForgotPassword({super.key});
 
   @override
-  State<ForgotPassword> createState() => _ForgotPasswordState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final manager = ref.watch(forgotPasswordProvider);
 
-class _ForgotPasswordState extends State<ForgotPassword> {
-  final TextEditingController emailController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     final screenHeight = MediaQuery.sizeOf(context).height;
     final screenWidth = MediaQuery.sizeOf(context).width;
-
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -37,7 +25,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               vertical: screenHeight * 0.05,
             ),
             child: Form(
-              key: formKey,
+              key: manager.formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -53,32 +41,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                   SizedBox(height: screenHeight * 0.04),
                   CustomTextField(
-                    emailController: emailController,
+                    emailController: manager.emailController,
                     isPassword: false,
                     hint: 'Enter Email address',
                     isdark: isDarkMode,
 
-                    validator:
-                        (value) =>
-                            (value == null || value.trim().isEmpty)
-                                ? 'Please enter your email'
-                                : !value.contains('@') || !value.contains('.')
-                                ? 'Please enter a valid email address'
-                                : null,
+                    validator: manager.validateEmail,
                   ),
                   SizedBox(height: screenHeight * 0.03),
-                  ContinueButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ResetPassword(),
-                          ),
-                        );
-                      }
-                    },
-                  ),
+                  ContinueButton(onPressed: () => manager.submit(context)),
                 ],
               ),
             ),
