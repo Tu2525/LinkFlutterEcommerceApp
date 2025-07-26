@@ -14,6 +14,7 @@ class VisaDataBottomSheet extends StatelessWidget {
     required this.expiryController,
     required this.formKey,
     required this.ref,
+    required this.isDarkMode,
   });
   final WidgetRef ref;
   final GlobalKey<FormState> formKey;
@@ -21,9 +22,12 @@ class VisaDataBottomSheet extends StatelessWidget {
   final TextEditingController cardnumberController;
   final TextEditingController cvvController;
   final TextEditingController expiryController;
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return Container(
       height: 700.h,
       width: double.infinity,
@@ -49,7 +53,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                 child: Text(
                   'Cardholder Name',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: textColor,
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -73,7 +77,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                 child: Text(
                   'Card Number',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: textColor,
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -106,7 +110,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           child: Text(
                             'Expiry',
                             style: TextStyle(
-                              color: Colors.white,
+                              color:textColor,
                               fontSize: 24.sp,
                               fontWeight: FontWeight.w500,
                             ),
@@ -140,7 +144,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           child: Text(
                             'CVV',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontSize: 24.sp,
                               fontWeight: FontWeight.w500,
                             ),
@@ -153,9 +157,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           ),
                           child: CustomTextForm(
                             controller: cvvController,
-                            inputType: const TextInputType.numberWithOptions(
-                              decimal: true,
-                            ),
+                            inputType: TextInputType.number,
                             hint: ' CVV',
                             validator:
                                 (value) =>

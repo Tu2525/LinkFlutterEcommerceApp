@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
+import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: EcommerceApp()));
@@ -23,7 +23,7 @@ class EcommerceApp extends StatelessWidget {
           fontFamily: 'Circular',
         ),
         themeMode: ThemeMode.system,
-        home:  const Paymentscreen(),
+        home:  const SplashScreen(),
       ),
     );
   }

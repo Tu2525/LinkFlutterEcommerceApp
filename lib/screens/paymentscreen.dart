@@ -28,6 +28,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,8 +45,10 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                         cvvController: cvvController,
                         expiryController: expiryController,
                         ref: ref,
+                        isDarkMode: isDarkMode,
                       ),
                 ),
+            isDarkMode: isDarkMode,
           ),
         ],
       ),
