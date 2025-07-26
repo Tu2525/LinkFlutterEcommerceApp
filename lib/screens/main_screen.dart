@@ -66,18 +66,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-
-class ss extends StatelessWidget {
-  const ss({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Receipt Page', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
 class ReceiptPage extends StatelessWidget {
   const ReceiptPage({super.key});
 
