@@ -62,6 +62,7 @@ class VisaDataBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
                 child: CustomTextForm(
+                  isdarkmode: isDarkMode,
                   controller: nameController,
                   inputType: TextInputType.name,
                   hint: ' Name',
@@ -96,6 +97,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           value == null || value.length < 16
                               ? 'Enter valid card number'
                               : null,
+                  isdarkmode: isDarkMode,
                 ),
               ),
               Row(
@@ -110,7 +112,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           child: Text(
                             'Expiry',
                             style: TextStyle(
-                              color:textColor,
+                              color: textColor,
                               fontSize: 24.sp,
                               fontWeight: FontWeight.w500,
                             ),
@@ -122,6 +124,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                             vertical: 8.h,
                           ),
                           child: CustomTextForm(
+                            isdarkmode: isDarkMode,
                             controller: expiryController,
                             inputType: TextInputType.datetime,
                             hint: ' Expiry',
@@ -156,6 +159,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                             vertical: 8.h,
                           ),
                           child: CustomTextForm(
+                            isdarkmode: isDarkMode,
                             controller: cvvController,
                             inputType: TextInputType.number,
                             hint: ' CVV',
