@@ -14,6 +14,7 @@ class UserInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isFormValid = ref.watch(isFormValidProvider);
+
     return Scaffold(
       backgroundColor: isDark ? const Color(0xFF1C1B20) : Colors.white,
       body: SafeArea(
@@ -59,7 +60,7 @@ class UserInfo extends ConsumerWidget {
                       ),
                     );
                   }
-                  : null,
+                  : () {},
           text: 'Finish',
         ),
       ),

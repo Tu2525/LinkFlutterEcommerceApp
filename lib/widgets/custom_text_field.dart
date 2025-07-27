@@ -6,17 +6,19 @@ class CustomTextField extends StatelessWidget {
     required TextEditingController emailController,
     required this.isPassword,
     required this.hint,
-    required this.isdark,
+    required this.isdark, this.validator,
   }) : _emailController = emailController;
 
   final TextEditingController _emailController;
   final bool isPassword;
   final String hint;
   final bool isdark;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
       controller: _emailController,
       obscureText: isPassword,
       decoration: InputDecoration(
