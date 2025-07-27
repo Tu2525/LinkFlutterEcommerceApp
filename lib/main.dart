@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 
+
 void main() {
   runApp(const ProviderScope(child: EcommerceApp()));
 }
@@ -15,6 +16,7 @@ class EcommerceApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       minTextAdapt: true,
+      splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

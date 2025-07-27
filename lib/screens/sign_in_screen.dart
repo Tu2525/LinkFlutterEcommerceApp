@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
@@ -89,7 +90,6 @@ class _SignInScreenState extends State<SignInScreen>
                 },
               ),
 
-
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -101,19 +101,18 @@ class _SignInScreenState extends State<SignInScreen>
                   ),
                   GestureDetector(
                     onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreateAccountScreen(),
-                    ),
-                  );
-                },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateAccountScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       ' Create One',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
-
                       ),
                     ),
                   ),
@@ -131,7 +130,14 @@ class _SignInScreenState extends State<SignInScreen>
                 isdark: isDarkMode,
                 text: 'Continue With Google',
                 icon: Image.asset('images/google.png', height: 25, width: 20),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const OrderDetails(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 12),
               SigninWithButton(
