@@ -13,24 +13,21 @@ class EcommerceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      splitScreenMode: true,
+      designSize: const Size(390, 844),
       minTextAdapt: true,
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.light,
-            fontFamily: 'Circular',
-          ),
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            fontFamily: 'Circular',
-          ),
-          themeMode: ThemeMode.system,
-          home: const SplashScreen(),
-        );
-      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          fontFamily: 'Circular',
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          fontFamily: 'Circular',
+        ),
+        themeMode: ThemeMode.system,
+        home: const SplashScreen(),
+      ),
     );
   }
 }
