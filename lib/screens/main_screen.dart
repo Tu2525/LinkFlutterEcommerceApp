@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
 
   static const List<Widget> _pages = <Widget>[
     HomePage(),
-    NotificationPage(),
+    NotificationScreen(),
     ReceiptPage(),
     ProfilePage(),
   ];
@@ -61,18 +62,6 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
-    );
-  }
-}
-
-
-class NotificationPage extends StatelessWidget {
-  const NotificationPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Notification Page', style: TextStyle(fontSize: 24)),
     );
   }
 }
