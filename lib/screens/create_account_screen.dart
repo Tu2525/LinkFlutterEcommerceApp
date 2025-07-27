@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/reset_password%20screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
@@ -76,7 +77,14 @@ class CreateAccountScreen extends StatelessWidget {
                 hint: "Password",
               ),
               const SizedBox(height: 40),
-              ContinueButton(onPressed: () {}),
+              ContinueButton(onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UserInfo(),
+                  ),
+                );
+              }),
               const SizedBox(height: 40),
               Row(
                 children: [
