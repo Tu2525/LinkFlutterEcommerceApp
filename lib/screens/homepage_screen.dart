@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                CategoriesSection(),
+                const CategoriesSection(),
                 const SizedBox(height: 24),
                 TopSellingSection(
                   products: MockProductData.getFeaturedProducts(),
