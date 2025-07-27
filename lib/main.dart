@@ -17,13 +17,16 @@ class EcommerceApp extends StatelessWidget {
       minTextAdapt: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
+        theme: ThemeData(
+          brightness: Brightness.light,
+          fontFamily: 'Circular',
+        ),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
           fontFamily: 'Circular',
         ),
         themeMode: ThemeMode.system,
-        home:  const SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ContinueButton extends StatelessWidget {
+
   const ContinueButton({super.key, required this.onPressed, this.text= 'Continue', this.width =double.infinity, this.height=49});
   final VoidCallback onPressed;
   final String text;
