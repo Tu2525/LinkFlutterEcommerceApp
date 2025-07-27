@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/onboarding_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/gender_button.dart';
 
 class UserInfo extends StatefulWidget {
@@ -170,7 +170,7 @@ class _UserInfoState extends State<UserInfo> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MainScreen(),
+                            builder: (context) => const OnBoardingScreen(),
                           ),
                         );
                       },

@@ -11,7 +11,6 @@ class ForgotPassword extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final manager = ref.watch(forgotPasswordProvider);
-
     final screenHeight = MediaQuery.sizeOf(context).height;
     final screenWidth = MediaQuery.sizeOf(context).width;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
