@@ -54,7 +54,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                   'Cardholder Name',
                   style: TextStyle(
                     color: textColor,
-                    fontSize: 24.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -79,7 +79,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                   'Card Number',
                   style: TextStyle(
                     color: textColor,
-                    fontSize: 24.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -106,6 +106,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
@@ -113,7 +114,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                             'Expiry',
                             style: TextStyle(
                               color: textColor,
-                              fontSize: 24.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -141,6 +142,7 @@ class VisaDataBottomSheet extends StatelessWidget {
 
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
@@ -148,7 +150,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                             'CVV',
                             style: TextStyle(
                               color: textColor,
-                              fontSize: 24.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -175,6 +177,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 20.h),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20.0,
