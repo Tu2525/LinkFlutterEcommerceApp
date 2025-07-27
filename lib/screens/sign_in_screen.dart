@@ -89,7 +89,6 @@ class _SignInScreenState extends State<SignInScreen>
                 },
               ),
 
-
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -101,19 +100,18 @@ class _SignInScreenState extends State<SignInScreen>
                   ),
                   GestureDetector(
                     onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreateAccountScreen(),
-                    ),
-                  );
-                },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateAccountScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       ' Create One',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
-
                       ),
                     ),
                   ),
@@ -139,7 +137,7 @@ class _SignInScreenState extends State<SignInScreen>
                 text: 'Continue With Facebook',
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
                 onPressed: () {
-                   Navigator.push(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const Paymentscreen(),
