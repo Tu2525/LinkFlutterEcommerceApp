@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
@@ -143,7 +144,14 @@ class _SignInScreenState extends State<SignInScreen>
                 isdark: isDarkMode,
                 text: 'Continue With Facebook',
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
-                onPressed: () {},
+                onPressed: () {
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Paymentscreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
