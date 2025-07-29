@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:link_flutter_ecommerce_app/providers/notification_screen_providor.dart';
+import 'package:link_flutter_ecommerce_app/providers/notification_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/notification_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/notification_with_data.dart';
 

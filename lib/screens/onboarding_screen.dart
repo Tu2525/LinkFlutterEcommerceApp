@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:link_flutter_ecommerce_app/providors/onboarding_screen_providor.dart';
+import 'package:link_flutter_ecommerce_app/providers/onboarding_screen_providor.dart';
 import 'package:link_flutter_ecommerce_app/widgets/onboarding_screen_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
