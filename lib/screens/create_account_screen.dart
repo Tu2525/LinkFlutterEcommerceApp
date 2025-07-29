@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
-import 'package:link_flutter_ecommerce_app/screens/reset_password%20screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';

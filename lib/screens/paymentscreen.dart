@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
@@ -19,34 +20,18 @@ class Paymentscreen extends ConsumerStatefulWidget {
 class _PaymentscreenState extends ConsumerState<Paymentscreen> {
   final formKey = GlobalKey<FormState>();
 
-  final nameController = TextEditingController();
-  final cardnumberController = TextEditingController();
-  final cvvController = TextEditingController();
-  final expiryController = TextEditingController();
-  final countryController = TextEditingController();
-  final stateController = TextEditingController();
-  final addressController = TextEditingController();
-  final cityController = TextEditingController();
-  final zipcodeController = TextEditingController();
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    cardnumberController.dispose();
-    cvvController.dispose();
-    expiryController.dispose();
-    countryController.dispose();
-    stateController.dispose();
-    addressController.dispose();
-    cityController.dispose();
-    zipcodeController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
+    final nameController = ref.watch(nameControllerProvider);
+    final cardNumberController = ref.watch(cardNumberControllerProvider);
+    final cvvController = ref.watch(cvvControllerProvider);
+    final expiryController = ref.watch(expiryControllerProvider);
+    final countryController = ref.watch(countryControllerProvider);
+    final stateController = ref.watch(stateControllerProvider);
+    final addressController = ref.watch(addressControllerProvider);
+    final cityController = ref.watch(cityControllerProvider);
+    final zipCodeController = ref.watch(zipCodeControllerProvider);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +67,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                   stateController: stateController,
                   addressController: addressController,
                   cityController: cityController,
-                  zipcodeController: zipcodeController,
+                  zipcodeController: zipCodeController,
                 ),
               );
             },
@@ -98,7 +83,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                   ref: ref,
                   isDarkMode: isDarkMode,
                   nameController: nameController,
-                  cardnumberController: cardnumberController,
+                  cardnumberController: cardNumberController,
                   cvvController: cvvController,
                   expiryController: expiryController,
                 ),
