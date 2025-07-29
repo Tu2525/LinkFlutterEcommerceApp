@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  String _selectedCategory = 'Men';
-  final List<String> _categories = ['Men', 'Women', 'Kids'];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeNotifier = ref.watch(homePageProvider);
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Padding(
@@ -42,13 +38,11 @@ class _HomePageState extends State<HomePage> {
 
                       PopupMenuButton<String>(
                         onSelected: (String result) {
-                          setState(() {
-                            _selectedCategory = result;
-                          });
+                          ref.read(homePageProvider).selectedCategory;
                         },
                         itemBuilder:
                             (BuildContext context) =>
-                                _categories.map((String category) {
+                                homeNotifier.categories.map((String category) {
                                   return PopupMenuItem<String>(
                                     value: category,
                                     child: Text(category),
@@ -66,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             children: [
                               Text(
-                                _selectedCategory,
+                                homeNotifier.selectedCategory,
                                 style: AppTextStyles.sectionTitle(isDarkMode),
                               ),
                               const SizedBox(width: 4),
