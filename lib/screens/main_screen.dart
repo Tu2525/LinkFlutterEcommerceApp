@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   static const List<Widget> _pages = <Widget>[
     HomePage(),
     NotificationScreen(),
-    ReceiptPage(),
+    OrdersScreen(),
     ProfilePage(),
   ];
   void _onItemTapped(int index) {
@@ -65,18 +66,6 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-class ReceiptPage extends StatelessWidget {
-  const ReceiptPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Receipt Page', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
