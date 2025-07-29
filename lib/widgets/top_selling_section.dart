@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import '../models/product.dart';
+
 import 'product_card.dart';
 
-class TopSellingSection extends StatelessWidget {
-  final List<Product> products;
+class TopSellingSection extends ConsumerWidget {
   final String title;
   final VoidCallback? onSeeAllTap;
   final Function(Product)? onProductTap;
@@ -13,10 +14,11 @@ class TopSellingSection extends StatelessWidget {
   final double? cardWidth;
   final double? cardHeight;
   final double? sectionHeight;
+  final StateNotifierProvider<StateNotifier<List<Product>>, List<Product>>
+  provider;
 
-  const TopSellingSection({
-    super.key,
-    required this.products,
+  TopSellingSection({
+    Key? key,
     this.title = 'Top Selling',
     this.onSeeAllTap,
     this.onProductTap,
@@ -25,13 +27,15 @@ class TopSellingSection extends StatelessWidget {
     this.cardWidth,
     this.cardHeight,
     this.sectionHeight,
-  });
+    required this.provider,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = theme.brightness == Brightness.dark;
+    final products = ref.watch(provider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +82,7 @@ class TopSellingSection extends StatelessWidget {
                       final product = products[index];
                       return ProductCard(
                         cardColor:
-                            theme.brightness == Brightness.dark
+                            isDarkMode
                                 ? const Color(0xFF342F3F)
                                 : const Color(0xFFF4F4F4),
                         product: product,
