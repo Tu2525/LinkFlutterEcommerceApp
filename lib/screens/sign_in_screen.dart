@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
@@ -6,50 +7,52 @@ import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
 import 'create_account_screen.dart';
+import 'package:link_flutter_ecommerce_app/providers/sign_in_provider.dart';
 
-class SignInScreen extends StatefulWidget {
+// Removed duplicate ConsumerWidget version
+// Use only ConsumerStatefulWidget version below
+class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen>
-    with WidgetsBindingObserver {
-  bool isDarkMode = false;
+class _SignInScreenState extends ConsumerState<SignInScreen> {
+  late final TextEditingController emailController;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _updateDarkMode(); // Call it here instead
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangePlatformBrightness() {
-    _updateDarkMode();
-  }
-
-  void _updateDarkMode() {
-    setState(() {
-      isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    emailController = TextEditingController(
+      text: ref.read(signInEmailProvider),
+    );
+    emailController.addListener(() {
+      ref.read(signInEmailProvider.notifier).state = emailController.text;
     });
   }
 
   @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController emailController = TextEditingController();
+    final isDarkMode = ref.watch(signInDarkModeProvider);
+
+    // Update dark mode state on build
+    final brightness = MediaQuery.of(context).platformBrightness;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (ref.read(signInDarkModeProvider.notifier).state !=
+          (brightness == Brightness.dark)) {
+        ref.read(signInDarkModeProvider.notifier).state =
+            brightness == Brightness.dark;
+      }
+    });
+
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
@@ -72,21 +75,27 @@ class _SignInScreenState extends State<SignInScreen>
                 ),
               ),
               const SizedBox(height: 32),
-              CustomTextField(
-                emailController: emailController,
-                isPassword: false,
-                hint: 'Email Address',
-                isdark: isDarkMode,
+              Form(
+                key: _formKey,
+                child: CustomTextField(
+                  emailController: emailController,
+                  isPassword: false,
+                  hint: 'Email Address',
+                  isdark: isDarkMode,
+                  validator: (value) => validateEmail(value),
+                ),
               ),
               const SizedBox(height: 16),
               ContinueButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PasswordScreen(),
-                    ),
-                  );
+                  if (_formKey.currentState?.validate() ?? false) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PasswordScreen(),
+                      ),
+                    );
+                  }
                 },
               ),
 
@@ -122,7 +131,18 @@ class _SignInScreenState extends State<SignInScreen>
               SigninWithButton(
                 isdark: isDarkMode,
                 text: 'Continue With Apple',
-                icon: Image.asset('images/apple.png', height: 25, width: 20),
+                icon:
+                    isDarkMode
+                        ? Image.asset(
+                          'images/whiteApple.png',
+                          height: 25,
+                          width: 20,
+                        )
+                        : Image.asset(
+                          'images/apple.png',
+                          height: 25,
+                          width: 20,
+                        ),
                 onPressed: () {},
               ),
               const SizedBox(height: 12),
@@ -145,7 +165,7 @@ class _SignInScreenState extends State<SignInScreen>
                 text: 'Continue With Facebook',
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
                 onPressed: () {
-                   Navigator.push(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const Paymentscreen(),
