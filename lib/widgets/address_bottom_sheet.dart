@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
+import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
 
-class VisaDataBottomSheet extends StatelessWidget {
-  const VisaDataBottomSheet({
+class AddressBottomSheet extends StatelessWidget {
+  const AddressBottomSheet({
     super.key,
-    required this.nameController,
-    required this.cardnumberController,
-    required this.cvvController,
-    required this.expiryController,
+    required this.countryController,
+    required this.stateController,
+    required this.addressController,
+    required this.cityController,
+    required this.zipcodeController,
     required this.formKey,
     required this.ref,
     required this.isDarkMode,
   });
   final WidgetRef ref;
   final GlobalKey<FormState> formKey;
-  final TextEditingController nameController;
-  final TextEditingController cardnumberController;
-  final TextEditingController cvvController;
-  final TextEditingController expiryController;
+  final TextEditingController countryController;
+  final TextEditingController stateController;
+  final TextEditingController addressController;
+  final TextEditingController cityController;
+  final TextEditingController zipcodeController;
   final bool isDarkMode;
 
   @override
@@ -50,7 +52,7 @@ class VisaDataBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                 child: Text(
-                  'Cardholder Name',
+                  'Country',
                   style: TextStyle(
                     color: textColor,
                     fontSize: 16.sp,
@@ -62,20 +64,20 @@ class VisaDataBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
                 child: CustomTextForm(
                   isdarkmode: isDarkMode,
-                  controller: nameController,
+                  controller: countryController,
                   inputType: TextInputType.name,
-                  hint: ' Name',
+                  hint: ' Country',
                   validator:
                       (value) =>
-                          value == null || value.isEmpty
-                              ? 'Please enter cardholder name'
+                          value == null || value.trim().isEmpty
+                              ? 'Country is required'
                               : null,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                 child: Text(
-                  'Card Number',
+                  'State/Region',
                   style: TextStyle(
                     color: textColor,
                     fontSize: 16.sp,
@@ -86,15 +88,38 @@ class VisaDataBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
                 child: CustomTextForm(
-                  controller: cardnumberController,
-                  inputType: const TextInputType.numberWithOptions(
-                    decimal: true,
+                  controller: stateController,
+                  inputType: TextInputType.name,
+                  hint: 'State/Region',
+                  validator:
+                      (value) =>
+                          value == null || value.trim().isEmpty
+                              ? 'State/Region is required'
+                              : null,
+                  isdarkmode: isDarkMode,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                child: Text(
+                  'Address',
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
                   ),
-                  hint: ' Card Number',
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                child: CustomTextForm(
+                  controller: addressController,
+                  inputType: TextInputType.name,
+                  hint: 'Address',
                   validator:
                       (value) =>
                           value == null || value.length < 16
-                              ? 'Enter valid card number'
+                              ? 'Address is required'
                               : null,
                   isdarkmode: isDarkMode,
                 ),
@@ -110,7 +135,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                           child: Text(
-                            'Expiry',
+                            'city',
                             style: TextStyle(
                               color: textColor,
                               fontSize: 16.sp,
@@ -125,13 +150,13 @@ class VisaDataBottomSheet extends StatelessWidget {
                           ),
                           child: CustomTextForm(
                             isdarkmode: isDarkMode,
-                            controller: expiryController,
+                            controller: cityController,
                             inputType: TextInputType.datetime,
-                            hint: ' Expiry',
+                            hint: 'city',
                             validator:
                                 (value) =>
-                                    value == null || value.length < 4
-                                        ? 'Enter valid expiry date/Use format MM/YY'
+                                    value == null || value.trim().isEmpty
+                                        ? 'city is required'
                                         : null,
                           ),
                         ),
@@ -146,7 +171,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                           child: Text(
-                            'CVV',
+                            'Zipcode',
                             style: TextStyle(
                               color: textColor,
                               fontSize: 16.sp,
@@ -161,14 +186,18 @@ class VisaDataBottomSheet extends StatelessWidget {
                           ),
                           child: CustomTextForm(
                             isdarkmode: isDarkMode,
-                            controller: cvvController,
+                            controller: zipcodeController,
                             inputType: TextInputType.number,
-                            hint: ' CVV',
-                            validator:
-                                (value) =>
-                                    value == null || value.length != 3
-                                        ? 'Enter valid CVV'
-                                        : null,
+                            hint: 'Zipcode',
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Please enter your zipcode';
+                              } else if (value.trim().length < 3 ||
+                                  value.trim().length > 10) {
+                                return 'Zipcode must be between 3 to 10 digits';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -185,12 +214,12 @@ class VisaDataBottomSheet extends StatelessWidget {
                 child: ContinueButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      ref.read(cardNumberProvider.notifier).state =
-                          cardnumberController.text;
+                      ref.read(addressProvider.notifier).state =
+                          addressController.text;
                       Navigator.pop(context);
                     }
                   },
-                  text: 'Add Card',
+                  text: 'Add Address',
                 ),
               ),
             ],
