@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:link_flutter_ecommerce_app/model/category_model.dart';
+import 'package:link_flutter_ecommerce_app/models/category_model.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories.dart';
 
 final List<CategoryModel> allCategories = [
