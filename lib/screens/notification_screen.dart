@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/providers/notification_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/notification_card.dart';
-import 'package:link_flutter_ecommerce_app/widgets/notification_with_data.dart';
+import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
 
 class NotificationScreen extends ConsumerWidget {
   const NotificationScreen({super.key});
@@ -31,7 +31,7 @@ class NotificationScreen extends ConsumerWidget {
             ),
             Expanded(
               child: notifications.isEmpty
-                  ?const NotificationWithData()
+                  ?const WithoutDataWidget(img: 'images/bell 1.png',text: "No Notification yet",)
                   : ListView.builder(
                       itemCount: notifications.length,
                       padding: const EdgeInsets.all(16),

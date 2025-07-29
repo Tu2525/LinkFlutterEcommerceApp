@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
 
-class NotificationWithData extends StatelessWidget {
-  const NotificationWithData({super.key});
-
+class WithoutDataWidget extends StatelessWidget {
+  const WithoutDataWidget({super.key, required this.img , required this.text});
+  final String img; 
+  final String text;
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -11,10 +12,10 @@ class NotificationWithData extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('images/bell 1.png', width: 100),
+          Image.asset(img, width: 100),
           const SizedBox(height: 20),
           Text(
-            "No Notification yet",
+            text,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color:  isDarkMode ? Colors.white : const Color(0xff272727),),
           ),
           const SizedBox(height: 20),
