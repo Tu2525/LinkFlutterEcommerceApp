@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/providers/category_section_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/products_of_category_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CategoryCard.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 
@@ -46,12 +47,24 @@ class CategoriesList extends ConsumerWidget {
                     final item = categories[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: CategoryCard(
-                        image: item.imgPath,
-                        title: item.title,
-                        isDarkMode: isDarkMode,
-                        screenHeight: screenHeight,
-                        screenWidth: screenWidth,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => ProductsOfCategoryScreen(
+                                    categoryName: item.title,
+                                  ),
+                            ),
+                          );
+                        },
+                        child: CategoryCard(
+                          image: item.imgPath,
+                          title: item.title,
+                          isDarkMode: isDarkMode,
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth,
+                        ),
                       ),
                     );
                   },
