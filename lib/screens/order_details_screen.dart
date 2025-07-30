@@ -9,24 +9,21 @@ import 'package:link_flutter_ecommerce_app/widgets/shipping_details.dart';
 
 class OrderDetails extends ConsumerWidget {
   const OrderDetails({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? Colors.white : Colors.black;
-    final orderAsyncValue = ref.watch(orderProvider);
+    final order = ref.watch(selectedOrderProvider);
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
-      body: orderAsyncValue.when(
-        data:
-            (order) => Padding(
+      body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  OrderHeader(orderId: order.id),
+                  OrderHeader(orderId: order!.id),
                   SizedBox(height: 20.h),
-                  OrderSteps(isDarkMode: isDarkMode, steps: order.steps),
+                  OrderSteps(isDarkMode: isDarkMode, steps: order!.steps),
                   SizedBox(height: 20.h),
                   Padding(
                     padding: EdgeInsets.only(left: 16.w),
@@ -40,7 +37,7 @@ class OrderDetails extends ConsumerWidget {
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  OrderItemsCard(isDarkMode: isDarkMode, items: order.items),
+                  OrderItemsCard(isDarkMode: isDarkMode, items: order!.items),
                   SizedBox(height: 38.h),
                   ShippingDetails(
                     isDarkMode: isDarkMode,
@@ -49,9 +46,6 @@ class OrderDetails extends ConsumerWidget {
                 ],
               ),
             ),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stackTrace) => Center(child: Text(error.toString())),
-      ),
     );
   }
 }
