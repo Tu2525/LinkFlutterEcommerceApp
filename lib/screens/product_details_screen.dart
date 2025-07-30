@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/TopBar.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/addToBagButton.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/colorSelector.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/infoSection.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/productImageCarousel.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/quantitySelector.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewSection.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/sizeSelector.dart';
 
-class MyWidget extends ConsumerWidget {
-  const MyWidget({super.key});
+class ProductDetailsScreen extends ConsumerWidget {
+  const ProductDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final product = ref.watch(productProvider);
+    final totalPrice = ref.watch(totalPriceProvider);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -17,8 +27,8 @@ class MyWidget extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const _TopBar(),
-                    const _ProductImageCarousel(),
+                    const TopBar(),
+                    const ProductImageCarousel(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Column(
@@ -42,28 +52,28 @@ class MyWidget extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          const _SizeSelector(),
+                          const SizeSelector(),
                           const SizedBox(height: 16),
-                          const _ColorSelector(),
+                          const ColorSelector(),
                           const SizedBox(height: 16),
-                          const _QuantitySelector(),
+                          const QuantitySelector(),
                           const SizedBox(height: 24),
-                          Text(
-                            product.description,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey[700],
-                              height: 1.5,
-                            ),
-                          ),
+                          // Text(
+                          //   product.description as String,
+                          //   style: TextStyle(
+                          //     fontSize: 15,
+                          //     color: Colors.grey[700],
+                          //     height: 1.5,
+                          //   ),
+                          // ),
                           const SizedBox(height: 24),
-                          const _InfoSection(
+                          const InfoSection(
                             title: 'Shipping & Returns',
                             content:
                                 'Free standard shipping and free 60-day returns',
                           ),
                           const SizedBox(height: 24),
-                          const _ReviewsSection(),
+                          const ReviewsSection(),
                         ],
                       ),
                     ),
@@ -71,10 +81,9 @@ class MyWidget extends ConsumerWidget {
                 ),
               ),
             ),
-            // Positioned "Add to Bag" button at the bottom
             Align(
               alignment: Alignment.bottomCenter,
-              child: _AddToBagButton(totalPrice: totalPrice),
+              child: AddToBagButton(totalPrice: totalPrice),
             ),
           ],
         ),
