@@ -4,6 +4,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/providers/main_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -11,7 +12,7 @@ class MainScreen extends ConsumerWidget {
   static const List<Widget> _pages = <Widget>[
     HomePage(),
     NotificationScreen(),
-    ReceiptPage(),
+    OrdersScreen(),
     ProfilePage(),
   ];
 
@@ -56,18 +57,6 @@ class MainScreen extends ConsumerWidget {
     );
   }
 }
-
-class ReceiptPage extends StatelessWidget {
-  const ReceiptPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Receipt Page', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 

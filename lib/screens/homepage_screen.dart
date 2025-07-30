@@ -4,13 +4,15 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
 import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
+import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
+import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +37,7 @@ class HomePage extends ConsumerWidget {
                           'https://picsum.photos/536/354',
                         ),
                       ),
-
+                      // ...existing code for category popup and bag icon...
                       PopupMenuButton<String>(
                         onSelected: (String result) {
                           ref.read(homePageProvider).selectedCategory;
@@ -79,15 +81,25 @@ class HomePage extends ConsumerWidget {
                           color: AppColors.primary,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
-                          IconsaxPlusBroken.bag_2,
-                          color: Colors.white,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const OrdersScreen(),
+                              ),
+                            );
+                          },
+
+                          child: const Icon(
+                            IconsaxPlusBroken.bag_2,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 20),
                 //Search
                 Padding(
@@ -110,13 +122,11 @@ class HomePage extends ConsumerWidget {
                 const SizedBox(height: 24),
                 const CategoriesSection(),
                 const SizedBox(height: 24),
-                TopSellingSection(
-                  products: MockProductData.getFeaturedProducts(),
-                ),
+                TopSellingSection(provider: topSellingProductsProvider),
                 const SizedBox(height: 24),
                 TopSellingSection(
                   title: "New in",
-                  products: MockProductData.getFeaturedProducts(),
+                  provider: newInProductsProvider,
                 ),
               ],
             ),

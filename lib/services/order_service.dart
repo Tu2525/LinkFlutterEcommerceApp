@@ -2,11 +2,12 @@ import 'dart:async';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 
 class OrderService {
-  Future<OrderModel> getOrderDetails() async {
+  Future<List<OrderModel>> getOrderDetails() async {
     await Future.delayed(const Duration(seconds: 1)); 
 
-    return OrderModel(
+    return [OrderModel(
       id: '03545',
+      status: 'Shipped',
       items: [
         OrderItem(name: 'Shirt', quantity: 2),
         OrderItem(name: 'Jeans', quantity: 1),
@@ -23,6 +24,7 @@ class OrderService {
         phone: '+20 1012345678',
         address: 'Nasr City, Cairo, Egypt',
       ),
-    );
+    )]
+    ;
   }
 }

@@ -1,10 +1,13 @@
+
 class OrderModel {
   final String id;
   final List<OrderItem> items;
   final List<OrderStep> steps;
   final ShippingInfo shipping;
+  final String status;
 
   OrderModel({
+    required this.status,
     required this.id,
     required this.items,
     required this.steps,
@@ -13,6 +16,7 @@ class OrderModel {
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
+      status: json['status'],
       id: json['id'],
       items: (json['items'] as List).map((e) => OrderItem.fromJson(e)).toList(),
       steps: (json['steps'] as List).map((e) => OrderStep.fromJson(e)).toList(),

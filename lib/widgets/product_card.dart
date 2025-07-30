@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import '../models/product.dart';
 
 class ProductCard extends StatefulWidget {
@@ -42,15 +43,16 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        width: 159,
-        height: 281,
+        width: widget.width ?? 159,
+        height: widget.height ?? 281,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          color: widget.cardColor ?? colorScheme.surface,
+          color: widget.cardColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -93,7 +95,9 @@ class _ProductCardState extends State<ProductCard> {
                       child: GestureDetector(
                         onTap: _toggleFavorite,
                         child: Icon(
-                          _isFavorite ? Icons.favorite : Icons.favorite_outline,
+                          _isFavorite
+                              ? IconsaxPlusBold.heart
+                              : IconsaxPlusBroken.heart,
                           color:
                               _isFavorite
                                   ? Colors.red
@@ -123,7 +127,7 @@ class _ProductCardState extends State<ProductCard> {
                       fontFamily: 'Circular',
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: colorScheme.onSurface,
+                      color: isDarkMode ? Colors.white : colorScheme.onSurface,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
