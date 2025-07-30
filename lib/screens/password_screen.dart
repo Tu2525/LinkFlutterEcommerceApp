@@ -1,22 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/onboarding_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
+import 'package:link_flutter_ecommerce_app/providers/sign_in_provider.dart';
 
-class PasswordScreen extends StatefulWidget {
+class PasswordScreen extends ConsumerStatefulWidget {
   const PasswordScreen({super.key});
 
   @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
+  ConsumerState<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class _PasswordScreenState extends State<PasswordScreen> {
-  final TextEditingController _passwordController = TextEditingController();
+class _PasswordScreenState extends ConsumerState<PasswordScreen> {
+  late final TextEditingController passwordController;
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController = TextEditingController(
+      text: ref.read(signInPasswordProvider),
+    );
+    passwordController.addListener(() {
+      ref.read(signInPasswordProvider.notifier).state = passwordController.text;
+    });
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = ref.watch(signInDarkModeProvider);
+
+    // Update dark mode state on build
+    final brightness = MediaQuery.of(context).platformBrightness;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (ref.read(signInDarkModeProvider.notifier).state !=
+          (brightness == Brightness.dark)) {
+        ref.read(signInDarkModeProvider.notifier).state =
+            brightness == Brightness.dark;
+      }
+    });
+
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       body: Padding(
@@ -39,21 +70,27 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 ),
               ),
               const SizedBox(height: 32),
-              CustomTextField(
-                emailController: _passwordController,
-                isPassword: true,
-                hint: 'Password',
-                isdark: isDarkMode,
+              Form(
+                key: _formKey,
+                child: CustomTextField(
+                  emailController: passwordController,
+                  isPassword: true,
+                  hint: 'Password',
+                  isdark: isDarkMode,
+                  validator: (value) => validatePassword(value),
+                ),
               ),
               const SizedBox(height: 16),
               ContinueButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const OnBoardingScreen(),
-                    ),
-                  );
+                  if (_formKey.currentState?.validate() ?? false) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OnBoardingScreen(),
+                      ),
+                    );
+                  }
                 },
               ),
               const SizedBox(height: 16),
