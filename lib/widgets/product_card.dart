@@ -78,9 +78,9 @@ class _ProductCardState extends State<ProductCard> {
                         topRight: Radius.circular(8),
                       ),
                       child:
-                          widget.product.imageUrl != null
+                          widget.product.imageUrls != null
                               ? Image.network(
-                                widget.product.imageUrl!,
+                                widget.product.imageUrls! as String,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return _buildPlaceholder();

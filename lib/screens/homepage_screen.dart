@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
 import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
@@ -9,11 +11,12 @@ import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final homeNotifier = ref.watch(homePageProvider);
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Padding(
@@ -36,10 +39,12 @@ class HomePage extends StatelessWidget {
                       ),
                       // ...existing code for category popup and bag icon...
                       PopupMenuButton<String>(
-                        onSelected: (String result) {},
+                        onSelected: (String result) {
+                          ref.read(homePageProvider).selectedCategory;
+                        },
                         itemBuilder:
                             (BuildContext context) =>
-                                ['Men', 'Women', 'Kids'].map((String category) {
+                                homeNotifier.categories.map((String category) {
                                   return PopupMenuItem<String>(
                                     value: category,
                                     child: Text(category),
@@ -57,7 +62,7 @@ class HomePage extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                'Men',
+                                homeNotifier.selectedCategory,
                                 style: AppTextStyles.sectionTitle(isDarkMode),
                               ),
                               const SizedBox(width: 4),
@@ -77,12 +82,14 @@ class HomePage extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const OrdersScreen()),
-                          );
-                        },
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const OrdersScreen(),
+                              ),
+                            );
+                          },
 
                           child: const Icon(
                             IconsaxPlusBroken.bag_2,

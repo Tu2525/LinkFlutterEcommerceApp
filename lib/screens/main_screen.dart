@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/providers/main_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
 
   static const List<Widget> _pages = <Widget>[
     HomePage(),
@@ -20,17 +15,13 @@ class _MainScreenState extends State<MainScreen> {
     OrdersScreen(),
     ProfilePage(),
   ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final mainScreenController = ref.watch(mainScreenProvider);
     return Scaffold(
       body: IndexedStack(
-        index: _selectedIndex,
+        index: mainScreenController.selectedIndex,
         children: _pages,
       ),
 
@@ -59,9 +50,9 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Profile',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex:  mainScreenController.selectedIndex,
         selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
+        onTap: (index) => ref.read(mainScreenProvider).setIndex(index),
       ),
     );
   }

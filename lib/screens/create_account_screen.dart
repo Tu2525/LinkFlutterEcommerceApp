@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
+import 'package:link_flutter_ecommerce_app/providers/create_account_provider.dart';
 
-class CreateAccountScreen extends StatelessWidget {
+class CreateAccountScreen extends ConsumerWidget {
   CreateAccountScreen({super.key});
 
   final emailController = TextEditingController();
@@ -14,7 +16,8 @@ class CreateAccountScreen extends StatelessWidget {
   final passwordController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accountManager = ref.watch(createAccountProvider);
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
@@ -42,49 +45,46 @@ class CreateAccountScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               CustomTextField(
-
                 isdark: isDarkMode,
 
-                emailController: firstnameController,
+                emailController: accountManager.firstnameController,
                 isPassword: false,
                 hint: "Firstname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
-
                 isdark: isDarkMode,
 
-                emailController: lastnameController,
+                emailController: accountManager.lastnameController,
                 isPassword: false,
                 hint: "Lastname",
               ),
               const SizedBox(height: 16),
               CustomTextField(
-
                 isdark: isDarkMode,
 
-                emailController: emailController,
+                emailController: accountManager.emailController,
                 isPassword: false,
                 hint: "Email Address",
               ),
               const SizedBox(height: 16),
               CustomTextField(
-
                 isdark: isDarkMode,
 
-                emailController: passwordController,
+                emailController: accountManager.passwordController,
                 isPassword: true,
                 hint: "Password",
               ),
               const SizedBox(height: 40),
-              ContinueButton(onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const UserInfo(),
-                  ),
-                );
-              }),
+              ContinueButton(
+                onPressed: () {
+                  accountManager.submit();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const UserInfo()),
+                  );
+                },
+              ),
               const SizedBox(height: 40),
               Row(
                 children: [

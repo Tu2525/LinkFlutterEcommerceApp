@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewItem.dart';
+
+class ReviewsSection extends ConsumerWidget {
+  const ReviewsSection({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final product = ref.watch(productProvider);
+    final totalRating = product.reviews!.map((r) => r.rating).reduce((a, b) => a + b) / product.reviews!.length; //FIX MOCKDATA
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Reviews',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Text(
+              '${totalRating.toStringAsFixed(1)} Ratings',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              '${product.reviews?.length} Reviews',
+              style: TextStyle(fontSize: 15, color: Colors.grey[600]),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        ...product.reviews!.map((review) => ReviewItem(review: review)),
+      ],
+    );
+  }
+}
