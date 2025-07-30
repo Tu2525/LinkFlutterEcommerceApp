@@ -39,7 +39,7 @@ class CustomTextForm extends StatelessWidget {
           borderSide: BorderSide(color: bordercolor),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(const Radius.circular(8)),
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(color: bordercolor),
         ),
         hintText: hint,

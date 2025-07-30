@@ -62,7 +62,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                 child: Text(
                   'Sign In',
                   style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
+                    color: isDarkMode ? Colors.white : const Color.fromARGB(255, 176, 99, 99),
                     fontFamily: 'Circular',
                     fontWeight: FontWeight.w700,
                     fontSize: 32,
