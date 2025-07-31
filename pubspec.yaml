@@ -39,6 +39,9 @@ dependencies:
   iconsax_plus: ^1.0.0
   flutter_riverpod: ^2.6.1
   flutter_screenutil: ^5.9.3
+  firebase_core: ^4.0.0
+  firebase_auth: ^6.0.0
+  cloud_firestore: ^6.0.0
 
 dev_dependencies:
   flutter_test:

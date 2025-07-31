@@ -1,10 +1,10 @@
-class User {
+class UserModel {
   final String firstName;
   final String lastName;
   final String email;
   final String password;
 
-  User({
+  UserModel({
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -19,12 +19,22 @@ class User {
     };
   }
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],
       password: json['password'],
+    );
+  }
+
+  // Add fromMap method for Firestore compatibility
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      firstName: map['firstName'] ?? '',
+      lastName: map['lastName'] ?? '',
+      email: map['email'] ?? '',
+      password: map['password'] ?? '',
     );
   }
 }
