@@ -17,8 +17,8 @@ class TopSellingSection extends ConsumerWidget {
   final StateNotifierProvider<StateNotifier<List<Product>>, List<Product>>
   provider;
 
-  TopSellingSection({
-    Key? key,
+  const TopSellingSection({
+    super.key,
     this.title = 'Top Selling',
     this.onSeeAllTap,
     this.onProductTap,
@@ -28,7 +28,7 @@ class TopSellingSection extends ConsumerWidget {
     this.cardHeight,
     this.sectionHeight,
     required this.provider,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

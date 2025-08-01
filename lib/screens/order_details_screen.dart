@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
+import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_header.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_items_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_steps.dart';
@@ -13,7 +14,8 @@ class OrderDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? Colors.white : Colors.black;
-    final order = ref.watch(selectedOrderProvider);
+    // final order = ref.watch(selectedOrderProvider);
+    final order = mockOrders[0];
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
       body: Padding(
@@ -21,9 +23,9 @@ class OrderDetails extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  OrderHeader(orderId: order!.id),
+                  OrderHeader(orderId: order.id),
                   SizedBox(height: 20.h),
-                  OrderSteps(isDarkMode: isDarkMode, steps: order!.steps),
+                  OrderSteps(isDarkMode: isDarkMode, steps: order.steps),
                   SizedBox(height: 20.h),
                   Padding(
                     padding: EdgeInsets.only(left: 16.w),
@@ -37,7 +39,7 @@ class OrderDetails extends ConsumerWidget {
                     ),
                   ),
                   SizedBox(height: 20.h),
-                  OrderItemsCard(isDarkMode: isDarkMode, items: order!.items),
+                  OrderItemsCard(isDarkMode: isDarkMode, items: order.items),
                   SizedBox(height: 38.h),
                   ShippingDetails(
                     isDarkMode: isDarkMode,

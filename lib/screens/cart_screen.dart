@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
+import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/empty_cart.dart';
+import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/populated_cart.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/TopBar.dart';
+
+class CartScreen extends ConsumerWidget {
+  const CartScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartItems = ref.watch(cartProvider);
+
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Custom top bar implementation
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 16.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TopBar(showHeartIcon: false,),
+                  Text(
+                    "Cart",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  // if (cartItems.isNotEmpty)
+                  //   TextButton(
+                  //     onPressed:
+                  //         () => ref.read(cartProvider.notifier).clearCart(),
+                  //     child: const Text(
+                  //       'Remove All',
+                  //       style: TextStyle(color: Colors.black54),
+                  //     ),
+                  //   )
+                  // else
+                    SizedBox(
+                      width: 80,
+                    ), // Placeholder with approx. width of the button
+                ],
+              ),
+            ),
+            // Main content area that expands to fill the remaining space
+            Expanded(
+              child:
+                  cartItems.isEmpty
+                      ? const EmptyCart()
+                      : PopulatedCart(cartItems: cartItems),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

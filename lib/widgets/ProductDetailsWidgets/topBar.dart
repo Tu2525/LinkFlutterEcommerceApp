@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class TopBar extends StatelessWidget {
-  const TopBar({super.key});
+  final bool showHeartIcon;
+  const TopBar({super.key, this.showHeartIcon = true});
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +12,8 @@ class TopBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildIconButton(Icons.arrow_back_ios_new),
-          _buildIconButton(Icons.favorite_border),
+          _buildIconButton(IconsaxPlusBroken.arrow_left_2),
+          if(showHeartIcon) _buildIconButton(IconsaxPlusBroken.heart),
         ],
       ),
     );

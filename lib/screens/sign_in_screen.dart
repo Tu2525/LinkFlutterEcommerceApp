@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
@@ -143,7 +144,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           height: 25,
                           width: 20,
                         ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CartScreen()),
+                  );
+                },
               ),
               const SizedBox(height: 12),
               SigninWithButton(

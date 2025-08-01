@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
 class OrderSummary extends StatelessWidget {
@@ -7,13 +8,8 @@ class OrderSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final labelStyle = TextStyle(
-      color: Colors.grey.shade600,
-      fontSize: 14.sp,
-    );
-    const valueStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-    );
+    final labelStyle = TextStyle(color: Colors.grey.shade600, fontSize: 14.sp);
+    const valueStyle = TextStyle(fontWeight: FontWeight.bold);
     final totalStyle = valueStyle.copyWith(fontSize: 16.sp);
 
     return Column(
@@ -52,12 +48,17 @@ class OrderSummary extends StatelessWidget {
         ),
         SizedBox(height: 24.h),
         ContinueButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const OrderPlacedSuccessfullyScreen(),
+              ),
+            );
+          },
           text: '\$208${' ' * 60}Place Order',
         ),
       ],
     );
   }
 }
-
-

@@ -5,7 +5,6 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
-import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
