@@ -14,7 +14,7 @@ class OrderDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? Colors.white : Colors.black;
-    // final order = ref.watch(selectedOrderProvider);
+    // final order = ref.watch(selectedOrderProvider); //zabt dah ya abdallah
     final order = mockOrders[0];
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
