@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase only if it hasn't been initialized already
+  try {
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+  } catch (e) {
+    if (e.toString().contains('duplicate-app')) {
+      // Firebase already initialized, continue
+      print('Firebase was already initialized');
+    } else {
+      // Re-throw other exceptions
+      rethrow;
+    }
+  }
+
   runApp(const ProviderScope(child: EcommerceApp()));
 }
 
