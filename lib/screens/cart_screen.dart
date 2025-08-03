@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/empty_cart.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/populated_cart.dart';
-import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/TopBar.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
 
 class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});

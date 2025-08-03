@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 
 class EmptyCart extends StatelessWidget {
   const EmptyCart({super.key});
@@ -17,7 +18,7 @@ class EmptyCart extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {Navigator.pop(context, MaterialPageRoute(builder: (context) => const MainScreen()));},
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurpleAccent,
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
