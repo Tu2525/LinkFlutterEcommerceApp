@@ -1,12 +1,23 @@
-import 'package:flutter/painting.dart';
-class CategoryModel{
+
+class CategoryModel {
   final String imgPath;
   final String categoryName;
-  final VoidCallback ontap;
-  
+  final String description;
+  final bool isActive;
+
   CategoryModel({
     required this.categoryName,
-    required this.imgPath ,
-    required this.ontap
-    });
+    required this.imgPath,
+    required this.description,
+    required this.isActive,
+  });
+
+  factory CategoryModel.fromFireStore(Map<String, dynamic> data) {
+    return CategoryModel(
+      categoryName: data['name'] ?? '',
+      imgPath: data['imageUrl'] ?? '',
+      description: data['description'] ?? '',
+      isActive: data['isActive'] ?? false,
+    );
+  }
 }
