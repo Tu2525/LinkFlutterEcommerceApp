@@ -20,47 +20,4 @@ class ProductsOfCategoryNotifier extends StateNotifier<List<Product>> {
 }
 
 // Mock data for now
-final List<Product> _mockProducts = [
-  Product(
-    id: '1',
-    name: "Men's Fleece Pullover Hoodie",
-    price: 100.0,
-    imageUrl: 'assets/images/hoodie1.png',
-    category: 'Hoodies',
-  ),
-  Product(
-    id: '2',
-    name: "Fleece Pullover Skate Hoodie",
-    price: 150.97,
-    imageUrl: 'assets/images/hoodie2.png',
-    category: 'Hoodies',
-  ),
-  Product(
-    id: '1',
-    name: "Men's Fleece Pullover Hoodie",
-    price: 100.0,
-    imageUrl: 'assets/images/hoodie1.png',
-    category: 'Hoodies',
-  ),
-  Product(
-    id: '2',
-    name: "Fleece Pullover Skate Hoodie",
-    price: 150.97,
-    imageUrl: 'assets/images/hoodie2.png',
-    category: 'Hoodies',
-  ),
-  Product(
-    id: '3',
-    name: "Fleece Skate Hoodie",
-    price: 110.0,
-    imageUrl: 'assets/images/hoodie3.png',
-    category: 'Hoodies',
-  ),
-  Product(
-    id: '4',
-    name: "Men's Ice-Dye Pullover Hoodie",
-    price: 128.97,
-    imageUrl: 'assets/images/hoodie4.png',
-    category: 'Hoodies',
-  ),
-];
+final List<Product> _mockProducts = [];
