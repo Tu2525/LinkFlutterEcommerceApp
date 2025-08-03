@@ -1,3 +1,5 @@
+import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
+import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/models/review.dart';
 
 import '../models/product.dart';
@@ -11,6 +13,68 @@ final placeHolderReview = Review( //WILL BE REMOVED
   comment: "This is a great product! I would definitely recommend it to a friend. The quality is top-notch and it exceeded my expectations.",
   date: "2 days ago",
 );
+
+final List<CartItem>placeHolderOrders = [
+  const CartItem(
+    id: '1',
+    name: "Men's Harrington Jacket",
+    imageUrl: 'https://placehold.co/100x100/A4E3A9/000000?text=Jacket',
+    size: 'M',
+    color: 'Lemon',
+    price: 148.00,
+  ),
+  const CartItem(
+    id: '2',
+    name: "Men's Coaches Jacket",
+    imageUrl: 'https://placehold.co/100x100/3D4C53/FFFFFF?text=Jacket',
+    size: 'M',
+    color: 'Black',
+    price: 52.00,
+  ),
+];
+
+final List<OrderModel> mockOrders = [
+  OrderModel(
+    id: "ORD-2025-08-01-001",
+    status: "Shipped",
+    items: [
+      OrderItem(name: "Laptop Pro 15-inch", quantity: 1),
+      OrderItem(name: "Wireless Mouse", quantity: 1),
+      OrderItem(name: "USB-C Hub", quantity: 2),
+    ],
+    steps: [
+      OrderStep(title: "Order Placed", isChecked: true, date: "2025-07-29"),
+      OrderStep(title: "Processing", isChecked: true, date: "2025-07-30"),
+      OrderStep(title: "Shipped", isChecked: true, date: "2025-08-01"),
+      OrderStep(title: "Delivered", isChecked: false, date: ""),
+    ],
+    shipping: ShippingInfo(
+      name: "John Doe",
+      phone: "+1-202-555-0147",
+      address: "123 Tech Avenue, Silicon Valley, CA 94043, USA",
+    ),
+  ),
+  OrderModel(
+    id: "ORD-2025-07-25-002",
+    status: "Delivered",
+    items: [
+      OrderItem(name: "Smart Coffee Mug", quantity: 1),
+      OrderItem(name: "Book: 'The Art of Code'", quantity: 1),
+    ],
+    steps: [
+      OrderStep(title: "Order Placed", isChecked: true, date: "2025-07-25"),
+      OrderStep(title: "Processing", isChecked: true, date: "2025-07-25"),
+      OrderStep(title: "Shipped", isChecked: true, date: "2025-07-26"),
+      OrderStep(title: "Delivered", isChecked: true, date: "2025-07-28"),
+    ],
+    shipping: ShippingInfo(
+      name: "Jane Smith",
+      phone: "+44 20 7946 0958",
+      address: "456 Innovation Drive, London, E1 6AN, UK",
+    ),
+  ),
+];
+
 class MockProductData {
   static List<Product> getTopSellingProducts() {
     return [

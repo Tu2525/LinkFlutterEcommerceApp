@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
 class OrderPlacedSuccessfullyScreen extends StatelessWidget {
@@ -67,12 +68,12 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
                   height: 52,
                   text: 'See Order details',
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const (),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderDetails(),
+                      ),
+                    );
                   },
                 ),
               ],

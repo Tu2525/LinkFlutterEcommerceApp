@@ -1,12 +1,13 @@
-import 'package:flutter/painting.dart';
-class CategoryModel{
+import 'dart:ui';
+
+class CategoryModel {
   final String imgPath;
   final String categoryName;
   final VoidCallback ontap;
-  
+
   CategoryModel({
     required this.categoryName,
-    required this.imgPath ,
-    required this.ontap
-    });
+    required this.imgPath,
+    required this.ontap,
+  });
 }
