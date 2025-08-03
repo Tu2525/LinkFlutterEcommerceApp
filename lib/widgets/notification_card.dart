@@ -3,7 +3,7 @@ import 'package:link_flutter_ecommerce_app/models/notification_model.dart';
 
 class NotificationCard extends StatelessWidget {
   const NotificationCard({super.key, required this.item});
-  final NotificationModel item;
+  final NotificationData item;
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
