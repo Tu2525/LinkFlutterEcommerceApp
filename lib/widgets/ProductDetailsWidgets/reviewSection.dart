@@ -9,7 +9,7 @@ class ReviewsSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final product = ref.watch(productProvider);
-    final totalRating = product.reviews!.map((r) => r.rating).reduce((a, b) => a + b) / product.reviews!.length; //FIX MOCKDATA
+    final totalRating = product.reviews.map((r) => r.rating).reduce((a, b) => a + b) / product.reviews.length; //FIX MOCKDATA
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,13 +27,13 @@ class ReviewsSection extends ConsumerWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              '${product.reviews?.length} Reviews',
+              '${product.reviews.length} Reviews',
               style: TextStyle(fontSize: 15, color: Colors.grey[600]),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        ...product.reviews!.map((review) => ReviewItem(review: review)),
+        ...product.reviews.map((review) => ReviewItem(review: review)),
       ],
     );
   }

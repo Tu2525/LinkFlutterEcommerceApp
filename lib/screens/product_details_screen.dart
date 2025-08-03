@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
-import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/TopBar.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/addToBagButton.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/colorSelector.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/infoSection.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/productImageCarousel.dart';

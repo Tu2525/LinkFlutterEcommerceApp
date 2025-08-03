@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
 class CustomIcon extends StatelessWidget {
   const CustomIcon({super.key});
@@ -21,7 +22,7 @@ class CustomIcon extends StatelessWidget {
         child: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: Icon(
-            Icons.arrow_back_ios_new,
+            IconsaxPlusBroken.arrow_left_2,
             size: 16,
             color: isDark ? Colors.white : Colors.black,
           ),

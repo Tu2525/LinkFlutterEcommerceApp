@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
 class QuantitySelector extends ConsumerWidget {
@@ -29,7 +30,7 @@ class QuantitySelector extends ConsumerWidget {
           Row(
             children: [
               buildQuantityButton(
-                icon: Icons.remove,
+                icon: IconsaxPlusBroken.minus,
                 onPressed: () {
                   if (quantity > 1) {
                     ref.read(quantityProvider.notifier).state--;
@@ -47,7 +48,7 @@ class QuantitySelector extends ConsumerWidget {
                 ),
               ),
               buildQuantityButton(
-                icon: Icons.add,
+                icon: IconsaxPlusBroken.add,
                 onPressed: () {
                   ref.read(quantityProvider.notifier).state++;
                 },

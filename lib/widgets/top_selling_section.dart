@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
 import '../models/product.dart';
 
 import 'product_card.dart';
@@ -17,8 +18,8 @@ class TopSellingSection extends ConsumerWidget {
   final StateNotifierProvider<StateNotifier<List<Product>>, List<Product>>
   provider;
 
-  TopSellingSection({
-    Key? key,
+  const TopSellingSection({
+    super.key,
     this.title = 'Top Selling',
     this.onSeeAllTap,
     this.onProductTap,
@@ -28,7 +29,7 @@ class TopSellingSection extends ConsumerWidget {
     this.cardHeight,
     this.sectionHeight,
     required this.provider,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -88,7 +89,15 @@ class TopSellingSection extends ConsumerWidget {
                         product: product,
                         width: cardWidth,
                         height: cardHeight,
-                        onTap: () => onProductTap?.call(product),
+                        onTap:
+                            () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) =>
+                                        const ProductDetailsScreen(),
+                              ),
+                            ),
                         onFavoriteToggle: () => onFavoriteToggle?.call(product),
                       );
                     },

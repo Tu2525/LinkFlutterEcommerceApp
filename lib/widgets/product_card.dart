@@ -80,7 +80,7 @@ class _ProductCardState extends State<ProductCard> {
                       child:
                           widget.product.imageUrls != null
                               ? Image.network(
-                                widget.product.imageUrls! as String,
+                                widget.product.imageUrls![0],
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return _buildPlaceholder();

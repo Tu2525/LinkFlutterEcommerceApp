@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import '../widgets/product_card.dart';
-import '../models/product.dart';
 import '../providers/products_of_category_provider.dart';
 import '../constants/app_colors.dart';
 
 class ProductsOfCategoryScreen extends ConsumerWidget {
   final String categoryName;
-  const ProductsOfCategoryScreen({Key? key, required this.categoryName})
-    : super(key: key);
+  const ProductsOfCategoryScreen({super.key, required this.categoryName});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

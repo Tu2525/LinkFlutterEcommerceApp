@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
 class SizeSelector extends ConsumerWidget {
@@ -27,7 +28,7 @@ class SizeSelector extends ConsumerWidget {
         child: DropdownButton<String>(
           isExpanded: true,
           value: selectedSize,
-          icon: const Icon(Icons.keyboard_arrow_down),
+          icon: const Icon(IconsaxPlusBroken.arrow_down_2),
           items: sizes.map((String value) {
             return DropdownMenuItem<String>(
               value: value,
