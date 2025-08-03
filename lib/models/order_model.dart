@@ -5,6 +5,7 @@ class OrderModel {
   final List<OrderStep> steps;
   final ShippingInfo shipping;
   final String status;
+  final String userId;
 
   OrderModel({
     required this.status,
@@ -12,15 +13,17 @@ class OrderModel {
     required this.items,
     required this.steps,
     required this.shipping,
+    required this.userId,
   });
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) {
+  factory OrderModel.fromFireStore(Map<String, dynamic> json) {
     return OrderModel(
       status: json['status'],
       id: json['id'],
       items: (json['items'] as List).map((e) => OrderItem.fromJson(e)).toList(),
       steps: (json['steps'] as List).map((e) => OrderStep.fromJson(e)).toList(),
       shipping: ShippingInfo.fromJson(json['shipping']),
+      userId: json['userId'],
     );
   }
 }

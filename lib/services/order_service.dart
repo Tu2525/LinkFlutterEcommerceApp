@@ -1,30 +1,30 @@
-import 'dart:async';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/order_model.dart';
 
 class OrderService {
-  Future<List<OrderModel>> getOrderDetails() async {
-    await Future.delayed(const Duration(seconds: 1)); 
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    return [OrderModel(
-      id: '03545',
-      status: 'Shipped',
-      items: [
-        OrderItem(name: 'Shirt', quantity: 2),
-        OrderItem(name: 'Jeans', quantity: 1),
-        OrderItem(name: 'Sneakers', quantity: 1),
-      ],
-      steps: [
-        OrderStep(title: 'Delivered', isChecked: false, date: '28 May'),
-        OrderStep(title: 'Shipped', isChecked: true, date: '27 May'),
-        OrderStep(title: 'Order confirmed', isChecked: true, date: '26 May'),
-        OrderStep(title: 'Order placed', isChecked: true, date: '25 May'),
-      ],
-      shipping: ShippingInfo(
-        name: 'Abdallah Atef',
-        phone: '+20 1012345678',
-        address: 'Nasr City, Cairo, Egypt',
-      ),
-    )]
-    ;
+  Future<List<OrderModel>> getOrderDetails() async {
+    //final user = _auth.currentUser;// test it when sign in finish 
+    //if (user == null) throw Exception('User not logged in');
+
+    final query = await _firestore
+        .collection('orders')
+        //.where('userId', isEqualTo: user.uid)
+        .get();
+
+
+    return query.docs.map((doc) {
+      final data = doc.data();
+      log("${query.docs.length}, ${query.docs.first},  ${query.docs}");
+      return OrderModel.fromFireStore({
+        ...data,
+        'id': doc.id,
+      });
+    }).toList();
   }
 }
