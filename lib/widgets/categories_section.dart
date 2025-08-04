@@ -29,12 +29,12 @@ class CategoriesSection extends StatelessWidget {
                     const Spacer(flex: 1),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CategoriesList(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const CategoriesList(),
+                        //   ),
+                        // );
                       },
                       child: Text(
                         "See All",
@@ -45,9 +45,14 @@ class CategoriesSection extends StatelessWidget {
                 ),
               ),
               Consumer(
-                builder:
-                    (context, ref, child) =>
-                        Row(children: ref.watch(categoryProvider)),
+                builder: (context, ref, child) {
+                  final asyncCategories = ref.watch(categoryProvider);
+                  return asyncCategories.when(
+                    data: (categories) => Row(children: categories),
+                    loading: () => const CircularProgressIndicator(),
+                    error: (e, _) => Text('Error: $e'),
+                  );
+                },
               ),
             ],
           ),
