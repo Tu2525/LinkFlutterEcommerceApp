@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
+import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
@@ -89,18 +89,36 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               ),
               const SizedBox(height: 16),
               ContinueButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PasswordScreen(),
-                      ),
-                    );
+                    final exists = await ref
+                        .read(authServiceProvider)
+                        .checkIfEmailExists(emailController.text.trim());
+                    final error = ref.read(authErrorProvider);
+                    if (!exists) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            error.isNotEmpty
+                                ? error
+                                : 'No user found for that email.',
+                          ),
+                        ),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => PasswordScreen(
+                                email: emailController.text.trim(),
+                              ),
+                        ),
+                      );
+                    }
                   }
                 },
               ),
-
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -148,7 +166,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ProductDetailsScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const ProductDetailsScreen(),
+                    ),
                   );
                 },
               ),
