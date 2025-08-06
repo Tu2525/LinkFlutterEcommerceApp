@@ -1,10 +1,22 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
+import 'package:link_flutter_ecommerce_app/services/notification_service.dart';
 import 'firebase_options.dart';
+
+
+@pragma('vm:entry-point')//for native 
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message, {bool showNotification = false}) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await setupFlutterNotifications();
+  if (showNotification) {
+    showFlutterNotification(message);
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
