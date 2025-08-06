@@ -1,21 +1,34 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
+import 'package:link_flutter_ecommerce_app/services/product_service.dart';
 import '../models/product.dart';
 
-final topSellingProductsProvider =
-    StateNotifierProvider<TopSellingProductsNotifier, List<Product>>((ref) {
-      // Replace with real fetch logic or Firebase integration in the future
-      return TopSellingProductsNotifier();
-    });
+final topSellingProductsProvider = StateNotifierProvider<
+  TopSellingProductsNotifier,
+  AsyncValue<List<Product>>
+>((ref) {
+  return TopSellingProductsNotifier();
+});
 
-class TopSellingProductsNotifier extends StateNotifier<List<Product>> {
-  TopSellingProductsNotifier() : super(_mockTopSellingProducts);
+class TopSellingProductsNotifier
+    extends StateNotifier<AsyncValue<List<Product>>> {
+  TopSellingProductsNotifier() : super(const AsyncValue.loading()) {
+    _loadTopSellingProducts();
+  }
 
-  // Add methods for fetching, filtering, etc. as needed
+  Future<void> _loadTopSellingProducts() async {
+    try {
+      state = const AsyncValue.loading();
+      final products = await ProductService.getTopSellingProducts();
+      state = AsyncValue.data(products);
+    } catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace);
+    }
+  }
+
+  Future<void> refresh() async {
+    await _loadTopSellingProducts();
+  }
 }
-
-List<Product> _mockTopSellingProducts = MockProductData.getFeaturedProducts();
-
 
 // final List<Product> _mockTopSellingProducts = [
 //   Product(

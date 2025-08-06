@@ -10,11 +10,10 @@ class CategoriesList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final screenHeight = MediaQuery.sizeOf(context).height;
     final screenWidth = MediaQuery.sizeOf(context).width;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final categories = ref.watch(categoryProvider);
+    final categories = ref.watch(categoryDataProvider);
     return categories.when(
       data:
           (categories) => Scaffold(
@@ -55,14 +54,15 @@ class CategoriesList extends ConsumerWidget {
                                   MaterialPageRoute(
                                     builder:
                                         (context) => ProductsOfCategoryScreen(
-                                          categoryName: item.title,
+                                          categoryName: item.name,
+                                          categoryId: item.id,
                                         ),
                                   ),
                                 );
                               },
                               child: CategoryCard(
-                                image: item.imgPath,
-                                title: item.title,
+                                image: item.imageUrl,
+                                title: item.name,
                                 isDarkMode: isDarkMode,
                                 screenHeight: screenHeight,
                                 screenWidth: screenWidth,
