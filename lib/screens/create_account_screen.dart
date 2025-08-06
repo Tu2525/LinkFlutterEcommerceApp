@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
@@ -89,7 +90,7 @@ class CreateAccountScreen extends ConsumerWidget {
               Row(
                 children: [
                   Text(
-                    'Forgot Password?',
+                    AppLocalizations.of(context)!.forgotPassword,
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),

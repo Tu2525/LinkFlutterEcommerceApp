@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 import 'firebase_options.dart';
 
@@ -38,6 +39,9 @@ class EcommerceApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
         darkTheme: ThemeData(

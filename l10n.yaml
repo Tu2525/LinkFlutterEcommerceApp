@@ -1,0 +1,6 @@
+arb-dir: lib/l10n
+temblate-arb-file: lib/l10n/app_en.arb
+output-directory: lib/l10n/generated
+output-localizations-file: app_localization.dart
+untranslated-messages-file: missed_translated_messages.json
+
