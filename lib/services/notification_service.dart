@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:link_flutter_ecommerce_app/models/notification_model.dart';
@@ -11,27 +9,81 @@ import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  
+
   Future<List<NotificationModel>> fetchNotificationData() async {
-    await Future.delayed(const Duration(seconds: 1)); 
-    //final user = _auth.currentUser;// test it when sign in finish 
-    //if (user == null) throw Exception('User not logged in');
-      final query = await _firestore
-        .collection('notifications')
-        //.where('userId', isEqualTo: user.uid)
-        .get();
-      log("${query.docs}, ${query.size}");  
-      return query.docs.map((doc) {
-      final data = doc.data();
-      return NotificationModel.fromFireStore({
-        ...data,
-        'id': doc.id,
-      });
-    }).toList();     
+    try {
+      print('🔔 Fetching notifications from Firebase...');
+
+      // For now, fetch all notifications (you can add user filtering later)
+      final query = await _firestore.collection('notifications').get();
+
+      print('🔔 Found ${query.docs.length} notification documents');
+
+      List<NotificationModel> allNotifications = [];
+
+      for (var doc in query.docs) {
+        try {
+          final data = doc.data();
+          print('🔔 Processing document ${doc.id}: ${data.keys}');
+
+          final notificationModel = NotificationModel.fromFireStore({
+            ...data,
+            'id': doc.id,
+          });
+
+          allNotifications.add(notificationModel);
+          print(
+            '🔔 Added ${notificationModel.data.length} notifications from document ${doc.id}',
+          );
+        } catch (e) {
+          print('❌ Error processing notification document ${doc.id}: $e');
+        }
+      }
+
+      print('🔔 Total notification models: ${allNotifications.length}');
+      return allNotifications;
+    } catch (e) {
+      print('❌ Error fetching notifications: $e');
+      return [];
+    }
+  }
+
+  // Real-time listener for notifications
+  Stream<List<NotificationModel>> notificationStream() {
+    print('🔔 Starting real-time notification stream...');
+
+    return _firestore.collection('notifications').snapshots().map((snapshot) {
+      print(
+        '🔔 Real-time update: ${snapshot.docs.length} notification documents',
+      );
+
+      List<NotificationModel> allNotifications = [];
+
+      for (var doc in snapshot.docs) {
+        try {
+          final data = doc.data();
+          print('🔔 Real-time processing document ${doc.id}');
+
+          final notificationModel = NotificationModel.fromFireStore({
+            ...data,
+            'id': doc.id,
+          });
+
+          allNotifications.add(notificationModel);
+        } catch (e) {
+          print(
+            '❌ Error processing real-time notification document ${doc.id}: $e',
+          );
+        }
+      }
+
+      print(
+        '🔔 Real-time total notification models: ${allNotifications.length}',
+      );
+      return allNotifications;
+    });
   }
 }
-
 
 void showFlutterNotification(RemoteMessage message) async {
   await setupFlutterNotifications();
@@ -56,7 +108,6 @@ void showFlutterNotification(RemoteMessage message) async {
   );
 }
 
-
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
@@ -72,8 +123,9 @@ Future<void> setupFlutterNotifications() async {
 
   channel = const AndroidNotificationChannel(
     'high_importance_channel', // id
-    'High Importance Notifications', // title 
-    description: 'This channel is used for important notifications.', // description
+    'High Importance Notifications', // title
+    description:
+        'This channel is used for important notifications.', // description
     importance: Importance.max,
     enableLights: true,
     enableVibration: true,
@@ -86,7 +138,9 @@ Future<void> setupFlutterNotifications() async {
   /// We use this channel in the `AndroidManifest.xml` file to override the
   /// default FCM channel to enable heads up notifications.
   await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin
+      >()
       ?.createNotificationChannel(channel);
 
   /// Update the iOS foreground notification presentation options to allow
@@ -97,7 +151,8 @@ Future<void> setupFlutterNotifications() async {
     sound: true,
   );
 
-  AndroidInitializationSettings androidSettings = const AndroidInitializationSettings("@drawable/icon");
+  AndroidInitializationSettings androidSettings =
+      const AndroidInitializationSettings("@drawable/icon");
 
   DarwinInitializationSettings iosSettings = const DarwinInitializationSettings(
     requestAlertPermission: true,
@@ -112,10 +167,12 @@ Future<void> setupFlutterNotifications() async {
 
   flutterLocalNotificationsPlugin.initialize(
     notificationsSettings,
-    onDidReceiveNotificationResponse: (NotificationResponse details) {//optional
+    onDidReceiveNotificationResponse: (NotificationResponse details) {
+      //optional
       handleNotificationClicks(details.payload);
     },
-    onDidReceiveBackgroundNotificationResponse: onDidReceiveBackgroundNotificationResponse,
+    onDidReceiveBackgroundNotificationResponse:
+        onDidReceiveBackgroundNotificationResponse,
   );
 
   tz.initializeDatabase([]);
@@ -124,8 +181,8 @@ Future<void> setupFlutterNotifications() async {
 }
 
 void handleNotificationClicks(String? payload) async {
-  if(payload !=null){
-    //logic 
+  if (payload != null) {
+    //logic
   }
 }
 

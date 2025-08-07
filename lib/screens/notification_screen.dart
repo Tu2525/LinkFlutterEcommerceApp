@@ -10,7 +10,7 @@ class NotificationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final notifications = ref.watch(notificationProvider);
+    final notifications = ref.watch(realTimeNotificationProvider);
     return SafeArea(
       child: Column(
         children: [
