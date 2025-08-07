@@ -2,20 +2,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/services/product_service.dart';
 import '../models/product.dart';
 
-// Provider for products by category using Firebase
-final productsOfCategoryProvider = StateNotifierProvider.family<
-  ProductsOfCategoryNotifier,
+// Provider for products by category
+final productsByCategoryProvider = StateNotifierProvider.family<
+  ProductsByCategoryNotifier,
   AsyncValue<List<Product>>,
   String
 >((ref, categoryId) {
-  return ProductsOfCategoryNotifier(categoryId);
+  return ProductsByCategoryNotifier(categoryId);
 });
 
-class ProductsOfCategoryNotifier
+class ProductsByCategoryNotifier
     extends StateNotifier<AsyncValue<List<Product>>> {
   final String categoryId;
 
-  ProductsOfCategoryNotifier(this.categoryId)
+  ProductsByCategoryNotifier(this.categoryId)
     : super(const AsyncValue.loading()) {
     _loadProductsByCategory();
   }

@@ -6,10 +6,12 @@ class Categories extends StatelessWidget {
     super.key,
     required this.imgPath,
     required this.title,
+    required this.categoryId,
     required this.ontap,
   });
 
   final String title;
+  final String categoryId;
   final String imgPath;
   final VoidCallback ontap;
   @override
@@ -18,7 +20,19 @@ class Categories extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return GestureDetector(
-      onTap: () => {Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductsOfCategoryScreen(categoryName: title,)))},
+      onTap:
+          () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (context) => ProductsOfCategoryScreen(
+                      categoryName: title,
+                      categoryId: categoryId,
+                    ),
+              ),
+            ),
+          },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

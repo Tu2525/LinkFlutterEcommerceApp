@@ -29,12 +29,12 @@ class CategoriesSection extends StatelessWidget {
                     const Spacer(flex: 1),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const CategoriesList(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CategoriesList(),
+                          ),
+                        );
                       },
                       child: Text(
                         "See All",
