@@ -13,7 +13,8 @@ class CategoriesList extends ConsumerWidget {
     final screenHeight = MediaQuery.sizeOf(context).height;
     final screenWidth = MediaQuery.sizeOf(context).width;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final categoriesAsync = ref.watch(categoryProvider);
+
+    final categoriesAsync = ref.watch(categoryDataProvider);
 
     return categoriesAsync.when(
       data: (categories) {
@@ -53,16 +54,16 @@ class CategoriesList extends ConsumerWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder:
-                                      (context) => ProductsOfCategoryScreen(
-                                        categoryName: item.title,
-                                      ),
+                                  builder: (context) => ProductsOfCategoryScreen(
+                                    categoryName: item.name,
+                                    categoryId: item.id,
+                                  ),
                                 ),
                               );
                             },
                             child: CategoryCard(
-                              image: item.imgPath,
-                              title: item.title,
+                              image: item.imageUrl,
+                              title: item.name,
                               isDarkMode: isDarkMode,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
@@ -78,21 +79,19 @@ class CategoriesList extends ConsumerWidget {
           ),
         );
       },
-      loading:
-          () => Scaffold(
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            body: const Center(child: CircularProgressIndicator()),
+      loading: () => Scaffold(
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        body: const Center(child: CircularProgressIndicator()),
+      ),
+      error: (error, stack) => Scaffold(
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        body: Center(
+          child: Text(
+            'Error: $error',
+            style: const TextStyle(color: Colors.red),
           ),
-      error:
-          (error, stack) => Scaffold(
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            body: Center(
-              child: Text(
-                'Error: $error',
-                style: const TextStyle(color: Colors.red),
-              ),
-            ),
-          ),
+        ),
+      ),
     );
   }
 }

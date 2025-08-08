@@ -7,12 +7,22 @@ import '../constants/app_colors.dart';
 
 class ProductsOfCategoryScreen extends ConsumerWidget {
   final String categoryName;
-  const ProductsOfCategoryScreen({super.key, required this.categoryName});
+  final String categoryId;
+  const ProductsOfCategoryScreen({
+    super.key,
+    required this.categoryName,
+    required this.categoryId,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productsState = ref.watch(productsOfCategoryProvider(categoryName));
+    final productsAsyncValue = ref.watch(
+      productsOfCategoryProvider(
+        categoryId,
+      ), // Use categoryId instead of categoryName
+    );
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       backgroundColor: isDarkMode ? Colors.black : Colors.white,
       appBar: PreferredSize(
@@ -64,42 +74,139 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            Text(
-              '${categoryName} (${productsState.length})',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
+            productsAsyncValue.when(
+              data:
+                  (products) => Text(
+                    '${categoryName} (${products.length})',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+              loading:
+                  () => Text(
+                    '${categoryName} (...)',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+              error:
+                  (error, stack) => Text(
+                    '${categoryName} (0)',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
             ),
             const SizedBox(height: 12),
             Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 161 / 281,
-                ),
-                itemCount: productsState.length,
-                itemBuilder: (context, index) {
-                  final product = productsState[index];
-                  return ProductCard(
-                    product: product,
-                    cardColor:
-                        isDarkMode
-                            ? const Color(0xFF342F3F)
-                            : (AppColors.grey ?? Colors.grey[200]!),
-                    width: 161,
-                    height: 281,
-                    onTap: () {},
-                    onFavoriteToggle: () {},
-                  );
-                },
+              child: productsAsyncValue.when(
+                data:
+                    (products) =>
+                        products.isEmpty
+                            ? _buildEmptyState(isDarkMode)
+                            : GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 16,
+                                    crossAxisSpacing: 12,
+                                    childAspectRatio: 161 / 281,
+                                  ),
+                              itemCount: products.length,
+                              itemBuilder: (context, index) {
+                                final product = products[index];
+                                return ProductCard(
+                                  product: product,
+                                  cardColor:
+                                      isDarkMode
+                                          ? const Color(0xFF342F3F)
+                                          : (AppColors.grey ??
+                                              Colors.grey[200]!),
+                                  width: 161,
+                                  height: 281,
+                                  onTap: () {},
+                                  onFavoriteToggle: () {},
+                                );
+                              },
+                            ),
+                loading: () => _buildLoadingState(),
+                error: (error, stack) => _buildErrorState(isDarkMode, error),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingState() {
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  Widget _buildErrorState(bool isDarkMode, Object error) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.error_outline,
+            size: 48,
+            color: isDarkMode ? Colors.white54 : Colors.black54,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Failed to load products',
+            style: TextStyle(
+              fontSize: 16,
+              color: isDarkMode ? Colors.white70 : Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Please try again later',
+            style: TextStyle(
+              fontSize: 14,
+              color: isDarkMode ? Colors.white54 : Colors.black54,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyState(bool isDarkMode) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.shopping_bag_outlined,
+            size: 48,
+            color: isDarkMode ? Colors.white54 : Colors.black54,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'No products found',
+            style: TextStyle(
+              fontSize: 16,
+              color: isDarkMode ? Colors.white70 : Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Check back later for new items',
+            style: TextStyle(
+              fontSize: 14,
+              color: isDarkMode ? Colors.white54 : Colors.black54,
+            ),
+          ),
+        ],
       ),
     );
   }
