@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ContinueButton extends StatelessWidget {
+  const ContinueButton({
+    super.key,
+    required this.onPressed,
+    this.text = 'Continue',
+    this.width = double.infinity,
+    this.height = 49,
 
-  const ContinueButton({super.key, required this.onPressed, this.text= 'Continue', this.width =double.infinity, this.height=49});
+  });
   final VoidCallback onPressed;
   final String text;
   final double width;
@@ -18,7 +24,7 @@ class ContinueButton extends StatelessWidget {
         minimumSize: Size(width, height),
         elevation: 0, // Full width button
       ),
-      child:  Text(
+      child: Text(
         text,
         style: const TextStyle(
           fontFamily: 'Circular',
