@@ -8,9 +8,11 @@ import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 import 'package:link_flutter_ecommerce_app/services/notification_service.dart';
 import 'firebase_options.dart';
 
-
-@pragma('vm:entry-point')//for native 
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message, {bool showNotification = false}) async {
+@pragma('vm:entry-point') //for native
+Future<void> firebaseMessagingBackgroundHandler(
+  RemoteMessage message, {
+  bool showNotification = false,
+}) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setupFlutterNotifications();
   if (showNotification) {
@@ -53,7 +55,7 @@ class EcommerceApp extends StatelessWidget {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('ar'),
+        locale: const Locale('en'),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
         darkTheme: ThemeData(

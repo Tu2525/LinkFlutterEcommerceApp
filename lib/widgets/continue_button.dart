@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
 class ContinueButton extends StatelessWidget {
   const ContinueButton({
     super.key,
     required this.onPressed,
-    this.text = 'Continue',
+    this.text,
     this.width = double.infinity,
     this.height = 49,
-
   });
   final VoidCallback onPressed;
-  final String text;
+  final String? text;
   final double width;
   final double height;
 
@@ -25,7 +25,7 @@ class ContinueButton extends StatelessWidget {
         elevation: 0, // Full width button
       ),
       child: Text(
-        text,
+        text ?? AppLocalizations.of(context)!.cont,
         style: const TextStyle(
           fontFamily: 'Circular',
           fontWeight: FontWeight.w500,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/onboarding_screen_providor.dart';
 import 'package:link_flutter_ecommerce_app/widgets/onboarding_screen_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -12,7 +13,6 @@ class OnBoardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -21,18 +21,20 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
       controller.updateIndexFromScroll();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final controller = ref.watch(onboardingControllerProvider.notifier);
     final pageController = controller.pageController;
-    final screens=ref.read(onboardingScreenProvider);
+    final screens = ref.watch(onboardingScreenProvider(context));
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(bottom: 80),
         child: PageView(
           controller: pageController,
           children: List.generate(
-            3,
+            screens.length,
             (index) => OnboardingScreenWidget(
               title: screens[index].title,
               subtitle1: screens[index].subtitle,
@@ -53,12 +55,12 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
           children: [
             TextButton(
               onPressed: () => controller.goToHomeScreen(context),
-              child: const Text('Skip'),
+              child: Text(AppLocalizations.of(context)!.skip),
             ),
             Center(
               child: SmoothPageIndicator(
                 controller: pageController,
-                count: 3,
+                count: screens.length,
                 effect: const WormEffect(
                   spacing: 16,
                   activeDotColor: Colors.purple,
@@ -73,7 +75,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
             ),
             TextButton(
               onPressed: () => controller.nextPage(context),
-              child: const Text('Next'),
+              child: Text(AppLocalizations.of(context)!.next),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 
 class AuthService {
@@ -28,7 +29,8 @@ class AuthService {
       final snapshot = await userDoc.get();
 
       if (snapshot.exists) {
-        ref.read(authErrorProvider.notifier).state = 'Email is already in use';
+        ref.read(authErrorProvider.notifier).state =
+            AppLocalizations.of(ref.context)!.emailIsAlreadyInUse;
       } else {
         await userDoc.set({
           'name': name,
@@ -39,13 +41,17 @@ class AuthService {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
-        ref.read(authErrorProvider.notifier).state = 'Email is already in use';
+        ref.read(authErrorProvider.notifier).state =
+            AppLocalizations.of(ref.context)!.emailIsAlreadyInUse;
       } else if (e.code == 'invalid-email') {
-        ref.read(authErrorProvider.notifier).state = 'Email is not valid';
+        ref.read(authErrorProvider.notifier).state =
+            AppLocalizations.of(ref.context)!.invalidEmail;
       } else if (e.code == 'weak-password') {
-        ref.read(authErrorProvider.notifier).state = 'Password is too weak';
+        ref.read(authErrorProvider.notifier).state =
+            AppLocalizations.of(ref.context)!.weakPassword;
       } else {
-        ref.read(authErrorProvider.notifier).state = 'Auth Error: ${e.message}';
+        ref.read(authErrorProvider.notifier).state =
+            e.message ?? AppLocalizations.of(ref.context)!.authError;
       }
     } catch (e) {
       ref.read(authErrorProvider.notifier).state = e.toString();
@@ -69,11 +75,13 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'No account found for this email') {
         ref.read(authErrorProvider.notifier).state =
-            'No user found for that email.';
+            AppLocalizations.of(ref.context)!.noUserFound;
       } else if (e.code == 'invalid-credential') {
-        ref.read(authErrorProvider.notifier).state = 'Wrong password.';
+        ref.read(authErrorProvider.notifier).state =
+            AppLocalizations.of(ref.context)!.wrongPassword;
       } else {
-        ref.read(authErrorProvider.notifier).state = e.message ?? 'Auth error';
+        ref.read(authErrorProvider.notifier).state =
+            e.message ?? AppLocalizations.of(ref.context)!.authError;
       }
     } catch (e) {
       ref.read(authErrorProvider.notifier).state = e.toString();
