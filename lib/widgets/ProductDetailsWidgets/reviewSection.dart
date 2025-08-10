@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewItem.dart';
-
+import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 class ReviewsSection extends ConsumerWidget {
   const ReviewsSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final product = ref.watch(productProvider);
-    final totalRating = product.reviews.map((r) => r.rating).reduce((a, b) => a + b) / product.reviews.length; //FIX MOCKDATA
+
+    final double totalRating = product.reviews.isEmpty
+        ? 0.0
+        : product.reviews.map((r) => r.rating).reduce((a, b) => a + b) /
+            product.reviews.length;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
