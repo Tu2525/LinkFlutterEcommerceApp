@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/category_section_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/products_of_category_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CategoryCard.dart';
@@ -33,7 +34,7 @@ class CategoriesList extends ConsumerWidget {
                     const CustomIcon(),
                     SizedBox(height: screenHeight * 0.03),
                     Text(
-                      'Shop by Categories',
+                      AppLocalizations.of(context)!.shopByCategory,
                       style: TextStyle(
                         fontFamily: 'Circular',
                         fontWeight: FontWeight.w700,
@@ -54,10 +55,11 @@ class CategoriesList extends ConsumerWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => ProductsOfCategoryScreen(
-                                    categoryName: item.name,
-                                    categoryId: item.id,
-                                  ),
+                                  builder:
+                                      (context) => ProductsOfCategoryScreen(
+                                        categoryName: item.name,
+                                        categoryId: item.id,
+                                      ),
                                 ),
                               );
                             },
@@ -79,19 +81,21 @@ class CategoriesList extends ConsumerWidget {
           ),
         );
       },
-      loading: () => Scaffold(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        body: const Center(child: CircularProgressIndicator()),
-      ),
-      error: (error, stack) => Scaffold(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        body: Center(
-          child: Text(
-            'Error: $error',
-            style: const TextStyle(color: Colors.red),
+      loading:
+          () => Scaffold(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            body: const Center(child: CircularProgressIndicator()),
           ),
-        ),
-      ),
+      error:
+          (error, stack) => Scaffold(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            body: Center(
+              child: Text(
+                'Error: $error',
+                style: const TextStyle(color: Colors.red),
+              ),
+            ),
+          ),
     );
   }
 }

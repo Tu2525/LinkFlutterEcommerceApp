@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
 import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
@@ -16,6 +18,15 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final homeNotifier = ref.watch(homePageProvider);
+    homeNotifier.initCategories(
+      defaultCategory: AppLocalizations.of(context)!.men,
+      categories: [
+        AppLocalizations.of(context)!.men,
+        AppLocalizations.of(context)!.women,
+        AppLocalizations.of(context)!.kids,
+      ],
+    );
+
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Padding(
@@ -39,7 +50,7 @@ class HomePage extends ConsumerWidget {
                       // ...existing code for category popup and bag icon...
                       PopupMenuButton<String>(
                         onSelected: (String result) {
-                          ref.read(homePageProvider).selectedCategory;
+                          ref.read(homePageProvider).selectCategory(result);
                         },
                         itemBuilder:
                             (BuildContext context) =>
@@ -109,10 +120,10 @@ class HomePage extends ConsumerWidget {
                       color: AppColors.grey,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
-                        icon: Icon(IconsaxPlusBroken.search_normal_1),
-                        hintText: 'Search',
+                        icon: const Icon(IconsaxPlusBroken.search_normal_1),
+                        hintText: AppLocalizations.of(context)!.search,
                         border: InputBorder.none,
                       ),
                     ),

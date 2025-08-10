@@ -379,6 +379,95 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Return to login'**
   String get returnToLogin;
+  /// No description provided for @kids.
+  ///
+  /// In en, this message translates to:
+  /// **'Kids'**
+  String get kids;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @topSelling.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Selling'**
+  String get topSelling;
+
+  /// No description provided for @seeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get seeAll;
+
+  /// No description provided for @bags.
+  ///
+  /// In en, this message translates to:
+  /// **'Bags'**
+  String get bags;
+
+  /// No description provided for @shoes.
+  ///
+  /// In en, this message translates to:
+  /// **'Shoes'**
+  String get shoes;
+
+  /// No description provided for @shorts.
+  ///
+  /// In en, this message translates to:
+  /// **'Shorts'**
+  String get shorts;
+
+  /// No description provided for @shopByCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop by Category'**
+  String get shopByCategory;
+
+  /// No description provided for @hoddies.
+  ///
+  /// In en, this message translates to:
+  /// **'Hoddies'**
+  String get hoddies;
+
+  /// No description provided for @accessories.
+  ///
+  /// In en, this message translates to:
+  /// **'Accessories'**
+  String get accessories;
+
+  /// No description provided for @sale.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale'**
+  String get sale;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart'**
+  String get cart;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
 }
 
 class _AppLocalizationsDelegate

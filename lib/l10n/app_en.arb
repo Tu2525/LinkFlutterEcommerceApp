@@ -46,5 +46,20 @@
     "receiveYourOrder": "Receive your order fast and hassle-free",
     "resetPassText": "We Sent you an Email to reset",
     "resetPassText2": "Your password",
-    "returnToLogin": "Return to login"
+    "returnToLogin": "Return to login",
+    "kids": "Kids",
+    "categories": "Categories",
+    "topSelling": "Top Selling",
+    "seeAll": "See All",
+    "bags": "Bags",
+    "shoes": "Shoes",
+    "shorts": "Shorts",
+    "shopByCategory": "Shop by Category",
+    "hoddies": "Hoddies",
+    "accessories": "Accessories",
+    "sale": "Sale",
+    "home": "Home",
+    "cart": "Cart",
+    "profile": "Profile",
+    "search": "Search"
 }
