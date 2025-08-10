@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategoryService {
@@ -11,6 +13,7 @@ class CategoryService {
       final List<Map<String, dynamic>> categories = [];
       for (var doc in querySnapshot.docs) {
         final data = doc.data();
+        log(data['imageUrl']);
         categories.add({
           'id': doc.id,
           'name': data['name'] ?? '',

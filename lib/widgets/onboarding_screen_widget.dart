@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
 class OnboardingScreenWidget extends StatelessWidget {
   OnboardingScreenWidget({
@@ -47,7 +48,6 @@ class OnboardingScreenWidget extends StatelessWidget {
             ),
             child: Column(
               crossAxisAlignment: getCrossAxisAlignment(index),
-
               children: [
                 SizedBox(height: screenHeight * 0.05),
                 Image.asset(
@@ -57,7 +57,7 @@ class OnboardingScreenWidget extends StatelessWidget {
                   color: color ?? Colors.white,
                 ),
                 Text(
-                  'eCommerce Shop',
+                  AppLocalizations.of(context)!.ecommerceShop,
                   style: TextStyle(
                     color: color ?? Colors.white,
                     fontSize: titleFontSize,
@@ -69,14 +69,14 @@ class OnboardingScreenWidget extends StatelessWidget {
                   child: Divider(color: color ?? Colors.white, thickness: 1),
                 ),
                 Text(
-                  "Professional App for your",
+                  AppLocalizations.of(context)!.professionalAppForYour,
                   style: TextStyle(
                     color: color2 ?? Colors.white,
                     fontSize: subtitleFontSize,
                   ),
                 ),
                 Text(
-                  "eCommerce business",
+                  AppLocalizations.of(context)!.ecommerceBusiness,
                   style: TextStyle(
                     color: color2 ?? Colors.white,
                     fontSize: subtitleFontSize,

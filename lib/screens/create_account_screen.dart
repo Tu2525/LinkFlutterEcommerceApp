@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
+import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
 import 'package:link_flutter_ecommerce_app/services/auth_services.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
@@ -38,9 +37,9 @@ class CreateAccountScreen extends ConsumerWidget {
 
             children: [
               const SizedBox(height: 20),
-              const Text(
-                "Create Account",
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.createAccount,
+                style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -52,7 +51,7 @@ class CreateAccountScreen extends ConsumerWidget {
 
                 emailController: accountManager.firstnameController,
                 isPassword: false,
-                hint: "Firstname",
+                hint: AppLocalizations.of(context)!.firstName,
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -60,7 +59,7 @@ class CreateAccountScreen extends ConsumerWidget {
 
                 emailController: accountManager.lastnameController,
                 isPassword: false,
-                hint: "Lastname",
+                hint: AppLocalizations.of(context)!.lastName,
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -68,7 +67,7 @@ class CreateAccountScreen extends ConsumerWidget {
 
                 emailController: accountManager.emailController,
                 isPassword: false,
-                hint: "Email Address",
+                hint: AppLocalizations.of(context)!.emailAddress,
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -76,7 +75,7 @@ class CreateAccountScreen extends ConsumerWidget {
 
                 emailController: accountManager.passwordController,
                 isPassword: true,
-                hint: "Password",
+                hint: AppLocalizations.of(context)!.pass,
               ),
               const SizedBox(height: 40),
               ContinueButton(
@@ -103,34 +102,6 @@ class CreateAccountScreen extends ConsumerWidget {
                     ).showSnackBar(SnackBar(content: Text(error)));
                   }
                 },
-              ),
-              const SizedBox(height: 40),
-              Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.forgotPassword,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Paymentscreen(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      ' Reset',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Circular',
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ],
           ),

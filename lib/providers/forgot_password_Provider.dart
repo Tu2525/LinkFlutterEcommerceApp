@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/reset_password%20screen.dart';
 
 class ForgotPasswordManager extends ChangeNotifier {
@@ -15,12 +16,12 @@ class ForgotPasswordManager extends ChangeNotifier {
     );
   }
 
-  String? validateEmail(String? value) {
+  String? validateEmail(BuildContext context, String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter your email';
+      return AppLocalizations.of(context)!.emptyMessage;
     }
     if (!value.contains('@') || !value.contains('.')) {
-      return 'Please enter a valid email address';
+      return AppLocalizations.of(context)!.invalidFormatMessage;
     }
     return null;
   }

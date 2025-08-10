@@ -77,7 +77,7 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
             productsAsyncValue.when(
               data:
                   (products) => Text(
-                    '${categoryName} (${products.length})',
+                    '$categoryName (${products.length})',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -86,7 +86,7 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                   ),
               loading:
                   () => Text(
-                    '${categoryName} (...)',
+                    '$categoryName (...)',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -95,7 +95,7 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                   ),
               error:
                   (error, stack) => Text(
-                    '${categoryName} (0)',
+                    '$categoryName (0)',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

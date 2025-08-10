@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
@@ -25,19 +26,19 @@ class ResetPassword extends StatelessWidget {
                     width: screenWidth * 0.25,
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    'We Sent you an Email to reset',
+                  Text(
+                    AppLocalizations.of(context)!.resetPassText,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Circular',
                       fontWeight: FontWeight.w500,
                       fontSize: 23,
                     ),
                   ),
-                  const Text(
-                    'your password.',
+                  Text(
+                    AppLocalizations.of(context)!.resetPassText2,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'Circular',
                       fontWeight: FontWeight.w500,
                       fontSize: 23,
@@ -56,7 +57,7 @@ class ResetPassword extends StatelessWidget {
                           ),
                         );
                       },
-                      text: 'Return to Login',
+                      text: AppLocalizations.of(context)!.returnToLogin,
                     ),
                   ),
                 ],
