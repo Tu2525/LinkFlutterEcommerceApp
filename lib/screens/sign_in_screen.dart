@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
+import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
@@ -45,20 +47,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ref.watch(signInDarkModeProvider);
-
-    // Update dark mode state on build
-    final brightness = MediaQuery.of(context).platformBrightness;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (ref.read(signInDarkModeProvider.notifier).state !=
-          (brightness == Brightness.dark)) {
-        ref.read(signInDarkModeProvider.notifier).state =
-            brightness == Brightness.dark;
-      }
-    });
+    final isDarkMode = ref.watch(isDarkModeProvider);
 
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: AppColors.backgroundColor(isDarkMode),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 23),
         child: SingleChildScrollView(
@@ -71,7 +63,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 child: Text(
                   AppLocalizations.of(context)!.signIn,
                   style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
+                    color: AppColors.textPrimaryColor(isDarkMode),
                     fontFamily: 'Circular',
                     fontWeight: FontWeight.w700,
                     fontSize: 32,
@@ -168,9 +160,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const MainScreen()
-                    ),
+                    MaterialPageRoute(builder: (context) => const MainScreen()),
                   );
                 },
               ),
