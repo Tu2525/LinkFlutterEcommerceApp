@@ -13,6 +13,7 @@ class CategoryService {
         final data = doc.data();
         categories.add({
           'id': doc.id,
+          'arabic':data['arabic'] ?? '',
           'name': data['name'] ?? '',
           'imageUrl': data['imageUrl'] ?? '',
           'description': data['description'] ?? '',

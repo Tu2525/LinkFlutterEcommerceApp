@@ -18,6 +18,15 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message, {bool sho
   }
 }
 
+/*************  ✨ Windsurf Command ⭐  *************/
+/// The main entry point of the application.
+///
+/// Initializes Flutter and Firebase, ensuring Firebase is only initialized
+/// once. Catches and handles the 'duplicate-app' exception to prevent 
+/// re-initialization errors. Starts the application with a ProviderScope 
+/// and an instance of `EcommerceApp`.
+
+/*******  04452b9f-1050-4c15-b898-b6debc2c8778  *******/
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

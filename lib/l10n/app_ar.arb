@@ -1,5 +1,21 @@
 {
     "@@locale": "ar",
-    "forgotPassword": "هل نسيت كلمة السر؟"
-
+    "forgotPassword": "هل نسيت كلمة السر؟",
+    "men": "رجالي",
+    "women": "نسائي",
+    "kids": "أطفال",
+    "categories": "التصنيفات",
+    "topSelling": "أكثر مبيعا",
+    "seeAll": "اظهار الكل",
+    "bags": "حقائب",
+    "shoes": "أحذية",
+    "shorts": "شورت",
+    "hoddies": "هودي",
+    "shopByCategory": "تسوق حسب التصنيف",
+    "accessories": "أكسسوارات",
+    "sale": "تخفيضات",
+    "home": "الصفحة الرئيسية",
+    "cart": "السلة",
+    "profile": "الصفحة الشخصية",
+    "search": "بحث"
 }

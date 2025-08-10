@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
-import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_header.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_items_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_steps.dart';

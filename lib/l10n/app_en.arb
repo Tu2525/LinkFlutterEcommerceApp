@@ -1,6 +1,21 @@
 {
     "@@locale": "en",
-    "forgotPassword": "Forgot Password?"
-
-    
+    "forgotPassword": "Forgot Password?",
+    "men": "Men",
+    "women": "Women",
+    "kids": "Kids",
+    "categories": "Categories",
+    "topSelling": "Top Selling",
+    "seeAll": "See All",
+    "bags": "Bags",
+    "shoes": "Shoes",
+    "shorts": "Shorts",
+    "shopByCategory": "Shop by Category",
+    "hoddies": "Hoddies",
+    "accessories": "Accessories",
+    "sale": "Sale",
+    "home": "Home",
+    "cart": "Cart",
+    "profile": "Profile",
+    "search": "Search"
 }
