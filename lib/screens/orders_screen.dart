@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
 import '../providers/order_provider.dart';
 import '../widgets/order_card.dart';
@@ -22,7 +23,7 @@ class OrdersScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(),
+        title: Text(AppLocalizations.of(context)!.order),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,

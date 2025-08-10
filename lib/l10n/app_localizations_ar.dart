@@ -194,4 +194,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search => 'بحث';
+
+  @override
+  String get order => 'طلب';
 }
