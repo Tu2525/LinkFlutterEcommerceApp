@@ -12,31 +12,155 @@ import 'package:timezone/timezone.dart' as tz;
 class NotificationService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  
-  Future<List<NotificationModel>> fetchNotificationData() async {
-    await Future.delayed(const Duration(seconds: 1)); 
-    //final user = _auth.currentUser;// test it when sign in finish 
-    //if (user == null) throw Exception('User not logged in');
-      final query = await _firestore
-        .collection('notifications')
-        //.where('userId', isEqualTo: user.uid)
-        .get();
-      log("${query.docs}, ${query.size}");  
-      return query.docs.map((doc) {
-      final data = doc.data();
-      return NotificationModel.fromFireStore({
-        ...data,
-        'id': doc.id,
+
+  /// Save notification payload to Firebase for the current user
+  Future<void> saveNotificationToFirebase({
+    required String message,
+    bool isImportant = false,
+    Map<String, dynamic>? additionalData,
+  }) async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      log('User not logged in - cannot save notification');
+      return;
+    }
+
+    try {
+      await _firestore.collection('notifications').add({
+        'userId': user.uid,
+        'data': [
+          {'message': message, 'isImportant': isImportant},
+        ],
+        'timestamp': FieldValue.serverTimestamp(),
+        'additionalData': additionalData,
+        'isRead': false,
+        'createdAt': FieldValue.serverTimestamp(),
       });
-    }).toList();     
+      log('Notification saved successfully for user: ${user.uid}');
+    } catch (e) {
+      log('Error saving notification: $e');
+    }
+  }
+
+  Future<List<NotificationModel>> fetchNotificationData() async {
+    await Future.delayed(const Duration(seconds: 1));
+    final user = _auth.currentUser;
+    if (user == null) throw Exception('User not logged in');
+
+    final query =
+        await _firestore
+            .collection('notifications')
+            .where('userId', isEqualTo: user.uid)
+            .get();
+
+    log("Fetched ${query.size} notifications for user: ${user.uid}");
+
+    final notifications =
+        query.docs.map((doc) {
+          final data = doc.data();
+          return NotificationModel.fromFireStore({...data, 'id': doc.id});
+        }).toList();
+
+    // Sort by timestamp in Dart (newest first)
+    notifications.sort((a, b) {
+      if (a.timestamp == null && b.timestamp == null) return 0;
+      if (a.timestamp == null) return 1;
+      if (b.timestamp == null) return -1;
+      return b.timestamp!.compareTo(a.timestamp!);
+    });
+
+    return notifications;
+  }
+
+  /// Stream notifications in real-time for the current user
+  Stream<List<NotificationModel>> getNotificationStream() {
+    final user = _auth.currentUser;
+    if (user == null) {
+      return Stream.error('User not logged in');
+    }
+
+    return _firestore
+        .collection('notifications')
+        .where('userId', isEqualTo: user.uid)
+        .snapshots()
+        .map((snapshot) {
+          log(
+            "Real-time update: ${snapshot.docs.length} notifications for user: ${user.uid}",
+          );
+
+          final notifications =
+              snapshot.docs.map((doc) {
+                final data = doc.data();
+                return NotificationModel.fromFireStore({...data, 'id': doc.id});
+              }).toList();
+
+          // Sort by timestamp (newest first)
+          notifications.sort((a, b) {
+            if (a.timestamp == null && b.timestamp == null) return 0;
+            if (a.timestamp == null) return 1;
+            if (b.timestamp == null) return -1;
+            return b.timestamp!.compareTo(a.timestamp!);
+          });
+
+          return notifications;
+        });
+  }
+
+  /// Stream notifications with authentication state management
+  Stream<List<NotificationModel>> getNotificationStreamWithAuth() {
+    return _auth.authStateChanges().asyncExpand((user) {
+      if (user == null) {
+        return Stream.value(<NotificationModel>[]);
+      }
+      return getNotificationStream();
+    });
+  }
+
+  /// Mark notification as read
+  Future<void> markNotificationAsRead(String notificationId) async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    try {
+      await _firestore.collection('notifications').doc(notificationId).update({
+        'isRead': true,
+        'readAt': FieldValue.serverTimestamp(),
+      });
+      log('Notification marked as read: $notificationId');
+    } catch (e) {
+      log('Error marking notification as read: $e');
+    }
+  }
+
+  /// Delete notification
+  Future<void> deleteNotification(String notificationId) async {
+    final user = _auth.currentUser;
+    if (user == null) return;
+
+    try {
+      await _firestore.collection('notifications').doc(notificationId).delete();
+      log('Notification deleted: $notificationId');
+    } catch (e) {
+      log('Error deleting notification: $e');
+    }
   }
 }
-
 
 void showFlutterNotification(RemoteMessage message) async {
   await setupFlutterNotifications();
   RemoteNotification? notification = message.notification;
   if (notification == null) return;
+
+  // Save notification to Firebase for current user
+  final notificationService = NotificationService();
+  await notificationService.saveNotificationToFirebase(
+    message: notification.body ?? notification.title ?? 'New notification',
+    isImportant:
+        message.data['isImportant'] == 'true' ||
+        message.data['priority'] == 'high',
+    additionalData: message.data,
+  );
+
   flutterLocalNotificationsPlugin.show(
     notification.hashCode,
     notification.title ?? '',
@@ -56,7 +180,6 @@ void showFlutterNotification(RemoteMessage message) async {
   );
 }
 
-
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
@@ -72,8 +195,9 @@ Future<void> setupFlutterNotifications() async {
 
   channel = const AndroidNotificationChannel(
     'high_importance_channel', // id
-    'High Importance Notifications', // title 
-    description: 'This channel is used for important notifications.', // description
+    'High Importance Notifications', // title
+    description:
+        'This channel is used for important notifications.', // description
     importance: Importance.max,
     enableLights: true,
     enableVibration: true,
@@ -86,7 +210,9 @@ Future<void> setupFlutterNotifications() async {
   /// We use this channel in the `AndroidManifest.xml` file to override the
   /// default FCM channel to enable heads up notifications.
   await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin
+      >()
       ?.createNotificationChannel(channel);
 
   /// Update the iOS foreground notification presentation options to allow
@@ -97,7 +223,8 @@ Future<void> setupFlutterNotifications() async {
     sound: true,
   );
 
-  AndroidInitializationSettings androidSettings = const AndroidInitializationSettings("@drawable/icon");
+  AndroidInitializationSettings androidSettings =
+      const AndroidInitializationSettings("@drawable/icon");
 
   DarwinInitializationSettings iosSettings = const DarwinInitializationSettings(
     requestAlertPermission: true,
@@ -112,10 +239,12 @@ Future<void> setupFlutterNotifications() async {
 
   flutterLocalNotificationsPlugin.initialize(
     notificationsSettings,
-    onDidReceiveNotificationResponse: (NotificationResponse details) {//optional
+    onDidReceiveNotificationResponse: (NotificationResponse details) {
+      //optional
       handleNotificationClicks(details.payload);
     },
-    onDidReceiveBackgroundNotificationResponse: onDidReceiveBackgroundNotificationResponse,
+    onDidReceiveBackgroundNotificationResponse:
+        onDidReceiveBackgroundNotificationResponse,
   );
 
   tz.initializeDatabase([]);
@@ -124,8 +253,27 @@ Future<void> setupFlutterNotifications() async {
 }
 
 void handleNotificationClicks(String? payload) async {
-  if(payload !=null){
-    //logic 
+  if (payload != null) {
+    try {
+      final data = json.decode(payload) as Map<String, dynamic>;
+
+      // Save notification click event
+      final notificationService = NotificationService();
+      await notificationService.saveNotificationToFirebase(
+        message: 'User clicked notification',
+        isImportant: false,
+        additionalData: {
+          'action': 'notification_clicked',
+          'originalPayload': data,
+          'clickedAt': DateTime.now().toIso8601String(),
+        },
+      );
+
+      // Add your navigation logic here
+      log('Notification clicked with payload: $payload');
+    } catch (e) {
+      log('Error handling notification click: $e');
+    }
   }
 }
 
