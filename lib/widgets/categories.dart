@@ -42,8 +42,24 @@ class Categories extends StatelessWidget {
               height: screenWidth * 0.15,
               width: screenWidth * 0.15,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(screenWidth * 0.02),
-                child: Image.asset(imgPath, fit: BoxFit.cover),
+                borderRadius: BorderRadius.circular(screenWidth * 0.80),
+                child: Image.network(
+                  imgPath,
+                  fit: BoxFit.fill,
+                  errorBuilder:
+                      (context, error, stackTrace) => Container(
+                        color: Colors.grey[300],
+                        child: Icon(
+                          Icons.broken_image,
+                          size: screenWidth * 0.08,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(child: CircularProgressIndicator());
+                  },
+                ),
               ),
             ),
           ),

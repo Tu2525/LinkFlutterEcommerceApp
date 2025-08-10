@@ -47,13 +47,7 @@ class OnboardingScreenWidget extends StatelessWidget {
               horizontal: screenWidth * 0.06,
             ),
             child: Column(
-              crossAxisAlignment:
-                  index ==
-                          2 // for 3rd screen (index starts at 0)
-                      ? CrossAxisAlignment
-                          .end // align to left
-                      : CrossAxisAlignment.start,
-
+              crossAxisAlignment: getCrossAxisAlignment(index),
               children: [
                 SizedBox(height: screenHeight * 0.05),
                 Image.asset(
@@ -116,5 +110,16 @@ class OnboardingScreenWidget extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+CrossAxisAlignment getCrossAxisAlignment(int index) {
+  switch (index) {
+    case 2:
+      return CrossAxisAlignment.start;
+    case 1:
+      return CrossAxisAlignment.center;
+    default:
+      return CrossAxisAlignment.end;
   }
 }
