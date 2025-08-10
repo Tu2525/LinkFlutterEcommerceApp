@@ -61,5 +61,6 @@
     "home": "Home",
     "cart": "Cart",
     "profile": "Profile",
-    "search": "Search"
+    "search": "Search",
+    "order":"Orders"
 }

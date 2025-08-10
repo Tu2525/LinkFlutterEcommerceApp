@@ -22,7 +22,7 @@ class OrdersScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Orders"),
+        title: const Text(),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
