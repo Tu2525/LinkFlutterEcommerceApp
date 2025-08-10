@@ -14,7 +14,7 @@ class CategoriesList extends ConsumerWidget {
     final screenWidth = MediaQuery.sizeOf(context).width;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    final categoriesAsync = ref.watch(categoryDataProvider);
+    final categoriesAsync = ref.watch(categoryProvider);
 
     return categoriesAsync.when(
       data: (categories) {
@@ -55,15 +55,14 @@ class CategoriesList extends ConsumerWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ProductsOfCategoryScreen(
-                                    categoryName: item.name,
-                                    categoryId: item.id,
+                                    categoryName: item.title,
                                   ),
                                 ),
                               );
                             },
                             child: CategoryCard(
-                              image: item.imageUrl,
-                              title: item.name,
+                              image: item.imgPath,
+                              title: item.title,
                               isDarkMode: isDarkMode,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
