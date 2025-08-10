@@ -13,13 +13,14 @@ class SplashScreen extends ConsumerStatefulWidget {
 }
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {
-  
   @override
   void initState() {
     super.initState();
-    var splashAnimation= ref.read(splashAnimationProvider);
+    var splashAnimation = ref.read(splashAnimationProvider);
     FirebaseNotificationService().requestNotificationPermission();
-    FirebaseNotificationService().getToken().then((value) => print(value));
+    FirebaseNotificationService().getToken().then(
+      (value) => print('valueeeeeeeeeeeeeeeeeeeeeeeee: $value'),
+    );
     FirebaseNotificationService().initFirebaseMessaging();
     setupFlutterNotifications();
     splashAnimation(context);
