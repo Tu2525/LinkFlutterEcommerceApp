@@ -16,24 +16,19 @@ class OrderDetails extends ConsumerWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? Colors.white : Colors.black;
     
-    // This 'orderAsyncValue' is an AsyncValue object
-    final orderAsyncValue = ref.watch(orderProvider);
+    final order = ref.watch(orderProvider);
 
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
-      // Use .when to handle loading, error, and data states
       body: orderAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
         data: (orderData) {
-          // Inside this 'data' block, you have your actual List<OrderModel>
-          // Assuming you want to display the first order from the list
           if (orderData.isEmpty) {
             return const Center(child: Text('No order found.'));
           }
           final singleOrder = orderData.first;
 
-          // Now you can safely build your UI with the 'singleOrder' object
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
             child: Column(
@@ -61,10 +56,17 @@ class OrderDetails extends ConsumerWidget {
                   isDarkMode: isDarkMode,
                   shippingInfo: [singleOrder.shipping],
                 ),
-              ],
+              ),
             ),
-          );
-        },
+            SizedBox(height: 20.h),
+            OrderItemsCard(isDarkMode: isDarkMode, items: order.items),
+            SizedBox(height: 38.h),
+            ShippingDetails(
+              isDarkMode: isDarkMode,
+              shippingInfo: [order.shipping],
+            ),
+          ],
+        ),
       ),
     );
   }
