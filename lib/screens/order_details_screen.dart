@@ -15,8 +15,7 @@ class OrderDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? Colors.white : Colors.black;
-    
-    final order = ref.watch(orderProvider);
+    final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
@@ -50,23 +49,19 @@ class OrderDetails extends ConsumerWidget {
                   ),
                 ),
                 SizedBox(height: 20.h),
-                OrderItemsCard(isDarkMode: isDarkMode, items: singleOrder.items),
+                OrderItemsCard(
+                  isDarkMode: isDarkMode,
+                  items: singleOrder.items,
+                ),
                 SizedBox(height: 38.h),
                 ShippingDetails(
                   isDarkMode: isDarkMode,
                   shippingInfo: [singleOrder.shipping],
                 ),
-              ),
+              ],
             ),
-            SizedBox(height: 20.h),
-            OrderItemsCard(isDarkMode: isDarkMode, items: order.items),
-            SizedBox(height: 38.h),
-            ShippingDetails(
-              isDarkMode: isDarkMode,
-              shippingInfo: [order.shipping],
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

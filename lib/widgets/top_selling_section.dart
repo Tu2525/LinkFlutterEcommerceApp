@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/see_all_products_screen.dart';
 import '../models/product.dart';
 
 import 'product_card.dart';
@@ -58,7 +59,25 @@ class TopSellingSection extends ConsumerWidget {
               ),
               if (showSeeAll)
                 GestureDetector(
-                  onTap: onSeeAllTap,
+                  onTap:
+                      onSeeAllTap ??
+                      () {
+                        // Default navigation based on title
+                        final productType =
+                            title.toLowerCase() == 'new in'
+                                ? 'newIn'
+                                : 'topSelling';
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => SeeAllProductsScreen(
+                                  productType: productType,
+                                  title: title,
+                                ),
+                          ),
+                        );
+                      },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
@@ -82,7 +101,7 @@ class TopSellingSection extends ConsumerWidget {
                         : ListView.builder(
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: products.length,
+                          itemCount: 4,
                           itemBuilder: (context, index) {
                             final product = products[index];
                             return ProductCard(

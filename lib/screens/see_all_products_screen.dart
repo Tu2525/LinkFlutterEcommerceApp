@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import '../widgets/product_card.dart';
-import '../providers/products_of_category_provider.dart';
+import '../providers/top_selling_products_provider.dart';
+import '../providers/new_in_products_provider.dart';
 import '../constants/app_colors.dart';
 import 'product_details_screen.dart';
 
-class ProductsOfCategoryScreen extends ConsumerWidget {
-  final String categoryName;
-  final String categoryId;
-  const ProductsOfCategoryScreen({
+class SeeAllProductsScreen extends ConsumerWidget {
+  final String productType; // 'topSelling' or 'newIn'
+  final String title;
+
+  const SeeAllProductsScreen({
     super.key,
-    required this.categoryName,
-    required this.categoryId,
+    required this.productType,
+    required this.title,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productsAsyncValue = ref.watch(
-      productsOfCategoryProvider(
-        categoryId,
-      ), // Use categoryId instead of categoryName
-    );
+    // Choose the correct provider based on productType
+    final productsAsyncValue =
+        productType == 'topSelling'
+            ? ref.watch(topSellingProductsProvider)
+            : ref.watch(newInProductsProvider);
+
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -38,71 +43,36 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
           ),
           child: Row(
             children: [
-              Container(
-                width: 80,
-                height: 80,
-                alignment: Alignment.centerLeft,
-                child: Material(
-                  color:
-                      isDarkMode
-                          ? const Color(0xFF342F3F)
-                          : const Color(0xFFF4F4F4),
-                  shape: const CircleBorder(),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(100),
-                    onTap: () => Navigator.of(context).pop(),
-                    child: SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: Icon(
-                        IconsaxPlusBroken.arrow_left_2,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                        size: 20,
-                      ),
-                    ),
+              SizedBox(height: 80.h),
+              const CustomIcon(),
+              Expanded(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
-              Expanded(child: Container()),
+              const SizedBox(width: 80), // Balance the back button
             ],
           ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 8),
-            productsAsyncValue.when(
-              data:
-                  (products) => Text(
-                    '$categoryName (${products.length})',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
-                  ),
-              loading:
-                  () => Text(
-                    '$categoryName (...)',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
-                  ),
-              error:
-                  (error, stack) => Text(
-                    '$categoryName (0)',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
-                  ),
+            Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
             const SizedBox(height: 12),
             Expanded(
@@ -142,7 +112,9 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                                       ),
                                     );
                                   },
-                                  onFavoriteToggle: () {},
+                                  onFavoriteToggle: () {
+                                    // Handle favorite toggle if needed
+                                  },
                                 );
                               },
                             ),
@@ -160,27 +132,28 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
     return const Center(child: CircularProgressIndicator());
   }
 
-  Widget _buildErrorState(bool isDarkMode, Object error) {
+  Widget _buildEmptyState(bool isDarkMode) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.error_outline,
-            size: 48,
+            IconsaxPlusLinear.box,
+            size: 64,
             color: isDarkMode ? Colors.white54 : Colors.black54,
           ),
           const SizedBox(height: 16),
           Text(
-            'Failed to load products',
+            'No products found',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white70 : Colors.black87,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Please try again later',
+            'Check back later for new products',
             style: TextStyle(
               fontSize: 14,
               color: isDarkMode ? Colors.white54 : Colors.black54,
@@ -191,27 +164,28 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildEmptyState(bool isDarkMode) {
+  Widget _buildErrorState(bool isDarkMode, Object error) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.shopping_bag_outlined,
-            size: 48,
-            color: isDarkMode ? Colors.white54 : Colors.black54,
+            IconsaxPlusLinear.warning_2,
+            size: 64,
+            color: isDarkMode ? Colors.red[300] : Colors.red,
           ),
           const SizedBox(height: 16),
           Text(
-            'No products found',
+            'Something went wrong',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white70 : Colors.black87,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Check back later for new items',
+            'Please try again later',
             style: TextStyle(
               fontSize: 14,
               color: isDarkMode ? Colors.white54 : Colors.black54,
