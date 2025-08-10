@@ -16,7 +16,6 @@ class CartScreen extends ConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Custom top bar implementation
             const Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 8.0,

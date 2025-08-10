@@ -1,25 +1,35 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
-import 'package:link_flutter_ecommerce_app/utils/mock_product_data.dart';
+
+// No longer need to import mock_product_data.dart
 
 class CartController extends StateNotifier<List<CartItem>> {
-  CartController() : super(placeHolderOrders);
+  // 1. Initialize with an empty list for a real user session.
+  CartController() : super([]);
 
-  void addItem(CartItem item) {
-    final existingIndex = state.indexWhere((i) => i.id == item.id);
+  void addItem(CartItem item, {required String productId, required String productName}) {
+    // 2. Check for an item with the same ID, size, AND color.
+    final existingIndex = state.indexWhere((i) =>
+        i.id == item.id && i.size == item.size && i.color == item.color);
+
     if (existingIndex != -1) {
+      // 3. If it exists, update the quantity correctly.
       final updatedItem = state[existingIndex].copyWith(
-        quantity: state[existingIndex].quantity + 1,
+        // Add the quantity from the new item, not just incrementing by 1.
+        quantity: state[existingIndex].quantity + item.quantity,
       );
+      // Rebuild the state list
       state = [
         for (int i = 0; i < state.length; i++)
           if (i == existingIndex) updatedItem else state[i],
       ];
     } else {
+      // If no matching item is found, add the new item to the cart.
       state = [...state, item];
     }
   }
 
+  // The rest of your methods are great and don't need changes.
   void increment(String itemId) {
     state = [
       for (final item in state)
@@ -31,19 +41,18 @@ class CartController extends StateNotifier<List<CartItem>> {
   }
 
   void decrement(String itemId) {
-    state =
-        state
-            .map((item) {
-              if (item.id == itemId) {
-                if (item.quantity > 1) {
-                  return item.copyWith(quantity: item.quantity - 1);
-                }
-                return null;
-              }
-              return item;
-            })
-            .whereType<CartItem>()
-            .toList();
+    state = state
+        .map((item) {
+          if (item.id == itemId) {
+            if (item.quantity > 1) {
+              return item.copyWith(quantity: item.quantity - 1);
+            }
+            return null; // This will remove the item if quantity is 1
+          }
+          return item;
+        })
+        .whereType<CartItem>()
+        .toList();
   }
 
   void clearCart() {

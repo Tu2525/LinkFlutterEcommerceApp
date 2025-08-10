@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
@@ -36,7 +37,7 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 40),
                 Text(
-                  "Order Placed",
+                  AppLocalizations.of(context)!.orderPlaced,
                   style: TextStyle(
                     color: isDarkMode ? Colors.white : const Color(0xff272727),
                     fontWeight: FontWeight.bold,
@@ -44,7 +45,7 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Successfully",
+                  AppLocalizations.of(context)!.successfully,
                   style: TextStyle(
                     color: isDarkMode ? Colors.white : const Color(0xff272727),
                     fontWeight: FontWeight.bold,
@@ -53,7 +54,7 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 Text(
-                  "You Will recieve an email confirmation",
+                  AppLocalizations.of(context)!.receiveEmail,
                   style: TextStyle(
                     fontSize: 16,
                     color:
@@ -66,7 +67,7 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
                 ContinueButton(
                   width: 350,
                   height: 52,
-                  text: 'See Order details',
+                  text: AppLocalizations.of(context)!.seeOrderDetails,
                   onPressed: () {
                     Navigator.push(
                       context,

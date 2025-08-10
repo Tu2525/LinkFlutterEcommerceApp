@@ -65,4 +65,22 @@
     "profile": "الصفحة الشخصية",
     "search": "بحث",
     "order": "طلب"
+    "notifications":"الاشعارات",
+    "noNotifications":"لا توجد لديك اشعارات حتي الان",
+    "exploreCategories":"اكتشف الفئات",
+    "processing":"قيد المعالجة",
+    "shipped":"تم الشحن",
+    "delivered":"تم التسليم",
+    "returned":"تم الإرجاع",
+    "cancelled":"تم الإلغاء",
+    "orders":"الطلبات",
+    "noOrders":"لا يوجد لديك طلبات حتي الان",
+    "order":"طلب",
+    "item":"قطعه",
+    "orderItems":"منتجات الطلب",
+    "viewAll":"عرض الكل",
+    "orderPlaced":"تم تقديم الطلب",
+    "successfully": "بنجاح",
+    "receiveEmail": "ستتلقى تأكيدًا عبر البريد الإلكتروني",
+    "seeOrderDetails": "عرض تفاصيل الطلب"
 }

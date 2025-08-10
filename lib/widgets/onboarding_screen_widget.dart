@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
 class OnboardingScreenWidget extends StatelessWidget {
-  OnboardingScreenWidget({
+  const OnboardingScreenWidget({
     super.key,
     required this.title,
     required this.subtitle1,
@@ -17,98 +17,113 @@ class OnboardingScreenWidget extends StatelessWidget {
   final String subtitle1;
   final String imagePath;
   final String iconPath;
-  Color? color;
-  Color? color2;
+  final Color? color;
+  final Color? color2;
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final screenWidth = constraints.maxWidth;
-        final screenHeight = constraints.maxHeight;
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
 
-        double titleFontSize = screenWidth * 0.065;
-        double subtitleFontSize = screenWidth * 0.04;
-        double sizedBoxHeight = screenHeight * 0.1;
+    // Font sizes scale with screen width
+    final titleFontSize = screenWidth * 0.065;
+    final subtitleFontSize = screenWidth * 0.04;
+    final iconSize = screenWidth * 0.08;
+    final imageHeight = screenHeight * 0.33;
+    final verticalSpacing = screenHeight * 0.05;
+    final largeSpacing = screenHeight * 0.1;
 
-        return Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(imagePath),
-              fit: BoxFit.cover,
-            ),
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.cover,
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: screenHeight * 0.08,
-              horizontal: screenWidth * 0.06,
-            ),
-            child: Column(
-              crossAxisAlignment: getCrossAxisAlignment(index),
-              children: [
-                SizedBox(height: screenHeight * 0.05),
-                Image.asset(
-                  'images/icon.png',
-                  width: screenWidth * 0.08,
-                  height: screenWidth * 0.08,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: screenHeight * 0.08,
+            horizontal: screenWidth * 0.06,
+          ),
+          child: Column(
+            crossAxisAlignment: getCrossAxisAlignment(index),
+            children: [
+              SizedBox(height: verticalSpacing),
+              Image.asset(
+                'images/icon.png',
+                width: iconSize,
+                height: iconSize,
+                color: color ?? Colors.white,
+              ),
+              Text(
+                AppLocalizations.of(context)!.ecommerceShop,
+                style: TextStyle(
                   color: color ?? Colors.white,
+                  fontSize: titleFontSize,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  AppLocalizations.of(context)!.ecommerceShop,
-                  style: TextStyle(
-                    color: color ?? Colors.white,
-                    fontSize: titleFontSize,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  width: screenWidth * 0.6,
-                  child: Divider(color: color ?? Colors.white, thickness: 1),
-                ),
-                Text(
+              ),
+              SizedBox(
+                width: screenWidth * 0.6,
+                child: Divider(color: color ?? Colors.white, thickness: 1),
+              ),
+              Flexible(
+                child: Text(
                   AppLocalizations.of(context)!.professionalAppForYour,
                   style: TextStyle(
                     color: color2 ?? Colors.white,
                     fontSize: subtitleFontSize,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                Text(
+              ),
+              Flexible(
+                child: Text(
                   AppLocalizations.of(context)!.ecommerceBusiness,
                   style: TextStyle(
                     color: color2 ?? Colors.white,
                     fontSize: subtitleFontSize,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                SizedBox(height: sizedBoxHeight),
-                Center(
-                  child: Image.asset(iconPath, height: screenHeight * 0.33),
+              ),
+              SizedBox(height: largeSpacing),
+              Center(
+                child: Image.asset(
+                  iconPath,
+                  height: imageHeight,
+                  fit: BoxFit.contain,
                 ),
-                SizedBox(height: sizedBoxHeight),
-                Center(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: titleFontSize,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
+              ),
+              SizedBox(height: largeSpacing),
+              Center(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: titleFontSize,
+                    fontWeight: FontWeight.w600,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                Center(
+              ),
+              Flexible(
+                child: Center(
                   child: Text(
                     subtitle1,
                     style: TextStyle(fontSize: subtitleFontSize),
                     textAlign: TextAlign.center,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

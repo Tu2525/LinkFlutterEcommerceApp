@@ -65,4 +65,22 @@
     "profile": "Profile",
     "search": "Search",
     "order": "Orders"
+    "notifications":"Notifications",
+    "noNotifications":"No Notification yet",
+    "exploreCategories":"Explore Categories",
+    "processing":"Processing",
+    "shipped":"Shipped",
+    "delivered":"Delivered",
+    "returned":"Returned",
+    "cancelled":"Cancelled",
+    "orders":"Orders",
+    "noOrders":"No Orders yet",
+    "order":"Order",
+    "item":"items",
+    "orderItems":"Order Items",
+    "viewAll":"View All",
+    "orderPlaced":"Order Placed",
+    "successfully": "Successfully",
+    "receiveEmail": "You will receive a confirmation email",
+    "seeOrderDetails": "See Order details"
 }

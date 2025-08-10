@@ -42,7 +42,7 @@ void main() async {
   } catch (e) {
     if (e.toString().contains('duplicate-app')) {
       // Firebase already initialized, continue
-      print('Firebase was already initialized');
+      // print('Firebase was already initialized');
     } else {
       // Re-throw other exceptions
       rethrow;
@@ -64,7 +64,7 @@ class EcommerceApp extends StatelessWidget {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('en'),
+        locale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
         darkTheme: ThemeData(

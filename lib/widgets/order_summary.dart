@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
-class OrderSummary extends StatelessWidget {
+class OrderSummary extends ConsumerWidget {
   const OrderSummary({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final labelStyle = TextStyle(color: Colors.grey.shade600, fontSize: 14.sp);
     const valueStyle = TextStyle(fontWeight: FontWeight.bold);
     final totalStyle = valueStyle.copyWith(fontSize: 16.sp);
+    final subtotal = ref.read(cartProvider.notifier).subtotal;
+    final data = ref.watch(cartProvider);
+    print(data);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,7 +24,7 @@ class OrderSummary extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Subtotal', style: labelStyle),
-            const Text('\$200', style: valueStyle),
+            Text('\$$subtotal', style: valueStyle),
           ],
         ),
         SizedBox(height: 8.h),
@@ -56,7 +61,7 @@ class OrderSummary extends StatelessWidget {
               ),
             );
           },
-          text: '\$208${' ' * 60}Place Order',
+          text: '\$208${' ' * 40}Place Order',
         ),
       ],
     );

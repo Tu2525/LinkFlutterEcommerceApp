@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/notification_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/notification_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
@@ -19,7 +20,7 @@ class NotificationScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Center(
               child: Text(
-                "Notifications",
+                AppLocalizations.of(context)!.notifications,
                 style: TextStyle(
                   color: isDarkMode ? Colors.white : const Color(0xff272727),
                   fontSize: 20,
@@ -32,9 +33,9 @@ class NotificationScreen extends ConsumerWidget {
             child: notifications.when(
               data: (data) {
                 if (data.isEmpty) {
-                  return const WithoutDataWidget(
+                  return WithoutDataWidget(
                     img: 'images/bell 1.png',
-                    text: "No Notification yet",
+                    text: AppLocalizations.of(context)!.noNotifications,
                   );
                 } else {
                   final allNotifications =

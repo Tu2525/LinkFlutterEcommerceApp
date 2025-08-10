@@ -17,12 +17,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     super.initState();
     var splashAnimation = ref.read(splashAnimationProvider);
-    FirebaseNotificationService().requestNotificationPermission();
-    FirebaseNotificationService().getToken().then(
-      (value) => print('valueeeeeeeeeeeeeeeeeeeeeeeee: $value'),
-    );
-    FirebaseNotificationService().initFirebaseMessaging();
-    setupFlutterNotifications();
+    // FirebaseNotificationService().requestNotificationPermission();
+    // FirebaseNotificationService().getToken().then(
+    //   (value) => print('valueeeeeeeeeeeeeeeeeeeeeeeee: $value'),
+    // );
+    // FirebaseNotificationService().initFirebaseMessaging();
+    // setupFlutterNotifications();
     splashAnimation(context);
   }
 

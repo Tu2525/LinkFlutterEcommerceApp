@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 
 class OrderItemsCard extends StatelessWidget {
@@ -36,21 +36,19 @@ class OrderItemsCard extends StatelessWidget {
             tileColor: cardColor,
             leading: const Icon(IconsaxPlusBroken.receipt_1),
             title: Text(
-              '${items.length} items',
+              '${items.length} ${AppLocalizations.of(context)!.item}',
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                fontFamily: 'Circular',
                 fontSize: 16,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
             trailing: TextButton(
               onPressed: () {},
-              child: const Text(
-                'View all',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.viewAll,
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
-                  fontFamily: 'Circular',
                   fontSize: 16,
                   color: Color(0xff8E6CEF),
                 ),
