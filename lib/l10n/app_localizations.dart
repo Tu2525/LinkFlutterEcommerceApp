@@ -468,12 +468,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search'**
   String get search;
-
-  /// No description provided for @order.
-  ///
-  /// In en, this message translates to:
-  /// **'Orders'**
-  String get order;
 }
 
 class _AppLocalizationsDelegate
