@@ -44,7 +44,6 @@ class _ProductCardState extends State<ProductCard> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(

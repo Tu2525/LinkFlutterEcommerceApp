@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
+import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
@@ -168,7 +169,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ProductDetailsScreen(),
+                      builder: (context) => const MainScreen()
                     ),
                   );
                 },

@@ -10,11 +10,15 @@ import 'package:link_flutter_ecommerce_app/widgets/shipping_details.dart';
 
 class OrderDetails extends ConsumerWidget {
   const OrderDetails({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? Colors.white : Colors.black;
-    final order = ref.watch(selectedOrderProvider);
+    
+    // This 'orderAsyncValue' is an AsyncValue object
+    final order = ref.watch(orderProvider);
+
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
       body: Padding(
@@ -22,7 +26,7 @@ class OrderDetails extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            OrderHeader(orderId: order!.id),
+            OrderHeader(orderId: order.id),
             SizedBox(height: 20.h),
             OrderSteps(isDarkMode: isDarkMode, steps: order.steps),
             SizedBox(height: 20.h),

@@ -66,7 +66,14 @@ class PopulatedCart extends ConsumerWidget {
               const CouponCodeInput(),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const Paymentscreen()));},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Paymentscreen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurpleAccent,
                   minimumSize: const Size(double.infinity, 55),

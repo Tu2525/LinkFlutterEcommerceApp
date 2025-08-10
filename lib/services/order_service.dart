@@ -8,6 +8,8 @@ class OrderService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  get id => null;
+
   Future<List<OrderModel>> getOrderDetails() async {
     final user = _auth.currentUser; // test it when sign in finish
     if (user == null) throw Exception('User not logged in');
