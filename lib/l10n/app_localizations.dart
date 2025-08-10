@@ -103,6 +103,282 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Forgot Password?'**
   String get forgotPassword;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signIn;
+
+  /// No description provided for @emailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address'**
+  String get emailAddress;
+
+  /// No description provided for @cont.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get cont;
+
+  /// No description provided for @noUserFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found for that email.'**
+  String get noUserFound;
+
+  /// No description provided for @dontHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'\'t have an Account?'**
+  String get dontHaveAnAccount;
+
+  /// No description provided for @createOne.
+  ///
+  /// In en, this message translates to:
+  /// **' Create One'**
+  String get createOne;
+
+  /// No description provided for @continueWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue With Apple'**
+  String get continueWithApple;
+
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue With Google'**
+  String get continueWithGoogle;
+
+  /// No description provided for @continueWithFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue With Facebook'**
+  String get continueWithFacebook;
+
+  /// No description provided for @emptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emptyMessage;
+
+  /// No description provided for @invalidFormatMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address'**
+  String get invalidFormatMessage;
+
+  /// No description provided for @emptyPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get emptyPassword;
+
+  /// No description provided for @minLengthMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get minLengthMessage;
+
+  /// No description provided for @patternMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain letters and numbers'**
+  String get patternMessage;
+
+  /// No description provided for @pass.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get pass;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **' Reset'**
+  String get reset;
+
+  /// No description provided for @enterEmailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Email Address'**
+  String get enterEmailAddress;
+
+  /// No description provided for @emailIsAlreadyInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is already in use'**
+  String get emailIsAlreadyInUse;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is not valid'**
+  String get invalidEmail;
+
+  /// No description provided for @weakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak'**
+  String get weakPassword;
+
+  /// No description provided for @wrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong password'**
+  String get wrongPassword;
+
+  /// No description provided for @authError.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication error'**
+  String get authError;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @tellUsAboutYourself.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about yourself'**
+  String get tellUsAboutYourself;
+
+  /// No description provided for @whoDoYouShopFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Who do you shop for?'**
+  String get whoDoYouShopFor;
+
+  /// No description provided for @howoldAreYou.
+  ///
+  /// In en, this message translates to:
+  /// **'How old are you?'**
+  String get howoldAreYou;
+
+  /// No description provided for @men.
+  ///
+  /// In en, this message translates to:
+  /// **'Men'**
+  String get men;
+
+  /// No description provided for @women.
+  ///
+  /// In en, this message translates to:
+  /// **'Women'**
+  String get women;
+
+  /// No description provided for @selectAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Age'**
+  String get selectAge;
+
+  /// No description provided for @finish.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finish;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @ecommerceShop.
+  ///
+  /// In en, this message translates to:
+  /// **'Ecommerce Shop'**
+  String get ecommerceShop;
+
+  /// No description provided for @professionalAppForYour.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional App for your '**
+  String get professionalAppForYour;
+
+  /// No description provided for @ecommerceBusiness.
+  ///
+  /// In en, this message translates to:
+  /// **'Ecommerce Business'**
+  String get ecommerceBusiness;
+
+  /// No description provided for @purachaseOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'!!Purachase Online'**
+  String get purachaseOnline;
+
+  /// No description provided for @trackOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'!!Track Order'**
+  String get trackOrder;
+
+  /// No description provided for @getYourOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'!!Get your order'**
+  String get getYourOrder;
+
+  /// No description provided for @shopsmarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Smarter,faster and easier'**
+  String get shopsmarter;
+
+  /// No description provided for @fastTransperntAlwaysOnTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast, transparent, always on time'**
+  String get fastTransperntAlwaysOnTime;
+
+  /// No description provided for @receiveYourOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive your order fast and hassle-free'**
+  String get receiveYourOrder;
+
+  /// No description provided for @resetPassText.
+  ///
+  /// In en, this message translates to:
+  /// **'We Sent you an Email to reset'**
+  String get resetPassText;
+
+  /// No description provided for @resetPassText2.
+  ///
+  /// In en, this message translates to:
+  /// **'Your password'**
+  String get resetPassText2;
+
+  /// No description provided for @returnToLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to login'**
+  String get returnToLogin;
 }
 
 class _AppLocalizationsDelegate

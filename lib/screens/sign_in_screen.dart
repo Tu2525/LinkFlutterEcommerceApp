@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
@@ -67,7 +68,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
-                  'Sign In',
+                  AppLocalizations.of(context)!.signIn,
                   style: TextStyle(
                     color: isDarkMode ? Colors.white : Colors.black,
                     fontFamily: 'Circular',
@@ -82,9 +83,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 child: CustomTextField(
                   emailController: emailController,
                   isPassword: false,
-                  hint: 'Email Address',
+                  hint: AppLocalizations.of(context)!.emailAddress,
                   isdark: isDarkMode,
-                  validator: (value) => validateEmail(value),
+                  validator: (value) => validateEmail(context, value),
                 ),
               ),
               const SizedBox(height: 16),
@@ -101,7 +102,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           content: Text(
                             error.isNotEmpty
                                 ? error
-                                : 'No user found for that email.',
+                                : AppLocalizations.of(context)!.noUserFound,
                           ),
                         ),
                       );
@@ -123,7 +124,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               Row(
                 children: [
                   Text(
-                    'Don\'t have an Account?',
+                    AppLocalizations.of(context)!.dontHaveAnAccount,
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),
@@ -138,7 +139,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       );
                     },
                     child: Text(
-                      ' Create One',
+                      AppLocalizations.of(context)!.createOne,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Circular',
@@ -150,7 +151,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               const SizedBox(height: 71),
               SigninWithButton(
                 isdark: isDarkMode,
-                text: 'Continue With Apple',
+                text: AppLocalizations.of(context)!.continueWithApple,
                 icon:
                     isDarkMode
                         ? Image.asset(
@@ -175,7 +176,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               const SizedBox(height: 12),
               SigninWithButton(
                 isdark: isDarkMode,
-                text: 'Continue With Google',
+                text: AppLocalizations.of(context)!.continueWithGoogle,
                 icon: Image.asset('images/google.png', height: 25, width: 20),
                 onPressed: () {
                   Navigator.push(
@@ -189,7 +190,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               const SizedBox(height: 12),
               SigninWithButton(
                 isdark: isDarkMode,
-                text: 'Continue With Facebook',
+                text: AppLocalizations.of(context)!.continueWithFacebook,
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
                 onPressed: () {
                   Navigator.push(

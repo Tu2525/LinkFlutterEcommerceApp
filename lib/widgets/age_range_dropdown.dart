@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/user_info_providers.dart';
 
 class AgeRangeDropdown extends ConsumerWidget {
@@ -41,7 +42,7 @@ class AgeRangeDropdown extends ConsumerWidget {
         ),
       ),
       icon: const Icon(Icons.arrow_drop_down),
-      hint: const Text('Select Age Range'),
+      hint: Text(AppLocalizations.of(context)!.selectAge),
       items:
           ageRanges.map((value) {
             return DropdownMenuItem<String>(value: value, child: Text(value));

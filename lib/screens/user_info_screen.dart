@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
 import 'package:link_flutter_ecommerce_app/providers/user_info_providers.dart';
 import 'package:link_flutter_ecommerce_app/screens/onboarding_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/age_range_dropdown.dart';
@@ -25,19 +27,19 @@ class UserInfo extends ConsumerWidget {
             children: [
               SizedBox(height: 40.h),
               Text(
-                'Tell us about yourself',
+                AppLocalizations.of(context)!.tellUsAboutYourself,
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 32.sp),
               ),
               SizedBox(height: 48.h),
               Text(
-                'Who do you shop for?',
+                AppLocalizations.of(context)!.whoDoYouShopFor,
                 style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 16.h),
               const GenderSelectionRow(),
               SizedBox(height: 40.h),
               Text(
-                'How old are you?',
+                AppLocalizations.of(context)!.howoldAreYou,
                 style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 16.h),
@@ -61,7 +63,7 @@ class UserInfo extends ConsumerWidget {
                     );
                   }
                   : () {},
-          text: 'Finish',
+          text: AppLocalizations.of(context)!.finish,
         ),
       ),
     );
