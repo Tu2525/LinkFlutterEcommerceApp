@@ -9,22 +9,19 @@ class OrderService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<List<OrderModel>> getOrderDetails() async {
-    //final user = _auth.currentUser;// test it when sign in finish 
-    //if (user == null) throw Exception('User not logged in');
+    final user = _auth.currentUser; // test it when sign in finish
+    if (user == null) throw Exception('User not logged in');
 
-    final query = await _firestore
-        .collection('orders')
-        //.where('userId', isEqualTo: user.uid)
-        .get();
-
+    final query =
+        await _firestore
+            .collection('orders')
+            .where('userId', isEqualTo: user.uid)
+            .get();
 
     return query.docs.map((doc) {
       final data = doc.data();
       log("${query.docs.length}, ${query.docs.first},  ${query.docs}");
-      return OrderModel.fromFireStore({
-        ...data,
-        'id': doc.id,
-      });
+      return OrderModel.fromFireStore({...data, 'id': doc.id});
     }).toList();
   }
 }

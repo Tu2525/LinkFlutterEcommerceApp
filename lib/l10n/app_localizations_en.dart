@@ -148,4 +148,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get returnToLogin => 'Return to login';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get exploreCategories => 'Explore Categories';
+
+  @override
+  String get item => 'Item';
+
+  @override
+  String get noNotifications => 'No Notifications yet';
+
+  @override
+  String get noOrders => 'No Orders yet';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get order => 'Order';
+
+  @override
+  String get processing => 'Processing';
+
+  @override
+  String get returned => 'Returned';
+
+  @override
+  String get shipped => 'Shipped';
+
+  @override
+  String get orderItems => 'Order Items';
+
+  @override
+  String get viewAll => 'View All';
+
+  @override
+  String get orderPlaced => 'Order Placed Successfully';
+
+  @override
+  String get receiveEmail => 'You will receive a confirmation email';
+
+  @override
+  String get seeOrderDetails => 'See Order Details';
+
+  @override
+  String get successfully => 'Successfully';
 }

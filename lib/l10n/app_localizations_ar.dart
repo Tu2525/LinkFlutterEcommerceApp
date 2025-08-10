@@ -149,4 +149,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get returnToLogin => 'العودة إلى تسجيل الدخول';
+
+  @override
+  String get cancelled => 'تم الإلغاء';
+
+  @override
+  String get delivered => 'تم التسليم';
+
+  @override
+  String get exploreCategories => 'استكشاف الفئات';
+
+  @override
+  String get item => 'عنصر';
+
+  @override
+  String get noNotifications => 'لا توجد إشعارات بعد';
+
+  @override
+  String get noOrders => 'لا توجد طلبات بعد';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get order => 'الطلب';
+
+  @override
+  String get processing => 'جاري المعالجة';
+
+  @override
+  String get returned => 'تم إرجاعه';
+
+  @override
+  String get shipped => 'تم شحنه';
+
+  @override
+  String get orderItems => 'عناصر الطلب';
+
+  @override
+  String get viewAll => 'عرض الكل';
+
+  @override
+  String get orderPlaced => 'تم تقديم الطلب بنجاح';
+
+  @override
+  String get receiveEmail => 'ستتلقى بريدًا إلكترونيًا لتأكيد الطلب';
+
+  @override
+  String get seeOrderDetails => 'عرض تفاصيل الطلب';
+
+  @override
+  String get successfully => 'تم بنجاح';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SigninWithButton extends StatelessWidget {
   const SigninWithButton({
@@ -27,17 +28,16 @@ class SigninWithButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           icon,
-          const SizedBox(width: 40),
+          SizedBox(width: 40.w),
           Text(
             text,
             style: TextStyle(
               fontFamily: 'Circular',
               fontWeight: FontWeight.w500,
-              fontSize: 16,
+              fontSize: 16.sp,
               color: isdark ? Colors.white : Colors.black,
             ),
           ),
-          const SizedBox(width: 20),
         ],
       ),
     );

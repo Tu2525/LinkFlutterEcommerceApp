@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
 import '../providers/order_provider.dart';
 import '../widgets/order_card.dart';
@@ -7,22 +8,21 @@ import '../widgets/order_card.dart';
 class OrdersScreen extends ConsumerWidget {
   const OrdersScreen({super.key});
 
-  static const statuses = [
-    "Processing",
-    "Shipped",
-    "Delivered",
-    "Returned",
-    "Cancelled",
-  ];
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<String> statuses = [
+      AppLocalizations.of(context)!.processing,
+      AppLocalizations.of(context)!.shipped,
+      AppLocalizations.of(context)!.delivered,
+      AppLocalizations.of(context)!.returned,
+      AppLocalizations.of(context)!.cancelled,
+    ];
     final selectedStatus = ref.watch(selectedStatusProvider);
     final orderAsync = ref.watch(orderProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Orders"),
+        title: Text(AppLocalizations.of(context)!.order),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -34,9 +34,9 @@ class OrdersScreen extends ConsumerWidget {
         error: (err, stack) => Center(child: Text("Error: $err")),
         data: (orders) {
           if (orders.isEmpty) {
-            return const WithoutDataWidget(
+            return WithoutDataWidget(
               img: 'images/check-out 1.png',
-              text: 'No Orders yet',
+              text: AppLocalizations.of(context)!.noOrders,
             );
           }
           final filtered =

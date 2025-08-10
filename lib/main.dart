@@ -55,7 +55,7 @@ class EcommerceApp extends StatelessWidget {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('en'),
+        locale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
         darkTheme: ThemeData(

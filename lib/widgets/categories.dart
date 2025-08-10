@@ -42,7 +42,7 @@ class Categories extends StatelessWidget {
               height: screenWidth * 0.15,
               width: screenWidth * 0.15,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(screenWidth * 0.80),
+                borderRadius: BorderRadius.circular(screenWidth * 0.50),
                 child: Image.network(
                   imgPath,
                   fit: BoxFit.fill,

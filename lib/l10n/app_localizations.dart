@@ -379,6 +379,40 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Return to login'**
   String get returnToLogin;
+
+  String get delivered;
+
+  String get noNotifications;
+
+  String get order;
+
+  String get item;
+
+  String get processing;
+
+  String get shipped;
+
+  String get returned;
+
+  String get cancelled;
+
+  String get noOrders;
+
+  String get exploreCategories;
+
+  String get notifications;
+
+  String get viewAll;
+
+  String get orderItems;
+
+  String get orderPlaced;
+
+  String get successfully;
+
+  String get receiveEmail;
+
+  String get seeOrderDetails;
 }
 
 class _AppLocalizationsDelegate

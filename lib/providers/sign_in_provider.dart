@@ -35,14 +35,5 @@ ValidationResult validatePassword(
   if (value == null || value.isEmpty) {
     return AppLocalizations.of(context)!.emptyPassword;
   }
-  if (value.length < minLength) {
-    return AppLocalizations.of(context)!.minLengthMessage;
-  }
-  final pwPattern =
-      pattern ?? RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
-  if (!pwPattern.hasMatch(value)) {
-    return AppLocalizations.of(context)!.patternMessage;
-  }
-  // Add Firebase-specific checks here in the future
   return null;
 }
