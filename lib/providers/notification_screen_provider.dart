@@ -11,7 +11,6 @@ final notificationDetailsProvider = Provider<NotificationService>(
 // Use StreamProvider for real-time updates
 final notificationProvider = StreamProvider<List<NotificationModel>>((ref) {
   final api = ref.watch(notificationDetailsProvider);
-  log("Setting up real-time notification stream");
   return api.getNotificationStreamWithAuth();
 });
 
@@ -22,15 +21,6 @@ final notificationFutureProvider = FutureProvider<List<NotificationModel>>((
   final api = ref.watch(notificationDetailsProvider);
   log("${api.fetchNotificationData()}");
   return api.fetchNotificationData();
-});
-
-// Provider for marking notification as read
-final markNotificationAsReadProvider = FutureProvider.family<void, String>((
-  ref,
-  notificationId,
-) {
-  final api = ref.watch(notificationDetailsProvider);
-  return api.markNotificationAsRead(notificationId);
 });
 
 // Provider for deleting notification

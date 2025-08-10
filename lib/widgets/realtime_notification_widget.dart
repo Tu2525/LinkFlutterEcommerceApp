@@ -73,7 +73,6 @@ class NotificationTile extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: notification.isRead ? Colors.grey : Colors.blue,
           child: Icon(
             notification.data.any((data) => data.isImportant)
                 ? Icons.priority_high
@@ -85,10 +84,7 @@ class NotificationTile extends ConsumerWidget {
           notification.data.isNotEmpty
               ? notification.data.first.message
               : 'No message',
-          style: TextStyle(
-            fontWeight:
-                notification.isRead ? FontWeight.normal : FontWeight.bold,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,28 +94,23 @@ class NotificationTile extends ConsumerWidget {
                 'Received: ${_formatDateTime(notification.timestamp!)}',
                 style: const TextStyle(fontSize: 12),
               ),
-            if (notification.isRead && notification.readAt != null)
-              Text(
-                'Read: ${_formatDateTime(notification.readAt!)}',
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
-              ),
           ],
         ),
         trailing: PopupMenuButton(
           itemBuilder:
               (context) => [
-                if (!notification.isRead)
-                  PopupMenuItem(
-                    value: 'mark_read',
-                    child: const Row(
-                      children: [
-                        Icon(Icons.mark_email_read),
-                        SizedBox(width: 8),
-                        Text('Mark as Read'),
-                      ],
-                    ),
-                  ),
-                PopupMenuItem(
+                // if (!notification.isRead)
+                //   PopupMenuItem(
+                //     value: 'mark_read',
+                //     child: const Row(
+                //       children: [
+                //         Icon(Icons.mark_email_read),
+                //         SizedBox(width: 8),
+                //         Text('Mark as Read'),
+                //       ],
+                //     ),
+                //   ),
+                const PopupMenuItem(
                   value: 'delete',
                   child: const Row(
                     children: [
@@ -134,32 +125,32 @@ class NotificationTile extends ConsumerWidget {
             if (notification.id == null) return;
 
             switch (value) {
-              case 'mark_read':
-                await notificationService.markNotificationAsRead(
-                  notification.id!,
-                );
-                break;
+              // case 'mark_read':
+              //   await notificationService.markNotificationAsRead(
+              //     notification.id!,
+              //   );
+              //   break;
               case 'delete':
                 await notificationService.deleteNotification(notification.id!);
                 break;
             }
           },
         ),
-        onTap: () async {
-          // Mark as read when tapped (if not already read)
-          if (!notification.isRead && notification.id != null) {
-            await notificationService.markNotificationAsRead(notification.id!);
-          }
+        // onTap: () async {
+        //   // Mark as read when tapped (if not already read)
+        //   if (notification.id != null) {
+        //     await notificationService.markNotificationAsRead(notification.id!);
+        //   }
 
-          // Add your navigation logic here
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Notification tapped: ${notification.data.first.message}',
-              ),
-            ),
-          );
-        },
+        //   // Add your navigation logic here
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: Text(
+        //         'Notification tapped: ${notification.data.first.message}',
+        //       ),
+        //     ),
+        //   );
+        // },
       ),
     );
   }

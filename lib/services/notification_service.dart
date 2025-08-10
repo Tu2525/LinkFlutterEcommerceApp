@@ -33,7 +33,6 @@ class NotificationService {
         ],
         'timestamp': FieldValue.serverTimestamp(),
         'additionalData': additionalData,
-        'isRead': false,
         'createdAt': FieldValue.serverTimestamp(),
       });
       log('Notification saved successfully for user: ${user.uid}');
@@ -114,22 +113,6 @@ class NotificationService {
       }
       return getNotificationStream();
     });
-  }
-
-  /// Mark notification as read
-  Future<void> markNotificationAsRead(String notificationId) async {
-    final user = _auth.currentUser;
-    if (user == null) return;
-
-    try {
-      await _firestore.collection('notifications').doc(notificationId).update({
-        'isRead': true,
-        'readAt': FieldValue.serverTimestamp(),
-      });
-      log('Notification marked as read: $notificationId');
-    } catch (e) {
-      log('Error marking notification as read: $e');
-    }
   }
 
   /// Delete notification
@@ -255,21 +238,6 @@ Future<void> setupFlutterNotifications() async {
 void handleNotificationClicks(String? payload) async {
   if (payload != null) {
     try {
-      final data = json.decode(payload) as Map<String, dynamic>;
-
-      // Save notification click event
-      final notificationService = NotificationService();
-      await notificationService.saveNotificationToFirebase(
-        message: 'User clicked notification',
-        isImportant: false,
-        additionalData: {
-          'action': 'notification_clicked',
-          'originalPayload': data,
-          'clickedAt': DateTime.now().toIso8601String(),
-        },
-      );
-
-      // Add your navigation logic here
       log('Notification clicked with payload: $payload');
     } catch (e) {
       log('Error handling notification click: $e');

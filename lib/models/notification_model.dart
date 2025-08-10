@@ -5,16 +5,12 @@ class NotificationModel {
   final String userId;
   final DateTime? timestamp;
   final String? id;
-  final bool isRead;
-  final DateTime? readAt;
 
   NotificationModel({
     required this.data,
     required this.userId,
     this.timestamp,
     this.id,
-    this.isRead = false,
-    this.readAt,
   });
 
   factory NotificationModel.fromFireStore(Map<String, dynamic> json) {
@@ -29,11 +25,6 @@ class NotificationModel {
               ? (json['timestamp'] as Timestamp).toDate()
               : null,
       id: json['id'],
-      isRead: json['isRead'] ?? false,
-      readAt:
-          json['readAt'] != null
-              ? (json['readAt'] as Timestamp).toDate()
-              : null,
     );
   }
 }
