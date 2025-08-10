@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/models/product.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/addToBagButton.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
@@ -10,8 +11,30 @@ import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/quantit
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewSection.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/sizeSelector.dart';
 
-class ProductDetailsScreen extends ConsumerWidget {
-  const ProductDetailsScreen({super.key});
+
+class ProductDetailsScreen extends StatelessWidget {
+  // Your screen still accepts a product object
+  final Product product;
+
+  const ProductDetailsScreen({required this.product, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Use ProviderScope to "provide" your product to the providers
+    return ProviderScope(
+      overrides: [
+        // This is where you connect your screen's product to the provider
+        productProvider.overrideWithValue(product)
+      ],
+      // The child widget can now correctly use all your providers
+      child:  const _ProductDetailsView(),
+    );
+  }
+}
+
+class _ProductDetailsView extends ConsumerWidget {
+  const _ProductDetailsView();
+  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,7 +51,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const TopBar(),
-                    const ProductImageCarousel(),
+                    ProductImageCarousel(product: product,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Column(

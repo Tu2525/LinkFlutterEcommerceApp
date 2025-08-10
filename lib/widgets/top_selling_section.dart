@@ -98,8 +98,9 @@ class TopSellingSection extends ConsumerWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder:
-                                          (context) =>
-                                              const ProductDetailsScreen(),
+                                          (context) => ProductDetailsScreen(
+                                            product: product,
+                                          ),
                                     ),
                                   ),
                               onFavoriteToggle:
@@ -137,7 +138,7 @@ class TopSellingSection extends ConsumerWidget {
                 'Failed to load products',
                 style: TextStyle(
                   fontSize: 16,
-                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
               const SizedBox(height: 8),
@@ -145,7 +146,7 @@ class TopSellingSection extends ConsumerWidget {
                 'Please try again later',
                 style: TextStyle(
                   fontSize: 14,
-                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: theme.colorScheme.onSurface.withValues(alpha: .5),
                 ),
               ),
             ],
@@ -166,14 +167,14 @@ class TopSellingSection extends ConsumerWidget {
               Icon(
                 Icons.shopping_bag_outlined,
                 size: 48,
-                color: theme.colorScheme.onSurface.withOpacity(0.4),
+                color: theme.colorScheme.onSurface.withValues(alpha: .4),
               ),
               const SizedBox(height: 16),
               Text(
                 'No products available',
                 style: TextStyle(
                   fontSize: 16,
-                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                  color: theme.colorScheme.onSurface.withValues(alpha: .6),
                 ),
               ),
               const SizedBox(height: 8),
@@ -181,7 +182,7 @@ class TopSellingSection extends ConsumerWidget {
                 'Check back later for new items',
                 style: TextStyle(
                   fontSize: 14,
-                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                 ),
               ),
             ],
