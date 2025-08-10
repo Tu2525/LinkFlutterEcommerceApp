@@ -31,7 +31,7 @@ class ReviewsSection extends ConsumerWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              '${product.reviews.length} Reviews',
+              '${product.reviewCount} Reviews',
               style: TextStyle(fontSize: 15, color: Colors.grey[600]),
             ),
           ],
