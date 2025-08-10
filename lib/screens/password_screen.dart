@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/onboarding_screen.dart';
+import 'package:link_flutter_ecommerce_app/services/auth_services.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/providers/sign_in_provider.dart';
 
 class PasswordScreen extends ConsumerStatefulWidget {
-  const PasswordScreen({super.key});
+  final String email;
+  const PasswordScreen({super.key, required this.email});
 
   @override
   ConsumerState<PasswordScreen> createState() => _PasswordScreenState();
@@ -62,7 +65,10 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                 child: Text(
                   'Sign In',
                   style: TextStyle(
-                    color: isDarkMode ? Colors.white : const Color.fromARGB(255, 176, 99, 99),
+                    color:
+                        isDarkMode
+                            ? Colors.white
+                            : const Color.fromARGB(255, 176, 99, 99),
                     fontFamily: 'Circular',
                     fontWeight: FontWeight.w700,
                     fontSize: 32,
@@ -82,14 +88,33 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
               ),
               const SizedBox(height: 16),
               ContinueButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const OnBoardingScreen(),
-                      ),
-                    );
+                    await ref
+                        .read(authServiceProvider)
+                        .loginUser(
+                          ref: ref,
+                          email: widget.email,
+                          password: passwordController.text.trim(),
+                        );
+
+                    if (!context.mounted) return;
+
+                    final success = ref.read(authSuccessProvider);
+                    final error = ref.read(authErrorProvider);
+
+                    if (success) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OnBoardingScreen(),
+                        ),
+                      );
+                    } else if (error.isNotEmpty) {
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(error)));
+                    }
                   }
                 },
               ),

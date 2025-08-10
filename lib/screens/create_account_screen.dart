@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
+import 'package:link_flutter_ecommerce_app/services/auth_services.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
@@ -77,19 +80,35 @@ class CreateAccountScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 40),
               ContinueButton(
-                onPressed: () {
-                  accountManager.submit();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const UserInfo()),
+                onPressed: () async {
+                  await AuthService().registerUser(
+                    ref: ref,
+                    email: accountManager.emailController.text.trim(),
+                    password: accountManager.passwordController.text.trim(),
+                    name:
+                        '${accountManager.firstnameController.text.trim()} ${accountManager.lastnameController.text.trim()}',
                   );
+
+                  final success = ref.read(authSuccessProvider);
+                  final error = ref.read(authErrorProvider);
+
+                  if (success) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const UserInfo()),
+                    );
+                  } else if (error.isNotEmpty) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(error)));
+                  }
                 },
               ),
               const SizedBox(height: 40),
               Row(
                 children: [
                   Text(
-                    'Forgot Password?',
+                    AppLocalizations.of(context)!.forgotPassword,
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall?.copyWith(fontFamily: 'Circular'),

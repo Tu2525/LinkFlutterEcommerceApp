@@ -45,9 +45,14 @@ class CategoriesSection extends StatelessWidget {
                 ),
               ),
               Consumer(
-                builder:
-                    (context, ref, child) =>
-                        Row(children: ref.watch(categoryProvider)),
+                builder: (context, ref, child) {
+                  final asyncCategories = ref.watch(categoryProvider);
+                  return asyncCategories.when(
+                    data: (categories) => Row(children: categories),
+                    loading: () => const CircularProgressIndicator(),
+                    error: (e, _) => Text('Error: $e'),
+                  );
+                },
               ),
             ],
           ),

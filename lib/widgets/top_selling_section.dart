@@ -15,7 +15,10 @@ class TopSellingSection extends ConsumerWidget {
   final double? cardWidth;
   final double? cardHeight;
   final double? sectionHeight;
-  final StateNotifierProvider<StateNotifier<List<Product>>, List<Product>>
+  final StateNotifierProvider<
+    StateNotifier<AsyncValue<List<Product>>>,
+    AsyncValue<List<Product>>
+  >
   provider;
 
   const TopSellingSection({
@@ -34,9 +37,8 @@ class TopSellingSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final isDarkMode = theme.brightness == Brightness.dark;
-    final products = ref.watch(provider);
+    final productsAsyncValue = ref.watch(provider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,38 +74,84 @@ class TopSellingSection extends ConsumerWidget {
         // Products List
         SizedBox(
           height: sectionHeight ?? 281,
-          child:
-              products.isEmpty
-                  ? _buildEmptyState()
-                  : ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return ProductCard(
-                        cardColor:
-                            isDarkMode
-                                ? const Color(0xFF342F3F)
-                                : const Color(0xFFF4F4F4),
-                        product: product,
-                        width: cardWidth,
-                        height: cardHeight,
-                        onTap:
-                            () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) =>
-                                        const ProductDetailsScreen(),
-                              ),
-                            ),
-                        onFavoriteToggle: () => onFavoriteToggle?.call(product),
-                      );
-                    },
-                  ),
+          child: productsAsyncValue.when(
+            data:
+                (products) =>
+                    products.isEmpty
+                        ? _buildEmptyState()
+                        : ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            final product = products[index];
+                            return ProductCard(
+                              cardColor:
+                                  isDarkMode
+                                      ? const Color(0xFF342F3F)
+                                      : const Color(0xFFF4F4F4),
+                              product: product,
+                              width: cardWidth,
+                              height: cardHeight,
+                              onTap:
+                                  () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) =>
+                                              const ProductDetailsScreen(),
+                                    ),
+                                  ),
+                              onFavoriteToggle:
+                                  () => onFavoriteToggle?.call(product),
+                            );
+                          },
+                        ),
+            loading: () => _buildLoadingState(),
+            error: (error, stackTrace) => _buildErrorState(error),
+          ),
         ),
       ],
+    );
+  }
+
+  Widget _buildLoadingState() {
+    return const Center(child: CircularProgressIndicator());
+  }
+
+  Widget _buildErrorState(Object error) {
+    return Builder(
+      builder: (context) {
+        final theme = Theme.of(context);
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.error_outline,
+                size: 48,
+                color: theme.colorScheme.error,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Failed to load products',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: theme.colorScheme.onSurface.withOpacity(0.6),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Please try again later',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: theme.colorScheme.onSurface.withOpacity(0.5),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
