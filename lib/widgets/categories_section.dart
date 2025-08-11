@@ -47,8 +47,10 @@ class CategoriesSection extends StatelessWidget {
               ),
               Consumer(
                 builder: (context, ref, child) {
-                  final asyncCategories = ref.watch(categoryProvider);
-                  return asyncCategories.when(
+                  final locale = Localizations.localeOf(context).languageCode;
+                  final categoriesAsync = ref.watch(categoryProvider(locale));
+
+                  return categoriesAsync.when(
                     data: (categories) => Row(children: categories),
                     loading: () => const CircularProgressIndicator(),
                     error: (e, _) => Text('Error: $e'),

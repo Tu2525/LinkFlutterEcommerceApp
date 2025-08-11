@@ -11,22 +11,40 @@ import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final homeNotifier = ref.watch(homePageProvider);
-    homeNotifier.initCategories(
-      defaultCategory: AppLocalizations.of(context)!.men,
-      categories: [
-        AppLocalizations.of(context)!.men,
-        AppLocalizations.of(context)!.women,
-        AppLocalizations.of(context)!.kids,
-      ],
-    );
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  @override
+  void initState() {
+    super.initState();
+
+    Future(() {
+      if (mounted) {
+        ref
+            .read(homePageProvider)
+            .initCategories(
+              defaultCategory: AppLocalizations.of(context)!.men,
+              categories: [
+                AppLocalizations.of(context)!.men,
+                AppLocalizations.of(context)!.women,
+                AppLocalizations.of(context)!.kids,
+              ],
+            );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final homeNotifier = ref.watch(homePageProvider);
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24.0),
@@ -46,7 +64,6 @@ class HomePage extends ConsumerWidget {
                           'https://picsum.photos/536/354',
                         ),
                       ),
-                      // ...existing code for category popup and bag icon...
                       PopupMenuButton<String>(
                         onSelected: (String result) {
                           ref.read(homePageProvider).selectCategory(result);
@@ -99,7 +116,6 @@ class HomePage extends ConsumerWidget {
                               ),
                             );
                           },
-
                           child: const Icon(
                             IconsaxPlusBroken.bag_2,
                             color: Colors.white,
@@ -110,7 +126,7 @@ class HomePage extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                //Search
+                // Search
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Container(
@@ -134,7 +150,7 @@ class HomePage extends ConsumerWidget {
                 TopSellingSection(provider: topSellingProductsProvider),
                 const SizedBox(height: 24),
                 TopSellingSection(
-                  title: "New in",
+                  title: AppLocalizations.of(context)!.newIn,
                   provider: newInProductsProvider,
                 ),
               ],

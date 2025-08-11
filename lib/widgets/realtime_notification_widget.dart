@@ -116,7 +116,7 @@ class NotificationTile extends ConsumerWidget {
                 //   ),
                 const PopupMenuItem(
                   value: 'delete',
-                  child: const Row(
+                  child: Row(
                     children: [
                       Icon(Icons.delete, color: Colors.red),
                       SizedBox(width: 8),

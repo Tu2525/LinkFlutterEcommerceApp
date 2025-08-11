@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
 
 class PaymentCard extends ConsumerWidget {
-  const PaymentCard( {super.key, required this.ontab, required this.isDarkMode});
+  const PaymentCard({super.key, required this.ontab, required this.isDarkMode});
 
-  static const subtitleText = 'Add Payment Method';
-  static const titleText = 'Payment Method';
   final void Function()? ontab;
   final bool isDarkMode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final subtitleText = AppLocalizations.of(context)!.addPaymentMethod;
+    final titleText = AppLocalizations.of(context)!.paymentMethod;
     final last4Digits = ref.watch(last4DigitsProvider);
     final textColor = isDarkMode ? Colors.white : Colors.black;
     final fadedTextColor =

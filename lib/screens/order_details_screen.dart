@@ -16,36 +16,59 @@ class OrderDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
 
+    // From feature/link_orser_with_fire_base
     final order = ref.watch(selectedOrderProvider);
+
+    // From develop branch
+    final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
       backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            OrderHeader(orderIdd: order!.key),
-            SizedBox(height: 20.h),
-            OrderSteps(isDarkMode: isDarkMode, steps: order.steps),
-            SizedBox(height: 20.h),
-            Padding(
-              padding: EdgeInsets.only(left: 16.w),
-              child: Text(
-                AppLocalizations.of(context)!.orderItems,
-                style: AppTextStyles.heading5(isDarkMode),
-              ),
+
+      // Keep develop's async handling but also allow direct `order` usage if needed
+      body: orderAsyncValue.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (err, stack) => Center(child: Text('Error: $err')),
+        data: (orderData) {
+          if (orderData.isEmpty && order == null) {
+            return Center(child: Text(AppLocalizations.of(context)!.noOrders));
+          }
+
+          // Prefer selectedOrderProvider if available, otherwise fallback to first from orderProvider
+          final activeOrder = order ?? orderData.first;
+
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                OrderHeader(orderId: activeOrder.id ?? activeOrder.key),
+                SizedBox(height: 20.h),
+                OrderSteps(isDarkMode: isDarkMode, steps: activeOrder.steps),
+                SizedBox(height: 20.h),
+                Padding(
+                  padding: EdgeInsets.only(left: 16.w),
+                  child: Text(
+                    AppLocalizations.of(context)!.orderItems,
+                    style: AppTextStyles.heading5(isDarkMode),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                OrderItemsCard(
+                  isDarkMode: isDarkMode,
+                  items: activeOrder.items,
+                ),
+                SizedBox(height: 38.h),
+                ShippingDetails(
+                  isDarkMode: isDarkMode,
+                  shippingInfo: [activeOrder.shipping],
+                ),
+              ],
             ),
-            SizedBox(height: 20.h),
-            OrderItemsCard(isDarkMode: isDarkMode, items: order.items),
-            SizedBox(height: 38.h),
-            ShippingDetails(
-              isDarkMode: isDarkMode,
-              shippingInfo: [order.shipping],
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

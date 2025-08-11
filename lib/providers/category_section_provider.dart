@@ -18,9 +18,11 @@ final categoryDataProvider = FutureProvider<List<CategoryData>>((ref) async {
   }).toList();
 });
 
-final categoryProvider = FutureProvider<List<Categories>>((ref) async {
-  final categoryDataList = await ref.watch(categoryDataProvider.future);
-  final locale = WidgetsBinding.instance.platformDispatcher.locale.languageCode;
+final categoryProvider = FutureProvider.family<List<Categories>, String>((
+  ref,
+  locale,
+) async {
+  final categoryDataList = await ref.read(categoryDataProvider.future);
 
   return categoryDataList.map((categoryData) {
     final title = (locale == 'ar') ? categoryData.arabic : categoryData.name;

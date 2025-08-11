@@ -1,1 +1,19 @@
-{}
+{
+  "ar": [
+    "notifications",
+    "noNotifications",
+    "exploreCategories",
+    "processing",
+    "shipped",
+    "delivered",
+    "returned",
+    "cancelled",
+    "orders",
+    "noOrders",
+    "order",
+    "item",
+    "orderItems",
+    "viewAll",
+    "orderPlaced"
+  ]
+}

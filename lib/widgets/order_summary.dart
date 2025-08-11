@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
@@ -11,6 +13,7 @@ import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
 import 'package:link_flutter_ecommerce_app/services/order_service.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
 class OrderSummary extends ConsumerWidget {
   const OrderSummary({super.key});
@@ -18,48 +21,58 @@ class OrderSummary extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subtotal = ref.read(cartProvider.notifier).subtotal;
-    final total = ref.watch(totalProvider);
+
+    // feature branch vars
+    final totalFromProvider = ref.watch(totalProvider);
     final cartItems = ref.watch(cartProvider);
     final addressController = ref.read(addressControllerProvider);
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final user = _auth.currentUser;
 
+    // develop branch constants
+    const shippingCost = 8.00;
+    const tax = 0.00;
+    final totalFromDevelop = subtotal + shippingCost + tax;
+
+    // decide which total to use (prefer provider if available)
+    final total = totalFromProvider != 0 ? totalFromProvider : totalFromDevelop;
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Subtotal', style: AppTextStyles.labelStyle),
-            Text('\$$subtotal', style: AppTextStyles.valueStyle),
-          ],
+        // Subtotal
+        PriceSummaryRow(
+          label: AppLocalizations.of(context)!.subtotal,
+          amount: subtotal,
         ),
         SizedBox(height: 8.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Shipping Cost', style: AppTextStyles.labelStyle),
-            Text('\$8.00', style: AppTextStyles.valueStyle),
-          ],
+
+        // Shipping cost
+        PriceSummaryRow(
+          label: AppLocalizations.of(context)!.shippingCost,
+          amount: shippingCost,
         ),
         SizedBox(height: 8.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Tax', style: AppTextStyles.labelStyle),
-            Text('\$0.00', style: AppTextStyles.valueStyle),
-          ],
+
+        // Tax
+        PriceSummaryRow(
+          label: AppLocalizations.of(context)!.tax,
+          amount: tax,
         ),
-        SizedBox(height: 12.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Total', style: AppTextStyles.totalStyle),
-            Text('\$$total', style: AppTextStyles.totalStyle),
-          ],
+
+        const Divider(height: 30),
+
+        // Total
+        PriceSummaryRow(
+          label: AppLocalizations.of(context)!.total,
+          amount: total,
+          isTotal: true,
         ),
+
         SizedBox(height: 24.h),
+
+        // Continue button from feature branch
         ContinueButton(
           onPressed: () async {
             if (cartItems.isEmpty) {
@@ -74,18 +87,16 @@ class OrderSummary extends ConsumerWidget {
 
             try {
               final shippingInfo = ShippingInfo(
-                address:
-                    addressController.text.isNotEmpty
-                        ? addressController.text
-                        : 'No address provided',
+                address: addressController.text.isNotEmpty
+                    ? addressController.text
+                    : 'No address provided',
               );
 
               showDialog(
                 context: context,
                 barrierDismissible: false,
-                builder:
-                    (context) =>
-                        const Center(child: CircularProgressIndicator()),
+                builder: (context) =>
+                    const Center(child: CircularProgressIndicator()),
               );
 
               final order = await OrderService().saveOrderToFirebase(
@@ -111,12 +122,9 @@ class OrderSummary extends ConsumerWidget {
                 ),
               );
             } catch (e) {
-              // Hide loading indicator if showing
               if (Navigator.canPop(context)) {
                 Navigator.of(context).pop();
               }
-
-              // Show error message
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Failed to place order: $e'),
@@ -127,6 +135,8 @@ class OrderSummary extends ConsumerWidget {
           },
           text: '\$$total${' ' * 40}Place Order',
         ),
+
+        SizedBox(height: 20.h),
       ],
     );
   }
