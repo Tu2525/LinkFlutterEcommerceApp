@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
@@ -19,7 +20,7 @@ class OrderDetails extends ConsumerWidget {
     final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
+      backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
       body: orderAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),

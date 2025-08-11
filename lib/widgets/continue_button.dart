@@ -17,6 +17,7 @@ class ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -27,7 +28,7 @@ class ContinueButton extends StatelessWidget {
       ),
       child: Text(
         text ?? AppLocalizations.of(context)!.cont,
-        style: AppTextStyles.subTitle1(false),
+        style: AppTextStyles.subTitle1(!isDarkMode),
       ),
     );
   }

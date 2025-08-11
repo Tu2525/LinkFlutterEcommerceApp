@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
@@ -12,11 +13,11 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color(0xff8E6CEF),
+      backgroundColor: AppColors.primary,
       body: Column(
         children: [
           Container(
-            color: const Color(0xff8E6CEF),
+            color: AppColors.primary,
             width: double.infinity,
             height: screenHeight * 0.52,
             child: Image.asset('images/order-placed-successfully.png'),
@@ -27,8 +28,8 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color:
                   isDarkMode
-                      ? const Color(0xff272727)
-                      : const Color(0xffF4F4F4),
+                      ? AppColors.black
+                      : AppColors.white,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
