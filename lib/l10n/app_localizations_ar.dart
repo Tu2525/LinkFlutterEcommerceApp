@@ -198,52 +198,53 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get order => 'طلب';
   String get cancelled => 'تم الإلغاء';
+  String get notifications => 'الاشعارات';
+
+  @override
+  String get noNotifications => 'لا توجد لديك اشعارات حتي الان';
+
+  @override
+  String get exploreCategories => 'اكتشف الفئات';
+
+  @override
+  String get processing => 'قيد المعالجة';
+
+  @override
+  String get shipped => 'تم الشحن';
 
   @override
   String get delivered => 'تم التسليم';
 
   @override
-  String get exploreCategories => 'استكشاف الفئات';
+  String get returned => 'تم الإرجاع';
 
   @override
-  String get item => 'عنصر';
+  String get orders => 'الطلبات';
 
   @override
-  String get noNotifications => 'لا توجد إشعارات بعد';
+  String get noOrders => 'لا يوجد لديك طلبات حتي الان';
 
   @override
-  String get noOrders => 'لا توجد طلبات بعد';
+  String get item => 'قطعه';
 
   @override
-  String get notifications => 'الإشعارات';
-
-  @override
-  String get order => 'الطلب';
-
-  @override
-  String get processing => 'جاري المعالجة';
-
-  @override
-  String get returned => 'تم إرجاعه';
-
-  @override
-  String get shipped => 'تم شحنه';
-
-  @override
-  String get orderItems => 'عناصر الطلب';
+  String get orderItems => 'منتجات الطلب';
 
   @override
   String get viewAll => 'عرض الكل';
 
   @override
-  String get orderPlaced => 'تم تقديم الطلب بنجاح';
+  String get orderPlaced => 'تم تقديم الطلب';
 
   @override
-  String get receiveEmail => 'ستتلقى بريدًا إلكترونيًا لتأكيد الطلب';
+  String get successfully => 'بنجاح';
+
+  @override
+  String get receiveEmail => 'ستتلقى تأكيدًا عبر البريد الإلكتروني';
 
   @override
   String get seeOrderDetails => 'عرض تفاصيل الطلب';
 
   @override
-  String get successfully => 'تم بنجاح';
+  String get shopByCategories => 'تسوق حسب الفئات';
 }

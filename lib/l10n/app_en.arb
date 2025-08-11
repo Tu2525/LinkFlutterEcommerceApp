@@ -82,5 +82,6 @@
     "orderPlaced":"Order Placed",
     "successfully": "Successfully",
     "receiveEmail": "You will receive a confirmation email",
-    "seeOrderDetails": "See Order details"
+    "seeOrderDetails": "See Order details",
+    "shopByCategories": "Shop by Categories"
 }

@@ -197,37 +197,40 @@ class AppLocalizationsEn extends AppLocalizations {
 =======
 
   @override
-  String get cancelled => 'Cancelled';
+  String get notifications => 'Notifications';
 
   @override
-  String get delivered => 'Delivered';
+  String get noNotifications => 'No Notification yet';
 
   @override
   String get exploreCategories => 'Explore Categories';
 
   @override
-  String get item => 'Item';
-
-  @override
-  String get noNotifications => 'No Notifications yet';
-
-  @override
-  String get noOrders => 'No Orders yet';
-
-  @override
-  String get notifications => 'Notifications';
-
-  @override
-  String get order => 'Order';
-
-  @override
   String get processing => 'Processing';
+
+  @override
+  String get shipped => 'Shipped';
+
+  @override
+  String get delivered => 'Delivered';
 
   @override
   String get returned => 'Returned';
 
   @override
-  String get shipped => 'Shipped';
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get orders => 'Orders';
+
+  @override
+  String get noOrders => 'No Orders yet';
+
+  @override
+  String get order => 'Order';
+
+  @override
+  String get item => 'items';
 
   @override
   String get orderItems => 'Order Items';
@@ -236,14 +239,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewAll => 'View All';
 
   @override
-  String get orderPlaced => 'Order Placed Successfully';
+  String get orderPlaced => 'Order Placed';
+
+  @override
+  String get successfully => 'Successfully';
 
   @override
   String get receiveEmail => 'You will receive a confirmation email';
 
   @override
-  String get seeOrderDetails => 'See Order Details';
+  String get seeOrderDetails => 'See Order details';
 
   @override
-  String get successfully => 'Successfully';
+  String get shopByCategories => 'Shop by Categories';
 }

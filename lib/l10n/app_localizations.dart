@@ -469,39 +469,119 @@ abstract class AppLocalizations {
   /// **'Search'**
   String get search;
 
-  String get delivered;
-
-  String get noNotifications;
-
-  String get order;
-
-  String get item;
-
-  String get processing;
-
-  String get shipped;
-
-  String get returned;
-
-  String get cancelled;
-
-  String get noOrders;
-
-  String get exploreCategories;
-
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
   String get notifications;
 
-  String get viewAll;
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No Notification yet'**
+  String get noNotifications;
 
+  /// No description provided for @exploreCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Categories'**
+  String get exploreCategories;
+
+  /// No description provided for @processing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get processing;
+
+  /// No description provided for @shipped.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipped'**
+  String get shipped;
+
+  /// No description provided for @delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get delivered;
+
+  /// No description provided for @returned.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned'**
+  String get returned;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
+
+  /// No description provided for @orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get orders;
+
+  /// No description provided for @noOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'No Orders yet'**
+  String get noOrders;
+
+  /// No description provided for @order.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get order;
+
+  /// No description provided for @item.
+  ///
+  /// In en, this message translates to:
+  /// **'items'**
+  String get item;
+
+  /// No description provided for @orderItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Items'**
   String get orderItems;
 
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
+
+  /// No description provided for @orderPlaced.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Placed'**
   String get orderPlaced;
 
+  /// No description provided for @successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully'**
   String get successfully;
 
+  /// No description provided for @receiveEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'You will receive a confirmation email'**
   String get receiveEmail;
 
+  /// No description provided for @seeOrderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'See Order details'**
   String get seeOrderDetails;
+
+  /// No description provided for @shopByCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop by Categories'**
+  String get shopByCategories;
 }
 
 class _AppLocalizationsDelegate
