@@ -148,6 +148,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get returnToLogin => 'Return to login';
+  String get kids => 'Kids';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get topSelling => 'Top Selling';
+
+  @override
+  String get seeAll => 'See All';
+
+  @override
+  String get bags => 'Bags';
+
+  @override
+  String get shoes => 'Shoes';
+
+  @override
+  String get shorts => 'Shorts';
+
+  @override
+  String get shopByCategory => 'Shop by Category';
+
+  @override
+  String get hoddies => 'Hoddies';
+
+  @override
+  String get accessories => 'Accessories';
+
+  @override
+  String get sale => 'Sale';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get cart => 'Cart';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get order => 'Orders';
+=======
 
   @override
   String get cancelled => 'Cancelled';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/category_section_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/products_of_category_screen.dart';
@@ -34,7 +35,7 @@ class CategoriesList extends ConsumerWidget {
                     const CustomIcon(),
                     SizedBox(height: screenHeight * 0.03),
                     Text(
-                      'Shop by Categories',
+                      AppLocalizations.of(context)!.shopByCategory,
                       style: AppTextStyles.heading3(isDarkMode),
                     ),
                     SizedBox(height: screenHeight * 0.02),

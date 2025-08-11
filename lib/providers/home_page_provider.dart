@@ -4,11 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePageNotifier extends ChangeNotifier {
-  String _selectedCategory = 'Men';
-  final List<String> _categories = ['Men', 'Women', 'Kids'];
+  String _selectedCategory = '';
+  List<String> _categories = [];
 
   String get selectedCategory => _selectedCategory;
   List<String> get categories => _categories;
+
+  void initCategories({
+    required String defaultCategory,
+    required List<String> categories,
+  }) {
+    if (_categories.isEmpty) {
+      _categories = categories;
+      _selectedCategory = defaultCategory;
+      notifyListeners();
+    }
+  }
 
   void selectCategory(String category) {
     _selectedCategory = category;
