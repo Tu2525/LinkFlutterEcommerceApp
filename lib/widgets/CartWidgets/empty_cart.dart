@@ -44,10 +44,8 @@ class EmptyCart extends StatelessWidget {
             ),
             child:  Text(
               AppLocalizations.of(context)!.exploreCategories,
-              style: const TextStyle(fontSize: 16, color: Colors.white),
-            ),
-
-            child: Text('Explore Categories', style: AppTextStyles.body1(!isDarkMode)),
+            
+             style: AppTextStyles.body1(!isDarkMode)),
 
           ),
         ],

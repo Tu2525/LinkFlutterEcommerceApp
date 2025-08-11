@@ -13,9 +13,6 @@ class ReviewsSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
-
     final product = ref.watch(productProvider);
 
     final double totalRating =
@@ -29,13 +26,12 @@ class ReviewsSection extends ConsumerWidget {
       children: [
         Text(
           AppLocalizations.of(context)!.review,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 12),
         Row(
           children: [
             Text(
-
               '${totalRating.toStringAsFixed(1)} ${AppLocalizations.of(context)!.rating} ',
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
@@ -43,9 +39,6 @@ class ReviewsSection extends ConsumerWidget {
             Text(
               '${product.reviewCount} ${AppLocalizations.of(context)!.reviewers}',
               style: AppTextStyles.review,
-     
-            const SizedBox(width: 8),
-
             ),
           ],
         ),

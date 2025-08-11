@@ -20,10 +20,6 @@ class PaymentCard extends ConsumerWidget {
     final titleText = AppLocalizations.of(context)!.paymentMethod;
     final last4Digits = ref.watch(last4DigitsProvider);
     final textColor = isDarkMode ? Colors.white : Colors.black;
-    final fadedTextColor =
-        isDarkMode
-            ? Colors.white.withOpacity(0.5)
-            : const Color(0xff272727).withOpacity(0.5);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
@@ -36,7 +32,7 @@ class PaymentCard extends ConsumerWidget {
           tileColor:
               isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
           trailing: Icon(IconsaxPlusBroken.arrow_right_3, color: textColor),
-          title: const Text(titleText, style: AppTextStyles.faintGrey),
+          title:  Text(titleText, style: AppTextStyles.faintGrey),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 4.0.h),
             child:
