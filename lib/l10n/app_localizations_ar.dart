@@ -405,4 +405,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addAddress => 'إضافة عنوان';
+
+  @override
+  String get noorder => 'لا يوجد طلبات';
 }

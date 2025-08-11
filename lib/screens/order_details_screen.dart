@@ -28,7 +28,7 @@ class OrderDetails extends ConsumerWidget {
         error: (err, stack) => Center(child: Text('Error: $err')),
         data: (orderData) {
           if (orderData.isEmpty) {
-            return const Center(child: Text('No order found.'));
+            return Center(child: Text(AppLocalizations.of(context)!.noOrders));
           }
           final singleOrder = orderData.first;
 

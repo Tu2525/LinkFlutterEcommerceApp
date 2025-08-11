@@ -404,4 +404,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addAddress => 'Add Address';
+
+  @override
+  String get noorder => 'No order found.';
 }

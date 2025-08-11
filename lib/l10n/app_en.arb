@@ -131,5 +131,6 @@
     "validCvv": "Please Enter Valid CVV",
     "addCard":  "Add Card",
     "zipcodemustbe":"Zipcode must be between 3 to 10 digits",
-    "addAddress": "Add Address"
+    "addAddress": "Add Address",
+    "noorder":"No order found."
 }

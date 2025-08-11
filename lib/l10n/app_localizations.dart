@@ -889,6 +889,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Address'**
   String get addAddress;
+
+  /// No description provided for @noorder.
+  ///
+  /// In en, this message translates to:
+  /// **'No order found.'**
+  String get noorder;
 }
 
 class _AppLocalizationsDelegate
