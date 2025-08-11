@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/empty_cart.dart';
@@ -14,7 +16,6 @@ class CartScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cartItems = ref.watch(cartProvider);
     final isDarkMode = ref.watch(isDarkModeProvider);
-
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(isDarkMode),
       body: SafeArea(
@@ -28,6 +29,7 @@ class CartScreen extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
                   const TopBar(showHeartIcon: false),
                   Text(
                     "Cart",
@@ -36,7 +38,15 @@ class CartScreen extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimaryColor(isDarkMode),
                     ),
+
+
+                  const TopBar(showHeartIcon: false,),
+                  Text(
+                    AppLocalizations.of(context)!.cart,
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
                   ),
+
                   // if (cartItems.isNotEmpty)
                   //   TextButton(
                   //     onPressed:
@@ -47,6 +57,7 @@ class CartScreen extends ConsumerWidget {
                   //     ),
                   //   )
                   // else
+
                   const SizedBox(
                     width: 80,
                   ), // Placeholder with approx. width of the button

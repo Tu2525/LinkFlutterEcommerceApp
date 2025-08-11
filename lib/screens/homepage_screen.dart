@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
@@ -12,11 +13,36 @@ import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future(() {
+      if (mounted) {
+        ref
+            .read(homePageProvider)
+            .initCategories(
+              defaultCategory: AppLocalizations.of(context)!.men,
+              categories: [
+                AppLocalizations.of(context)!.men,
+                AppLocalizations.of(context)!.women,
+                AppLocalizations.of(context)!.kids,
+              ],
+            );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final homeNotifier = ref.watch(homePageProvider);
     final isDarkMode = ref.watch(isDarkModeProvider);
 
@@ -48,23 +74,18 @@ class HomePage extends ConsumerWidget {
                           onSelected: (String result) {
                             ref.read(homePageProvider).selectedCategory;
                           },
-                          itemBuilder:
-                              (BuildContext context) =>
-                                  homeNotifier.categories.map((
-                                    String category,
-                                  ) {
-                                    return PopupMenuItem<String>(
-                                      value: category,
-                                      child: Text(
-                                        category,
-                                        style: TextStyle(
-                                          color: AppColors.textPrimaryColor(
-                                            isDarkMode,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }).toList(),
+                          itemBuilder: (BuildContext context) =>
+                              homeNotifier.categories.map((String category) {
+                            return PopupMenuItem<String>(
+                              value: category,
+                              child: Text(
+                                category,
+                                style: TextStyle(
+                                  color: AppColors.textPrimaryColor(isDarkMode),
+                                ),
+                              ),
+                            );
+                          }).toList(),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,

@@ -8,7 +8,6 @@ import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
-import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
@@ -62,12 +61,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   AppLocalizations.of(context)!.signIn,
-                  style: TextStyle(
-                    color: AppColors.textPrimaryColor(isDarkMode),
-                    fontFamily: 'Circular',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 32,
-                  ),
+                  style: AppTextStyles.heading2(isDarkMode),
                 ),
               ),
               const SizedBox(height: 32),

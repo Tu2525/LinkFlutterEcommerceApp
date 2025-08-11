@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
@@ -64,12 +65,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   AppLocalizations.of(context)!.signIn,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : const Color(0xff000000),
-                    fontFamily: 'Circular',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 32,
-                  ),
+                  style: AppTextStyles.heading2(isDarkMode),
                 ),
               ),
               const SizedBox(height: 32),
@@ -120,12 +116,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                 children: [
                   Text(
                     AppLocalizations.of(context)!.forgotPassword,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Circular',
-                      fontSize: 12,
-                      color: Color(0xff000000),
-                    ),
+                    style: AppTextStyles.subTitle2(isDarkMode),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -138,12 +129,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                     },
                     child: Text(
                       AppLocalizations.of(context)!.reset,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Circular',
-                        fontSize: 12,
-                        color: Colors.black,
-                      ),
+                      style: AppTextStyles.heading6(isDarkMode),
                     ),
                   ),
                 ],

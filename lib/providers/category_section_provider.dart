@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/models/category_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories.dart';
@@ -17,14 +18,17 @@ final categoryDataProvider = FutureProvider<List<CategoryData>>((ref) async {
   }).toList();
 });
 
-// Provider that returns Categories widgets for UI
-final categoryProvider = FutureProvider<List<Categories>>((ref) async {
-  final categoryDataList = await ref.watch(categoryDataProvider.future);
+final categoryProvider = FutureProvider.family<List<Categories>, String>((
+  ref,
+  locale,
+) async {
+  final categoryDataList = await ref.read(categoryDataProvider.future);
 
   return categoryDataList.map((categoryData) {
+    final title = (locale == 'ar') ? categoryData.arabic : categoryData.name;
     return Categories(
       imgPath: categoryData.imageUrl,
-      title: categoryData.name,
+      title: title,
       categoryId: categoryData.id,
       ontap: () {},
     );

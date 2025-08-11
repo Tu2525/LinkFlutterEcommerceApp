@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class CategoryCard extends StatelessWidget {
   final String image;
@@ -30,18 +31,13 @@ class CategoryCard extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage(image),
+            backgroundImage: NetworkImage(image),
             radius: screenWidth * 0.06,
           ),
           const SizedBox(width: 16),
           Text(
             title,
-            style: TextStyle(
-              fontFamily: 'Circular',
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              color: isDarkMode ? Colors.white : const Color(0xff272727),
-            ),
+            style: AppTextStyles.subTitle1(isDarkMode),
           ),
         ],
       ),

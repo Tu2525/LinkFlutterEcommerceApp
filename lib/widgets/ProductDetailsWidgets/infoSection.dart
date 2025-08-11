@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class InfoSection extends StatelessWidget {
   final String title;
@@ -8,15 +9,16 @@ class InfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: AppTextStyles.heading4(isDarkMode),
         ),
         const SizedBox(height: 8),
-        Text(content, style: TextStyle(fontSize: 15, color: Colors.grey[600])),
+        Text(content, style: AppTextStyles.review),
       ],
     );
   }

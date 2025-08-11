@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
 
@@ -37,9 +38,7 @@ class WithoutDataWidget extends StatelessWidget {
             },
             child: Text(
               AppLocalizations.of(context)!.exploreCategories,
-              style: TextStyle(
-                color: isDarkMode ? Colors.white : const Color(0xff272727),
-              ),
+              style: AppTextStyles.body1(isDarkMode),
             ),
           ),
         ],

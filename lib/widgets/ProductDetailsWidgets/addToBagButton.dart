@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
-import 'package:link_flutter_ecommerce_app/providers/cartItem_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
@@ -12,6 +16,7 @@ class AddToBagButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -33,11 +38,7 @@ class AddToBagButton extends ConsumerWidget {
         children: [
           Text(
             '\$${totalPrice.toStringAsFixed(2)}',
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF8A2BE2),
-            ),
+            style: AppTextStyles.price,
           ),
           const SizedBox(width: 20),
           Expanded(
@@ -49,10 +50,7 @@ class AddToBagButton extends ConsumerWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                textStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                textStyle: AppTextStyles.heading5(isDarkMode),
               ),
               onPressed: () {
                 // 1. Read the necessary providers to get the current selections.
@@ -88,18 +86,27 @@ class AddToBagButton extends ConsumerWidget {
                 // 4. Show a confirmation message.
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: const Text('Added to Bag!'),
+                    content: Text(
+                      '${AppLocalizations.of(context)!.addedToBag}!',
+                    ),
                     duration: const Duration(seconds: 2),
                     backgroundColor: Colors.green,
                     action: SnackBarAction(
-                      label: "Proceed to checkout",
-                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen()));},
+                      label: AppLocalizations.of(context)!.proceedToCheckout,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 );
               },
 
-              child: const Text('Add to Bag'),
+              child: Text(AppLocalizations.of(context)!.addToBag),
             ),
           ),
         ],

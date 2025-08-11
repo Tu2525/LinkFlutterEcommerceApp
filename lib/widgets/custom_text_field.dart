@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return TextFormField(
       validator: validator,
       controller: _emailController,
@@ -29,9 +31,7 @@ class CustomTextField extends StatelessWidget {
         fillColor: isdark ? const Color(0xff342F3F) : const Color(0xffF4F4F4),
         filled: true,
         hintText: hint,
-        hintStyle: TextStyle(
-          color: isdark ? const Color(0xffffffff8) : const Color(0xff27272780),
-        ),
+        hintStyle: AppTextStyles.body2(isDarkMode),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           borderSide: BorderSide.none,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class CustomTextForm extends StatelessWidget {
   final TextEditingController controller;
@@ -18,6 +19,7 @@ class CustomTextForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final bordercolor =
         isdarkmode
             ? Colors.white.withOpacity(0.2)
@@ -43,14 +45,7 @@ class CustomTextForm extends StatelessWidget {
           borderSide: BorderSide(color: bordercolor),
         ),
         hintText: hint,
-        hintStyle: TextStyle(
-          color:
-              isdarkmode
-                  ? Colors.white.withOpacity(0.5)
-                  : Colors.black.withOpacity(0.5),
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        ),
+        hintStyle: AppTextStyles.subTitle1(isDarkMode),
       ),
 
       validator: validator,

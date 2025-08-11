@@ -52,10 +52,7 @@ class TopSellingSection extends ConsumerWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  title,
-                  style: AppTextStyles.sectionTitle(isDarkMode),
-                ),
+                child: Text(title, style: AppTextStyles.subTitle1(isDarkMode)),
               ),
               if (showSeeAll)
                 GestureDetector(

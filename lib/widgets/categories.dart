@@ -28,7 +28,6 @@ class Categories extends StatelessWidget {
                 builder:
                     (context) => ProductsOfCategoryScreen(
                       categoryName: title,
-                      categoryId: categoryId,
                     ),
               ),
             ),
@@ -57,7 +56,7 @@ class Categories extends StatelessWidget {
                       ),
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   },
                 ),
               ),
@@ -66,7 +65,7 @@ class Categories extends StatelessWidget {
           SizedBox(height: screenHeight * 0.008),
           Text(
             title,
-            style: TextStyle(
+            style: TextStyle( //for indiviual category item >> #TODO
               color:
                   Theme.of(context).brightness == Brightness.dark
                       ? Colors.white

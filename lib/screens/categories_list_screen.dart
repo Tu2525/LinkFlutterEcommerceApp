@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/category_section_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/products_of_category_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CategoryCard.dart';
@@ -14,7 +16,8 @@ class CategoriesList extends ConsumerWidget {
     final screenWidth = MediaQuery.sizeOf(context).width;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    final categoriesAsync = ref.watch(categoryDataProvider);
+    final locale = Localizations.localeOf(context).languageCode;
+    final categoriesAsync = ref.watch(categoryProvider(locale));
 
     return categoriesAsync.when(
       data: (categories) {
@@ -33,13 +36,8 @@ class CategoriesList extends ConsumerWidget {
                     const CustomIcon(),
                     SizedBox(height: screenHeight * 0.03),
                     Text(
-                      'Shop by Categories',
-                      style: TextStyle(
-                        fontFamily: 'Circular',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
+                      AppLocalizations.of(context)!.shopByCategory,
+                      style: AppTextStyles.heading3(isDarkMode),
                     ),
                     SizedBox(height: screenHeight * 0.02),
                     ListView.builder(
@@ -54,16 +52,16 @@ class CategoriesList extends ConsumerWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => ProductsOfCategoryScreen(
-                                    categoryName: item.name,
-                                    categoryId: item.id,
-                                  ),
+                                  builder:
+                                      (context) => ProductsOfCategoryScreen(
+                                        categoryName: item.title,
+                                      ),
                                 ),
                               );
                             },
                             child: CategoryCard(
-                              image: item.imageUrl,
-                              title: item.name,
+                              image: item.imgPath,
+                              title: item.title,
                               isDarkMode: isDarkMode,
                               screenHeight: screenHeight,
                               screenWidth: screenWidth,
@@ -79,19 +77,18 @@ class CategoriesList extends ConsumerWidget {
           ),
         );
       },
-      loading: () => Scaffold(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        body: const Center(child: CircularProgressIndicator()),
-      ),
-      error: (error, stack) => Scaffold(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        body: Center(
-          child: Text(
-            'Error: $error',
-            style: const TextStyle(color: Colors.red),
+      loading:
+          () => Scaffold(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            body: const Center(child: CircularProgressIndicator()),
           ),
-        ),
-      ),
+      error:
+          (error, stack) => Scaffold(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            body: Center(
+              child: Text('Error: $error', style: AppTextStyles.error),
+            ),
+          ),
     );
   }
 }

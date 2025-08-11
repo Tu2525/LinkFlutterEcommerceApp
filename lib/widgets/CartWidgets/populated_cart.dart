@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/cart_item_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/coupon_code_input.dart';
-import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
+import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
 
 class PopulatedCart extends ConsumerWidget {
   final List<CartItem> cartItems;
@@ -13,6 +15,7 @@ class PopulatedCart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final subtotal = ref.read(cartProvider.notifier).subtotal;
     final total = ref.watch(totalProvider);
 
@@ -24,9 +27,12 @@ class PopulatedCart extends ConsumerWidget {
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () => ref.read(cartProvider.notifier).clearCart(),
+              child: Text(
+                AppLocalizations.of(context)!.removeAll,
+                style: const TextStyle(color: Colors.black54),
               child: const Text(
                 'Remove All',
-                style: TextStyle(color: Colors.black54),
+                style: AppTextStyles.faintGrey,
               ),
             ),
           ),
@@ -53,16 +59,8 @@ class PopulatedCart extends ConsumerWidget {
             ],
           ),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              PriceSummaryRow(label: 'Subtotal', amount: subtotal),
-              const SizedBox(height: 8),
-              const PriceSummaryRow(label: 'Shipping Cost', amount: 8.00),
-              const SizedBox(height: 8),
-              const PriceSummaryRow(label: 'Tax', amount: 0.00),
-              const Divider(height: 30),
-              PriceSummaryRow(label: 'Total', amount: total, isTotal: true),
-              const SizedBox(height: 20),
+              OrderSummary(subtotal: subtotal, total: total),
               const CouponCodeInput(),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -81,13 +79,12 @@ class PopulatedCart extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                child: const Text(
-                  'Checkout',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Text(
+
+                  AppLocalizations.of(context)!.checkout,
+               
+                  style: AppTextStyles.heading4(!isDarkMode),
+
                 ),
               ),
             ],

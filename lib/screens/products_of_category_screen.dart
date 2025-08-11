@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import '../widgets/product_card.dart';
 import '../providers/products_of_category_provider.dart';
 import '../constants/app_colors.dart';
@@ -8,18 +9,13 @@ import 'product_details_screen.dart';
 
 class ProductsOfCategoryScreen extends ConsumerWidget {
   final String categoryName;
-  final String categoryId;
-  const ProductsOfCategoryScreen({
-    super.key,
-    required this.categoryName,
-    required this.categoryId,
-  });
+  const ProductsOfCategoryScreen({super.key, required this.categoryName});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsyncValue = ref.watch(
       productsOfCategoryProvider(
-        categoryId,
+        categoryName,
       ), // Use categoryId instead of categoryName
     );
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -79,29 +75,17 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
               data:
                   (products) => Text(
                     '$categoryName (${products.length})',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
+                    style: AppTextStyles.heading5(isDarkMode),
                   ),
               loading:
                   () => Text(
                     '$categoryName (...)',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
+                    style: AppTextStyles.heading5(isDarkMode),
                   ),
               error:
                   (error, stack) => Text(
                     '$categoryName (0)',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
+                    style: AppTextStyles.heading5(isDarkMode),
                   ),
             ),
             const SizedBox(height: 12),
@@ -173,18 +157,12 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
           const SizedBox(height: 16),
           Text(
             'Failed to load products',
-            style: TextStyle(
-              fontSize: 16,
-              color: isDarkMode ? Colors.white70 : Colors.black87,
-            ),
+            style: AppTextStyles.body1(isDarkMode),
           ),
           const SizedBox(height: 8),
           Text(
             'Please try again later',
-            style: TextStyle(
-              fontSize: 14,
-              color: isDarkMode ? Colors.white54 : Colors.black54,
-            ),
+            style: AppTextStyles.body2(isDarkMode),
           ),
         ],
       ),
@@ -202,20 +180,11 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
             color: isDarkMode ? Colors.white54 : Colors.black54,
           ),
           const SizedBox(height: 16),
-          Text(
-            'No products found',
-            style: TextStyle(
-              fontSize: 16,
-              color: isDarkMode ? Colors.white70 : Colors.black87,
-            ),
-          ),
+          Text('No products found', style: AppTextStyles.body1(isDarkMode)),
           const SizedBox(height: 8),
           Text(
             'Check back later for new items',
-            style: TextStyle(
-              fontSize: 14,
-              color: isDarkMode ? Colors.white54 : Colors.black54,
-            ),
+            style: AppTextStyles.body2(isDarkMode),
           ),
         ],
       ),
