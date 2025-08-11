@@ -28,7 +28,6 @@ class Categories extends StatelessWidget {
                 builder:
                     (context) => ProductsOfCategoryScreen(
                       categoryName: title,
-                      categoryId: categoryId,
                     ),
               ),
             ),
