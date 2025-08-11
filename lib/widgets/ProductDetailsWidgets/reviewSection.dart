@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewItem.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
@@ -9,6 +13,9 @@ class ReviewsSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+
+
     final product = ref.watch(productProvider);
 
     final double totalRating =
@@ -28,13 +35,17 @@ class ReviewsSection extends ConsumerWidget {
         Row(
           children: [
             Text(
+
               '${totalRating.toStringAsFixed(1)} ${AppLocalizations.of(context)!.rating} ',
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 8),
             Text(
               '${product.reviewCount} ${AppLocalizations.of(context)!.reviewers}',
-              style: TextStyle(fontSize: 15, color: Colors.grey[600]),
+              style: AppTextStyles.review,
+     
+            const SizedBox(width: 8),
+
             ),
           ],
         ),

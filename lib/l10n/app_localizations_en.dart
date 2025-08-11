@@ -195,7 +195,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search => 'Search';
 
   @override
+
   String get notifications => 'Notifications';
+
+  String get order => 'Orders';
+
 
   @override
   String get noNotifications => 'No Notification yet';
@@ -219,7 +223,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancelled => 'Cancelled';
 
   @override
+
   String get orders => 'Orders';
+
 
   @override
   String get noOrders => 'No Orders yet';

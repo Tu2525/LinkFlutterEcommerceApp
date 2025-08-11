@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
@@ -14,6 +15,7 @@ class PopulatedCart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final subtotal = ref.read(cartProvider.notifier).subtotal;
     final total = ref.watch(totalProvider);
 
@@ -28,6 +30,9 @@ class PopulatedCart extends ConsumerWidget {
               child: Text(
                 AppLocalizations.of(context)!.removeAll,
                 style: const TextStyle(color: Colors.black54),
+              child: const Text(
+                'Remove All',
+                style: AppTextStyles.faintGrey,
               ),
             ),
           ),
@@ -75,12 +80,11 @@ class PopulatedCart extends ConsumerWidget {
                   ),
                 ),
                 child: Text(
+
                   AppLocalizations.of(context)!.checkout,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+               
+                  style: AppTextStyles.heading4(!isDarkMode),
+
                 ),
               ),
             ],

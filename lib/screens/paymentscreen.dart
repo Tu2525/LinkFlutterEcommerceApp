@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
@@ -49,12 +51,8 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                 SizedBox(width: 100.w),
                 Text(
                   AppLocalizations.of(context)!.checkout,
-                  style: TextStyle(
-                    fontFamily: 'Circular',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18.sp,
-                  ),
-                ),
+                   style: AppTextStyles.heading3(isDarkMode)),
+SizedBox(width: 90.w),
               ],
             ),
           ),
@@ -98,6 +96,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
             },
           ),
           const Spacer(),
+
           Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(

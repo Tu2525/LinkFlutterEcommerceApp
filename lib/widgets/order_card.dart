@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
@@ -11,6 +12,7 @@ class OrderCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Expanded(
       child: ListView.builder(
         itemCount: orders.length,
@@ -28,7 +30,7 @@ class OrderCard extends ConsumerWidget {
                 leading: const Icon(Icons.receipt_long_outlined, size: 28),
                 title: Text(
                   "${AppLocalizations.of(context)!.order} ${order.id}",
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: AppTextStyles.heading5(isDarkMode),
                 ),
                 subtitle: Text(
                   "${order.items.length} ${AppLocalizations.of(context)!.item}",

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
 class ColorSelector extends ConsumerWidget {
@@ -8,6 +10,7 @@ class ColorSelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final selectedColor = ref.watch(colorProvider);
     final colors = [
       const Color(0xFFA3B18A),
@@ -31,10 +34,11 @@ class ColorSelector extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+
           Text(
             AppLocalizations.of(context)!.color,
-            style: TextStyle(fontSize: 16),
-          ),
+          style: AppTextStyles.body1(isDarkMode)),
+
           Row(
             children:
                 colors.map((color) {

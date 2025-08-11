@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
-import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/coupon_code_input.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
-class OrderSummary extends StatelessWidget {
-  const OrderSummary({super.key, required this.subtotal, required this.total});
-
-  final double subtotal;
-  final double total;
+class OrderSummary extends ConsumerWidget {
+  const OrderSummary({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final subtotal = ref.read(cartProvider.notifier).subtotal;
+    const shippingCost = 8.00;
+    const tax = 0.00;
+    final total = subtotal + shippingCost + tax;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -19,20 +24,23 @@ class OrderSummary extends StatelessWidget {
           label: AppLocalizations.of(context)!.subtotal,
           amount: subtotal,
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         PriceSummaryRow(
           label: AppLocalizations.of(context)!.shippingCost,
-          amount: 8.00,
+          amount: shippingCost,
         ),
-        const SizedBox(height: 8),
-        PriceSummaryRow(label: AppLocalizations.of(context)!.tax, amount: 0.00),
+        SizedBox(height: 8.h),
+        PriceSummaryRow(
+          label: AppLocalizations.of(context)!.tax,
+          amount: tax,
+        ),
         const Divider(height: 30),
         PriceSummaryRow(
           label: AppLocalizations.of(context)!.total,
           amount: total,
           isTotal: true,
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 20.h),
       ],
     );
   }

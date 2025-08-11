@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
 class QuantitySelector extends ConsumerWidget {
@@ -9,6 +11,7 @@ class QuantitySelector extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final quantity = ref.watch(quantityProvider);
 
     return Container(
@@ -27,10 +30,11 @@ class QuantitySelector extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+
           Text(
             AppLocalizations.of(context)!.quantity,
-            style: const TextStyle(fontSize: 16),
-          ),
+             style: AppTextStyles.body1(isDarkMode)),
+
           Row(
             children: [
               buildQuantityButton(
@@ -45,10 +49,7 @@ class QuantitySelector extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   quantity.toString(),
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyles.heading4(isDarkMode),
                 ),
               ),
               buildQuantityButton(

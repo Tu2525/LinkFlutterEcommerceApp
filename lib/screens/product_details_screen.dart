@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
+
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/product.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/addToBagButton.dart';
@@ -40,6 +43,7 @@ class _ProductDetailsView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final product = ref.watch(productProvider);
     final totalPrice = ref.watch(totalPriceProvider);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -60,19 +64,12 @@ class _ProductDetailsView extends ConsumerWidget {
                           const SizedBox(height: 24),
                           Text(
                             product.name,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: AppTextStyles.heading3(isDarkMode),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             '\$${product.price.toStringAsFixed(2)}',
-                            style: const TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF8A2BE2),
-                            ),
+                            style: AppTextStyles.price,
                           ),
                           const SizedBox(height: 24),
                           const SizeSelector(),

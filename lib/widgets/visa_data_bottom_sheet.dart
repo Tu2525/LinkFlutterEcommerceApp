@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
@@ -51,12 +55,11 @@ class VisaDataBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
+
                   AppLocalizations.of(context)!.cardHolderName,
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                ,
+                  style: AppTextStyles.subTitle1(isDarkMode),
+
                 ),
               ),
               Padding(
@@ -78,12 +81,11 @@ class VisaDataBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
+
                   AppLocalizations.of(context)!.cardNumber,
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+          
+                  style: AppTextStyles.subTitle1(isDarkMode),
+
                 ),
               ),
               Padding(
@@ -119,12 +121,11 @@ class VisaDataBottomSheet extends StatelessWidget {
                             right: 20.w,
                           ),
                           child: Text(
+
                             AppLocalizations.of(context)!.expiryDate,
-                            style: TextStyle(
-                              color: textColor,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
+                     
+                            style: AppTextStyles.subTitle1(isDarkMode),
+
                           ),
                         ),
                         Padding(
@@ -162,11 +163,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           ),
                           child: Text(
                             'CVV',
-                            style: TextStyle(
-                              color: textColor,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: AppTextStyles.subTitle1(isDarkMode),
                           ),
                         ),
                         Padding(

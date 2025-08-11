@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class GenderButton extends StatelessWidget {
   final String gender;
@@ -14,6 +15,7 @@ class GenderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -30,16 +32,7 @@ class GenderButton extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           gender,
-          style: TextStyle(
-            color:
-                isSelected
-                    ? Colors.white
-                    : Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : Colors.black,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
+          style: AppTextStyles.subTitle1(isDarkMode),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/notification_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/models/notification_model.dart';
 
@@ -61,15 +62,18 @@ class RealtimeNotificationWidget extends ConsumerWidget {
 }
 
 class NotificationTile extends ConsumerWidget {
+  
   final NotificationModel notification;
 
   const NotificationTile({super.key, required this.notification});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final notificationService = ref.read(notificationDetailsProvider);
 
     return Card(
+      
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: ListTile(
         leading: CircleAvatar(
@@ -84,7 +88,7 @@ class NotificationTile extends ConsumerWidget {
           notification.data.isNotEmpty
               ? notification.data.first.message
               : 'No message',
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: AppTextStyles.heading5(isDarkMode),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +96,7 @@ class NotificationTile extends ConsumerWidget {
             if (notification.timestamp != null)
               Text(
                 'Received: ${_formatDateTime(notification.timestamp!)}',
-                style: const TextStyle(fontSize: 12),
+                style: AppTextStyles.body3(isDarkMode),
               ),
           ],
         ),
@@ -116,7 +120,7 @@ class NotificationTile extends ConsumerWidget {
                     children: [
                       Icon(Icons.delete, color: Colors.red),
                       SizedBox(width: 8),
-                      Text('Delete', style: TextStyle(color: Colors.red)),
+                      Text('Delete', style: AppTextStyles.error),
                     ],
                   ),
                 ),

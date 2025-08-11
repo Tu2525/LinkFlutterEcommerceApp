@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/review.dart';
 
 class ReviewItem extends StatelessWidget {
   final Review review;
 
   const ReviewItem({super.key, required this.review});
+  
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Row(
@@ -29,10 +32,7 @@ class ReviewItem extends StatelessWidget {
                   children: [
                     Text(
                       review.author,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppTextStyles.heading5(isDarkMode),
                     ),
                     Row(
                       children: List.generate(5, (index) {
@@ -48,15 +48,9 @@ class ReviewItem extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  review.comment,
-                  style: TextStyle(color: Colors.grey[700], height: 1.4),
-                ),
+                Text(review.comment, style: AppTextStyles.body3(isDarkMode)),
                 const SizedBox(height: 8),
-                Text(
-                  review.date,
-                  style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                ),
+                Text(review.date, style: AppTextStyles.review2),
               ],
             ),
           ),

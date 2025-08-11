@@ -65,7 +65,7 @@ class Categories extends StatelessWidget {
           SizedBox(height: screenHeight * 0.008),
           Text(
             title,
-            style: TextStyle(
+            style: TextStyle( //for indiviual category item >> #TODO
               color:
                   Theme.of(context).brightness == Brightness.dark
                       ? Colors.white

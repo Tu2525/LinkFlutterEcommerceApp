@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
@@ -39,11 +40,7 @@ class CreateAccountScreen extends ConsumerWidget {
               const SizedBox(height: 20),
               Text(
                 AppLocalizations.of(context)!.createAccount,
-                style: const TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+                style: AppTextStyles.heading2(isDarkMode),
               ),
               const SizedBox(height: 32),
               CustomTextField(

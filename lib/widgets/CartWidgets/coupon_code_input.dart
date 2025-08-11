@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 
 class CouponCodeInput extends StatelessWidget {
   const CouponCodeInput({super.key});
@@ -9,8 +13,12 @@ class CouponCodeInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
+
         hintText: AppLocalizations.of(context)!.enterCouponCode,
-        hintStyle: const TextStyle(color: Colors.black54),
+ 
+
+        hintStyle: AppTextStyles.faintGrey,
+
         filled: true,
         fillColor: Colors.grey.shade100,
         border: OutlineInputBorder(
