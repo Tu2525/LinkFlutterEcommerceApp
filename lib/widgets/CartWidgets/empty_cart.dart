@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 
 class EmptyCart extends StatelessWidget {
@@ -12,15 +16,25 @@ class EmptyCart extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Image(image: AssetImage('images/shoppingbag.png'),width: 100,height: 100,fit: BoxFit.fill,),
+          const Image(
+            image: AssetImage('images/shoppingbag.png'),
+            width: 100,
+            height: 100,
+            fit: BoxFit.fill,
+          ),
           const SizedBox(height: 20),
-          const Text(
-            'Your Cart is Empty',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Text(
+            AppLocalizations.of(context)!.emptyCart,
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 30),
           ElevatedButton(
-            onPressed: () {Navigator.pop(context, MaterialPageRoute(builder: (context) => const MainScreen()));},
+            onPressed: () {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(builder: (context) => const MainScreen()),
+              );
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurpleAccent,
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
@@ -28,7 +42,13 @@ class EmptyCart extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
+            child:  Text(
+              AppLocalizations.of(context)!.exploreCategories,
+              style: const TextStyle(fontSize: 16, color: Colors.white),
+            ),
+
             child: Text('Explore Categories', style: AppTextStyles.body1(!isDarkMode)),
+
           ),
         ],
       ),

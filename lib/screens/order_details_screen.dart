@@ -17,21 +17,25 @@ class OrderDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
+
     final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
+
       backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
+
       body: orderAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
         data: (orderData) {
           if (orderData.isEmpty) {
-            return const Center(child: Text('No order found.'));
+            return Center(child: Text(AppLocalizations.of(context)!.noOrders));
           }
           final singleOrder = orderData.first;
 
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
+          return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -45,6 +49,16 @@ class OrderDetails extends ConsumerWidget {
                     AppLocalizations.of(context)!.orderItems,
                     style: AppTextStyles.heading5(isDarkMode),
                   ),
+                ),
+                SizedBox(height: 20.h),
+                OrderItemsCard(
+                  isDarkMode: isDarkMode,
+                  items: singleOrder.items,
+                ),
+                SizedBox(height: 38.h),
+                ShippingDetails(
+                  isDarkMode: isDarkMode,
+                  shippingInfo: [singleOrder.shipping],
                 ),
                 SizedBox(height: 20.h),
                 OrderItemsCard(

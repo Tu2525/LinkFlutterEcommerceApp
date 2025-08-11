@@ -9,11 +9,13 @@ class ContinueButton extends StatelessWidget {
     this.text,
     this.width = double.infinity,
     this.height = 49,
+    this.row,
   });
   final VoidCallback onPressed;
   final String? text;
   final double width;
   final double height;
+  final Widget? row;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,16 @@ class ContinueButton extends StatelessWidget {
         minimumSize: Size(width, height),
         elevation: 0, // Full width button
       ),
-      child: Text(
-        text ?? AppLocalizations.of(context)!.cont,
-        style: AppTextStyles.subTitle1(!isDarkMode),
-      ),
+
+      child:
+          row != null
+              ? row!
+              : Text(
+                text ?? AppLocalizations.of(context)!.cont,
+                   style: AppTextStyles.subTitle1(!isDarkMode),
+              ),
+
+ 
     );
   }
 }

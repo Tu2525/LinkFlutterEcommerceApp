@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
+
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/product.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
@@ -83,10 +87,13 @@ class _ProductDetailsView extends ConsumerWidget {
                           //   ),
                           // ),
                           const SizedBox(height: 24),
-                          const InfoSection(
-                            title: 'Shipping & Returns',
+                          InfoSection(
+                            title:
+                                AppLocalizations.of(context)!.shippingAndReturn,
                             content:
-                                'Free standard shipping and free 60-day returns',
+                                AppLocalizations.of(
+                                  context,
+                                )!.freeStandardShippingAndFreereturn,
                           ),
                           const SizedBox(height: 24),
                           const ReviewsSection(),
