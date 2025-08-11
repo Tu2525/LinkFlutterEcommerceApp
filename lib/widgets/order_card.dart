@@ -29,7 +29,7 @@ class OrderCard extends ConsumerWidget {
               child: ListTile(
                 leading: const Icon(Icons.receipt_long_outlined, size: 28),
                 title: Text(
-                  "${AppLocalizations.of(context)!.order} ${order.id}",
+                  "${AppLocalizations.of(context)!.order} ${order.key}",
                   style: AppTextStyles.heading5(isDarkMode),
                 ),
                 subtitle: Text(

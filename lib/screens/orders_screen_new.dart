@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
@@ -44,9 +42,6 @@ class OrdersScreen extends ConsumerWidget {
               text: AppLocalizations.of(context)!.noOrders,
             );
           }
-          log(
-            "Orderssssssssssssssssssssssss: ${orders.map((o) => o.userId).toList()}",
-          );
           final filtered =
               orders
                   .where((o) => getStepStatus(o, context) == selectedStatus)

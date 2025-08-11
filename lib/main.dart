@@ -24,8 +24,8 @@ Future<void> firebaseMessagingBackgroundHandler(
 /// The main entry point of the application.
 ///
 /// Initializes Flutter and Firebase, ensuring Firebase is only initialized
-/// once. Catches and handles the 'duplicate-app' exception to prevent 
-/// re-initialization errors. Starts the application with a ProviderScope 
+/// once. Catches and handles the 'duplicate-app' exception to prevent
+/// re-initialization errors. Starts the application with a ProviderScope
 /// and an instance of `EcommerceApp`.
 
 /*******  04452b9f-1050-4c15-b898-b6debc2c8778  *******/
@@ -64,7 +64,7 @@ class EcommerceApp extends StatelessWidget {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('en'),
+        locale: const Locale('ar'),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(brightness: Brightness.light, fontFamily: 'Circular'),
         darkTheme: ThemeData(

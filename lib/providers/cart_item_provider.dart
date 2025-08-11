@@ -7,10 +7,15 @@ class CartController extends StateNotifier<List<CartItem>> {
   // 1. Initialize with an empty list for a real user session.
   CartController() : super([]);
 
-  void addItem(CartItem item, {required String productId, required String productName}) {
+  void addItem(
+    CartItem item, {
+    required String productId,
+    required String productName,
+  }) {
     // 2. Check for an item with the same ID, size, AND color.
-    final existingIndex = state.indexWhere((i) =>
-        i.id == item.id && i.size == item.size && i.color == item.color);
+    final existingIndex = state.indexWhere(
+      (i) => i.id == item.id && i.size == item.size && i.color == item.color,
+    );
 
     if (existingIndex != -1) {
       // 3. If it exists, update the quantity correctly.
@@ -41,18 +46,19 @@ class CartController extends StateNotifier<List<CartItem>> {
   }
 
   void decrement(String itemId) {
-    state = state
-        .map((item) {
-          if (item.id == itemId) {
-            if (item.quantity > 1) {
-              return item.copyWith(quantity: item.quantity - 1);
-            }
-            return null; // This will remove the item if quantity is 1
-          }
-          return item;
-        })
-        .whereType<CartItem>()
-        .toList();
+    state =
+        state
+            .map((item) {
+              if (item.id == itemId) {
+                if (item.quantity > 1) {
+                  return item.copyWith(quantity: item.quantity - 1);
+                }
+                return null; // This will remove the item if quantity is 1
+              }
+              return item;
+            })
+            .whereType<CartItem>()
+            .toList();
   }
 
   void clearCart() {
@@ -63,14 +69,18 @@ class CartController extends StateNotifier<List<CartItem>> {
       state.fold(0, (total, item) => total + (item.price * item.quantity));
 }
 
-
-final cartProvider = StateNotifierProvider<CartController, List<CartItem>>((ref) {
+final cartProvider = StateNotifierProvider<CartController, List<CartItem>>((
+  ref,
+) {
   return CartController();
 });
 
 final totalProvider = Provider<double>((ref) {
-    final cartItems = ref.watch(cartProvider);
-    final subtotal = cartItems.fold(0.0, (sum, item) => sum + (item.price * item.quantity));
-    const shippingCost = 8.00;
-    return subtotal + shippingCost;
+  final cartItems = ref.watch(cartProvider);
+  final subtotal = cartItems.fold(
+    0.0,
+    (sum, item) => sum + (item.price * item.quantity),
+  );
+  const shippingCost = 8.00;
+  return subtotal + shippingCost;
 });

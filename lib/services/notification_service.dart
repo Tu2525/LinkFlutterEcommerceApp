@@ -60,7 +60,6 @@ class NotificationService {
           return NotificationModel.fromFireStore({...data, 'id': doc.id});
         }).toList();
 
-    // Sort by timestamp in Dart (newest first)
     notifications.sort((a, b) {
       if (a.timestamp == null && b.timestamp == null) return 0;
       if (a.timestamp == null) return 1;
@@ -71,7 +70,6 @@ class NotificationService {
     return notifications;
   }
 
-  /// Stream notifications in real-time for the current user
   Stream<List<NotificationModel>> getNotificationStream() {
     final user = _auth.currentUser;
     if (user == null) {
@@ -93,7 +91,6 @@ class NotificationService {
                 return NotificationModel.fromFireStore({...data, 'id': doc.id});
               }).toList();
 
-          // Sort by timestamp (newest first)
           notifications.sort((a, b) {
             if (a.timestamp == null && b.timestamp == null) return 0;
             if (a.timestamp == null) return 1;
@@ -105,7 +102,6 @@ class NotificationService {
         });
   }
 
-  /// Stream notifications with authentication state management
   Stream<List<NotificationModel>> getNotificationStreamWithAuth() {
     return _auth.authStateChanges().asyncExpand((user) {
       if (user == null) {
@@ -115,7 +111,6 @@ class NotificationService {
     });
   }
 
-  /// Delete notification
   Future<void> deleteNotification(String notificationId) async {
     final user = _auth.currentUser;
     if (user == null) return;
@@ -134,7 +129,6 @@ void showFlutterNotification(RemoteMessage message) async {
   RemoteNotification? notification = message.notification;
   if (notification == null) return;
 
-  // Save notification to Firebase for current user
   final notificationService = NotificationService();
   await notificationService.saveNotificationToFirebase(
     message: notification.body ?? notification.title ?? 'New notification',

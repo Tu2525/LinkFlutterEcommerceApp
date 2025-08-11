@@ -17,49 +17,35 @@ class OrderDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    final orderAsyncValue = ref.watch(orderProvider);
+    final order = ref.watch(selectedOrderProvider);
 
     return Scaffold(
       backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
-      body: orderAsyncValue.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text('Error: $err')),
-        data: (orderData) {
-          if (orderData.isEmpty) {
-            return const Center(child: Text('No order found.'));
-          }
-          final singleOrder = orderData.first;
-
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                OrderHeader(orderId: singleOrder.id),
-                SizedBox(height: 20.h),
-                OrderSteps(isDarkMode: isDarkMode, steps: singleOrder.steps),
-                SizedBox(height: 20.h),
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w),
-                  child: Text(
-                    AppLocalizations.of(context)!.orderItems,
-                    style: AppTextStyles.heading5(isDarkMode),
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                OrderItemsCard(
-                  isDarkMode: isDarkMode,
-                  items: singleOrder.items,
-                ),
-                SizedBox(height: 38.h),
-                ShippingDetails(
-                  isDarkMode: isDarkMode,
-                  shippingInfo: [singleOrder.shipping],
-                ),
-              ],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            OrderHeader(orderIdd: order!.key),
+            SizedBox(height: 20.h),
+            OrderSteps(isDarkMode: isDarkMode, steps: order.steps),
+            SizedBox(height: 20.h),
+            Padding(
+              padding: EdgeInsets.only(left: 16.w),
+              child: Text(
+                AppLocalizations.of(context)!.orderItems,
+                style: AppTextStyles.heading5(isDarkMode),
+              ),
             ),
-          );
-        },
+            SizedBox(height: 20.h),
+            OrderItemsCard(isDarkMode: isDarkMode, items: order.items),
+            SizedBox(height: 38.h),
+            ShippingDetails(
+              isDarkMode: isDarkMode,
+              shippingInfo: [order.shipping],
+            ),
+          ],
+        ),
       ),
     );
   }

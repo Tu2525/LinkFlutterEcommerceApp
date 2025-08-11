@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
-class OrderPlacedSuccessfullyScreen extends StatelessWidget {
+class OrderPlacedSuccessfullyScreen extends ConsumerWidget {
   const OrderPlacedSuccessfullyScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -26,10 +28,7 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
             width: double.infinity,
             height: screenHeight * 0.48,
             decoration: BoxDecoration(
-              color:
-                  isDarkMode
-                      ? AppColors.black
-                      : AppColors.white,
+              color: isDarkMode ? AppColors.black : AppColors.white,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
