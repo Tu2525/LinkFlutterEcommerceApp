@@ -218,7 +218,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifications => 'الإشعارات';
 
   @override
-  String get order => 'الطلب';
+  // String get order => 'الطلب';
 
   @override
   String get processing => 'جاري المعالجة';

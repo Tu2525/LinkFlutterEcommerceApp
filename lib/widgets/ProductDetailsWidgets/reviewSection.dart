@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewItem.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 class ReviewsSection extends ConsumerWidget {
@@ -7,6 +8,7 @@ class ReviewsSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     final product = ref.watch(productProvider);
 
@@ -27,12 +29,12 @@ class ReviewsSection extends ConsumerWidget {
           children: [
             Text(
               '${totalRating.toStringAsFixed(1)} Ratings',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: AppTextStyles.heading4(isDarkMode),
             ),
             const SizedBox(width: 8),
             Text(
               '${product.reviewCount} Reviews',
-              style: TextStyle(fontSize: 15, color: Colors.grey[600]),
+              style: AppTextStyles.review,
             ),
           ],
         ),

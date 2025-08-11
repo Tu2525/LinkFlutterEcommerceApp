@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 
 class ShippingDetails extends StatelessWidget {
@@ -16,7 +17,6 @@ class ShippingDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final cardColor =
         isDarkMode ? const Color(0xff342F3f) : const Color(0xffF4F4F4);
-    final textColor = isDarkMode ? Colors.white : Colors.black;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,11 +25,7 @@ class ShippingDetails extends StatelessWidget {
           padding: EdgeInsets.only(left: 16.w, bottom: 12.h),
           child: Text(
             'Shipping Details',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w700,
-              color: textColor,
-            ),
+            style: AppTextStyles.heading5(isDarkMode),
           ),
         ),
         Padding(
@@ -47,20 +43,12 @@ class ShippingDetails extends StatelessWidget {
               children: [
                 Text(
                   '${shippingInfo[0].name}, ${shippingInfo[0].address}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12.sp,
-                    color: textColor,
-                  ),
+                  style: AppTextStyles.body3(isDarkMode),
                 ),
                 SizedBox(height: 8.h),
                 Text(
                   shippingInfo[0].phone,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12.sp,
-                    color: textColor,
-                  ),
+                  style: AppTextStyles.body3(isDarkMode),
                 ),
               ],
             ),

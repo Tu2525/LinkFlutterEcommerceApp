@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 
@@ -37,21 +38,13 @@ class OrderItemsCard extends StatelessWidget {
             leading: const Icon(IconsaxPlusBroken.receipt_1),
             title: Text(
               '${items.length} ${AppLocalizations.of(context)!.item}',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
+              style: AppTextStyles.seeAll(isDarkMode),
             ),
             trailing: TextButton(
               onPressed: () {},
               child: Text(
                 AppLocalizations.of(context)!.viewAll,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: Color(0xff8E6CEF),
-                ),
+                style: AppTextStyles.viewAll(),
               ),
             ),
           ),

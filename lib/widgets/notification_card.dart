@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/notification_model.dart';
 
 class NotificationCard extends StatelessWidget {
@@ -7,23 +8,21 @@ class NotificationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    return  Card(
-        elevation: 0.5,
-        margin: const EdgeInsets.only(bottom: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+    return Card(
+      elevation: 0.5,
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        leading: Image.asset(
+          item.isImportant ? 'images/Frame 67.png' : 'images/Frame 67 (1).png',
         ),
-        child: ListTile(
-          leading:Image.asset(
-            item.isImportant
-                ? 'images/Frame 67.png'
-                : 'images/Frame 67 (1).png',
-          ),
-          title: Text(item.message,
+        title: Text(
+          item.message,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontSize: 12,color:  isDarkMode ? Colors.white : const Color(0xff272727),),),
+          style: AppTextStyles.body2(isDarkMode),
         ),
-      );
+      ),
+    );
   }
 }

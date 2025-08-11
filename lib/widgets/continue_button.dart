@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
 class ContinueButton extends StatelessWidget {
@@ -16,6 +17,7 @@ class ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -26,12 +28,7 @@ class ContinueButton extends StatelessWidget {
       ),
       child: Text(
         text ?? AppLocalizations.of(context)!.cont,
-        style: const TextStyle(
-          fontFamily: 'Circular',
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-          color: Colors.white,
-        ),
+        style: AppTextStyles.subTitle1(!isDarkMode),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class PriceSummaryRow extends StatelessWidget {
   final String label;
@@ -14,11 +15,9 @@ class PriceSummaryRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(
-      fontSize: isTotal ? 18 : 16,
-      fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-      color: isTotal ? Colors.black : Colors.black54,
-    );
+    final style = isTotal
+        ? AppTextStyles.priceSummaryRowTotal(context)
+        : AppTextStyles.priceSummaryRow(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

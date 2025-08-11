@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_card.dart';
@@ -8,7 +9,6 @@ import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/visa_data_bottom_sheet.dart';
-
 
 class Paymentscreen extends ConsumerStatefulWidget {
   const Paymentscreen({super.key});
@@ -41,15 +41,8 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
             child: Row(
               children: [
                 const CustomIcon(),
-                SizedBox(width: 100.w),
-                Text(
-                  'Checkout',
-                  style: TextStyle(
-                    fontFamily: 'Circular',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18.sp,
-                  ),
-                ),
+                SizedBox(width: 90.w),
+                Text('Checkout', style: AppTextStyles.heading3(isDarkMode)),
               ],
             ),
           ),
@@ -59,16 +52,17 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,
-                builder: (_) => AddressBottomSheet(
-                  formKey: formKey,
-                  ref: ref,
-                  isDarkMode: isDarkMode,
-                  countryController: countryController,
-                  stateController: stateController,
-                  addressController: addressController,
-                  cityController: cityController,
-                  zipcodeController: zipCodeController,
-                ),
+                builder:
+                    (_) => AddressBottomSheet(
+                      formKey: formKey,
+                      ref: ref,
+                      isDarkMode: isDarkMode,
+                      countryController: countryController,
+                      stateController: stateController,
+                      addressController: addressController,
+                      cityController: cityController,
+                      zipcodeController: zipCodeController,
+                    ),
               );
             },
           ),
@@ -78,23 +72,21 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,
-                builder: (_) => VisaDataBottomSheet(
-                  formKey: formKey,
-                  ref: ref,
-                  isDarkMode: isDarkMode,
-                  nameController: nameController,
-                  cardnumberController: cardNumberController,
-                  cvvController: cvvController,
-                  expiryController: expiryController,
-                ),
+                builder:
+                    (_) => VisaDataBottomSheet(
+                      formKey: formKey,
+                      ref: ref,
+                      isDarkMode: isDarkMode,
+                      nameController: nameController,
+                      cardnumberController: cardNumberController,
+                      cvvController: cvvController,
+                      expiryController: expiryController,
+                    ),
               );
             },
           ),
           const Spacer(),
-          const Padding(
-            padding: EdgeInsets.all(24.0),
-            child: OrderSummary(),
-          ),
+          const Padding(padding: EdgeInsets.all(24.0), child: OrderSummary()),
         ],
       ),
     );

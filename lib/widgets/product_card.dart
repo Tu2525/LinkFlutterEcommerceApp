@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import '../models/product.dart';
 
 class ProductCard extends StatefulWidget {
@@ -122,12 +123,7 @@ class _ProductCardState extends State<ProductCard> {
                     widget.product.name.length > 25
                         ? '${widget.product.name.substring(0, 25)}...'
                         : widget.product.name,
-                    style: TextStyle(
-                      fontFamily: 'Circular',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: isDarkMode ? Colors.white : colorScheme.onSurface,
-                    ),
+                    style: AppTextStyles.subTitle2(isDarkMode),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -137,26 +133,14 @@ class _ProductCardState extends State<ProductCard> {
                     children: [
                       Text(
                         '\$${widget.product.price.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontFamily: 'Circular',
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.onSurface,
-                        ),
+                        style: AppTextStyles.heading6(isDarkMode),
                       ),
                       if (widget.product.isOnSale) ...[
                         const SizedBox(width: 8),
                         Flexible(
                           child: Text(
                             '\$${widget.product.originalPrice!.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              fontFamily: 'Circular',
-                              fontSize: 12,
-                              color: colorScheme.onSurface.withOpacity(0.6),
-                              decoration: TextDecoration.lineThrough,
-                              decorationColor: colorScheme.onSurface
-                                  .withOpacity(0.6),
-                            ),
+                            style: AppTextStyles.faintGrey2,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -189,15 +173,12 @@ class _ProductCardState extends State<ProductCard> {
               Icon(
                 Icons.image_outlined,
                 size: 48,
-                color: colorScheme.onSurface.withOpacity(0.4),
+                color: colorScheme.onSurface.withValues(alpha: 0.4),
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'No Image',
-                style: TextStyle(
-                  color: colorScheme.onSurface.withOpacity(0.6),
-                  fontSize: 12,
-                ),
+                style: AppTextStyles.faintGrey2,
               ),
             ],
           ),

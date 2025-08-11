@@ -8,4 +8,8 @@ class AppColors {
   static const Color success = Color(0xFF2E8B57); // Sea Green
   static Color? grey = Colors.grey[200]; //Tone of grey duh
   static const Color seaAll = Color(0xFF272727); //See All
+  static const Color black = Colors.black; // black
+  static const Color white = Colors.white; // white
+  static const Color purple = Colors.purple; // pruple duh
+  
 }

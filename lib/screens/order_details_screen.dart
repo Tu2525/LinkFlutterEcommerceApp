@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_header.dart';
@@ -14,14 +16,11 @@ class OrderDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDarkMode ? Colors.white : Colors.black;
-    // This 'orderAsyncValue' is an AsyncValue object
+
     final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xff1D182A) : Colors.white,
-      // Use .when to handle loading, error, and data states
-
+      backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
       body: orderAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
@@ -30,6 +29,7 @@ class OrderDetails extends ConsumerWidget {
             return const Center(child: Text('No order found.'));
           }
           final singleOrder = orderData.first;
+
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
             child: Column(
@@ -43,20 +43,8 @@ class OrderDetails extends ConsumerWidget {
                   padding: EdgeInsets.only(left: 16.w),
                   child: Text(
                     AppLocalizations.of(context)!.orderItems,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                      color: textColor,
-                    ),
+                    style: AppTextStyles.heading5(isDarkMode),
                   ),
-                ),
-                SizedBox(height: 20.h),
-                OrderItemsCard(isDarkMode: isDarkMode, items: singleOrder.items),
-                SizedBox(height: 38.h),
-                ShippingDetails(
-                  isDarkMode: isDarkMode,
-                  shippingInfo: [singleOrder.shipping],
-
                 ),
                 SizedBox(height: 20.h),
                 OrderItemsCard(

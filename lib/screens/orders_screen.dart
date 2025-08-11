@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
 import '../providers/order_provider.dart';
@@ -19,6 +20,7 @@ class OrdersScreen extends ConsumerWidget {
     ];
     final selectedStatus = ref.watch(selectedStatusProvider);
     final orderAsync = ref.watch(orderProvider);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
@@ -60,9 +62,7 @@ class OrdersScreen extends ConsumerWidget {
                             selected: isSelected,
                             selectedColor: Colors.purple,
                             backgroundColor: Colors.grey.shade200,
-                            labelStyle: TextStyle(
-                              color: isSelected ? Colors.white : Colors.black,
-                            ),
+                            labelStyle: AppTextStyles.bodyText(isDarkMode),
                             onSelected:
                                 (_) =>
                                     ref

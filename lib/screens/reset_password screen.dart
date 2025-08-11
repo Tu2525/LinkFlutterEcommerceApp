@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
@@ -9,6 +10,7 @@ class ResetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.sizeOf(context).width;
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       body: Center(
@@ -29,20 +31,12 @@ class ResetPassword extends StatelessWidget {
                   Text(
                     AppLocalizations.of(context)!.resetPassText,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontFamily: 'Circular',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 23,
-                    ),
+                    style: AppTextStyles.heading3(isDarkMode),
                   ),
                   Text(
                     AppLocalizations.of(context)!.resetPassText2,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontFamily: 'Circular',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 23,
-                    ),
+                    style: AppTextStyles.heading5(isDarkMode),
                   ),
                   const SizedBox(height: 24),
                   SizedBox(
