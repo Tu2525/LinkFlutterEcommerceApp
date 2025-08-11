@@ -62,7 +62,7 @@ class HomePage extends ConsumerWidget {
                             children: [
                               Text(
                                 homeNotifier.selectedCategory,
-                                style: AppTextStyles.sectionTitle(isDarkMode),
+                                style: AppTextStyles.subTitle1(isDarkMode),
                               ),
                               const SizedBox(width: 4),
                               const Icon(

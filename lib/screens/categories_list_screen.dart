@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/category_section_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/products_of_category_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CategoryCard.dart';
@@ -34,12 +35,7 @@ class CategoriesList extends ConsumerWidget {
                     SizedBox(height: screenHeight * 0.03),
                     Text(
                       'Shop by Categories',
-                      style: TextStyle(
-                        fontFamily: 'Circular',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
+                      style: AppTextStyles.heading3(isDarkMode),
                     ),
                     SizedBox(height: screenHeight * 0.02),
                     ListView.builder(
@@ -54,9 +50,10 @@ class CategoriesList extends ConsumerWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => ProductsOfCategoryScreen(
-                                    categoryName: item.title,
-                                  ),
+                                  builder:
+                                      (context) => ProductsOfCategoryScreen(
+                                        categoryName: item.title,
+                                      ),
                                 ),
                               );
                             },
@@ -78,19 +75,18 @@ class CategoriesList extends ConsumerWidget {
           ),
         );
       },
-      loading: () => Scaffold(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        body: const Center(child: CircularProgressIndicator()),
-      ),
-      error: (error, stack) => Scaffold(
-        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        body: Center(
-          child: Text(
-            'Error: $error',
-            style: const TextStyle(color: Colors.red),
+      loading:
+          () => Scaffold(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            body: const Center(child: CircularProgressIndicator()),
           ),
-        ),
-      ),
+      error:
+          (error, stack) => Scaffold(
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            body: Center(
+              child: Text('Error: $error', style: AppTextStyles.error),
+            ),
+          ),
     );
   }
 }

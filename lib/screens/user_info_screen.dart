@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
 import 'package:link_flutter_ecommerce_app/providers/user_info_providers.dart';
@@ -14,11 +15,11 @@ class UserInfo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final isFormValid = ref.watch(isFormValidProvider);
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF1C1B20) : Colors.white,
+      backgroundColor: isDarkMode ? const Color(0xFF1C1B20) : Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
@@ -28,19 +29,19 @@ class UserInfo extends ConsumerWidget {
               SizedBox(height: 40.h),
               Text(
                 AppLocalizations.of(context)!.tellUsAboutYourself,
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 32.sp),
+                style: AppTextStyles.heading2(isDarkMode),
               ),
               SizedBox(height: 48.h),
               Text(
                 AppLocalizations.of(context)!.whoDoYouShopFor,
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                style: AppTextStyles.heading5(isDarkMode),
               ),
               SizedBox(height: 16.h),
               const GenderSelectionRow(),
               SizedBox(height: 40.h),
               Text(
                 AppLocalizations.of(context)!.howoldAreYou,
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                style: AppTextStyles.heading5(isDarkMode),
               ),
               SizedBox(height: 16.h),
               const AgeRangeDropdown(),
@@ -49,7 +50,7 @@ class UserInfo extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        color: isDark ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
+        color: isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         child: ContinueButton(
           onPressed:

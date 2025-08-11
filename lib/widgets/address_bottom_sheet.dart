@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
@@ -53,11 +54,7 @@ class AddressBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                 child: Text(
                   'Country',
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
               Padding(
@@ -78,11 +75,7 @@ class AddressBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                 child: Text(
                   'State/Region',
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
               Padding(
@@ -103,11 +96,7 @@ class AddressBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                 child: Text(
                   'Address',
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
               Padding(
@@ -136,11 +125,7 @@ class AddressBottomSheet extends StatelessWidget {
                           padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                           child: Text(
                             'city',
-                            style: TextStyle(
-                              color: textColor,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: AppTextStyles.subTitle1(isDarkMode),
                           ),
                         ),
                         Padding(
@@ -172,11 +157,7 @@ class AddressBottomSheet extends StatelessWidget {
                           padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
                           child: Text(
                             'Zipcode',
-                            style: TextStyle(
-                              color: textColor,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: AppTextStyles.subTitle1(isDarkMode),
                           ),
                         ),
                         Padding(

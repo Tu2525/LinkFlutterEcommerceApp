@@ -24,7 +24,7 @@ class CategoriesSection extends StatelessWidget {
                   children: [
                     Text(
                       "Categories",
-                      style: AppTextStyles.sectionTitle(isDarkMode),
+                      style: AppTextStyles.subTitle1(isDarkMode),
                     ),
                     const Spacer(flex: 1),
                     GestureDetector(

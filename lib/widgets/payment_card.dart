@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
 
 class PaymentCard extends ConsumerWidget {
@@ -31,7 +32,7 @@ class PaymentCard extends ConsumerWidget {
           tileColor:
               isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
           trailing: Icon(IconsaxPlusBroken.arrow_right_3, color: textColor),
-          title: Text(titleText, style: TextStyle(color: fadedTextColor)),
+          title: const Text(titleText, style: AppTextStyles.faintGrey),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 4.0.h),
             child:
@@ -41,12 +42,7 @@ class PaymentCard extends ConsumerWidget {
                       children: [
                         Text(
                           '**** **** **** $last4Digits',
-                          style: TextStyle(
-                            color: textColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.sp,
-                            fontFamily: 'Circular',
-                          ),
+                          style: AppTextStyles.heading5(isDarkMode),
                         ),
                         SizedBox(width: 6.w),
                         Image.network(
@@ -58,12 +54,7 @@ class PaymentCard extends ConsumerWidget {
                     )
                     : Text(
                       subtitleText,
-                      style: TextStyle(
-                        color: textColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
-                        fontFamily: 'Circular',
-                      ),
+                      style: AppTextStyles.heading5(isDarkMode),
                     ),
           ),
         ),

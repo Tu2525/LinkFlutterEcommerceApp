@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
@@ -70,12 +71,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
                   AppLocalizations.of(context)!.signIn,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                    fontFamily: 'Circular',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 32,
-                  ),
+                  style: AppTextStyles.heading2(isDarkMode),
                 ),
               ),
               const SizedBox(height: 32),
@@ -168,9 +164,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const MainScreen()
-                    ),
+                    MaterialPageRoute(builder: (context) => const MainScreen()),
                   );
                 },
               ),

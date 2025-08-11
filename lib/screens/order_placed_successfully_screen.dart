@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
@@ -38,19 +39,11 @@ class OrderPlacedSuccessfullyScreen extends StatelessWidget {
                 const SizedBox(height: 40),
                 Text(
                   AppLocalizations.of(context)!.orderPlaced,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : const Color(0xff272727),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32,
-                  ),
+                  style: AppTextStyles.heading2(isDarkMode),
                 ),
                 Text(
                   AppLocalizations.of(context)!.successfully,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : const Color(0xff272727),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 31,
-                  ),
+                  style: AppTextStyles.heading2(isDarkMode),
                 ),
                 const SizedBox(height: 25),
                 Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 
 class EmptyCart extends StatelessWidget {
@@ -6,6 +7,7 @@ class EmptyCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +28,7 @@ class EmptyCart extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: const Text('Explore Categories', style: TextStyle(fontSize: 16, color: Colors.white)),
+            child: Text('Explore Categories', style: AppTextStyles.body1(!isDarkMode)),
           ),
         ],
       ),

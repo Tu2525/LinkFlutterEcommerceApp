@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/quantity_button.dart';
@@ -11,6 +12,7 @@ class CartItemCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: const EdgeInsets.all(12.0),
@@ -46,15 +48,12 @@ class CartItemCard extends ConsumerWidget {
               children: [
                 Text(
                   item.name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+                  style: AppTextStyles.heading5(isDarkMode),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   'Size - ${item.size}   Color - ${item.color}',
-                  style: const TextStyle(color: Colors.black54),
+                  style: AppTextStyles.faintGrey,
                 ),
               ],
             ),
@@ -65,10 +64,7 @@ class CartItemCard extends ConsumerWidget {
             children: [
               Text(
                 '\$${(item.price * item.quantity).toStringAsFixed(2)}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+                style: AppTextStyles.heading5(isDarkMode),
               ),
               const SizedBox(height: 5),
               Row(
@@ -83,10 +79,7 @@ class CartItemCard extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       item.quantity.toString(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppTextStyles.heading5(isDarkMode),
                     ),
                   ),
                   QuantityButton(

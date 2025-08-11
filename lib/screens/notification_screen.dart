@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/notification_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/notification_card.dart';
@@ -21,11 +22,7 @@ class NotificationScreen extends ConsumerWidget {
             child: Center(
               child: Text(
                 AppLocalizations.of(context)!.notifications,
-                style: TextStyle(
-                  color: isDarkMode ? Colors.white : const Color(0xff272727),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTextStyles.heading5(isDarkMode),
               ),
             ),
           ),

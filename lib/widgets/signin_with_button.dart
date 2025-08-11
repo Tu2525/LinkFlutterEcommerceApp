@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class SigninWithButton extends StatelessWidget {
   const SigninWithButton({
@@ -15,6 +16,7 @@ class SigninWithButton extends StatelessWidget {
   final bool isdark;
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -31,12 +33,7 @@ class SigninWithButton extends StatelessWidget {
           SizedBox(width: 40.w),
           Text(
             text,
-            style: TextStyle(
-              fontFamily: 'Circular',
-              fontWeight: FontWeight.w500,
-              fontSize: 16.sp,
-              color: isdark ? Colors.white : Colors.black,
-            ),
+            style: AppTextStyles.subTitle1(isDarkMode),
           ),
         ],
       ),
