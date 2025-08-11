@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
 
 class AddressCard extends ConsumerWidget {
   const AddressCard({super.key, required this.ontab, required this.isDarkMode});
 
-  static const subtitleText = 'Add Shipping Address';
-  static const titleText = 'Shipping Address';
   final void Function()? ontab;
   final bool isDarkMode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final subtitleText = AppLocalizations.of(context)!.addShippingAddress;
+    final titleText = AppLocalizations.of(context)!.shippingAddress;
     final textColor = isDarkMode ? Colors.white : Colors.black;
     final fadedTextColor =
         isDarkMode

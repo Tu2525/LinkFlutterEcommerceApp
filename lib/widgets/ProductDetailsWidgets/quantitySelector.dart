@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
 class QuantitySelector extends ConsumerWidget {
@@ -26,7 +27,10 @@ class QuantitySelector extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text("Quantity", style: TextStyle(fontSize: 16)),
+          Text(
+            AppLocalizations.of(context)!.quantity,
+            style: const TextStyle(fontSize: 16),
+          ),
           Row(
             children: [
               buildQuantityButton(

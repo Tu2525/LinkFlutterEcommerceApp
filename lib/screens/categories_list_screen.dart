@@ -15,7 +15,8 @@ class CategoriesList extends ConsumerWidget {
     final screenWidth = MediaQuery.sizeOf(context).width;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    final categoriesAsync = ref.watch(categoryProvider);
+    final locale = Localizations.localeOf(context).languageCode;
+    final categoriesAsync = ref.watch(categoryProvider(locale));
 
     return categoriesAsync.when(
       data: (categories) {
@@ -55,9 +56,10 @@ class CategoriesList extends ConsumerWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => ProductsOfCategoryScreen(
-                                    categoryName: item.title,
-                                  ),
+                                  builder:
+                                      (context) => ProductsOfCategoryScreen(
+                                        categoryName: item.title,
+                                      ),
                                 ),
                               );
                             },

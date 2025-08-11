@@ -272,18 +272,6 @@ abstract class AppLocalizations {
   /// **'How old are you?'**
   String get howoldAreYou;
 
-  /// No description provided for @men.
-  ///
-  /// In en, this message translates to:
-  /// **'Men'**
-  String get men;
-
-  /// No description provided for @women.
-  ///
-  /// In en, this message translates to:
-  /// **'Women'**
-  String get women;
-
   /// No description provided for @selectAge.
   ///
   /// In en, this message translates to:
@@ -379,6 +367,19 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Return to login'**
   String get returnToLogin;
+
+  /// No description provided for @men.
+  ///
+  /// In en, this message translates to:
+  /// **'Men'**
+  String get men;
+
+  /// No description provided for @women.
+  ///
+  /// In en, this message translates to:
+  /// **'Women'**
+  String get women;
+
   /// No description provided for @kids.
   ///
   /// In en, this message translates to:
@@ -582,6 +583,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shop by Categories'**
   String get shopByCategories;
+
+  /// No description provided for @s.
+  ///
+  /// In en, this message translates to:
+  /// **'S'**
+  String get s;
+
+  /// No description provided for @m.
+  ///
+  /// In en, this message translates to:
+  /// **'M'**
+  String get m;
+
+  /// No description provided for @l.
+  ///
+  /// In en, this message translates to:
+  /// **'L'**
+  String get l;
+
+  /// No description provided for @xl.
+  ///
+  /// In en, this message translates to:
+  /// **'ْXL'**
+  String get xl;
+
+  /// No description provided for @newIn.
+  ///
+  /// In en, this message translates to:
+  /// **'New In'**
+  String get newIn;
+
+  /// No description provided for @color.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get color;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
+
+  /// No description provided for @shippingAndReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping and Return'**
+  String get shippingAndReturn;
+
+  /// No description provided for @freeStandardShippingAndFreereturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Free Standard Shipping and Free 60-days Return'**
+  String get freeStandardShippingAndFreereturn;
+
+  /// No description provided for @review.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get review;
+
+  /// No description provided for @reviewers.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewers'**
+  String get reviewers;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// No description provided for @size.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get size;
+
+  /// No description provided for @addToBag.
+  ///
+  /// In en, this message translates to:
+  /// **'Add To Bag'**
+  String get addToBag;
+
+  /// No description provided for @addedToBag.
+  ///
+  /// In en, this message translates to:
+  /// **'Added To Bag'**
+  String get addedToBag;
+
+  /// No description provided for @proceedToCheckout.
+  ///
+  /// In en, this message translates to:
+  /// **'Proceed to Checkout'**
+  String get proceedToCheckout;
+
+  /// No description provided for @emptyCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Cart is Empty'**
+  String get emptyCart;
+
+  /// No description provided for @removeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove All'**
+  String get removeAll;
+
+  /// No description provided for @subtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get subtotal;
+
+  /// No description provided for @shippingCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Cost'**
+  String get shippingCost;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @tax.
+  ///
+  /// In en, this message translates to:
+  /// **'Tax'**
+  String get tax;
+
+  /// No description provided for @checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkout;
+
+  /// No description provided for @enterCouponCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Coupon Code'**
+  String get enterCouponCode;
+
+  /// No description provided for @placeOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Place Order'**
+  String get placeOrder;
+
+  /// No description provided for @addShippingAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Shipping Address'**
+  String get addShippingAddress;
+
+  /// No description provided for @shippingAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Address'**
+  String get shippingAddress;
+
+  /// No description provided for @addPaymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Payment Method'**
+  String get addPaymentMethod;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @paymentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Details'**
+  String get paymentDetails;
+
+  /// No description provided for @cardHolderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Holder Name'**
+  String get cardHolderName;
+
+  /// No description provided for @cardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Number'**
+  String get cardNumber;
+
+  /// No description provided for @expiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry Date'**
+  String get expiryDate;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **' Address'**
+  String get address;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **' City'**
+  String get city;
+
+  /// No description provided for @state.
+  ///
+  /// In en, this message translates to:
+  /// **'State/Region'**
+  String get state;
+
+  /// No description provided for @zipCode.
+  ///
+  /// In en, this message translates to:
+  /// **' Zip Code'**
+  String get zipCode;
+
+  /// No description provided for @country.
+  ///
+  /// In en, this message translates to:
+  /// **' Country'**
+  String get country;
+
+  /// No description provided for @pleaseEnterCardHolderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Card Holder Name'**
+  String get pleaseEnterCardHolderName;
+
+  /// No description provided for @pleaseEnterCardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Card Number'**
+  String get pleaseEnterCardNumber;
+
+  /// No description provided for @pleaseEnterExpiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Expiry Date'**
+  String get pleaseEnterExpiryDate;
+
+  /// No description provided for @pleaseEnterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Address'**
+  String get pleaseEnterAddress;
+
+  /// No description provided for @pleaseEnterCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter City'**
+  String get pleaseEnterCity;
+
+  /// No description provided for @pleaseEnterState.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter State'**
+  String get pleaseEnterState;
+
+  /// No description provided for @pleaseEnterZipCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Zip Code'**
+  String get pleaseEnterZipCode;
+
+  /// No description provided for @pleaseEnterCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Country'**
+  String get pleaseEnterCountry;
+
+  /// No description provided for @validExpiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Valid Expiry Date'**
+  String get validExpiryDate;
+
+  /// No description provided for @validCvv.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Valid CVV'**
+  String get validCvv;
+
+  /// No description provided for @addCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Card'**
+  String get addCard;
+
+  /// No description provided for @zipcodemustbe.
+  ///
+  /// In en, this message translates to:
+  /// **'Zipcode must be between 3 to 10 digits'**
+  String get zipcodemustbe;
+
+  /// No description provided for @addAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Address'**
+  String get addAddress;
 }
 
 class _AppLocalizationsDelegate

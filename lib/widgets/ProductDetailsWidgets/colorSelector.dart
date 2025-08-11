@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
 class ColorSelector extends ConsumerWidget {
@@ -24,34 +25,39 @@ class ColorSelector extends ConsumerWidget {
             color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 5,
-          )
+          ),
         ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text("Color", style: TextStyle(fontSize: 16)),
+          Text(
+            AppLocalizations.of(context)!.color,
+            style: TextStyle(fontSize: 16),
+          ),
           Row(
-            children: colors.map((color) {
-              return GestureDetector(
-                onTap: () => ref.read(colorProvider.notifier).state = color,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: selectedColor == color
-                          ? const Color(0xFF8A2BE2)
-                          : Colors.transparent,
-                      width: 2,
+            children:
+                colors.map((color) {
+                  return GestureDetector(
+                    onTap: () => ref.read(colorProvider.notifier).state = color,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        color: color,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color:
+                              selectedColor == color
+                                  ? const Color(0xFF8A2BE2)
+                                  : Colors.transparent,
+                          width: 2,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
           ),
         ],
       ),

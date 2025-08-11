@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/quantity_button.dart';
@@ -53,7 +54,7 @@ class CartItemCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Size - ${item.size}   Color - ${item.color}',
+                  '${AppLocalizations.of(context)!.size} - ${item.size}   ${AppLocalizations.of(context)!.color} - ${item.color}',
                   style: const TextStyle(color: Colors.black54),
                 ),
               ],

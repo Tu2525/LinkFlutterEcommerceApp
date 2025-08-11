@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
@@ -87,18 +88,27 @@ class AddToBagButton extends ConsumerWidget {
                 // 4. Show a confirmation message.
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: const Text('Added to Bag!'),
+                    content: Text(
+                      '${AppLocalizations.of(context)!.addedToBag}!',
+                    ),
                     duration: const Duration(seconds: 2),
                     backgroundColor: Colors.green,
                     action: SnackBarAction(
-                      label: "Proceed to checkout",
-                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen()));},
+                      label: AppLocalizations.of(context)!.proceedToCheckout,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 );
               },
 
-              child: const Text('Add to Bag'),
+              child: Text(AppLocalizations.of(context)!.addToBag),
             ),
           ),
         ],

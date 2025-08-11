@@ -96,12 +96,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get howoldAreYou => 'How old are you?';
 
   @override
-  String get men => 'Men';
-
-  @override
-  String get women => 'Women';
-
-  @override
   String get selectAge => 'Select Age';
 
   @override
@@ -148,6 +142,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get returnToLogin => 'Return to login';
+
+  @override
+  String get men => 'Men';
+
+  @override
+  String get women => 'Women';
+
+  @override
   String get kids => 'Kids';
 
   @override
@@ -191,10 +193,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search => 'Search';
-
-  @override
-  String get order => 'Orders';
-=======
 
   @override
   String get notifications => 'Notifications';
@@ -252,4 +250,158 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shopByCategories => 'Shop by Categories';
+
+  @override
+  String get s => 'S';
+
+  @override
+  String get m => 'M';
+
+  @override
+  String get l => 'L';
+
+  @override
+  String get xl => 'ْXL';
+
+  @override
+  String get newIn => 'New In';
+
+  @override
+  String get color => 'Color';
+
+  @override
+  String get quantity => 'Quantity';
+
+  @override
+  String get shippingAndReturn => 'Shipping and Return';
+
+  @override
+  String get freeStandardShippingAndFreereturn =>
+      'Free Standard Shipping and Free 60-days Return';
+
+  @override
+  String get review => 'Reviews';
+
+  @override
+  String get reviewers => 'Reviewers';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get size => 'Size';
+
+  @override
+  String get addToBag => 'Add To Bag';
+
+  @override
+  String get addedToBag => 'Added To Bag';
+
+  @override
+  String get proceedToCheckout => 'Proceed to Checkout';
+
+  @override
+  String get emptyCart => 'Your Cart is Empty';
+
+  @override
+  String get removeAll => 'Remove All';
+
+  @override
+  String get subtotal => 'Subtotal';
+
+  @override
+  String get shippingCost => 'Shipping Cost';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get tax => 'Tax';
+
+  @override
+  String get checkout => 'Checkout';
+
+  @override
+  String get enterCouponCode => 'Enter Coupon Code';
+
+  @override
+  String get placeOrder => 'Place Order';
+
+  @override
+  String get addShippingAddress => 'Add Shipping Address';
+
+  @override
+  String get shippingAddress => 'Shipping Address';
+
+  @override
+  String get addPaymentMethod => 'Add Payment Method';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get paymentDetails => 'Payment Details';
+
+  @override
+  String get cardHolderName => 'Card Holder Name';
+
+  @override
+  String get cardNumber => 'Card Number';
+
+  @override
+  String get expiryDate => 'Expiry Date';
+
+  @override
+  String get address => ' Address';
+
+  @override
+  String get city => ' City';
+
+  @override
+  String get state => 'State/Region';
+
+  @override
+  String get zipCode => ' Zip Code';
+
+  @override
+  String get country => ' Country';
+
+  @override
+  String get pleaseEnterCardHolderName => 'Please Enter Card Holder Name';
+
+  @override
+  String get pleaseEnterCardNumber => 'Please Enter Card Number';
+
+  @override
+  String get pleaseEnterExpiryDate => 'Please Enter Expiry Date';
+
+  @override
+  String get pleaseEnterAddress => 'Please Enter Address';
+
+  @override
+  String get pleaseEnterCity => 'Please Enter City';
+
+  @override
+  String get pleaseEnterState => 'Please Enter State';
+
+  @override
+  String get pleaseEnterZipCode => 'Please Enter Zip Code';
+
+  @override
+  String get pleaseEnterCountry => 'Please Enter Country';
+
+  @override
+  String get validExpiryDate => 'Please Enter Valid Expiry Date';
+
+  @override
+  String get validCvv => 'Please Enter Valid CVV';
+
+  @override
+  String get addCard => 'Add Card';
+
+  @override
+  String get zipcodemustbe => 'Zipcode must be between 3 to 10 digits';
+
+  @override
+  String get addAddress => 'Add Address';
 }

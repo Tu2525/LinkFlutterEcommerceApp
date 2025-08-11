@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
 import 'package:link_flutter_ecommerce_app/models/product.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/addToBagButton.dart';
@@ -10,7 +12,6 @@ import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/product
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/quantitySelector.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewSection.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/sizeSelector.dart';
-
 
 class ProductDetailsScreen extends StatelessWidget {
   // Your screen still accepts a product object
@@ -24,17 +25,16 @@ class ProductDetailsScreen extends StatelessWidget {
     return ProviderScope(
       overrides: [
         // This is where you connect your screen's product to the provider
-        productProvider.overrideWithValue(product)
+        productProvider.overrideWithValue(product),
       ],
       // The child widget can now correctly use all your providers
-      child:  const _ProductDetailsView(),
+      child: const _ProductDetailsView(),
     );
   }
 }
 
 class _ProductDetailsView extends ConsumerWidget {
   const _ProductDetailsView();
-  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,7 @@ class _ProductDetailsView extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const TopBar(),
-                    ProductImageCarousel(product: product,),
+                    ProductImageCarousel(product: product),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Column(
@@ -90,10 +90,13 @@ class _ProductDetailsView extends ConsumerWidget {
                           //   ),
                           // ),
                           const SizedBox(height: 24),
-                          const InfoSection(
-                            title: 'Shipping & Returns',
+                          InfoSection(
+                            title:
+                                AppLocalizations.of(context)!.shippingAndReturn,
                             content:
-                                'Free standard shipping and free 60-day returns',
+                                AppLocalizations.of(
+                                  context,
+                                )!.freeStandardShippingAndFreereturn,
                           ),
                           const SizedBox(height: 24),
                           const ReviewsSection(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
@@ -50,9 +51,9 @@ class AddressBottomSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-                  'Country',
+                  AppLocalizations.of(context)!.country,
                   style: TextStyle(
                     color: textColor,
                     fontSize: 16.sp,
@@ -66,18 +67,18 @@ class AddressBottomSheet extends StatelessWidget {
                   isdarkmode: isDarkMode,
                   controller: countryController,
                   inputType: TextInputType.name,
-                  hint: ' Country',
+                  hint: AppLocalizations.of(context)!.country,
                   validator:
                       (value) =>
                           value == null || value.trim().isEmpty
-                              ? 'Country is required'
+                              ? AppLocalizations.of(context)!.pleaseEnterCountry
                               : null,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-                  'State/Region',
+                  AppLocalizations.of(context)!.state,
                   style: TextStyle(
                     color: textColor,
                     fontSize: 16.sp,
@@ -90,19 +91,19 @@ class AddressBottomSheet extends StatelessWidget {
                 child: CustomTextForm(
                   controller: stateController,
                   inputType: TextInputType.name,
-                  hint: 'State/Region',
+                  hint: AppLocalizations.of(context)!.state,
                   validator:
                       (value) =>
                           value == null || value.trim().isEmpty
-                              ? 'State/Region is required'
+                              ? AppLocalizations.of(context)!.pleaseEnterState
                               : null,
                   isdarkmode: isDarkMode,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-                  'Address',
+                  AppLocalizations.of(context)!.address,
                   style: TextStyle(
                     color: textColor,
                     fontSize: 16.sp,
@@ -115,11 +116,11 @@ class AddressBottomSheet extends StatelessWidget {
                 child: CustomTextForm(
                   controller: addressController,
                   inputType: TextInputType.name,
-                  hint: 'Address',
+                  hint: AppLocalizations.of(context)!.address,
                   validator:
                       (value) =>
                           value == null || value.length < 16
-                              ? 'Address is required'
+                              ? AppLocalizations.of(context)!.pleaseEnterAddress
                               : null,
                   isdarkmode: isDarkMode,
                 ),
@@ -133,9 +134,13 @@ class AddressBottomSheet extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                          padding: EdgeInsets.only(
+                            top: 20.0.h,
+                            left: 20.w,
+                            right: 20.w,
+                          ),
                           child: Text(
-                            'city',
+                            AppLocalizations.of(context)!.city,
                             style: TextStyle(
                               color: textColor,
                               fontSize: 16.sp,
@@ -152,11 +157,13 @@ class AddressBottomSheet extends StatelessWidget {
                             isdarkmode: isDarkMode,
                             controller: cityController,
                             inputType: TextInputType.datetime,
-                            hint: 'city',
+                            hint: AppLocalizations.of(context)!.city,
                             validator:
                                 (value) =>
                                     value == null || value.trim().isEmpty
-                                        ? 'city is required'
+                                        ? AppLocalizations.of(
+                                          context,
+                                        )!.pleaseEnterCity
                                         : null,
                           ),
                         ),
@@ -169,9 +176,13 @@ class AddressBottomSheet extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                          padding: EdgeInsets.only(
+                            top: 20.0.h,
+                            left: 20.w,
+                            right: 20.w,
+                          ),
                           child: Text(
-                            'Zipcode',
+                            AppLocalizations.of(context)!.zipCode,
                             style: TextStyle(
                               color: textColor,
                               fontSize: 16.sp,
@@ -188,13 +199,17 @@ class AddressBottomSheet extends StatelessWidget {
                             isdarkmode: isDarkMode,
                             controller: zipcodeController,
                             inputType: TextInputType.number,
-                            hint: 'Zipcode',
+                            hint: AppLocalizations.of(context)!.zipCode,
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return 'Please enter your zipcode';
+                                return AppLocalizations.of(
+                                  context,
+                                )!.pleaseEnterZipCode;
                               } else if (value.trim().length < 3 ||
                                   value.trim().length > 10) {
-                                return 'Zipcode must be between 3 to 10 digits';
+                                return AppLocalizations.of(
+                                  context,
+                                )!.zipcodemustbe;
                               }
                               return null;
                             },
@@ -219,7 +234,7 @@ class AddressBottomSheet extends StatelessWidget {
                       Navigator.pop(context);
                     }
                   },
-                  text: 'Add Address',
+                  text: AppLocalizations.of(context)!.addAddress,
                 ),
               ),
             ],

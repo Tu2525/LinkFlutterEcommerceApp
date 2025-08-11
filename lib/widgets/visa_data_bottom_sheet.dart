@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
@@ -48,9 +49,9 @@ class VisaDataBottomSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-                  'Cardholder Name',
+                  AppLocalizations.of(context)!.cardHolderName,
                   style: TextStyle(
                     color: textColor,
                     fontSize: 16.sp,
@@ -64,18 +65,20 @@ class VisaDataBottomSheet extends StatelessWidget {
                   isdarkmode: isDarkMode,
                   controller: nameController,
                   inputType: TextInputType.name,
-                  hint: ' Name',
+                  hint: AppLocalizations.of(context)!.cardHolderName,
                   validator:
                       (value) =>
                           value == null || value.isEmpty
-                              ? 'Please enter cardholder name'
+                              ? AppLocalizations.of(
+                                context,
+                              )!.pleaseEnterCardHolderName
                               : null,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-                  'Card Number',
+                  AppLocalizations.of(context)!.cardNumber,
                   style: TextStyle(
                     color: textColor,
                     fontSize: 16.sp,
@@ -90,11 +93,13 @@ class VisaDataBottomSheet extends StatelessWidget {
                   inputType: const TextInputType.numberWithOptions(
                     decimal: true,
                   ),
-                  hint: ' Card Number',
+                  hint: AppLocalizations.of(context)!.cardNumber,
                   validator:
                       (value) =>
                           value == null || value.length < 16
-                              ? 'Enter valid card number'
+                              ? AppLocalizations.of(
+                                context,
+                              )!.pleaseEnterCardNumber
                               : null,
                   isdarkmode: isDarkMode,
                 ),
@@ -108,9 +113,13 @@ class VisaDataBottomSheet extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                          padding: EdgeInsets.only(
+                            top: 20.0.h,
+                            left: 20.w,
+                            right: 20.w,
+                          ),
                           child: Text(
-                            'Expiry',
+                            AppLocalizations.of(context)!.expiryDate,
                             style: TextStyle(
                               color: textColor,
                               fontSize: 16.sp,
@@ -127,11 +136,13 @@ class VisaDataBottomSheet extends StatelessWidget {
                             isdarkmode: isDarkMode,
                             controller: expiryController,
                             inputType: TextInputType.datetime,
-                            hint: ' Expiry',
+                            hint: ' MM/YY',
                             validator:
                                 (value) =>
                                     value == null || value.length < 4
-                                        ? 'Enter valid expiry date/Use format MM/YY'
+                                        ? AppLocalizations.of(
+                                          context,
+                                        )!.pleaseEnterExpiryDate
                                         : null,
                           ),
                         ),
@@ -144,7 +155,11 @@ class VisaDataBottomSheet extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 20.0.h, left: 20.w),
+                          padding: EdgeInsets.only(
+                            top: 20.0.h,
+                            left: 20.w,
+                            right: 20.w,
+                          ),
                           child: Text(
                             'CVV',
                             style: TextStyle(
@@ -167,7 +182,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                             validator:
                                 (value) =>
                                     value == null || value.length != 3
-                                        ? 'Enter valid CVV'
+                                        ? AppLocalizations.of(context)!.validCvv
                                         : null,
                           ),
                         ),
@@ -190,7 +205,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                       Navigator.pop(context);
                     }
                   },
-                  text: 'Add Card',
+                  text: AppLocalizations.of(context)!.addCard,
                 ),
               ),
             ],
