@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
@@ -16,7 +15,9 @@ import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
 class OrderSummary extends ConsumerWidget {
-  const OrderSummary({super.key});
+  const OrderSummary({required this.subtotal, required this.total, super.key});
+  final double subtotal;
+  final double total;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,13 +55,10 @@ class OrderSummary extends ConsumerWidget {
           amount: shippingCost,
         ),
         SizedBox(height: 8.h),
-
-        // Tax
         PriceSummaryRow(
           label: AppLocalizations.of(context)!.tax,
           amount: tax,
         ),
-
         const Divider(height: 30),
 
         // Total
@@ -71,8 +69,6 @@ class OrderSummary extends ConsumerWidget {
         ),
 
         SizedBox(height: 24.h),
-
-        // Continue button from feature branch
         ContinueButton(
           onPressed: () async {
             if (cartItems.isEmpty) {

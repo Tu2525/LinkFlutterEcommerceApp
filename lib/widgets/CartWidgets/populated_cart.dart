@@ -29,9 +29,6 @@ class PopulatedCart extends ConsumerWidget {
               onPressed: () => ref.read(cartProvider.notifier).clearCart(),
               child: Text(
                 AppLocalizations.of(context)!.removeAll,
-                style: const TextStyle(color: Colors.black54),
-              child: const Text(
-                'Remove All',
                 style: AppTextStyles.faintGrey,
               ),
             ),
@@ -51,7 +48,7 @@ class PopulatedCart extends ConsumerWidget {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withValues(alpha: 0.1),
+                color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 0,
                 blurRadius: 20,
                 offset: const Offset(0, -5),
@@ -80,11 +77,8 @@ class PopulatedCart extends ConsumerWidget {
                   ),
                 ),
                 child: Text(
-
                   AppLocalizations.of(context)!.checkout,
-               
                   style: AppTextStyles.heading4(!isDarkMode),
-
                 ),
               ),
             ],

@@ -17,11 +17,8 @@ class OrderDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final textColor = isDarkMode ? Colors.white : Colors.black;
-
-    // From feature/link_orser_with_fire_base
     final order = ref.watch(selectedOrderProvider);
 
-    // From develop branch
     final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
@@ -59,11 +56,13 @@ class OrderDetails extends ConsumerWidget {
                 OrderItemsCard(
                   isDarkMode: isDarkMode,
                   items: activeOrder.items,
+
                 ),
                 SizedBox(height: 38.h),
                 ShippingDetails(
                   isDarkMode: isDarkMode,
                   shippingInfo: [activeOrder.shipping],
+
                 ),
               ],
             ),
