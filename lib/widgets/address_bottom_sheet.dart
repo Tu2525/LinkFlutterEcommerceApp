@@ -33,7 +33,7 @@ class AddressBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = isDarkMode ? Colors.white : Colors.black;
+
 
     return Container(
       width: double.infinity,
@@ -46,7 +46,6 @@ class AddressBottomSheet extends StatelessWidget {
       ),
       child: Form(
         key: formKey,
-
         child: SingleChildScrollView(
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,

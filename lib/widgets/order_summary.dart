@@ -18,7 +18,6 @@ class OrderSummary extends ConsumerWidget {
   const OrderSummary({required this.subtotal, required this.total, super.key});
   final double subtotal;
   final double total;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subtotal = ref.read(cartProvider.notifier).subtotal;
