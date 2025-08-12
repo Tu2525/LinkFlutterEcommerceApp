@@ -15,19 +15,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signIn => 'تسجيل الدخول';
 
   @override
-  String get emailAddress => 'البريد الإلكتروني';
+  String get emailAddress => 'البريد الإلكتروني';
 
   @override
   String get cont => 'استمر';
 
   @override
-  String get noUserFound => 'لا يوجد مستخدم لهذا البريد الإلكتروني.';
+  String get noUserFound => 'لا يوجد مستخدم لهذا البريد الإلكتروني.';
 
   @override
   String get dontHaveAnAccount => 'ليس لديك حساب؟';
 
   @override
-  String get createOne => ' إنشاء حساب';
+  String get createOne => ' إنشاء حساب';
 
   @override
   String get continueWithApple => 'تسجيل الدخول بواسطة Apple';
@@ -39,34 +39,34 @@ class AppLocalizationsAr extends AppLocalizations {
   String get continueWithFacebook => 'تسجيل الدخول بواسطة Facebook';
 
   @override
-  String get emptyMessage => 'البريد الإلكتروني مطلوب';
+  String get emptyMessage => 'البريد الإلكتروني مطلوب';
 
   @override
-  String get invalidFormatMessage => 'أدخل عنوان بريد إلكتروني صالح';
+  String get invalidFormatMessage => 'أدخل عنوان بريد إلكتروني صالح';
 
   @override
   String get emptyPassword => 'كلمة المرور مطلوبة';
 
   @override
-  String get minLengthMessage => 'كلمة المرور يجب أن تكون على الأقل 8 حروف';
+  String get minLengthMessage => 'كلمة المرور يجب أن تكون على الأقل 8 حروف';
 
   @override
-  String get patternMessage => 'كلمة المرور يجب أن تحتوي على حروف وأرقام';
+  String get patternMessage => 'كلمة المرور يجب أن تحتوي على حروف وأرقام';
 
   @override
   String get pass => 'كلمة المرور';
 
   @override
-  String get reset => 'إعادة تعيين ';
+  String get reset => 'إعادة تعيين ';
 
   @override
-  String get enterEmailAddress => 'أدخل عنوان البريد الإلكتروني';
+  String get enterEmailAddress => 'أدخل عنوان البريد الإلكتروني';
 
   @override
-  String get emailIsAlreadyInUse => 'البريد الإلكتروني مستخدم بالفعل';
+  String get emailIsAlreadyInUse => 'البريد الإلكتروني مستخدم بالفعل';
 
   @override
-  String get invalidEmail => 'البريد الإلكتروني غير صالح';
+  String get invalidEmail => 'البريد الإلكتروني غير صالح';
 
   @override
   String get weakPassword => 'كلمة المرور ضعيفة جداً';
@@ -78,16 +78,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get authError => 'خطأ في المصادقة';
 
   @override
-  String get createAccount => 'إنشاء حساب';
+  String get createAccount => 'إنشاء حساب';
 
   @override
-  String get firstName => 'الاسم الأول';
+  String get firstName => 'الاسم الأول';
 
   @override
-  String get lastName => 'الاسم الأخير';
+  String get lastName => 'الاسم الأخير';
 
   @override
-  String get tellUsAboutYourself => 'أخبرنا قليلاً عن نفسك';
+  String get tellUsAboutYourself => 'أخبرنا قليلاً عن نفسك';
 
   @override
   String get whoDoYouShopFor => 'لمن تتسوق؟';
@@ -99,7 +99,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get selectAge => 'اخنار الفئة العمرية';
 
   @override
-  String get finish => 'إنهاء';
+  String get finish => 'إنهاء';
 
   @override
   String get next => 'التالي';
@@ -108,16 +108,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get skip => 'تخطى';
 
   @override
-  String get ecommerceShop => 'متجر إلكتروني';
+  String get ecommerceShop => 'متجر إلكتروني';
 
   @override
   String get professionalAppForYour => 'تطبيق متخصص ك';
 
   @override
-  String get ecommerceBusiness => 'متجرك الإلكتروني';
+  String get ecommerceBusiness => 'متجرك الإلكتروني';
 
   @override
-  String get purachaseOnline => '!!تسوق عبر الإنترنت';
+  String get purachaseOnline => '!!تسوق عبر الإنترنت';
 
   @override
   String get trackOrder => '!!تتبع الطلب';
@@ -129,44 +129,43 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shopsmarter => 'تسوق بذكاء,بسهولة ,بسرعه';
 
   @override
-  String get fastTransperntAlwaysOnTime => 'سريع، موثق، دائماً في الموعد';
+  String get fastTransperntAlwaysOnTime => 'سريع، موثق، دائماً في الموعد';
 
   @override
   String get receiveYourOrder => 'استلام طلبك بسرعة وبسهولة';
 
   @override
-  String get resetPassText =>
-      'لقد أرسلنا لك بريدًا إلكترونيًا لإعادة تعيين ';
+  String get resetPassText => 'لقد أرسلنا لك بريدًا إلكترونيًا لإعادة تعيين ';
 
   @override
   String get resetPassText2 => 'كلمة المرور الخاصة بك';
 
   @override
-  String get returnToLogin => 'العودة إلى تسجيل الدخول';
+  String get returnToLogin => 'العودة إلى تسجيل الدخول';
 
   @override
   String get men => 'رجالي';
 
   @override
-  String get women => 'نسائي';
+  String get women => 'نسائي';
 
   @override
-  String get kids => 'أطفال';
+  String get kids => 'أطفال';
 
   @override
   String get categories => 'التصنيفات';
 
   @override
-  String get topSelling => 'أكثر مبيعا';
+  String get topSelling => 'أكثر مبيعا';
 
   @override
   String get seeAll => 'اظهار الكل';
 
   @override
-  String get bags => 'حقائب';
+  String get bags => 'حقائب';
 
   @override
-  String get shoes => 'أحذية';
+  String get shoes => 'أحذية';
 
   @override
   String get shorts => 'شورت';
@@ -178,13 +177,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hoddies => 'هودي';
 
   @override
-  String get accessories => 'أكسسوارات';
+  String get accessories => 'أكسسوارات';
 
   @override
   String get sale => 'تخفيضات';
 
   @override
-  String get home => 'الصفحة الرئيسية';
+  String get home => 'الصفحة الرئيسية';
 
   @override
   String get cart => 'السلة';
@@ -196,49 +195,49 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search => 'بحث';
 
   @override
-  String get notifications => 'Notifications';
+  String get notifications => 'الاشعارات';
 
   @override
-  String get noNotifications => 'No Notification yet';
+  String get noNotifications => 'لا توجد لديك اشعارات حتي الان';
 
   @override
-  String get exploreCategories => 'Explore Categories';
+  String get exploreCategories => 'اكتشف الفئات';
 
   @override
-  String get processing => 'Processing';
+  String get processing => 'قيد المعالجة';
 
   @override
-  String get shipped => 'Shipped';
+  String get shipped => 'تم الشحن';
 
   @override
-  String get delivered => 'Delivered';
+  String get delivered => 'تم التسليم';
 
   @override
-  String get returned => 'Returned';
+  String get returned => 'تم الإرجاع';
 
   @override
-  String get cancelled => 'Cancelled';
+  String get cancelled => 'تم الإلغاء';
 
   @override
-  String get orders => 'Orders';
+  String get orders => 'الطلبات';
 
   @override
-  String get noOrders => 'No Orders yet';
+  String get noOrders => 'لا يوجد لديك طلبات حتي الان';
 
   @override
-  String get order => 'Order';
+  String get order => 'طلب';
 
   @override
-  String get item => 'items';
+  String get item => 'قطعه';
 
   @override
-  String get orderItems => 'Order Items';
+  String get orderItems => 'منتجات الطلب';
 
   @override
-  String get viewAll => 'View All';
+  String get viewAll => 'عرض الكل';
 
   @override
-  String get orderPlaced => 'Order Placed';
+  String get orderPlaced => 'تم تقديم الطلب';
 
   @override
   String get successfully => 'بنجاح';
@@ -250,7 +249,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get seeOrderDetails => 'عرض تفاصيل الطلب';
 
   @override
-  String get shopByCategories => 'تسوق حسب الفئات';
+  String get shopByCategories => 'تسوق حسب الفئات';
 
   @override
   String get s => 'صغير';
@@ -277,8 +276,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shippingAndReturn => 'الشحن والاسترجاع';
 
   @override
-  String get freeStandardShippingAndFreereturn =>
-      'الشحن المجاني والاسترجاع المجاني لمدة 60 يوم';
+  String get freeStandardShippingAndFreereturn => 'الشحن المجاني والاسترجاع المجاني لمدة 60 يوم';
 
   @override
   String get review => 'التقييمات';
@@ -293,10 +291,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get size => 'الحجم';
 
   @override
-  String get addToBag => 'أضف إلى عربة التسوق';
+  String get addToBag => 'أضف إلى عربة التسوق';
 
   @override
-  String get addedToBag => 'تمت إضافتها إلى العربة';
+  String get addedToBag => 'تمت إضافتها إلى العربة';
 
   @override
   String get proceedToCheckout => 'استمرار الشراء';
@@ -305,7 +303,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emptyCart => 'عربة التسوق فارغة';
 
   @override
-  String get removeAll => 'إزالة الكل';
+  String get removeAll => 'إزالة الكل';
 
   @override
   String get subtotal => 'المجموع الفرعي';
@@ -323,19 +321,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkout => 'الدفع';
 
   @override
-  String get enterCouponCode => 'أدخل كود القسيمة';
+  String get enterCouponCode => 'أدخل كود القسيمة';
 
   @override
   String get placeOrder => 'قم بالطلب';
 
   @override
-  String get addShippingAddress => 'إضافة عنوان الشحن';
+  String get addShippingAddress => 'إضافة عنوان الشحن';
 
   @override
   String get shippingAddress => 'عنوان الشحن';
 
   @override
-  String get addPaymentMethod => 'إضافة طريقة الدفع';
+  String get addPaymentMethod => 'إضافة طريقة الدفع';
 
   @override
   String get paymentMethod => 'طريقة الدفع';
@@ -368,44 +366,104 @@ class AppLocalizationsAr extends AppLocalizations {
   String get country => ' الدولة';
 
   @override
-  String get pleaseEnterCardHolderName => 'يرجى إدخال اسم حامل البطاقة';
+  String get pleaseEnterCardHolderName => 'يرجى إدخال اسم حامل البطاقة';
 
   @override
-  String get pleaseEnterCardNumber => 'يرجى إدخال رقم البطاقة';
+  String get pleaseEnterCardNumber => 'يرجى إدخال رقم البطاقة';
 
   @override
-  String get pleaseEnterExpiryDate => 'يرجى إدخال تاريخ الانتهاء';
+  String get pleaseEnterExpiryDate => 'يرجى إدخال تاريخ الانتهاء';
 
   @override
-  String get pleaseEnterAddress => 'يرجى إدخال العنوان';
+  String get pleaseEnterAddress => 'يرجى إدخال العنوان';
 
   @override
-  String get pleaseEnterCity => 'يرجى إدخال المدينة';
+  String get pleaseEnterCity => 'يرجى إدخال المدينة';
 
   @override
-  String get pleaseEnterState => 'يرجى إدخال الولاية';
+  String get pleaseEnterState => 'يرجى إدخال الولاية';
 
   @override
-  String get pleaseEnterZipCode => 'يرجى إدخال الرمز البريدي';
+  String get pleaseEnterZipCode => 'يرجى إدخال الرمز البريدي';
 
   @override
-  String get pleaseEnterCountry => 'يرجى إدخال الدولة';
+  String get pleaseEnterCountry => 'يرجى إدخال الدولة';
 
   @override
-  String get validExpiryDate => 'يرجى إدخال تاريخ انتهاء صالح';
+  String get validExpiryDate => 'يرجى إدخال تاريخ انتهاء صالح';
 
   @override
-  String get validCvv => 'يرجى إدخال CVV صالح';
+  String get validCvv => 'يرجى إدخال CVV صالح';
 
   @override
-  String get addCard => 'إضافة بطاقة';
+  String get addCard => 'إضافة بطاقة';
 
   @override
-  String get zipcodemustbe => 'الرمز البريدي يجب أن يكون بين 3 و 10 أرقام';
+  String get zipcodemustbe => 'الرمز البريدي يجب أن يكون بين 3 و 10 أرقام';
 
   @override
-  String get addAddress => 'إضافة عنوان';
+  String get addAddress => 'إضافة عنوان';
 
   @override
   String get noorder => 'لا يوجد طلبات';
+
+  @override
+  String get profileTitle => 'الصفحة الشخصية';
+
+  @override
+  String get darkMode => 'الوضع المظلم';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get wishlist => 'المفضلة';
+
+  @override
+  String get payment => 'الدفع';
+
+  @override
+  String get help => 'المساعدة';
+
+  @override
+  String get support => 'الدعم';
+
+  @override
+  String get signOut => 'تسجيل الخروج';
+
+  @override
+  String get editProfile => 'تعديل';
+
+  @override
+  String get streetAddress => 'عنوان الشارع';
+
+  @override
+  String get pleaseEnterStreetAddress => 'يرجى إدخال عنوان الشارع';
+
+  @override
+  String get addNewAddress => 'إضافة عنوان جديد';
+
+  @override
+  String get editAddress => 'تعديل العنوان';
+
+  @override
+  String get saveAddress => 'حفظ العنوان';
+
+  @override
+  String get addressSaved => 'تم حفظ العنوان بنجاح';
+
+  @override
+  String get addressUpdated => 'تم تحديث العنوان بنجاح';
+
+  @override
+  String get errorSavingAddress => 'خطأ في حفظ العنوان';
+
+  @override
+  String get errorLoadingAddresses => 'خطأ في تحميل العناوين';
+
+  @override
+  String get noAddressesFound => 'لا توجد عناوين.\nأضف عنوانك الأول!';
+
+  @override
+  String get retry => 'إعادة المحاولة';
 }

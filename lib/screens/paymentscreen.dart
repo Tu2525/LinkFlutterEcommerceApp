@@ -8,13 +8,14 @@ import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
-import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
+import 'package:link_flutter_ecommerce_app/screens/address_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/visa_data_bottom_sheet.dart';
+import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
 
 class Paymentscreen extends ConsumerStatefulWidget {
   const Paymentscreen({super.key});
@@ -51,26 +52,44 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
 
     final subtotal = ref.read(cartProvider.notifier).subtotal;
     final total = ref.watch(totalProvider);
-    final checkoutState = ref.watch(checkoutProvider);
+    // Still watch to rebuild UI if needed, but side-effects are handled in ref.listen
+    final _ = ref.watch(checkoutProvider);
 
-    checkoutState.when(
-      data: (checkout) {
-        if (checkout != null) {
-          addressController.text = checkout.shippingAddress?.address ?? '';
-          cityController.text = checkout.shippingAddress?.city ?? '';
-          countryController.text = checkout.shippingAddress?.country ?? '';
-          zipCodeController.text = checkout.shippingAddress?.zipCode ?? '';
-          nameController.text = checkout.paymentMethod?.cardHolderName ?? '';
-          cardNumberController.text = checkout.paymentMethod?.cardNumber ?? '';
-          cvvController.text = checkout.paymentMethod?.cvv ?? '';
-          expiryController.text = checkout.paymentMethod?.expiry ?? '';
-        }
-      },
-      loading: () {},
-      error: (err, st) {
-        debugPrint("Error loading checkout data: $err");
-      },
-    );
+    // Listen to checkout changes and update controllers/providers after frame
+    ref.listen<AsyncValue<CheckoutModel?>>(checkoutProvider, (previous, next) {
+      next.when(
+        data: (checkout) {
+          if (checkout != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              final addr = checkout.shippingAddress;
+              final pay = checkout.paymentMethod;
+
+              if (addr != null) {
+                addressController.text = addr.address;
+                cityController.text = addr.city;
+                countryController.text = addr.country;
+                zipCodeController.text = addr.zipCode;
+
+                if (addr.address.isNotEmpty) {
+                  ref.read(addressProvider.notifier).state = addr.address;
+                }
+              }
+
+              if (pay != null) {
+                nameController.text = pay.cardHolderName;
+                cardNumberController.text = pay.cardNumber;
+                cvvController.text = pay.cvv;
+                expiryController.text = pay.expiry;
+              }
+            });
+          }
+        },
+        loading: () {},
+        error: (err, st) {
+          debugPrint("Error loading checkout data: $err");
+        },
+      );
+    });
 
     return Scaffold(
       body: Column(
@@ -95,22 +114,29 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
           // Address Section
           AddressCard(
             isDarkMode: isDarkMode,
-            ontab: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder:
-                    (_) => AddressBottomSheet(
-                      formKey: formKey,
-                      ref: ref,
-                      isDarkMode: isDarkMode,
-                      countryController: countryController,
-                      stateController: stateController,
-                      addressController: addressController,
-                      cityController: cityController,
-                      zipcodeController: zipCodeController,
-                    ),
+            ontab: () async {
+              final selectedAddress = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AddressScreen()),
               );
+
+              // If an address was selected, update both controllers
+              if (selectedAddress != null) {
+                // selectedAddress is AddressModel from AddressScreen
+                final addr = selectedAddress;
+                addressController.text = addr.streetAddress;
+                cityController.text = addr.city;
+                stateController.text = addr.state;
+                zipCodeController.text = addr.zipCode;
+                countryController.text =
+                    countryController.text.isNotEmpty
+                        ? countryController.text
+                        : ''; // keep existing if any
+
+                // Show formatted address on AddressCard
+                ref.read(addressProvider.notifier).state =
+                    addr.formattedAddress;
+              }
             },
           ),
 
@@ -169,7 +195,10 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                     final shipping = ShippingAddress(
                       address: addressController.text,
                       city: cityController.text,
-                      country: countryController.text,
+                      country:
+                          countryController.text.isNotEmpty
+                              ? countryController.text
+                              : '',
                       zipCode: zipCodeController.text,
                     );
 

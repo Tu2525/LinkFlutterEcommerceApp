@@ -8,7 +8,6 @@ import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
-import 'package:link_flutter_ecommerce_app/widgets/theme_toggle_widget.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';
@@ -74,18 +73,23 @@ class _HomePageState extends ConsumerState<HomePage> {
                           onSelected: (String result) {
                             ref.read(homePageProvider).selectedCategory;
                           },
-                          itemBuilder: (BuildContext context) =>
-                              homeNotifier.categories.map((String category) {
-                            return PopupMenuItem<String>(
-                              value: category,
-                              child: Text(
-                                category,
-                                style: TextStyle(
-                                  color: AppColors.textPrimaryColor(isDarkMode),
-                                ),
-                              ),
-                            );
-                          }).toList(),
+                          itemBuilder:
+                              (BuildContext context) =>
+                                  homeNotifier.categories.map((
+                                    String category,
+                                  ) {
+                                    return PopupMenuItem<String>(
+                                      value: category,
+                                      child: Text(
+                                        category,
+                                        style: TextStyle(
+                                          color: AppColors.textPrimaryColor(
+                                            isDarkMode,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,

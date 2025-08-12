@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
+import 'package:link_flutter_ecommerce_app/providers/locale_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 import 'package:link_flutter_ecommerce_app/services/notification_service.dart';
 import 'firebase_options.dart';
@@ -60,6 +61,7 @@ class EcommerceApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
+    final locale = ref.watch(localeProvider);
 
     return ScreenUtilInit(
       designSize: const Size(390, 844),
@@ -68,7 +70,7 @@ class EcommerceApp extends ConsumerWidget {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('ar'),
+        locale: locale,
         debugShowCheckedModeBanner: false,
         theme: _buildLightTheme(),
         darkTheme: _buildDarkTheme(),

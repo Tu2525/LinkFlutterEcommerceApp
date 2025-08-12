@@ -1,12 +1,50 @@
-// ignore: unused_import
-import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
-
-// ignore_for_file: type=lint
 
 /// The translations for English (`en`).
 class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get accessories => 'Accessories';
+
+  @override
+  String get addAddress => 'Add Address';
+
+  @override
+  String get addCard => 'Add Card';
+
+  @override
+  String get addNewAddress => 'Add New Address';
+
+  @override
+  String get orders => 'Orders';
+
+  @override
+  String get payment => 'Payment';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get termsAndConditions => 'Terms and Conditions';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get aboutUs => 'About Us';
+
+  @override
+  String get contactUs => 'Contact Us';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get logout => 'Logout';
 
   @override
   String get forgotPassword => 'Forgot Password?';
@@ -24,7 +62,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noUserFound => 'No user found for that email.';
 
   @override
-  String get dontHaveAnAccount => 'Don\'\'t have an Account?';
+  String get dontHaveAnAccount => 'Don\'t have an Account?';
 
   @override
   String get createOne => ' Create One';
@@ -153,37 +191,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get kids => 'Kids';
 
   @override
-  String get categories => 'Categories';
-
-  @override
-  String get topSelling => 'Top Selling';
-
-  @override
-  String get seeAll => 'See All';
-
-  @override
-  String get bags => 'Bags';
-
-  @override
-  String get shoes => 'Shoes';
-
-  @override
-  String get shorts => 'Shorts';
-
-  @override
-  String get shopByCategory => 'Shop by Category';
-
-  @override
-  String get hoddies => 'Hoddies';
-
-  @override
-  String get accessories => 'Accessories';
-
-  @override
-  String get sale => 'Sale';
+  String get search => 'Search';
 
   @override
   String get home => 'Home';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get favourites => 'Favourites';
 
   @override
   String get cart => 'Cart';
@@ -192,64 +209,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile => 'Profile';
 
   @override
-  String get search => 'Search';
+  String get specialOffers => 'Special Offers';
 
   @override
-  String get notifications => 'Notifications';
+  String get newIn => 'New In';
 
   @override
-  String get noNotifications => 'No Notification yet';
-
-  @override
-  String get exploreCategories => 'Explore Categories';
-
-  @override
-  String get processing => 'Processing';
-
-  @override
-  String get shipped => 'Shipped';
-
-  @override
-  String get delivered => 'Delivered';
-
-  @override
-  String get returned => 'Returned';
-
-  @override
-  String get cancelled => 'Cancelled';
-
-  @override
-  String get orders => 'Orders';
-
-  @override
-  String get noOrders => 'No Orders yet';
-
-  @override
-  String get order => 'Order';
-
-  @override
-  String get item => 'items';
-
-  @override
-  String get orderItems => 'Order Items';
+  String get featured => 'Featured';
 
   @override
   String get viewAll => 'View All';
 
   @override
-  String get orderPlaced => 'Order Placed';
-
-  @override
-  String get successfully => 'Successfully';
-
-  @override
-  String get receiveEmail => 'You will receive a confirmation email';
-
-  @override
-  String get seeOrderDetails => 'See Order details';
-
-  @override
-  String get shopByCategories => 'Shop by Categories';
+  String get addToCart => 'Add to Cart';
 
   @override
   String get s => 'S';
@@ -262,9 +234,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get xl => 'ْXL';
-
-  @override
-  String get newIn => 'New In';
 
   @override
   String get color => 'Color';
@@ -305,6 +274,117 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get removeAll => 'Remove All';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get enterStreetAddress => 'Enter Street Address';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get enterCity => 'Enter City';
+
+  @override
+  String get state => 'State';
+
+  @override
+  String get enterState => 'Enter State';
+
+  @override
+  String get zipCode => 'Zip Code';
+
+  @override
+  String get enterZipCode => 'Enter Zip Code';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get addressSaved => 'Address saved successfully';
+
+  @override
+  String get addressUpdated => 'Address updated successfully';
+
+  @override
+  String get errorSavingAddress => 'Error saving address';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get wishlist => 'Wishlist';
+
+  @override
+  String get help => 'Help';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get signOut => 'Sign Out';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get seeAll => 'See All';
+
+  @override
+  String get bags => 'Bags';
+
+  @override
+  String get shoes => 'Shoes';
+
+  @override
+  String get shorts => 'Shorts';
+
+  @override
+  String get shopByCategory => 'Shop by Category';
+
+  @override
+  String get hoddies => 'Hoddies';
+
+  @override
+  String get sale => 'Sale';
+
+  @override
+  String get noNotifications => 'No Notification yet';
+
+  @override
+  String get exploreCategories => 'Explore Categories';
+
+  @override
+  String get processing => 'Processing';
+
+  @override
+  String get shipped => 'Shipped';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get returned => 'Returned';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get noOrders => 'No Orders yet';
+
+  @override
+  String get order => 'Order';
+
+  @override
+  String get item => 'Items';
+
+  @override
+  String get orderItems => 'Order Items';
 
   @override
   String get subtotal => 'Subtotal';
@@ -352,19 +432,67 @@ class AppLocalizationsEn extends AppLocalizations {
   String get expiryDate => 'Expiry Date';
 
   @override
-  String get address => ' Address';
+  String get cvv => 'CVV';
 
   @override
-  String get city => ' City';
+  String get saveCard => 'Save Card';
 
   @override
-  String get state => 'State/Region';
+  String get removeCard => 'Remove Card';
 
   @override
-  String get zipCode => ' Zip Code';
+  String get savedCards => 'Saved Cards';
 
   @override
-  String get country => ' Country';
+  String get addNewCard => 'Add New Card';
+
+  @override
+  String get cardAdded => 'Card Added Successfully';
+
+  @override
+  String get cardRemoved => 'Card Removed Successfully';
+
+  @override
+  String get errorAddingCard => 'Error Adding Card';
+
+  @override
+  String get errorRemovingCard => 'Error Removing Card';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get noAddressesFound => 'No addresses found. Add your first address!';
+
+  @override
+  String get errorLoadingAddresses => 'Error loading addresses';
+
+  @override
+  String get orderPlaced => 'Order Placed';
+
+  @override
+  String get successfully => 'Successfully';
+
+  @override
+  String get receiveEmail => 'You will receive a confirmation email';
+
+  @override
+  String get seeOrderDetails => 'See Order details';
+
+  @override
+  String get shopByCategories => 'Shop by Categories';
+
+  @override
+  String get country => 'Country';
+
+  @override
+  String get editAddress => 'Edit Address';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get noorder => 'No Order';
 
   @override
   String get pleaseEnterCardHolderName => 'Please Enter Card Holder Name';
@@ -397,14 +525,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get validCvv => 'Please Enter Valid CVV';
 
   @override
-  String get addCard => 'Add Card';
-
-  @override
   String get zipcodemustbe => 'Zipcode must be between 3 to 10 digits';
 
   @override
-  String get addAddress => 'Add Address';
+  String get profileTitle => 'Profile';
 
   @override
-  String get noorder => 'No order found.';
+  String get pleaseEnterStreetAddress => 'Please Enter Street Address';
+
+  @override
+  String get saveAddress => 'Save Address';
+
+  @override
+  String get streetAddress => 'Street Address';
+
+  @override
+  String get topSelling => 'Top Selling';
 }

@@ -30,11 +30,8 @@ class SigninWithButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           icon,
-          SizedBox(width: 40.w),
-          Text(
-            text,
-            style: AppTextStyles.subTitle1(isDarkMode),
-          ),
+          SizedBox(width: 35.w),
+          Text(text, style: AppTextStyles.subTitle1(isDarkMode)),
         ],
       ),
     );

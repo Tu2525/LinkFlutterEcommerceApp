@@ -7,6 +7,7 @@ import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/profile_screen.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -15,7 +16,7 @@ class MainScreen extends ConsumerWidget {
     HomePage(),
     NotificationScreen(),
     OrdersScreen(),
-    ProfilePage(),
+    ProfileScreen(),
   ];
 
   @override
@@ -58,162 +59,6 @@ class MainScreen extends ConsumerWidget {
         currentIndex: mainScreenController.selectedIndex,
         onTap: (index) => ref.read(mainScreenProvider).setIndex(index),
       ),
-    );
-  }
-}
-
-class ProfilePage extends ConsumerWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isDarkMode = ref.watch(isDarkModeProvider);
-    final themeNotifier = ref.read(themeProvider.notifier);
-
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor(isDarkMode),
-      appBar: AppBar(
-        title: Text(
-          'Profile',
-          style: TextStyle(
-            color: AppColors.textPrimaryColor(isDarkMode),
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        backgroundColor: AppColors.backgroundColor(isDarkMode),
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // Profile Header
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppColors.cardBackgroundColor(isDarkMode),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: AppColors.borderColor(isDarkMode),
-                  width: 1,
-                ),
-              ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: AppColors.primary,
-                    child: Icon(
-                      IconsaxPlusBroken.profile,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'User Name',
-                          style: TextStyle(
-                            color: AppColors.textPrimaryColor(isDarkMode),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'user@example.com',
-                          style: TextStyle(
-                            color: AppColors.textSecondaryColor(isDarkMode),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            // Settings Section
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.cardBackgroundColor(isDarkMode),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: AppColors.borderColor(isDarkMode),
-                  width: 1,
-                ),
-              ),
-              child: Column(
-                children: [
-                  _buildSettingsTile(
-                    context,
-                    icon: IconsaxPlusBroken.moon,
-                    title: 'Dark Mode',
-                    trailing: Switch(
-                      value: isDarkMode,
-                      onChanged: (value) async {
-                        await themeNotifier.toggleTheme();
-                      },
-                      activeColor: AppColors.primary,
-                    ),
-                    isDarkMode: isDarkMode,
-                  ),
-                  Divider(height: 1, color: AppColors.borderColor(isDarkMode)),
-                  _buildSettingsTile(
-                    context,
-                    icon: IconsaxPlusBroken.notification,
-                    title: 'Notifications',
-                    trailing: Icon(
-                      IconsaxPlusBroken.arrow_right_3,
-                      color: AppColors.textSecondaryColor(isDarkMode),
-                    ),
-                    isDarkMode: isDarkMode,
-                  ),
-                  Divider(height: 1, color: AppColors.borderColor(isDarkMode)),
-                  _buildSettingsTile(
-                    context,
-                    icon: IconsaxPlusBroken.setting_2,
-                    title: 'Settings',
-                    trailing: Icon(
-                      IconsaxPlusBroken.arrow_right_3,
-                      color: AppColors.textSecondaryColor(isDarkMode),
-                    ),
-                    isDarkMode: isDarkMode,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSettingsTile(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required Widget trailing,
-    required bool isDarkMode,
-  }) {
-    return ListTile(
-      leading: Icon(icon, color: AppColors.textPrimaryColor(isDarkMode)),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: AppColors.textPrimaryColor(isDarkMode),
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      trailing: trailing,
-      onTap: () {
-        // Handle navigation if needed
-      },
     );
   }
 }
