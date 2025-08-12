@@ -3,14 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/category_section_provider.dart';
+import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
 
-class CategoriesSection extends StatelessWidget {
+class CategoriesSection extends ConsumerWidget {
   const CategoriesSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(isDarkModeProvider);
 
     return Column(
       mainAxisSize: MainAxisSize.min,

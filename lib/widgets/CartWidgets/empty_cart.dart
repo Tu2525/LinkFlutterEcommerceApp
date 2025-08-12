@@ -43,8 +43,7 @@ class EmptyCart extends StatelessWidget {
               ),
             ),
             child:  Text(
-              AppLocalizations.of(context)!.exploreCategories,
-            
+              AppLocalizations.of(context)!.exploreCategories,  
              style: AppTextStyles.body1(!isDarkMode)),
 
           ),
