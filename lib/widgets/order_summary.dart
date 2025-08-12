@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
@@ -11,7 +9,6 @@ class OrderSummary extends ConsumerWidget {
   const OrderSummary({required this.subtotal, required this.total, super.key});
   final double subtotal;
   final double total;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subtotal = ref.read(cartProvider.notifier).subtotal;

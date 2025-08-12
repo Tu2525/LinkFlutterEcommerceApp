@@ -57,7 +57,6 @@ class VisaDataBottomSheet extends StatelessWidget {
                 child: Text(
 
                   AppLocalizations.of(context)!.cardHolderName,
-                
                   style: AppTextStyles.subTitle1(isDarkMode),
 
                 ),
