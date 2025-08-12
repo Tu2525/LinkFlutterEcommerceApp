@@ -42,14 +42,10 @@ class ShippingDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${shippingInfo[0].name}, ${shippingInfo[0].address}',
+                  ' ${shippingInfo[0].address}',
                   style: AppTextStyles.body3(isDarkMode),
                 ),
                 SizedBox(height: 8.h),
-                Text(
-                  shippingInfo[0].phone,
-                  style: AppTextStyles.body3(isDarkMode),
-                ),
               ],
             ),
           ),

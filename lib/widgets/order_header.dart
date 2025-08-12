@@ -5,8 +5,8 @@ import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 
 class OrderHeader extends StatelessWidget {
-  const OrderHeader({super.key, required this.orderId});
-  final String orderId;
+  const OrderHeader({super.key, required this.orderIdd});
+  final String orderIdd;
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -15,7 +15,7 @@ class OrderHeader extends StatelessWidget {
         const CustomIcon(),
         SizedBox(width: 80.w),
         Text(
-          '${AppLocalizations.of(context)!.order} #$orderId',
+          '${AppLocalizations.of(context)!.order} #$orderIdd',
           style: AppTextStyles.subTitle1(isDarkMode),
         ),
       ],

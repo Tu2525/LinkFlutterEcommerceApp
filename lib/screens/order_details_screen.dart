@@ -16,30 +16,34 @@ class OrderDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
     final textColor = isDarkMode ? Colors.white : Colors.black;
+    final order = ref.watch(selectedOrderProvider);
+
     final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
-
       backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
 
+      // Keep develop's async handling but also allow direct `order` usage if needed
       body: orderAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
         data: (orderData) {
-          if (orderData.isEmpty) {
+          if (orderData.isEmpty && order == null) {
             return Center(child: Text(AppLocalizations.of(context)!.noOrders));
           }
-          final singleOrder = orderData.first;
+
+          // Prefer selectedOrderProvider if available, otherwise fallback to first from orderProvider
+          final activeOrder = order ?? orderData.first;
 
           return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OrderHeader(orderId: singleOrder.id),
+                OrderHeader(orderId: activeOrder.id ?? activeOrder.key),
                 SizedBox(height: 20.h),
-                OrderSteps(isDarkMode: isDarkMode, steps: singleOrder.steps),
+                OrderSteps(isDarkMode: isDarkMode, steps: activeOrder.steps),
                 SizedBox(height: 20.h),
                 Padding(
                   padding: EdgeInsets.only(left: 16.w),
@@ -51,12 +55,14 @@ class OrderDetails extends ConsumerWidget {
                 SizedBox(height: 20.h),
                 OrderItemsCard(
                   isDarkMode: isDarkMode,
-                  items: singleOrder.items,
+                  items: activeOrder.items,
+
                 ),
                 SizedBox(height: 38.h),
                 ShippingDetails(
                   isDarkMode: isDarkMode,
-                  shippingInfo: [singleOrder.shipping],
+                  shippingInfo: [activeOrder.shipping],
+
                 ),
               ],
             ),
