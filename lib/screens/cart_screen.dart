@@ -29,7 +29,6 @@ class CartScreen extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   const TopBar(showHeartIcon: false),
                   Text(
                     "Cart",
@@ -38,13 +37,14 @@ class CartScreen extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimaryColor(isDarkMode),
                     ),
-
-
-                  const TopBar(showHeartIcon: false,),
+                  ),
+                  const TopBar(showHeartIcon: false),
                   Text(
                     AppLocalizations.of(context)!.cart,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
 
                   // if (cartItems.isNotEmpty)
@@ -57,7 +57,6 @@ class CartScreen extends ConsumerWidget {
                   //     ),
                   //   )
                   // else
-
                   const SizedBox(
                     width: 80,
                   ), // Placeholder with approx. width of the button

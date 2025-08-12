@@ -22,10 +22,19 @@ class ProductsOfCategoryNotifier
 
   Future<void> _loadProductsByCategory() async {
     try {
+      print(
+        '🏪 ProductsOfCategoryNotifier: Loading products for categoryId: "$categoryId"',
+      );
       state = const AsyncValue.loading();
       final products = await ProductService.getProductsByCategory(categoryId);
+      print(
+        '🏪 ProductsOfCategoryNotifier: Loaded ${products.length} products for categoryId: "$categoryId"',
+      );
       state = AsyncValue.data(products);
     } catch (error, stackTrace) {
+      print(
+        '❌ ProductsOfCategoryNotifier: Error loading products for categoryId "$categoryId": $error',
+      );
       state = AsyncValue.error(error, stackTrace);
     }
   }

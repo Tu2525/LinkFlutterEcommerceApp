@@ -148,6 +148,24 @@ class ProductService {
     try {
       print('🔍 Searching for products with categoryId: "$categoryId"');
 
+      // First, let's get all products to see what's available
+      final allProductsSnapshot = await _firestore.collection('products').get();
+      print(
+        '📊 Total products in database: ${allProductsSnapshot.docs.length}',
+      );
+
+      // Log all categoryIds in the database
+      final allCategoryIds = <String>{};
+      for (var doc in allProductsSnapshot.docs) {
+        final data = doc.data();
+        final catId = data['categoryId']?.toString() ?? 'null';
+        allCategoryIds.add(catId);
+        print(
+          '📋 Product ${doc.id}: categoryId = "$catId", name = "${data['name']}"',
+        );
+      }
+      print('🏷️ Unique categoryIds in database: ${allCategoryIds.toList()}');
+
       final querySnapshot =
           await _firestore
               .collection('products')

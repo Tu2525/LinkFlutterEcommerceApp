@@ -74,18 +74,23 @@ class _HomePageState extends ConsumerState<HomePage> {
                           onSelected: (String result) {
                             ref.read(homePageProvider).selectedCategory;
                           },
-                          itemBuilder: (BuildContext context) =>
-                              homeNotifier.categories.map((String category) {
-                            return PopupMenuItem<String>(
-                              value: category,
-                              child: Text(
-                                category,
-                                style: TextStyle(
-                                  color: AppColors.textPrimaryColor(isDarkMode),
-                                ),
-                              ),
-                            );
-                          }).toList(),
+                          itemBuilder:
+                              (BuildContext context) =>
+                                  homeNotifier.categories.map((
+                                    String category,
+                                  ) {
+                                    return PopupMenuItem<String>(
+                                      value: category,
+                                      child: Text(
+                                        category,
+                                        style: TextStyle(
+                                          color: AppColors.textPrimaryColor(
+                                            isDarkMode,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,

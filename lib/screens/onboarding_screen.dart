@@ -62,7 +62,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
               child: SmoothPageIndicator(
                 controller: pageController,
                 count: screens.length,
-                effect: const WormEffect(
+                effect: WormEffect(
                   spacing: 16,
                   activeDotColor: AppColors.purple,
                 ),

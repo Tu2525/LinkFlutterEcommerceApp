@@ -9,13 +9,18 @@ import 'product_details_screen.dart';
 
 class ProductsOfCategoryScreen extends ConsumerWidget {
   final String categoryName;
-  const ProductsOfCategoryScreen({super.key, required this.categoryName});
+  final String categoryId;
+  const ProductsOfCategoryScreen({
+    super.key,
+    required this.categoryName,
+    required this.categoryId,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsyncValue = ref.watch(
       productsOfCategoryProvider(
-        categoryName,
+        categoryId, // Use categoryId instead of categoryName
       ), // Use categoryId instead of categoryName
     );
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;

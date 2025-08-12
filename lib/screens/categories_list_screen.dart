@@ -54,6 +54,7 @@ class CategoriesList extends ConsumerWidget {
                                 MaterialPageRoute(
                                   builder:
                                       (context) => ProductsOfCategoryScreen(
+                                        categoryId: item.categoryId,
                                         categoryName: item.title,
                                       ),
                                 ),
