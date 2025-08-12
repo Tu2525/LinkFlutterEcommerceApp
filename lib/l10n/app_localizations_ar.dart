@@ -196,49 +196,49 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search => 'بحث';
 
   @override
-  String get notifications => 'Notifications';
+  String get order => 'طلب';
 
   @override
-  String get noNotifications => 'No Notification yet';
+  String get notifications => 'الاشعارات';
 
   @override
-  String get exploreCategories => 'Explore Categories';
+  String get noNotifications => 'لا توجد لديك اشعارات حتي الان';
 
   @override
-  String get processing => 'Processing';
+  String get exploreCategories => 'اكتشف الفئات';
 
   @override
-  String get shipped => 'Shipped';
+  String get processing => 'قيد المعالجة';
 
   @override
-  String get delivered => 'Delivered';
+  String get shipped => 'تم الشحن';
 
   @override
-  String get returned => 'Returned';
+  String get delivered => 'تم التسليم';
 
   @override
-  String get cancelled => 'Cancelled';
+  String get returned => 'تم الإرجاع';
 
   @override
-  String get orders => 'Orders';
+  String get cancelled => 'تم الإلغاء';
 
   @override
-  String get noOrders => 'No Orders yet';
+  String get orders => 'الطلبات';
 
   @override
-  String get order => 'Order';
+  String get noOrders => 'لا يوجد لديك طلبات حتي الان';
 
   @override
-  String get item => 'items';
+  String get item => 'قطعه';
 
   @override
-  String get orderItems => 'Order Items';
+  String get orderItems => 'منتجات الطلب';
 
   @override
-  String get viewAll => 'View All';
+  String get viewAll => 'عرض الكل';
 
   @override
-  String get orderPlaced => 'Order Placed';
+  String get orderPlaced => 'تم تقديم الطلب';
 
   @override
   String get successfully => 'بنجاح';

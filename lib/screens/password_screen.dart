@@ -72,7 +72,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
               Form(
                 key: _formKey,
                 child: CustomTextField(
-                  emailController: passwordController,
+                  controller: passwordController,
                   isPassword: true,
                   hint: AppLocalizations.of(context)!.pass,
                   isdark: isDarkMode,

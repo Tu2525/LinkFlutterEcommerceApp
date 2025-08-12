@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
@@ -54,10 +53,7 @@ class OrderSummary extends ConsumerWidget {
           amount: shippingCost,
         ),
         SizedBox(height: 8.h),
-        PriceSummaryRow(
-          label: AppLocalizations.of(context)!.tax,
-          amount: tax,
-        ),
+        PriceSummaryRow(label: AppLocalizations.of(context)!.tax, amount: tax),
         const Divider(height: 30),
 
         // Total
@@ -82,16 +78,18 @@ class OrderSummary extends ConsumerWidget {
 
             try {
               final shippingInfo = ShippingInfo(
-                address: addressController.text.isNotEmpty
-                    ? addressController.text
-                    : 'No address provided',
+                address:
+                    addressController.text.isNotEmpty
+                        ? addressController.text
+                        : 'No address provided',
               );
 
               showDialog(
                 context: context,
                 barrierDismissible: false,
-                builder: (context) =>
-                    const Center(child: CircularProgressIndicator()),
+                builder:
+                    (context) =>
+                        const Center(child: CircularProgressIndicator()),
               );
 
               final order = await OrderService().saveOrderToFirebase(

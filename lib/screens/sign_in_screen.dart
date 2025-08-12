@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
@@ -68,7 +69,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               Form(
                 key: _formKey,
                 child: CustomTextField(
-                  emailController: emailController,
+                  controller: emailController,
                   isPassword: false,
                   hint: AppLocalizations.of(context)!.emailAddress,
                   isdark: isDarkMode,

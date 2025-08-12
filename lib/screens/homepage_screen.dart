@@ -8,7 +8,6 @@ import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
-import 'package:link_flutter_ecommerce_app/widgets/theme_toggle_widget.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';
@@ -68,24 +67,28 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ),
                         ),
                         // Theme toggle button
-
                         // Category dropdown
                         PopupMenuButton<String>(
                           onSelected: (String result) {
                             ref.read(homePageProvider).selectedCategory;
                           },
-                          itemBuilder: (BuildContext context) =>
-                              homeNotifier.categories.map((String category) {
-                            return PopupMenuItem<String>(
-                              value: category,
-                              child: Text(
-                                category,
-                                style: TextStyle(
-                                  color: AppColors.textPrimaryColor(isDarkMode),
-                                ),
-                              ),
-                            );
-                          }).toList(),
+                          itemBuilder:
+                              (BuildContext context) =>
+                                  homeNotifier.categories.map((
+                                    String category,
+                                  ) {
+                                    return PopupMenuItem<String>(
+                                      value: category,
+                                      child: Text(
+                                        category,
+                                        style: TextStyle(
+                                          color: AppColors.textPrimaryColor(
+                                            isDarkMode,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,
@@ -102,7 +105,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               children: [
                                 Text(
                                   homeNotifier.selectedCategory,
-                                  style: AppTextStyles.sectionTitle(isDarkMode),
+                                  style: AppTextStyles.body1(isDarkMode),
                                 ),
                                 const SizedBox(width: 4),
                                 Icon(
@@ -162,7 +165,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             IconsaxPlusBroken.search_normal_1,
                             color: AppColors.textSecondaryColor(isDarkMode),
                           ),
-                          hintText: 'Search',
+                          hintText: AppLocalizations.of(context)!.search,
                           hintStyle: TextStyle(
                             color: AppColors.textSecondaryColor(isDarkMode),
                           ),
@@ -177,7 +180,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   TopSellingSection(provider: topSellingProductsProvider),
                   const SizedBox(height: 24),
                   TopSellingSection(
-                    title: "New in",
+                    title: AppLocalizations.of(context)!.newIn,
                     provider: newInProductsProvider,
                   ),
                 ],

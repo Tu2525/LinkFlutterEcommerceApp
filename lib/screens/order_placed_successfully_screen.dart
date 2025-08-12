@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 
@@ -28,7 +27,10 @@ class OrderPlacedSuccessfullyScreen extends ConsumerWidget {
             width: double.infinity,
             height: screenHeight * 0.48,
             decoration: BoxDecoration(
-              color: isDarkMode ? AppColors.black : AppColors.white,
+              color:
+                  isDarkMode
+                      ? AppColors.darkBackground
+                      : AppColors.lightBackground,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),

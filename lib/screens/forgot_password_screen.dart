@@ -38,7 +38,7 @@ class ForgotPassword extends ConsumerWidget {
                   ),
                   SizedBox(height: screenHeight * 0.04),
                   CustomTextField(
-                    emailController: manager.emailController,
+                    controller: manager.emailController,
                     isPassword: false,
                     hint: AppLocalizations.of(context)!.enterEmailAddress,
                     isdark: isDarkMode,

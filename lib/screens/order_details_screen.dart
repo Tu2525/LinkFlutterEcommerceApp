@@ -16,13 +16,13 @@ class OrderDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDarkMode ? Colors.white : Colors.black;
     final order = ref.watch(selectedOrderProvider);
 
     final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
-      backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
+      backgroundColor:
+          isDarkMode ? AppColors.darkBackground : AppColors.lightBackground,
 
       // Keep develop's async handling but also allow direct `order` usage if needed
       body: orderAsyncValue.when(
@@ -41,7 +41,7 @@ class OrderDetails extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OrderHeader(orderId: activeOrder.id ?? activeOrder.key),
+                OrderHeader(orderIdd: activeOrder.key),
                 SizedBox(height: 20.h),
                 OrderSteps(isDarkMode: isDarkMode, steps: activeOrder.steps),
                 SizedBox(height: 20.h),
@@ -56,13 +56,11 @@ class OrderDetails extends ConsumerWidget {
                 OrderItemsCard(
                   isDarkMode: isDarkMode,
                   items: activeOrder.items,
-
                 ),
                 SizedBox(height: 38.h),
                 ShippingDetails(
                   isDarkMode: isDarkMode,
                   shippingInfo: [activeOrder.shipping],
-
                 ),
               ],
             ),
