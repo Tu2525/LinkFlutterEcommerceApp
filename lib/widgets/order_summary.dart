@@ -3,12 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
 class OrderSummary extends ConsumerWidget {
-  const OrderSummary({super.key});
+  const OrderSummary({required this.subtotal, required this.total, super.key});
+  final double subtotal;
+  final double total;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,10 +32,7 @@ class OrderSummary extends ConsumerWidget {
           amount: shippingCost,
         ),
         SizedBox(height: 8.h),
-        PriceSummaryRow(
-          label: AppLocalizations.of(context)!.tax,
-          amount: tax,
-        ),
+        PriceSummaryRow(label: AppLocalizations.of(context)!.tax, amount: tax),
         const Divider(height: 30),
         PriceSummaryRow(
           label: AppLocalizations.of(context)!.total,

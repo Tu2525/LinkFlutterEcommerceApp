@@ -217,9 +217,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get returned => 'Returned';
 
   @override
-
   String get cancelled => 'Cancelled';
-
 
   @override
   String get orders => 'Orders';

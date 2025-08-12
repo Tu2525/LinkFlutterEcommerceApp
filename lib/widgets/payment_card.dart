@@ -36,7 +36,7 @@ class PaymentCard extends ConsumerWidget {
           tileColor:
               isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
           trailing: Icon(IconsaxPlusBroken.arrow_right_3, color: textColor),
-          title: const Text(titleText, style: AppTextStyles.faintGrey),
+          title:  Text(titleText, style: AppTextStyles.faintGrey),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 4.0.h),
             child:
