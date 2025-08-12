@@ -100,7 +100,7 @@ class ProfilePage extends ConsumerWidget {
               ),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 30,
                     backgroundColor: AppColors.primary,
                     child: Icon(

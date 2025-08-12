@@ -8,7 +8,6 @@ import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
-import 'package:link_flutter_ecommerce_app/widgets/theme_toggle_widget.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';

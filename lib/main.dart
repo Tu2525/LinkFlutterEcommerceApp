@@ -30,7 +30,7 @@ Future<void> firebaseMessagingBackgroundHandler(
 /// re-initialization errors. Starts the application with a ProviderScope
 /// and an instance of `EcommerceApp`.
 
-/*******  04452b9f-1050-4c15-b898-b6debc2c8778  *******/
+/// *****  04452b9f-1050-4c15-b898-b6debc2c8778  ******
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -99,11 +99,9 @@ class EcommerceApp extends ConsumerWidget {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: AppColors.lightSurface,
-        background: AppColors.lightBackground,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: AppColors.lightTextPrimary,
-        onBackground: AppColors.lightTextPrimary,
       ),
     );
   }
@@ -129,11 +127,9 @@ class EcommerceApp extends ConsumerWidget {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: AppColors.darkSurface,
-        background: AppColors.darkBackground,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: AppColors.darkTextPrimary,
-        onBackground: AppColors.darkTextPrimary,
       ),
     );
   }
