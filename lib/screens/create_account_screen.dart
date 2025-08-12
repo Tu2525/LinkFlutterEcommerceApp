@@ -53,7 +53,6 @@ class CreateAccountScreen extends ConsumerWidget {
               const SizedBox(height: 16),
               CustomTextField(
                 isdark: isDarkMode,
-
                 controller: accountManager.lastnameController,
                 isPassword: false,
                 hint: AppLocalizations.of(context)!.lastName,
