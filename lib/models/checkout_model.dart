@@ -1,12 +1,14 @@
 class ShippingAddress {
   final String address;
   final String city;
+  final String state;
   final String country;
   final String zipCode;
 
   ShippingAddress({
     required this.address,
     required this.city,
+    required this.state,
     required this.country,
     required this.zipCode,
   });
@@ -15,6 +17,7 @@ class ShippingAddress {
     return {
       'address': address,
       'city': city,
+      'state': state,
       'country': country,
       'zipCode': zipCode,
     };
@@ -24,6 +27,7 @@ class ShippingAddress {
     return ShippingAddress(
       address: map['address'] ?? '',
       city: map['city'] ?? '',
+      state: map['state'] ?? '',
       country: map['country'] ?? '',
       zipCode: map['zipCode'] ?? '',
     );

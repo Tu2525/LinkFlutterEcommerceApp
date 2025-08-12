@@ -94,3 +94,25 @@ final checkoutProvider =
       final service = ref.watch(checkoutServiceProvider);
       return CheckoutNotifier(service);
     });
+    
+final addressTextProvider = StateProvider<String>((ref) => '');
+final cityTextProvider = StateProvider<String>((ref) => '');
+final countryTextProvider = StateProvider<String>((ref) => '');
+final zipCodeTextProvider = StateProvider<String>((ref) => '');
+final stateTextProvider = StateProvider<String>((ref) => '');
+final nameTextProvider = StateProvider<String>((ref) => '');
+final cardNumberTextProvider = StateProvider<String>((ref) => '');
+final cvvTextProvider = StateProvider<String>((ref) => '');
+final expiryTextProvider = StateProvider<String>((ref) => '');
+
+final isFormValidProvider = Provider<bool>((ref) {
+  return ref.watch(addressTextProvider).trim().isNotEmpty &&
+      ref.watch(cityTextProvider).trim().isNotEmpty &&
+      ref.watch(countryTextProvider).trim().isNotEmpty &&
+      ref.watch(zipCodeTextProvider).trim().isNotEmpty &&
+      ref.watch(stateTextProvider).trim().isNotEmpty &&
+      ref.watch(nameTextProvider).trim().isNotEmpty &&
+      ref.watch(cardNumberTextProvider).trim().isNotEmpty &&
+      ref.watch(cvvTextProvider).trim().isNotEmpty &&
+      ref.watch(expiryTextProvider).trim().isNotEmpty;
+});

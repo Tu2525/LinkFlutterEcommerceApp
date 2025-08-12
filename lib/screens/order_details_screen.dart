@@ -22,7 +22,7 @@ class OrderDetails extends ConsumerWidget {
     final orderAsyncValue = ref.watch(orderProvider);
 
     return Scaffold(
-      backgroundColor: isDarkMode ? AppColors.black : AppColors.white,
+      backgroundColor: isDarkMode ? AppColors.darkBackground : AppColors.lightBackground,
 
       // Keep develop's async handling but also allow direct `order` usage if needed
       body: orderAsyncValue.when(
@@ -41,7 +41,7 @@ class OrderDetails extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                OrderHeader(orderIdd: activeOrder.id ?? activeOrder.key),
+                OrderHeader(orderIdd: activeOrder.key),
                 SizedBox(height: 20.h),
                 OrderSteps(isDarkMode: isDarkMode, steps: activeOrder.steps),
                 SizedBox(height: 20.h),

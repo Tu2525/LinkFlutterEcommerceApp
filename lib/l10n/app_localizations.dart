@@ -473,7 +473,7 @@ abstract class AppLocalizations {
   /// No description provided for @order.
   ///
   /// In en, this message translates to:
-  /// **'Order'**
+  /// **'Orders'**
   String get order;
 
   /// No description provided for @notifications.
@@ -895,6 +895,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No order found.'**
   String get noorder;
+
+  /// No description provided for @pleaseFillAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in all the fields'**
+  String get pleaseFillAllFields;
+
+  /// No description provided for @failedToPlaceOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to place order:'**
+  String get failedToPlaceOrder;
+
+  /// No description provided for @orderPlacedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed successfully! Order ID:'**
+  String get orderPlacedSuccessfully;
+
+  /// No description provided for @noAddressProvided.
+  ///
+  /// In en, this message translates to:
+  /// **'No address provided'**
+  String get noAddressProvided;
 }
 
 class _AppLocalizationsDelegate

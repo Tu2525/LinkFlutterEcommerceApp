@@ -1,16 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
-import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
-import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
-import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
-import 'package:link_flutter_ecommerce_app/services/order_service.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
 class OrderSummary extends ConsumerWidget {
@@ -23,11 +15,7 @@ class OrderSummary extends ConsumerWidget {
 
     // feature branch vars
     final totalFromProvider = ref.watch(totalProvider);
-    final cartItems = ref.watch(cartProvider);
-    final addressController = ref.read(addressControllerProvider);
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
+    
 
     // develop branch constants
     const shippingCost = 8.00;
@@ -64,70 +52,6 @@ class OrderSummary extends ConsumerWidget {
           label: AppLocalizations.of(context)!.total,
           amount: total,
           isTotal: true,
-        ),
-
-        SizedBox(height: 24.h),
-        ContinueButton(
-          onPressed: () async {
-            if (cartItems.isEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Your cart is empty'),
-                  backgroundColor: Colors.red,
-                ),
-              );
-              return;
-            }
-
-            try {
-              final shippingInfo = ShippingInfo(
-                address: addressController.text.isNotEmpty
-                    ? addressController.text
-                    : 'No address provided',
-              );
-
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) =>
-                    const Center(child: CircularProgressIndicator()),
-              );
-
-              final order = await OrderService().saveOrderToFirebase(
-                cartItems: cartItems,
-                shipping: shippingInfo,
-                status: 'Processing',
-              );
-              ref.read(selectedOrderProvider.notifier).state = order;
-              Navigator.of(context).pop();
-              ref.read(cartProvider.notifier).clearCart();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const OrderPlacedSuccessfullyScreen(),
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Order placed successfully! Order ID: ${order.key}',
-                  ),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            } catch (e) {
-              if (Navigator.canPop(context)) {
-                Navigator.of(context).pop();
-              }
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Failed to place order: $e'),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
-          text: '\$$total${' ' * 40}Place Order',
         ),
 
         SizedBox(height: 20.h),

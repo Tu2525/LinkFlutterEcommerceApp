@@ -7,13 +7,14 @@ class CustomTextForm extends StatelessWidget {
   final String hint;
   final String? Function(String?)? validator;
   final bool isdarkmode;
+  final void Function(String)? onChanged;
   const CustomTextForm({
     super.key,
     required this.controller,
     required this.inputType,
     required this.hint,
     this.validator,
-    required this.isdarkmode,
+    required this.isdarkmode, required this.onChanged,
   });
 
   @override
@@ -54,6 +55,7 @@ class CustomTextForm extends StatelessWidget {
       ),
 
       validator: validator,
+      onChanged: onChanged ,
     );
   }
 }

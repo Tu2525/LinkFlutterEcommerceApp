@@ -132,7 +132,11 @@
   "addCard": "إضافة بطاقة",
   "zipcodemustbe": "الرمز البريدي يجب أن يكون بين 3 و 10 أرقام",
   "addAddress": "إضافة عنوان",
-  "noorder": "لا يوجد طلبات"
+  "noorder": "لا يوجد طلبات",
+  "pleaseFillAllFields": "يرجى ملء جميع الحقول",
+  "failedToPlaceOrder": "فشل في طلب الطلب:",
+  "orderPlacedSuccessfully": "تم تقديم الطلب بنجاح! رقم الطلب:",
+  "noAddressProvided": "لا يوجد عنوان مقدم"
 
   
 }

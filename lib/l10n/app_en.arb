@@ -132,5 +132,9 @@
     "addCard": "Add Card",
     "zipcodemustbe": "Zipcode must be between 3 to 10 digits",
     "addAddress": "Add Address",
-    "noorder": "No order found."
+    "noorder": "No order found.",
+    "pleaseFillAllFields": "Please fill in all the fields",
+    "failedToPlaceOrder": "Failed to place order:",
+    "orderPlacedSuccessfully": "Order placed successfully! Order ID:",
+    "noAddressProvided": "No address provided"
 }
