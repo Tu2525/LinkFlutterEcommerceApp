@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 
 class TopBar extends StatelessWidget {
   final bool showHeartIcon;
@@ -14,6 +15,7 @@ class TopBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _buildIconButton(
+            context: context,
             icon: IconsaxPlusBroken.arrow_left_2,
             onPressed: () {
               Navigator.of(context).pop();
@@ -21,39 +23,40 @@ class TopBar extends StatelessWidget {
           ),
           if (showHeartIcon)
             _buildIconButton(
+              context: context,
               icon: IconsaxPlusBroken.heart,
-              onPressed:
-                  onHeartPressed ??
-                  () {
-                    // print("Heart icon pressed!");
-                  },
+              onPressed: onHeartPressed ?? () {},
             ),
         ],
       ),
     );
   }
 
-  /// Builds a reusable icon button with a specific icon and action.
   Widget _buildIconButton({
+    required BuildContext context,
     required IconData icon,
     required VoidCallback onPressed,
   }) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBackgroundColor(isDarkMode),
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            // CORRECTED: .withOpacity() is the correct method
-            color: Colors.grey.withOpacity(0.2),
+            color: AppColors.borderColor(isDarkMode),
             spreadRadius: 1,
             blurRadius: 5,
           ),
         ],
       ),
       child: IconButton(
-        icon: Icon(icon, color: Colors.black87, size: 20),
-        // The action to perform when the button is tapped
+        icon: Icon(
+          icon,
+          color: isDarkMode ? Colors.white : Colors.black87,
+          size: 20,
+        ),
         onPressed: onPressed,
       ),
     );

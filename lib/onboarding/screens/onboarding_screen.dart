@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/providers/onboarding_screen_providor.dart';
-import 'package:link_flutter_ecommerce_app/widgets/onboarding_screen_widget.dart';
+import 'package:link_flutter_ecommerce_app/onboarding/providers/onboarding_screen_provider.dart';
+import 'package:link_flutter_ecommerce_app/onboarding/widgets/onboarding_screen_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends ConsumerStatefulWidget {
@@ -43,7 +43,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
               imagePath: screens[index].img,
               index: index,
               color: index == 1 ? AppColors.primary : null,
-              color2: index == 1 ? AppColors.black : null,
+              color2: index == 1 ? AppColors.darkBackground : null,
             ),
           ),
         ),
@@ -64,7 +64,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                 count: screens.length,
                 effect: const WormEffect(
                   spacing: 16,
-                  activeDotColor: AppColors.purple,
+                  activeDotColor: AppColors.primary,
                 ),
                 onDotClicked:
                     (index) => pageController.animateToPage(

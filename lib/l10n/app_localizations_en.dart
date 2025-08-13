@@ -407,4 +407,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noorder => 'No order found.';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get language => 'Language';
 }

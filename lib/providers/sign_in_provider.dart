@@ -6,7 +6,6 @@ final signInEmailProvider = StateProvider<String>((ref) => '');
 final signInDarkModeProvider = StateProvider<bool>((ref) => false);
 final signInPasswordProvider = StateProvider<String>((ref) => '');
 
-// Email validation: not empty, valid email format, extensible for Firebase
 typedef ValidationResult = String?;
 
 ValidationResult validateEmail(
@@ -21,11 +20,9 @@ ValidationResult validateEmail(
   if (!regex.hasMatch(value)) {
     return AppLocalizations.of(context)!.invalidFormatMessage;
   }
-  // Add Firebase-specific checks here in the future
   return null;
 }
 
-// Password validation: not empty, min 8 chars, at least one letter and one number, extensible for Firebase
 ValidationResult validatePassword(
   BuildContext context,
   String? value, {

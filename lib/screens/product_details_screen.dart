@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart'; //?? shouldn't this be used?
 
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/product.dart';
@@ -17,20 +17,14 @@ import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/reviewS
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/sizeSelector.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  // Your screen still accepts a product object
   final Product product;
 
   const ProductDetailsScreen({required this.product, super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Use ProviderScope to "provide" your product to the providers
     return ProviderScope(
-      overrides: [
-        // This is where you connect your screen's product to the provider
-        productProvider.overrideWithValue(product),
-      ],
-      // The child widget can now correctly use all your providers
+      overrides: [productProvider.overrideWithValue(product)],
       child: const _ProductDetailsView(),
     );
   }

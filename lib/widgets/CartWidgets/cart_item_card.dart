@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
@@ -21,7 +22,7 @@ class CartItemCard extends ConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBackgroundColor(isDarkMode),
         borderRadius: BorderRadius.circular(15.0),
         boxShadow: [
           BoxShadow(

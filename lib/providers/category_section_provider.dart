@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/models/category_data.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories.dart';
