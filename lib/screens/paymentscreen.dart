@@ -151,20 +151,11 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.placeOrder,
-                          style: const TextStyle(
-                            fontFamily: 'Circular',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
+                          style: AppTextStyles.subTitle1(isDarkMode),
                         ),
                         Text(
                           ' \$${total.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
+                          style: AppTextStyles.heading5(isDarkMode),
                         ),
                       ],
                     ),

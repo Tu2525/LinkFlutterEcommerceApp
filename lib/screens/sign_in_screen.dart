@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
+import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';

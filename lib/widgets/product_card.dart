@@ -48,7 +48,6 @@ class _ProductCardState extends State<ProductCard> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        // Provide a default width if none is passed. This fixes the error.
         width: widget.width ?? 160,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
@@ -56,7 +55,6 @@ class _ProductCardState extends State<ProductCard> {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AspectRatio(
@@ -76,17 +74,19 @@ class _ProductCardState extends State<ProductCard> {
                         topLeft: Radius.circular(12),
                         topRight: Radius.circular(12),
                       ),
-                      child: widget.product.imageUrls != null
-                          ? Image.network(
-                              widget.product.imageUrls![0],
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
-                              errorBuilder: (context, error, stackTrace) {
-                                return _buildPlaceholder();
-                              },
-                            )
-                          : _buildPlaceholder(),
+                      child:
+                          widget.product.imageUrls != null &&
+                                  widget.product.imageUrls!.isNotEmpty
+                              ? Image.network(
+                                widget.product.imageUrls![0],
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return _buildPlaceholder();
+                                },
+                              )
+                              : _buildPlaceholder(),
                     ),
                     Positioned(
                       top: 8,
@@ -97,9 +97,12 @@ class _ProductCardState extends State<ProductCard> {
                           _isFavorite
                               ? IconsaxPlusBold.heart
                               : IconsaxPlusBroken.heart,
-                          color: _isFavorite
-                              ? Colors.red
-                              : colorScheme.onSurface.withOpacity(0.7),
+                          color:
+                              _isFavorite
+                                  ? Colors.red
+                                  : colorScheme.onSurface.withValues(
+                                    alpha: 0.7,
+                                  ),
                           size: 24,
                         ),
                       ),
@@ -108,37 +111,40 @@ class _ProductCardState extends State<ProductCard> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.product.name,
-                    style: AppTextStyles.subTitle2(isDarkMode),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Row(
-                    children: [
-                      Text(
-                        '\$${widget.product.price.toStringAsFixed(2)}',
-                        style: AppTextStyles.heading6(isDarkMode),
-                      ),
-                      if (widget.product.isOnSale) ...[
-                        const SizedBox(width: 8),
-                        Flexible(
-                          child: Text(
-                            '\$${widget.product.originalPrice!.toStringAsFixed(2)}',
-                            style: AppTextStyles.faintGrey2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.product.name,
+                      style: AppTextStyles.subTitle2(isDarkMode),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Text(
+                          '\$${widget.product.price.toStringAsFixed(2)}',
+                          style: AppTextStyles.heading6(isDarkMode),
                         ),
+                        if (widget.product.isOnSale) ...[
+                          const SizedBox(width: 8),
+                          Flexible(
+                            child: Text(
+                              '\$${widget.product.originalPrice!.toStringAsFixed(2)}',
+                              style: AppTextStyles.faintGrey2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
                       ],
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -152,20 +158,21 @@ class _ProductCardState extends State<ProductCard> {
     final colorScheme = theme.colorScheme;
     return Container(
       color: colorScheme.surface,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.image_outlined,
-            size: 48,
-            color: colorScheme.onSurface.withOpacity(0.4),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'No Image',
-            style: AppTextStyles.faintGrey2,
-          ),
-        ],
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              IconsaxPlusBroken.image,
+              size: 48,
+              // FIXED: '.withValues' is not a standard method.
+              // Replaced with '.withOpacity' to set transparency.
+              color: colorScheme.onSurface.withValues(alpha: 0.4),
+            ),
+            const SizedBox(height: 8),
+            const Text('No Image', style: AppTextStyles.faintGrey2),
+          ],
+        ),
       ),
     );
   }

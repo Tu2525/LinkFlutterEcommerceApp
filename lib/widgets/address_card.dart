@@ -8,7 +8,7 @@ import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
-import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
+import 'package:link_flutter_ecommerce_app/providers/address_provider.dart';
 
 class AddressCard extends ConsumerWidget {
   const AddressCard({super.key, required this.ontab, required this.isDarkMode});
