@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
 
 class ShippingDetails extends StatelessWidget {
   final bool isDarkMode;
@@ -15,8 +16,6 @@ class ShippingDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardColor =
-        isDarkMode ? const Color(0xff342F3f) : const Color(0xffF4F4F4);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +33,7 @@ class ShippingDetails extends StatelessWidget {
             height: 72.h,
             width: 342.w,
             decoration: BoxDecoration(
-              color: cardColor,
+              color: AppColors.cardBackgroundColor(isDarkMode),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.all(8),

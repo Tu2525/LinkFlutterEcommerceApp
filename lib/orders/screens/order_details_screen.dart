@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
-import 'package:link_flutter_ecommerce_app/widgets/order_header.dart';
-import 'package:link_flutter_ecommerce_app/widgets/order_items_card.dart';
-import 'package:link_flutter_ecommerce_app/widgets/order_steps.dart';
-import 'package:link_flutter_ecommerce_app/widgets/shipping_details.dart';
+import 'package:link_flutter_ecommerce_app/orders/providers/orders_provider.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_header.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_items_card.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_steps.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/shipping_details.dart';
 
 class OrderDetails extends ConsumerWidget {
   const OrderDetails({super.key});
@@ -23,7 +23,6 @@ class OrderDetails extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(isDarkMode),
 
-      // Keep develop's async handling but also allow direct `order` usage if needed
       body: orderAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text('Error: $err')),
@@ -54,6 +53,7 @@ class OrderDetails extends ConsumerWidget {
                 OrderItemsCard(
                   isDarkMode: isDarkMode,
                   items: activeOrder.items,
+                  order: order,
 
                 ),
                 SizedBox(height: 38.h),

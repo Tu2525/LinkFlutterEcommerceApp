@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
-import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
+import 'package:link_flutter_ecommerce_app/orders/providers/orders_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
-import 'package:link_flutter_ecommerce_app/services/order_service.dart';
+import 'package:link_flutter_ecommerce_app/orders/services/order_service.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/cart_item_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/coupon_code_input.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
-import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_summary.dart';
 
 class PopulatedCart extends ConsumerWidget {
   final List<CartItem> cartItems;

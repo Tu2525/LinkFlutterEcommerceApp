@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/providers/orders_provider.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
-import '../providers/order_provider.dart';
-import '../widgets/order_card.dart';
 
 class OrdersScreen extends ConsumerWidget {
   const OrdersScreen({super.key});
@@ -28,10 +29,9 @@ class OrdersScreen extends ConsumerWidget {
         title: Text(AppLocalizations.of(context)!.order),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: AppColors.backgroundColor(isDarkMode),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundColor(isDarkMode),
       body: orderAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Center(child: Text("Error: $err")),
@@ -63,9 +63,9 @@ class OrdersScreen extends ConsumerWidget {
                           child: ChoiceChip(
                             label: Text(status),
                             selected: isSelected,
-                            selectedColor: Colors.purple,
-                            backgroundColor: Colors.grey.shade200,
-                            labelStyle: AppTextStyles.bodyText(isDarkMode),
+                            selectedColor: AppColors.primary,
+                            backgroundColor: AppColors.secondary,
+                            labelStyle: AppTextStyles.subTitle1(isDarkMode),
                             onSelected:
                                 (_) =>
                                     ref

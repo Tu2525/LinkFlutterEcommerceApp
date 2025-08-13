@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
-import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
+import 'package:link_flutter_ecommerce_app/orders/providers/orders_provider.dart';
+import 'package:link_flutter_ecommerce_app/orders/screens/order_details_screen.dart';
 import '../models/order_model.dart';
 
 class OrderCard extends ConsumerWidget {
@@ -24,7 +25,7 @@ class OrderCard extends ConsumerWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              color: Colors.grey.shade100,
+              color: AppColors.cardBackgroundColor(isDarkMode),
               elevation: 0,
               child: ListTile(
                 leading: const Icon(Icons.receipt_long_outlined, size: 28),

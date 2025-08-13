@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+import 'package:link_flutter_ecommerce_app/orders/screens/orders_screen_new.dart';
 import 'package:link_flutter_ecommerce_app/providers/main_screen_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
-import 'package:link_flutter_ecommerce_app/screens/orders_screen.dart';
 import 'package:link_flutter_ecommerce_app/profile/screens/profile_screen.dart';
 
 class MainScreen extends ConsumerWidget {

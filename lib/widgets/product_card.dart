@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import '../constants/app_colors.dart';
 import '../models/product.dart';
 
 class ProductCard extends StatefulWidget {
@@ -8,7 +9,6 @@ class ProductCard extends StatefulWidget {
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteToggle;
   final double? width;
-  final Color cardColor;
 
   const ProductCard({
     super.key,
@@ -16,7 +16,6 @@ class ProductCard extends StatefulWidget {
     this.onTap,
     this.onFavoriteToggle,
     this.width,
-    required this.cardColor,
   });
 
   @override
@@ -43,7 +42,7 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final isDarkMode = theme.brightness == Brightness.dark;
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return GestureDetector(
       onTap: widget.onTap,
@@ -51,7 +50,7 @@ class _ProductCardState extends State<ProductCard> {
         width: widget.width ?? 160,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          color: widget.cardColor,
+          color: AppColors.cardBackgroundColor(isDarkMode),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -65,7 +64,7 @@ class _ProductCardState extends State<ProductCard> {
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
                   ),
-                  color: colorScheme.surface,
+                  color: AppColors.cardBackgroundColor(isDarkMode),
                 ),
                 child: Stack(
                   children: [
@@ -156,8 +155,10 @@ class _ProductCardState extends State<ProductCard> {
   Widget _buildPlaceholder() {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final bool isDarkMode = theme.brightness == Brightness.dark;
+
     return Container(
-      color: colorScheme.surface,
+      color: AppColors.surfaceColor(isDarkMode),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -165,8 +166,6 @@ class _ProductCardState extends State<ProductCard> {
             Icon(
               IconsaxPlusBroken.image,
               size: 48,
-              // FIXED: '.withValues' is not a standard method.
-              // Replaced with '.withOpacity' to set transparency.
               color: colorScheme.onSurface.withValues(alpha: 0.4),
             ),
             const SizedBox(height: 8),

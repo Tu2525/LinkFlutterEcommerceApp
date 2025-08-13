@@ -5,9 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
-import '../providers/order_provider.dart';
+import '../providers/orders_provider.dart';
 import '../widgets/order_card.dart';
 
 class OrdersScreen extends ConsumerWidget {
@@ -68,9 +68,9 @@ class OrdersScreen extends ConsumerWidget {
                           child: ChoiceChip(
                             label: Text(status),
                             selected: isSelected,
-                            selectedColor: Colors.purple,
+                            selectedColor: Colors.blue,
                             backgroundColor: Colors.grey.shade200,
-                            labelStyle: AppTextStyles.bodyText(isDarkMode),
+                            labelStyle: AppTextStyles.subTitle1(isDarkMode),
                             onSelected:
                                 (_) =>
                                     ref

@@ -13,7 +13,7 @@ import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
-import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_summary.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/visa_data_bottom_sheet.dart';
 

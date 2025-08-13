@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/see_all_products_screen.dart';
@@ -87,9 +88,6 @@ class TopSellingSection extends ConsumerWidget {
                     itemBuilder: (context, index) {
                       final product = products[index];
                       return ProductCard(
-                        cardColor: isDarkMode
-                            ? const Color(0xFF342F3F)
-                            : const Color(0xFFF4F4F4),
                         product: product,
                         width: cardWidth,
                         onTap: () => Navigator.push(
