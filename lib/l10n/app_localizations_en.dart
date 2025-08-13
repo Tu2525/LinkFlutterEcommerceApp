@@ -422,4 +422,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shippingDetails => 'Shipping Details';
+
+  @override
+  String get payment => 'Payment';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
 }

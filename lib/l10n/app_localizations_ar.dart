@@ -423,4 +423,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shippingDetails => 'تفاصيل الشحن';
+
+  @override
+  String get payment => 'الدفع';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما';
 }

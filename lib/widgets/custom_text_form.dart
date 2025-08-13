@@ -56,6 +56,7 @@ class CustomTextForm extends StatelessWidget {
 
       validator: validator,
       onChanged: onChanged ,
+      
     );
   }
 }

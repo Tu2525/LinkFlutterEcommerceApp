@@ -74,7 +74,9 @@ checkoutState.when(
           });
         }
       },
-      loading: () {},
+      loading: () {
+        const Center(child: CircularProgressIndicator());
+      },
       error: (err, st) {
         debugPrint("Error loading checkout data: $err");
       },
@@ -115,7 +117,7 @@ checkoutState.when(
           // Payment Section
           PaymentCard(
             isDarkMode: isDarkMode,
-            ontab: () {
+            onTap: () {
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true,

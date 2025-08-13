@@ -925,6 +925,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shipping Details'**
   String get shippingDetails;
+
+  /// No description provided for @payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get payment;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get somethingWentWrong;
 }
 
 class _AppLocalizationsDelegate

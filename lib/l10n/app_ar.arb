@@ -137,7 +137,10 @@
   "failedToPlaceOrder": "فشل في طلب الطلب:",
   "orderPlacedSuccessfully": "تم تقديم الطلب بنجاح! رقم الطلب:",
   "noAddressProvided": "لا يوجد عنوان مقدم",
-  "shippingDetails": "تفاصيل الشحن"
+  "shippingDetails": "تفاصيل الشحن",
+  "payment":"الدفع",
+  "save"  :"حفظ",
+  "somethingWentWrong": "حدث خطأ ما"
 
   
 }

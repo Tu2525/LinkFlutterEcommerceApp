@@ -68,10 +68,10 @@ class CheckoutNotifier extends StateNotifier<AsyncValue<List<CheckoutModel>>> {
   StreamSubscription<List<CheckoutModel>>? _subscription;
 
   CheckoutNotifier(this._service) : super(const AsyncValue.loading()) {
-    _listenToCheckoutData();
+    listenToCheckoutData();
   }
 
-  void _listenToCheckoutData() {
+  void listenToCheckoutData() {
     _subscription?.cancel();
 
     _subscription = _service.getCheckoutDataStream().listen(
@@ -93,6 +93,7 @@ class CheckoutNotifier extends StateNotifier<AsyncValue<List<CheckoutModel>>> {
   Future<void> saveCheckoutData(CheckoutModel checkout) async {
     try {
       await _service.saveCheckoutData(checkout);
+      listenToCheckoutData();
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -101,6 +102,7 @@ class CheckoutNotifier extends StateNotifier<AsyncValue<List<CheckoutModel>>> {
   Future<void> updateCheckoutData(CheckoutModel checkout) async {
     try {
       await _service.updateCheckoutData(checkout);
+      listenToCheckoutData();
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }

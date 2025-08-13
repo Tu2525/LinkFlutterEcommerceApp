@@ -137,5 +137,9 @@
     "failedToPlaceOrder": "Failed to place order:",
     "orderPlacedSuccessfully": "Order placed successfully! Order ID:",
     "noAddressProvided": "No address provided",
-    "shippingDetails": "Shipping Details"
+    "shippingDetails": "Shipping Details",
+    "payment":"Payment",
+    "save"  :"Save",
+    "somethingWentWrong": "Something went wrong"
+  
 }
