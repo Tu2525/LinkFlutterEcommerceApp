@@ -27,6 +27,7 @@ class Categories extends StatelessWidget {
               MaterialPageRoute(
                 builder:
                     (context) => ProductsOfCategoryScreen(
+                      categoryId: categoryId,
                       categoryName: title,
                     ),
               ),
@@ -65,7 +66,8 @@ class Categories extends StatelessWidget {
           SizedBox(height: screenHeight * 0.008),
           Text(
             title,
-            style: TextStyle( //for indiviual category item >> #TODO
+            style: TextStyle(
+              //for indiviual category item >> #TODO
               color:
                   Theme.of(context).brightness == Brightness.dark
                       ? Colors.white
