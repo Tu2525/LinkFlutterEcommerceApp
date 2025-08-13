@@ -4,7 +4,7 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 
 class OrderPlacedSuccessfullyScreen extends ConsumerWidget {
   const OrderPlacedSuccessfullyScreen({super.key});
@@ -59,7 +59,7 @@ class OrderPlacedSuccessfullyScreen extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 80),
-                ContinueButton(
+                CustomButton(
                   width: 350,
                   height: 52,
                   text: AppLocalizations.of(context)!.seeOrderDetails,

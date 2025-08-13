@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
-class ContinueButton extends StatelessWidget {
-  const ContinueButton({
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     super.key,
     required this.onPressed,
     this.text,
     this.width = double.infinity,
-    this.height = 49,
+    this.height = 52,
     this.row,
   });
   final VoidCallback onPressed;
@@ -23,7 +24,7 @@ class ContinueButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xff8E6CEF),
+        backgroundColor: AppColors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         minimumSize: Size(width, height),
         elevation: 0, // Full width button
@@ -34,10 +35,8 @@ class ContinueButton extends StatelessWidget {
               ? row!
               : Text(
                 text ?? AppLocalizations.of(context)!.cont,
-                   style: AppTextStyles.subTitle1(!isDarkMode),
+                style: AppTextStyles.subTitle1(isDarkMode),
               ),
-
- 
     );
   }
 }

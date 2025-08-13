@@ -10,7 +10,8 @@ class CategoryCard extends StatelessWidget {
   final double screenHeight;
   final double screenWidth;
 
-  const CategoryCard({super.key, 
+  const CategoryCard({
+    super.key,
     required this.image,
     required this.title,
     required this.isDarkMode,
@@ -35,10 +36,7 @@ class CategoryCard extends StatelessWidget {
             radius: screenWidth * 0.06,
           ),
           const SizedBox(width: 16),
-          Text(
-            title,
-            style: AppTextStyles.subTitle1(isDarkMode),
-          ),
+          Text(title, style: AppTextStyles.subTitle1(isDarkMode)),
         ],
       ),
     );

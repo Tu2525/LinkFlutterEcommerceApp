@@ -22,7 +22,7 @@ class NotificationScreen extends ConsumerWidget {
             child: Center(
               child: Text(
                 AppLocalizations.of(context)!.notifications,
-                style: AppTextStyles.heading5(isDarkMode),
+                style: AppTextStyles.heading4(isDarkMode),
               ),
             ),
           ),

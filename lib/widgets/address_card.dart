@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
-import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
+import 'package:link_flutter_ecommerce_app/providers/address_provider.dart';
 
 class AddressCard extends ConsumerWidget {
   const AddressCard({super.key, required this.ontab, required this.isDarkMode});
@@ -33,7 +34,7 @@ class AddressCard extends ConsumerWidget {
             borderRadius: BorderRadius.circular(10.r),
           ),
           tileColor:
-              isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
+              AppColors.surfaceColor(isDarkMode),
           trailing: Icon(IconsaxPlusBroken.arrow_right_3, color: textColor),
           title: Text(titleText, style: TextStyle(color: fadedTextColor)),
           subtitle: Padding(

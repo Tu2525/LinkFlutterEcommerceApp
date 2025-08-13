@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/category_section_provider.dart';
-import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/categories_list_screen.dart';
 
 class CategoriesSection extends ConsumerWidget {
@@ -11,10 +10,11 @@ class CategoriesSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDarkMode = ref.watch(isDarkModeProvider);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -52,7 +52,9 @@ class CategoriesSection extends ConsumerWidget {
                   final categoriesAsync = ref.watch(categoryProvider(locale));
 
                   return categoriesAsync.when(
-                    data: (categories) => Row(children: categories),
+                    data: (categories) => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: categories),
                     loading: () => const CircularProgressIndicator(),
                     error: (e, _) => Text('Error: $e'),
                   );

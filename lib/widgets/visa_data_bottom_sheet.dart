@@ -7,7 +7,7 @@ import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
 
 class VisaDataBottomSheet extends StatelessWidget {
@@ -55,10 +55,8 @@ class VisaDataBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-
                   AppLocalizations.of(context)!.cardHolderName,
                   style: AppTextStyles.subTitle1(isDarkMode),
-
                 ),
               ),
               Padding(
@@ -80,11 +78,9 @@ class VisaDataBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-
                   AppLocalizations.of(context)!.cardNumber,
-          
-                  style: AppTextStyles.subTitle1(isDarkMode),
 
+                  style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
               Padding(
@@ -120,11 +116,9 @@ class VisaDataBottomSheet extends StatelessWidget {
                             right: 20.w,
                           ),
                           child: Text(
-
                             AppLocalizations.of(context)!.expiryDate,
-                     
-                            style: AppTextStyles.subTitle1(isDarkMode),
 
+                            style: AppTextStyles.subTitle1(isDarkMode),
                           ),
                         ),
                         Padding(
@@ -193,7 +187,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                   horizontal: 20.0,
                   vertical: 16,
                 ),
-                child: ContinueButton(
+                child: CustomButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       ref.read(cardNumberProvider.notifier).state =

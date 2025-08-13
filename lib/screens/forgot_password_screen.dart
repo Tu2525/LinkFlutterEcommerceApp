@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/forgot_password_Provider.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 
@@ -45,7 +45,7 @@ class ForgotPassword extends ConsumerWidget {
                     validator: (email) => manager.validateEmail(context, email),
                   ),
                   SizedBox(height: screenHeight * 0.03),
-                  ContinueButton(onPressed: () => manager.submit(context)),
+                  CustomButton(onPressed: () => manager.submit(context)),
                 ],
               ),
             ),

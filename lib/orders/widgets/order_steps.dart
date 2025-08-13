@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
-import 'package:link_flutter_ecommerce_app/widgets/order_status_card.dart';
+import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_status_card.dart';
 
 class OrderSteps extends StatelessWidget {
   const OrderSteps({super.key, required this.steps, required this.isDarkMode});

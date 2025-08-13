@@ -5,7 +5,6 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
-import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
@@ -43,7 +42,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final homeNotifier = ref.watch(homePageProvider);
-    final isDarkMode = ref.watch(isDarkModeProvider);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(isDarkMode),
@@ -105,7 +104,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               children: [
                                 Text(
                                   homeNotifier.selectedCategory,
-                                  style: AppTextStyles.body1(isDarkMode),
+                                  style: AppTextStyles.subTitle1(isDarkMode),
                                 ),
                                 const SizedBox(width: 4),
                                 Icon(

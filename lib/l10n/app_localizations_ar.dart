@@ -408,4 +408,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noorder => 'لا يوجد طلبات';
+
+  @override
+  String get darkMode => 'الوضع الداكنل';
+
+  @override
+  String get language => 'اللغة';
 }

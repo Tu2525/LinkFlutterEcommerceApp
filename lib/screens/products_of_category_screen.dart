@@ -14,18 +14,16 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsyncValue = ref.watch(
-      productsOfCategoryProvider(
-        categoryName,
-      ), // Use categoryId instead of categoryName
+      productsOfCategoryProvider(categoryName),
     );
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? Colors.black : Colors.white,
+      backgroundColor: AppColors.backgroundColor(isDarkMode),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: Container(
-          color: isDarkMode ? Colors.black : Colors.white,
+          color: AppColors.backgroundColor(isDarkMode),
           padding: const EdgeInsets.only(
             top: 32,
             left: 16,
@@ -39,10 +37,7 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                 height: 80,
                 alignment: Alignment.centerLeft,
                 child: Material(
-                  color:
-                      isDarkMode
-                          ? const Color(0xFF342F3F)
-                          : const Color(0xFFF4F4F4),
+                  color: AppColors.backgroundColor(isDarkMode),
                   shape: const CircleBorder(),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(100),
@@ -52,7 +47,7 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                       height: 40,
                       child: Icon(
                         IconsaxPlusBroken.arrow_left_2,
-                        color: isDarkMode ? Colors.white : Colors.black,
+                        color: AppColors.backgroundColor(isDarkMode),
                         size: 20,
                       ),
                     ),
@@ -101,20 +96,14 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                                     crossAxisCount: 2,
                                     mainAxisSpacing: 16,
                                     crossAxisSpacing: 12,
-                                    childAspectRatio: 161 / 281,
+                                    childAspectRatio:
+                                        0.75, // Adjusted for flexible card
                                   ),
                               itemCount: products.length,
                               itemBuilder: (context, index) {
                                 final product = products[index];
                                 return ProductCard(
                                   product: product,
-                                  cardColor:
-                                      isDarkMode
-                                          ? const Color(0xFF342F3F)
-                                          : (AppColors.grey ??
-                                              Colors.grey[200]!),
-                                  width: 161,
-                                  height: 281,
                                   onTap: () {
                                     Navigator.push(
                                       context,
