@@ -470,6 +470,12 @@ abstract class AppLocalizations {
   /// **'Search'**
   String get search;
 
+  /// No description provided for @order.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get order;
+
   /// No description provided for @notifications.
   ///
   /// In en, this message translates to:
@@ -529,12 +535,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Orders yet'**
   String get noOrders;
-
-  /// No description provided for @order.
-  ///
-  /// In en, this message translates to:
-  /// **'Order'**
-  String get order;
 
   /// No description provided for @item.
   ///

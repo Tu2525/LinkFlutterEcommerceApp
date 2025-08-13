@@ -66,24 +66,28 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ),
                         ),
                         // Theme toggle button
-
                         // Category dropdown
                         PopupMenuButton<String>(
                           onSelected: (String result) {
                             ref.read(homePageProvider).selectedCategory;
                           },
-                          itemBuilder: (BuildContext context) =>
-                              homeNotifier.categories.map((String category) {
-                            return PopupMenuItem<String>(
-                              value: category,
-                              child: Text(
-                                category,
-                                style: TextStyle(
-                                  color: AppColors.textPrimaryColor(isDarkMode),
-                                ),
-                              ),
-                            );
-                          }).toList(),
+                          itemBuilder:
+                              (BuildContext context) =>
+                                  homeNotifier.categories.map((
+                                    String category,
+                                  ) {
+                                    return PopupMenuItem<String>(
+                                      value: category,
+                                      child: Text(
+                                        category,
+                                        style: TextStyle(
+                                          color: AppColors.textPrimaryColor(
+                                            isDarkMode,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,
@@ -160,7 +164,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             IconsaxPlusBroken.search_normal_1,
                             color: AppColors.textSecondaryColor(isDarkMode),
                           ),
-                          hintText: 'Search',
+                          hintText: AppLocalizations.of(context)!.search,
                           hintStyle: TextStyle(
                             color: AppColors.textSecondaryColor(isDarkMode),
                           ),
@@ -175,7 +179,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   TopSellingSection(provider: topSellingProductsProvider),
                   const SizedBox(height: 24),
                   TopSellingSection(
-                    title: "New in",
+                    title: AppLocalizations.of(context)!.newIn,
                     provider: newInProductsProvider,
                   ),
                 ],

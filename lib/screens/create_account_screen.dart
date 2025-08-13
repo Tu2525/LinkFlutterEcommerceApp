@@ -46,15 +46,14 @@ class CreateAccountScreen extends ConsumerWidget {
               CustomTextField(
                 isdark: isDarkMode,
 
-                emailController: accountManager.firstnameController,
+                controller: accountManager.firstnameController,
                 isPassword: false,
                 hint: AppLocalizations.of(context)!.firstName,
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 isdark: isDarkMode,
-
-                emailController: accountManager.lastnameController,
+                controller: accountManager.lastnameController,
                 isPassword: false,
                 hint: AppLocalizations.of(context)!.lastName,
               ),
@@ -62,15 +61,14 @@ class CreateAccountScreen extends ConsumerWidget {
               CustomTextField(
                 isdark: isDarkMode,
 
-                emailController: accountManager.emailController,
+                controller: accountManager.emailController,
                 isPassword: false,
                 hint: AppLocalizations.of(context)!.emailAddress,
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 isdark: isDarkMode,
-
-                emailController: accountManager.passwordController,
+                controller: accountManager.passwordController,
                 isPassword: true,
                 hint: AppLocalizations.of(context)!.pass,
               ),

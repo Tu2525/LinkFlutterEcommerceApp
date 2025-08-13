@@ -68,7 +68,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               Form(
                 key: _formKey,
                 child: CustomTextField(
-                  emailController: emailController,
+                  controller: emailController,
                   isPassword: false,
                   hint: AppLocalizations.of(context)!.emailAddress,
                   isdark: isDarkMode,
