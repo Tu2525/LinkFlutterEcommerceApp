@@ -6,7 +6,7 @@ import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/user_info_provider.dart';
 import 'package:link_flutter_ecommerce_app/onboarding/screens/onboarding_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/age_range_dropdown.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/gender_selection_row.dart';
 
 class UserInfo extends ConsumerWidget {
@@ -51,7 +51,7 @@ class UserInfo extends ConsumerWidget {
       bottomNavigationBar: Container(
         color: isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-        child: ContinueButton(
+        child: CustomButton(
           onPressed:
               isFormValid
                   ? () {

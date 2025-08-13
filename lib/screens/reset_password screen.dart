@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({super.key});
@@ -42,7 +42,7 @@ class ResetPassword extends StatelessWidget {
                   SizedBox(
                     width: screenWidth * 0.5,
                     height: 52,
-                    child: ContinueButton(
+                    child: CustomButton(
                       onPressed: () {
                         Navigator.push(
                           context,

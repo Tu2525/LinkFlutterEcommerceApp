@@ -7,7 +7,7 @@ import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
 import 'package:link_flutter_ecommerce_app/onboarding/screens/onboarding_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/providers/sign_in_provider.dart';
 
@@ -51,7 +51,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TopBar(showHeartIcon: false,),
+              const TopBar(showHeartIcon: false),
               const SizedBox(height: 123),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -77,7 +77,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
               const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: ContinueButton(
+                child: CustomButton(
                   onPressed: () async {
                     if (_formKey.currentState?.validate() ?? false) {
                       await ref
@@ -87,12 +87,12 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                             email: widget.email,
                             password: passwordController.text.trim(),
                           );
-                  
+
                       if (!context.mounted) return;
-                  
+
                       final success = ref.read(authSuccessProvider);
                       final error = ref.read(authErrorProvider);
-                  
+
                       if (success) {
                         Navigator.pushReplacement(
                           context,

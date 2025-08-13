@@ -133,5 +133,7 @@
     "addCard": "Add Card",
     "zipcodemustbe": "Zipcode must be between 3 to 10 digits",
     "addAddress": "Add Address",
-    "noorder": "No order found."
+    "noorder": "No order found.",
+    "darkMode":"Dark Mode",
+    "language":"Language"
 }

@@ -4,13 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
-import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
-import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
-import 'package:link_flutter_ecommerce_app/services/order_service.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
 class OrderSummary extends ConsumerWidget {

@@ -10,6 +10,7 @@ import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 
 class AddToBagButton extends ConsumerWidget {
   final double totalPrice;
@@ -43,21 +44,26 @@ class AddToBagButton extends ConsumerWidget {
           ),
           const SizedBox(width: 20),
           Expanded(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF8A2BE2),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                textStyle: AppTextStyles.heading5(isDarkMode),
-              ),
+            child: CustomButton(
+              // The text for the button is now passed to the 'text' parameter.
+              text: AppLocalizations.of(context)!.addToBag,
+              // The entire logic from the old button is moved to the 'onPressed' callback.
               onPressed: () {
                 final product = ref.read(productProvider);
                 final quantity = ref.read(quantityProvider);
                 final color = ref.read(colorProvider);
                 final size = ref.read(sizeProvider);
+
+                // Ensure product images are available before creating the item
+                if (product.imageUrls == null || product.imageUrls!.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Product image not available.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
 
                 final newItem = CartItem(
                   id: product.id,
@@ -99,8 +105,6 @@ class AddToBagButton extends ConsumerWidget {
                   ),
                 );
               },
-
-              child: Text(AppLocalizations.of(context)!.addToBag),
             ),
           ),
         ],

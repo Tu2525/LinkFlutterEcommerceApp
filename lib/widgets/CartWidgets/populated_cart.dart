@@ -12,6 +12,7 @@ import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
 import 'package:link_flutter_ecommerce_app/services/order_service.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/cart_item_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/coupon_code_input.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
 
 class PopulatedCart extends ConsumerWidget {
@@ -54,7 +55,7 @@ class PopulatedCart extends ConsumerWidget {
               OrderSummary(subtotal: subtotal, total: total),
               const CouponCodeInput(),
               const SizedBox(height: 20),
-              ElevatedButton(
+              CustomButton(
                 onPressed: () async {
                   if (cartItems.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -119,17 +120,7 @@ class PopulatedCart extends ConsumerWidget {
                     );
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurpleAccent,
-                  minimumSize: const Size(double.infinity, 55),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.checkout,
-                  style: AppTextStyles.heading4(isDarkMode),
-                ),
+                text: AppLocalizations.of(context)!.checkout,
               ),
             ],
           ),

@@ -895,6 +895,10 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No order found.'**
   String get noorder;
+
+  String get darkMode;
+
+  String get language;
 }
 
 class _AppLocalizationsDelegate

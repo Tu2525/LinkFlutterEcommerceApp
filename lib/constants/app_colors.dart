@@ -8,6 +8,7 @@ class AppColors {
   static const Color success = Color(0xFF2E8B57); // Sea Green
 
   static const Color black = Colors.black;
+  static const Color black54 = Colors.black54;
   static const Color white = Colors.white;
 
   // Light theme colors

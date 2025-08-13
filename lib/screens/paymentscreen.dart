@@ -11,7 +11,7 @@ import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_card.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
@@ -145,7 +145,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
               child: Column(
                 children: [
                   OrderSummary(subtotal: subtotal, total: total),
-                  ContinueButton(
+                  CustomButton(
                     row: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -167,19 +167,19 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                         country: countryController.text,
                         zipCode: zipCodeController.text,
                       );
-            
+
                       final payment = PaymentMethod(
                         cardHolderName: nameController.text,
                         cardNumber: cardNumberController.text,
                         cvv: cvvController.text,
                         expiry: expiryController.text,
                       );
-            
+
                       final checkout = CheckoutModel(
                         shippingAddress: shipping,
                         paymentMethod: payment,
                       );
-            
+
                       await ref
                           .read(checkoutControllerProvider.notifier)
                           .placeOrder(
@@ -198,7 +198,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                             ),
                             checkout: checkout,
                           );
-            
+
                       if (mounted) {
                         Navigator.push(
                           context,

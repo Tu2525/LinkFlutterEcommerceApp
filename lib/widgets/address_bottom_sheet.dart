@@ -7,7 +7,7 @@ import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 import 'package:link_flutter_ecommerce_app/providers/address_provider.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
 
 class AddressBottomSheet extends StatelessWidget {
@@ -33,8 +33,6 @@ class AddressBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -56,11 +54,9 @@ class AddressBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-
                   AppLocalizations.of(context)!.country,
-                  
-                  style: AppTextStyles.subTitle1(isDarkMode),
 
+                  style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
               Padding(
@@ -81,9 +77,8 @@ class AddressBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
                   AppLocalizations.of(context)!.state,
-                
-                  style: AppTextStyles.subTitle1(isDarkMode),
 
+                  style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
               Padding(
@@ -103,11 +98,9 @@ class AddressBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
-
                   AppLocalizations.of(context)!.address,
-               
-                  style: AppTextStyles.subTitle1(isDarkMode),
 
+                  style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
               Padding(
@@ -139,11 +132,9 @@ class AddressBottomSheet extends StatelessWidget {
                             right: 20.w,
                           ),
                           child: Text(
-
                             AppLocalizations.of(context)!.city,
-                  
-                            style: AppTextStyles.subTitle1(isDarkMode),
 
+                            style: AppTextStyles.subTitle1(isDarkMode),
                           ),
                         ),
                         Padding(
@@ -180,11 +171,9 @@ class AddressBottomSheet extends StatelessWidget {
                             right: 20.w,
                           ),
                           child: Text(
-
                             AppLocalizations.of(context)!.zipCode,
-                   
-                            style: AppTextStyles.subTitle1(isDarkMode),
 
+                            style: AppTextStyles.subTitle1(isDarkMode),
                           ),
                         ),
                         Padding(
@@ -223,7 +212,7 @@ class AddressBottomSheet extends StatelessWidget {
                   horizontal: 20.0,
                   vertical: 16,
                 ),
-                child: ContinueButton(
+                child: CustomButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       ref.read(addressProvider.notifier).state =
