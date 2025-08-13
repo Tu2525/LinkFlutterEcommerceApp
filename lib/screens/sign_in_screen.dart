@@ -182,7 +182,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Paymentscreen(),
+                      builder: (context) => const Checkoutscreen(),
                     ),
                   );
                 },

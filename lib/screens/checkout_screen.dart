@@ -17,21 +17,22 @@ import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/visa_data_bottom_sheet.dart';
 
-class Paymentscreen extends ConsumerStatefulWidget {
-  const Paymentscreen({super.key});
+class Checkoutscreen extends ConsumerStatefulWidget {
+  const Checkoutscreen({super.key});
 
   @override
-  ConsumerState<Paymentscreen> createState() => _PaymentscreenState();
+  ConsumerState<Checkoutscreen> createState() => _CheckoutscreenState();
 }
 
-class _PaymentscreenState extends ConsumerState<Paymentscreen> {
+class _CheckoutscreenState extends ConsumerState<Checkoutscreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(checkoutProvider.notifier).getCheckoutData();
+     final checkoutService = ref.read(checkoutServiceProvider);
+  checkoutService.getCheckoutDataStream();
     });
   }
 
@@ -55,12 +56,14 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
     final cartItems = ref.watch(cartProvider);
     final isFormValid = ref.watch(isFormValidProvider);
 
-    checkoutState.when(
-      data: (checkout) {
-        if (checkout != null) {
+checkoutState.when(
+      data: (checkoutList) {
+        if (checkoutList.isNotEmpty) {
+          final checkout = checkoutList.last; 
           WidgetsBinding.instance.addPostFrameCallback((_) {
             addressController.text = checkout.shippingAddress?.address ?? '';
             cityController.text = checkout.shippingAddress?.city ?? '';
+            stateController.text = checkout.shippingAddress?.state ?? '';
             countryController.text = checkout.shippingAddress?.country ?? '';
             zipCodeController.text = checkout.shippingAddress?.zipCode ?? '';
             nameController.text = checkout.paymentMethod?.cardHolderName ?? '';

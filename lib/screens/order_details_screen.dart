@@ -16,7 +16,6 @@ class OrderDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDarkMode ? Colors.white : Colors.black;
     final order = ref.watch(selectedOrderProvider);
 
     final orderAsyncValue = ref.watch(orderProvider);

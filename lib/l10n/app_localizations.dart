@@ -919,6 +919,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No address provided'**
   String get noAddressProvided;
+
+  /// No description provided for @shippingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Details'**
+  String get shippingDetails;
 }
 
 class _AppLocalizationsDelegate

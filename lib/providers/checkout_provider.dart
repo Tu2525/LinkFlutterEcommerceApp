@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
@@ -61,28 +63,44 @@ final checkoutServiceProvider = Provider<CheckoutService>((ref) {
   return CheckoutService();
 });
 
-class CheckoutNotifier extends StateNotifier<AsyncValue<CheckoutModel?>> {
+class CheckoutNotifier extends StateNotifier<AsyncValue<List<CheckoutModel>>> {
   final CheckoutService _service;
+  StreamSubscription<List<CheckoutModel>>? _subscription;
 
   CheckoutNotifier(this._service) : super(const AsyncValue.loading()) {
-    getCheckoutData();
+    _listenToCheckoutData();
   }
 
-  Future<void> getCheckoutData() async {
+  void _listenToCheckoutData() {
+    _subscription?.cancel();
+
+    _subscription = _service.getCheckoutDataStream().listen(
+      (data) {
+        state = AsyncValue.data(data);
+      },
+      onError: (e, st) {
+        state = AsyncValue.error(e, st);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
+  Future<void> saveCheckoutData(CheckoutModel checkout) async {
     try {
-      state = const AsyncValue.loading();
-      final data = await _service.getCheckoutData();
-      state = AsyncValue.data(data);
+      await _service.saveCheckoutData(checkout);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
   }
 
-  Future<void> saveCheckoutData(CheckoutModel checkout) async {
+  Future<void> updateCheckoutData(CheckoutModel checkout) async {
     try {
-      state = const AsyncValue.loading();
-      await _service.saveCheckoutData(checkout);
-      state = AsyncValue.data(checkout);
+      await _service.updateCheckoutData(checkout);
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -90,10 +108,11 @@ class CheckoutNotifier extends StateNotifier<AsyncValue<CheckoutModel?>> {
 }
 
 final checkoutProvider =
-    StateNotifierProvider<CheckoutNotifier, AsyncValue<CheckoutModel?>>((ref) {
-      final service = ref.watch(checkoutServiceProvider);
-      return CheckoutNotifier(service);
-    });
+    StateNotifierProvider<CheckoutNotifier, AsyncValue<List<CheckoutModel>>>(
+      (ref) => CheckoutNotifier(ref.watch(checkoutServiceProvider)),
+    );
+
+
     
 final addressTextProvider = StateProvider<String>((ref) => '');
 final cityTextProvider = StateProvider<String>((ref) => '');

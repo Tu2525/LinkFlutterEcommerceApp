@@ -136,5 +136,6 @@
     "pleaseFillAllFields": "Please fill in all the fields",
     "failedToPlaceOrder": "Failed to place order:",
     "orderPlacedSuccessfully": "Order placed successfully! Order ID:",
-    "noAddressProvided": "No address provided"
+    "noAddressProvided": "No address provided",
+    "shippingDetails": "Shipping Details"
 }

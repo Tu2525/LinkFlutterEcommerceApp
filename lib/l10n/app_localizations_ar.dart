@@ -420,4 +420,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noAddressProvided => 'لا يوجد عنوان مقدم';
+
+  @override
+  String get shippingDetails => 'تفاصيل الشحن';
 }

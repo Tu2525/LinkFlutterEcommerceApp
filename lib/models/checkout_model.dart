@@ -67,10 +67,11 @@ class PaymentMethod {
 }
 
 class CheckoutModel {
+  final String? id; 
   final ShippingAddress? shippingAddress;
   final PaymentMethod? paymentMethod;
 
-  CheckoutModel({this.shippingAddress, this.paymentMethod});
+  CheckoutModel({this.id, this.shippingAddress, this.paymentMethod});
 
   Map<String, dynamic> toMap() {
     return {
@@ -79,8 +80,9 @@ class CheckoutModel {
     };
   }
 
-  factory CheckoutModel.fromMap(Map<String, dynamic> map) {
+  factory CheckoutModel.fromMap(Map<String, dynamic> map, {String? id}) {
     return CheckoutModel(
+      id: id,
       shippingAddress:
           map['shippingAddress'] != null
               ? ShippingAddress.fromMap(
@@ -96,3 +98,4 @@ class CheckoutModel {
     );
   }
 }
+

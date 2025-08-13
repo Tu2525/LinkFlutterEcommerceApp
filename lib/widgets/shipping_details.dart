@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 
 class ShippingDetails extends StatelessWidget {
@@ -24,7 +25,7 @@ class ShippingDetails extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 16.w, bottom: 12.h),
           child: Text(
-            'Shipping Details',
+            AppLocalizations.of(context)!.shippingDetails,
             style: AppTextStyles.heading5(isDarkMode),
           ),
         ),

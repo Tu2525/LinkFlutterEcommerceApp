@@ -65,7 +65,7 @@ class PopulatedCart extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Paymentscreen(),
+                      builder: (context) => const Checkoutscreen(),
                     ),
                   );
                 },

@@ -136,7 +136,8 @@
   "pleaseFillAllFields": "يرجى ملء جميع الحقول",
   "failedToPlaceOrder": "فشل في طلب الطلب:",
   "orderPlacedSuccessfully": "تم تقديم الطلب بنجاح! رقم الطلب:",
-  "noAddressProvided": "لا يوجد عنوان مقدم"
+  "noAddressProvided": "لا يوجد عنوان مقدم",
+  "shippingDetails": "تفاصيل الشحن"
 
   
 }
