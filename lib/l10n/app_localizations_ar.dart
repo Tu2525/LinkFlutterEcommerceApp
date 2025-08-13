@@ -276,7 +276,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shippingAndReturn => 'الشحن والاسترجاع';
 
   @override
-  String get freeStandardShippingAndFreereturn => 'الشحن المجاني والاسترجاع المجاني لمدة 60 يوم';
+  String get freeStandardShippingAndFreereturn =>
+      'الشحن المجاني والاسترجاع المجاني لمدة 60 يوم';
 
   @override
   String get review => 'التقييمات';
@@ -466,4 +467,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get retry => 'إعادة المحاولة';
+  @override
+  String get save => 'حفظ';
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما';
 }

@@ -541,4 +541,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get topSelling => 'Top Selling';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
 }

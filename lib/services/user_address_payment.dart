@@ -12,14 +12,42 @@ class CheckoutService {
     await _firestore
         .collection('users')
         .doc(_uid)
-        .set(checkout.toMap(), SetOptions(merge: true));
+        .collection('checkouts')
+        .add(checkout.toMap());
   }
 
-  Future<CheckoutModel?> getCheckoutData() async {
-    final doc = await _firestore.collection('users').doc(_uid).get();
-    if (doc.exists && doc.data() != null) {
-      return CheckoutModel.fromMap(doc.data()!);
+  Stream<List<CheckoutModel>> getCheckoutDataStream() {
+    return _firestore
+        .collection('users')
+        .doc(_uid)
+        .collection('checkouts')
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                return CheckoutModel.fromMap(doc.data(), id: doc.id);
+              }).toList(),
+        );
+  }
+
+  Future<void> updateCheckoutData(CheckoutModel checkout) async {
+    if (checkout.id == null) {
+      throw Exception("Checkout ID is required for update");
     }
-    return null;
+    await _firestore
+        .collection('users')
+        .doc(_uid)
+        .collection('checkouts')
+        .doc(checkout.id)
+        .update(checkout.toMap());
+  }
+
+  Future<void> deleteCheckoutData(String checkoutId) async {
+    await _firestore
+        .collection('users')
+        .doc(_uid)
+        .collection('checkouts')
+        .doc(checkoutId)
+        .delete();
   }
 }

@@ -7,6 +7,6 @@ class CartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const SafeArea(child: Scaffold(body: TopBar(showHeartIcon: false,)));
+    return const SafeArea(child: Scaffold(body: TopBar(showHeartIcon: false)));
   }
 }
