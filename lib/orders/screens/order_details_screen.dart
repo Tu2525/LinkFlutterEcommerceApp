@@ -9,6 +9,7 @@ import 'package:link_flutter_ecommerce_app/orders/widgets/order_header.dart';
 import 'package:link_flutter_ecommerce_app/orders/widgets/order_items_card.dart';
 import 'package:link_flutter_ecommerce_app/orders/widgets/order_steps.dart';
 import 'package:link_flutter_ecommerce_app/orders/widgets/shipping_details.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_price_summary.dart';
 
 class OrderDetails extends ConsumerWidget {
   const OrderDetails({super.key});
@@ -33,37 +34,57 @@ class OrderDetails extends ConsumerWidget {
 
           final activeOrder = order ?? orderData.first;
 
-          return SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                OrderHeader(orderIdd: activeOrder.key),
-                SizedBox(height: 20.h),
-                OrderSteps(isDarkMode: isDarkMode, steps: activeOrder.steps),
-                SizedBox(height: 20.h),
-                Padding(
-                  padding: EdgeInsets.only(left: 16.w),
-                  child: Text(
-                    AppLocalizations.of(context)!.orderItems,
-                    style: AppTextStyles.heading5(isDarkMode),
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 40.h,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      OrderHeader(orderIdd: activeOrder.key),
+                      SizedBox(height: 20.h),
+                      OrderSteps(
+                        isDarkMode: isDarkMode,
+                        steps: activeOrder.steps,
+                      ),
+                      SizedBox(height: 20.h),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.w),
+                        child: Text(
+                          AppLocalizations.of(context)!.orderItems,
+                          style: AppTextStyles.heading5(isDarkMode),
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                      OrderItemsCard(
+                        isDarkMode: isDarkMode,
+                        order: activeOrder,
+                        items: activeOrder.items,
+                      ),
+                      SizedBox(height: 38.h),
+                      ShippingDetails(
+                        isDarkMode: isDarkMode,
+                        shippingInfo: [activeOrder.shipping],
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 20.h),
-                OrderItemsCard(
-                  isDarkMode: isDarkMode,
-                  items: activeOrder.items,
-                  order: order,
-
+              ),
+              Container(
+                padding: const EdgeInsets.all(24.0),
+                decoration: BoxDecoration(
+                  color: AppColors.cardBackgroundColor(isDarkMode),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(24),
+                  ),
                 ),
-                SizedBox(height: 38.h),
-                ShippingDetails(
-                  isDarkMode: isDarkMode,
-                  shippingInfo: [activeOrder.shipping],
-
-                ),
-              ],
-            ),
+                child: OrderPriceSummary(order: activeOrder),
+              ),
+            ],
           );
         },
       ),

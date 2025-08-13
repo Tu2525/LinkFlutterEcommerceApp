@@ -24,6 +24,8 @@ class AuthService {
         password: password,
       );
 
+      await userCredential.user!.updateDisplayName(name);
+
       String uid = userCredential.user!.uid;
       final userDoc = firestore.collection('users').doc(uid);
       final snapshot = await userDoc.get();

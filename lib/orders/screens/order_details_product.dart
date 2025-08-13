@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
-import 'package:link_flutter_ecommerce_app/models/product.dart';
-import 'package:link_flutter_ecommerce_app/widgets/product_card.dart';
-import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
+import 'package:link_flutter_ecommerce_app/orders/widgets/order_detail_item_card.dart';
 import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
 
 class OrderDetailsScreen extends ConsumerWidget {
@@ -21,78 +19,53 @@ class OrderDetailsScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor(isDarkMode),
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            IconsaxPlusBroken.arrow_left_2,
-            color: isDarkMode ? Colors.white : Colors.black,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+          
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.surfaceColor(isDarkMode),
+            ),
+            child: IconButton(
+              icon: Icon(
+                size: 20,
+                IconsaxPlusBroken.arrow_left_2,
+                color: AppColors.backgroundColor(!isDarkMode),
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
           ),
-          onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Order #${order.key}',
+          'Order #${order.key}', // Display the order key/ID
           style: AppTextStyles.heading5(isDarkMode),
         ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.only(left: 4.0, bottom: 12.0),
-              child: Text(
-                '${order.items.length} Items',
-                style: AppTextStyles.subTitle1(isDarkMode),
-              ),
+            const SizedBox(height: 16),
+            Text(
+              // Display the number of items in the order.
+              '${order.items.length} Items',
+              style: AppTextStyles.subTitle1(isDarkMode),
             ),
+            const SizedBox(height: 16),
             Expanded(
-              child: order.items.isEmpty
-                  ? _buildEmptyState(isDarkMode)
-                  : GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 12,
-                        childAspectRatio: 0.75,
+              child:
+                  order.items.isEmpty
+                      ? _buildEmptyState(isDarkMode)
+                      : ListView.builder(
+                        itemCount: order.items.length,
+                        itemBuilder: (context, index) {
+                          final orderItem = order.items[index];
+                          return OrderDetailItemCard(item: orderItem);
+                        },
                       ),
-                      itemCount: order.items.length,
-                      itemBuilder: (context, index) {
-                        final orderItem = order.items[index];
-                        final product = Product(
-                          id: orderItem.productId ?? '',
-                          name: orderItem.name,
-                          price: orderItem.price,
-                          imageUrls: orderItem.imageUrl != null 
-                              ? [orderItem.imageUrl!] 
-                              : [],
-                          description: '', 
-                          rating: 0.0, 
-                          reviews: [], 
-                          originalPrice: orderItem.price,
-                          isFavorite: false,
-                          category: null,
-                          reviewCount: 0,
-                        );
-
-                        return ProductCard(
-                          product: product,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProductDetailsScreen(
-                                  product: product,
-                                ),
-                              ),
-                            );
-                          },
-                          onFavoriteToggle: () {},
-                        );
-                      },
-                    ),
             ),
           ],
         ),
@@ -111,8 +84,10 @@ class OrderDetailsScreen extends ConsumerWidget {
             color: AppColors.surfaceColor(isDarkMode),
           ),
           const SizedBox(height: 16),
-          Text('This order has no items',
-              style: AppTextStyles.body1(isDarkMode)),
+          Text(
+            'This order has no items',
+            style: AppTextStyles.body1(isDarkMode),
+          ),
         ],
       ),
     );

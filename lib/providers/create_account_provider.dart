@@ -1,16 +1,14 @@
 import 'dart:convert';
 
 import "package:flutter/material.dart";
-import 'package:link_flutter_ecommerce_app/models/user_model.dart';
+import 'package:link_flutter_ecommerce_app/profile/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 
 class CreateAccountManager extends ChangeNotifier {
   final emailController = TextEditingController();
   final firstnameController = TextEditingController();
   final lastnameController = TextEditingController();
   final passwordController = TextEditingController();
-
 
   //Getters
 
@@ -19,9 +17,8 @@ class CreateAccountManager extends ChangeNotifier {
   String get email => emailController.text;
   String get password => passwordController.text;
 
-
- void submit() {
-    final user = User(
+  void submit() {
+    final user = UserModel(
       firstName: firstname,
       lastName: lastname,
       email: email,
@@ -45,6 +42,7 @@ class CreateAccountManager extends ChangeNotifier {
   }
 }
 
-final createAccountProvider = ChangeNotifierProvider.autoDispose<CreateAccountManager>((ref) {
-  return CreateAccountManager();
-});
+final createAccountProvider =
+    ChangeNotifierProvider.autoDispose<CreateAccountManager>((ref) {
+      return CreateAccountManager();
+    });

@@ -21,6 +21,11 @@ class OrderItemsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final totalQuantity = List<OrderItem>.from(order.items).fold<int>(0, (total, item) {
+      return total + item.quantity;
+    });
+    final itemText =
+        totalQuantity == 1 ? AppLocalizations.of(context)!.item : "Items";
     return Padding(
       padding: const EdgeInsets.only(left: 8),
       child: SizedBox(
@@ -38,7 +43,7 @@ class OrderItemsCard extends StatelessWidget {
             tileColor: AppColors.cardBackgroundColor(isDarkMode),
             leading: const Icon(IconsaxPlusBroken.receipt_1),
             title: Text(
-              '${items.length} ${AppLocalizations.of(context)!.item}',
+              '$totalQuantity $itemText',
               style: AppTextStyles.seeAll(isDarkMode),
             ),
             trailing: TextButton(

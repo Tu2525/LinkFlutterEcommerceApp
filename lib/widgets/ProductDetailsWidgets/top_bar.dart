@@ -45,9 +45,7 @@ class TopBar extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: isDarkMode
-                ? Colors.black.withValues(alpha: 0.25)
-                : Colors.grey.withValues(alpha: 0.2),
+            color: AppColors.borderColor(isDarkMode),
             spreadRadius: 1,
             blurRadius: 5,
           ),
