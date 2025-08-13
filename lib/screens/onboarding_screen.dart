@@ -43,7 +43,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
               imagePath: screens[index].img,
               index: index,
               color: index == 1 ? AppColors.primary : null,
-              color2: index == 1 ? AppColors.black : null,
+              color2: index == 1 ? AppColors.darkBackground : null,
             ),
           ),
         ),
@@ -64,7 +64,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                 count: screens.length,
                 effect: const WormEffect(
                   spacing: 16,
-                  activeDotColor: AppColors.purple,
+                  activeDotColor: AppColors.primary,
                 ),
                 onDotClicked:
                     (index) => pageController.animateToPage(

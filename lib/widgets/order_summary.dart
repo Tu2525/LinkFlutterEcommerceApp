@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
@@ -68,68 +67,6 @@ class OrderSummary extends ConsumerWidget {
         ),
 
         SizedBox(height: 24.h),
-        ContinueButton(
-          onPressed: () async {
-            if (cartItems.isEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Your cart is empty'),
-                  backgroundColor: Colors.red,
-                ),
-              );
-              return;
-            }
-
-            try {
-              final shippingInfo = ShippingInfo(
-                address: addressController.text.isNotEmpty
-                    ? addressController.text
-                    : 'No address provided',
-              );
-
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) =>
-                    const Center(child: CircularProgressIndicator()),
-              );
-
-              final order = await OrderService().saveOrderToFirebase(
-                cartItems: cartItems,
-                shipping: shippingInfo,
-                status: 'Processing',
-              );
-              ref.read(selectedOrderProvider.notifier).state = order;
-              Navigator.of(context).pop();
-              ref.read(cartProvider.notifier).clearCart();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const OrderPlacedSuccessfullyScreen(),
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Order placed successfully! Order ID: ${order.key}',
-                  ),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            } catch (e) {
-              if (Navigator.canPop(context)) {
-                Navigator.of(context).pop();
-              }
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Failed to place order: $e'),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
-          text: '\$$total${' ' * 40}Place Order',
-        ),
 
         SizedBox(height: 20.h),
       ],

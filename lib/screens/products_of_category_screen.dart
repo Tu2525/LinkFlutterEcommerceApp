@@ -14,9 +14,7 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsyncValue = ref.watch(
-      productsOfCategoryProvider(
-        categoryName,
-      ), // Use categoryId instead of categoryName
+      productsOfCategoryProvider(categoryName),
     );
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
@@ -39,10 +37,9 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                 height: 80,
                 alignment: Alignment.centerLeft,
                 child: Material(
-                  color:
-                      isDarkMode
-                          ? const Color(0xFF342F3F)
-                          : const Color(0xFFF4F4F4),
+                  color: isDarkMode
+                      ? const Color(0xFF342F3F)
+                      : const Color(0xFFF4F4F4),
                   shape: const CircleBorder(),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(100),
@@ -72,64 +69,54 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
           children: [
             const SizedBox(height: 8),
             productsAsyncValue.when(
-              data:
-                  (products) => Text(
-                    '$categoryName (${products.length})',
-                    style: AppTextStyles.heading5(isDarkMode),
-                  ),
-              loading:
-                  () => Text(
-                    '$categoryName (...)',
-                    style: AppTextStyles.heading5(isDarkMode),
-                  ),
-              error:
-                  (error, stack) => Text(
-                    '$categoryName (0)',
-                    style: AppTextStyles.heading5(isDarkMode),
-                  ),
+              data: (products) => Text(
+                '$categoryName (${products.length})',
+                style: AppTextStyles.heading5(isDarkMode),
+              ),
+              loading: () => Text(
+                '$categoryName (...)',
+                style: AppTextStyles.heading5(isDarkMode),
+              ),
+              error: (error, stack) => Text(
+                '$categoryName (0)',
+                style: AppTextStyles.heading5(isDarkMode),
+              ),
             ),
             const SizedBox(height: 12),
             Expanded(
               child: productsAsyncValue.when(
-                data:
-                    (products) =>
-                        products.isEmpty
-                            ? _buildEmptyState(isDarkMode)
-                            : GridView.builder(
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 16,
-                                    crossAxisSpacing: 12,
-                                    childAspectRatio: 161 / 281,
+                data: (products) => products.isEmpty
+                    ? _buildEmptyState(isDarkMode)
+                    : GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 12,
+                          childAspectRatio: 0.75, // Adjusted for flexible card
+                        ),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          final product = products[index];
+                          return ProductCard(
+                            product: product,
+                            cardColor: isDarkMode
+                                ? const Color(0xFF342F3F)
+                                : (AppColors.grey ?? Colors.grey[200]!),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailsScreen(
+                                    product: product,
                                   ),
-                              itemCount: products.length,
-                              itemBuilder: (context, index) {
-                                final product = products[index];
-                                return ProductCard(
-                                  product: product,
-                                  cardColor:
-                                      isDarkMode
-                                          ? const Color(0xFF342F3F)
-                                          : (AppColors.grey ??
-                                              Colors.grey[200]!),
-                                  width: 161,
-                                  height: 281,
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) => ProductDetailsScreen(
-                                              product: product,
-                                            ),
-                                      ),
-                                    );
-                                  },
-                                  onFavoriteToggle: () {},
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
+                            onFavoriteToggle: () {},
+                          );
+                        },
+                      ),
                 loading: () => _buildLoadingState(),
                 error: (error, stack) => _buildErrorState(isDarkMode, error),
               ),

@@ -7,6 +7,8 @@ class AppColors {
   static const Color secondary = Color(0xFF5F9EA0); // Cadet Blue
   static const Color success = Color(0xFF2E8B57); // Sea Green
 
+  static const Color black = Colors.black;
+  static const Color white = Colors.white;
 
   // Light theme colors
   static const Color lightBackground = Color(0xFFFFFFFF);
@@ -46,5 +48,4 @@ class AppColors {
 
   static Color borderColor(bool isDarkMode) =>
       isDarkMode ? darkBorder : lightBorder;
-
 }

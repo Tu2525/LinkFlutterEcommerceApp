@@ -34,7 +34,7 @@ class ContinueButton extends StatelessWidget {
               ? row!
               : Text(
                 text ?? AppLocalizations.of(context)!.cont,
-                   style: AppTextStyles.subTitle1(!isDarkMode),
+                  style: AppTextStyles.subTitle1(!isDarkMode),
               ),
 
  

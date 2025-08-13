@@ -8,15 +8,14 @@ class ProductCard extends StatefulWidget {
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteToggle;
   final double? width;
-  final double? height;
   final Color cardColor;
+
   const ProductCard({
     super.key,
     required this.product,
     this.onTap,
     this.onFavoriteToggle,
     this.width,
-    this.height,
     required this.cardColor,
   });
 
@@ -44,64 +43,63 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final isDarkMode = theme.brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        width: widget.width ?? 159,
-        height: widget.height ?? 281,
+        // Provide a default width if none is passed. This fixes the error.
+        width: widget.width ?? 160,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
           color: widget.cardColor,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image with Favorite Button
-            Expanded(
+            AspectRatio(
+              aspectRatio: 1.0,
               child: Container(
-                width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12),
                   ),
                   color: colorScheme.surface,
                 ),
                 child: Stack(
                   children: [
-                    // Product Image
                     ClipRRect(
                       borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
                       ),
-                      child:
-                          widget.product.imageUrls != null
-                              ? Image.network(
-                                widget.product.imageUrls![0],
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return _buildPlaceholder();
-                                },
-                              )
-                              : _buildPlaceholder(),
+                      child: widget.product.imageUrls != null
+                          ? Image.network(
+                              widget.product.imageUrls![0],
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                              errorBuilder: (context, error, stackTrace) {
+                                return _buildPlaceholder();
+                              },
+                            )
+                          : _buildPlaceholder(),
                     ),
-                    // Favorite Button
                     Positioned(
-                      top: 9,
-                      right: 16,
+                      top: 8,
+                      right: 8,
                       child: GestureDetector(
                         onTap: _toggleFavorite,
                         child: Icon(
                           _isFavorite
                               ? IconsaxPlusBold.heart
                               : IconsaxPlusBroken.heart,
-                          color:
-                              _isFavorite
-                                  ? Colors.red
-                                  : colorScheme.onSurface.withOpacity(0.7),
+                          color: _isFavorite
+                              ? Colors.red
+                              : colorScheme.onSurface.withOpacity(0.7),
                           size: 24,
                         ),
                       ),
@@ -110,25 +108,18 @@ class _ProductCardState extends State<ProductCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            // Product Details
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Product Name
                   Text(
-                    widget.product.name.length > 25
-                        ? '${widget.product.name.substring(0, 25)}...'
-                        : widget.product.name,
+                    widget.product.name,
                     style: AppTextStyles.subTitle2(isDarkMode),
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 8),
-                  // Price Section
+                  const SizedBox(height: 4),
                   Row(
                     children: [
                       Text(
@@ -147,7 +138,6 @@ class _ProductCardState extends State<ProductCard> {
                       ],
                     ],
                   ),
-                  const SizedBox(height: 16),
                 ],
               ),
             ),
@@ -158,32 +148,25 @@ class _ProductCardState extends State<ProductCard> {
   }
 
   Widget _buildPlaceholder() {
-    return Builder(
-      builder: (context) {
-        final theme = Theme.of(context);
-        final colorScheme = theme.colorScheme;
-
-        return Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: colorScheme.surface,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.image_outlined,
-                size: 48,
-                color: colorScheme.onSurface.withValues(alpha: 0.4),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'No Image',
-                style: AppTextStyles.faintGrey2,
-              ),
-            ],
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    return Container(
+      color: colorScheme.surface,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.image_outlined,
+            size: 48,
+            color: colorScheme.onSurface.withOpacity(0.4),
           ),
-        );
-      },
+          const SizedBox(height: 8),
+          const Text(
+            'No Image',
+            style: AppTextStyles.faintGrey2,
+          ),
+        ],
+      ),
     );
   }
 }

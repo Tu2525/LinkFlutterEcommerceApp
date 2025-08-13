@@ -22,7 +22,7 @@ class CategoriesSection extends ConsumerWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
+                child: Row( //Fix center
                   children: [
                     Text(
                       AppLocalizations.of(context)!.categories,

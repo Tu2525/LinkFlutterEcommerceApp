@@ -5,7 +5,6 @@ import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/see_all_products_screen.dart';
 import '../models/product.dart';
-
 import 'product_card.dart';
 
 class TopSellingSection extends ConsumerWidget {
@@ -15,13 +14,9 @@ class TopSellingSection extends ConsumerWidget {
   final Function(Product)? onFavoriteToggle;
   final bool showSeeAll;
   final double? cardWidth;
-  final double? cardHeight;
-  final double? sectionHeight;
   final StateNotifierProvider<
-    StateNotifier<AsyncValue<List<Product>>>,
-    AsyncValue<List<Product>>
-  >
-  provider;
+      StateNotifier<AsyncValue<List<Product>>>,
+      AsyncValue<List<Product>>> provider;
 
   const TopSellingSection({
     super.key,
@@ -31,8 +26,6 @@ class TopSellingSection extends ConsumerWidget {
     this.onFavoriteToggle,
     this.showSeeAll = true,
     this.cardWidth,
-    this.cardHeight,
-    this.sectionHeight,
     required this.provider,
   });
 
@@ -42,9 +35,9 @@ class TopSellingSection extends ConsumerWidget {
     final productsAsyncValue = ref.watch(provider);
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Section Header
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
@@ -56,22 +49,18 @@ class TopSellingSection extends ConsumerWidget {
               ),
               if (showSeeAll)
                 GestureDetector(
-                  onTap:
-                      onSeeAllTap ??
+                  onTap: onSeeAllTap ??
                       () {
-                        // Default navigation based on title
-                        final productType =
-                            title.toLowerCase() == 'new in'
-                                ? 'newIn'
-                                : 'topSelling';
+                        final productType = title.toLowerCase() == 'new in'
+                            ? 'newIn'
+                            : 'topSelling';
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder:
-                                (context) => SeeAllProductsScreen(
-                                  productType: productType,
-                                  title: title,
-                                ),
+                            builder: (context) => SeeAllProductsScreen(
+                              productType: productType,
+                              title: title,
+                            ),
                           ),
                         );
                       },
@@ -87,43 +76,35 @@ class TopSellingSection extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 16),
-        // Products List
         SizedBox(
-          height: sectionHeight ?? 281,
+          height: 260,
           child: productsAsyncValue.when(
-            data:
-                (products) =>
-                    products.isEmpty
-                        ? _buildEmptyState()
-                        : ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: 4,
-                          itemBuilder: (context, index) {
-                            final product = products[index];
-                            return ProductCard(
-                              cardColor:
-                                  isDarkMode
-                                      ? const Color(0xFF342F3F)
-                                      : const Color(0xFFF4F4F4),
+            data: (products) => products.isEmpty
+                ? _buildEmptyState()
+                : ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: products.length > 4 ? 4 : products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return ProductCard(
+                        cardColor: isDarkMode
+                            ? const Color(0xFF342F3F)
+                            : const Color(0xFFF4F4F4),
+                        product: product,
+                        width: cardWidth,
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetailsScreen(
                               product: product,
-                              width: cardWidth,
-                              height: cardHeight,
-                              onTap:
-                                  () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder:
-                                          (context) => ProductDetailsScreen(
-                                            product: product,
-                                          ),
-                                    ),
-                                  ),
-                              onFavoriteToggle:
-                                  () => onFavoriteToggle?.call(product),
-                            );
-                          },
+                            ),
+                          ),
                         ),
+                        onFavoriteToggle: () => onFavoriteToggle?.call(product),
+                      );
+                    },
+                  ),
             loading: () => _buildLoadingState(),
             error: (error, stackTrace) => _buildErrorState(error),
           ),
@@ -157,14 +138,6 @@ class TopSellingSection extends ConsumerWidget {
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Please try again later',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: theme.colorScheme.onSurface.withValues(alpha: .5),
-                ),
-              ),
             ],
           ),
         );
@@ -183,22 +156,14 @@ class TopSellingSection extends ConsumerWidget {
               Icon(
                 Icons.shopping_bag_outlined,
                 size: 48,
-                color: theme.colorScheme.onSurface.withValues(alpha: .4),
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
               ),
               const SizedBox(height: 16),
               Text(
                 'No products available',
                 style: TextStyle(
                   fontSize: 16,
-                  color: theme.colorScheme.onSurface.withValues(alpha: .6),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Check back later for new items',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
             ],

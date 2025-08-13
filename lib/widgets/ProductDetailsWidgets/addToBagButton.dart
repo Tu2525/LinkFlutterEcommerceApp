@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
@@ -20,7 +21,7 @@ class AddToBagButton extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBackgroundColor(isDarkMode),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
@@ -53,28 +54,22 @@ class AddToBagButton extends ConsumerWidget {
                 textStyle: AppTextStyles.heading5(isDarkMode),
               ),
               onPressed: () {
-                // 1. Read the necessary providers to get the current selections.
-                // Use the correct provider for the live product state.
                 final product = ref.read(productProvider);
                 final quantity = ref.read(quantityProvider);
                 final color = ref.read(colorProvider);
                 final size = ref.read(sizeProvider);
 
-                // 2. Create a new CartItem instance.
                 final newItem = CartItem(
                   id: product.id,
                   name: product.name,
-                  // Correctly populate the image URL.
                   imageUrl: product.imageUrls!.first,
                   price: product.price,
                   quantity: quantity,
                   size: size,
-                  // Convert the Color object to a hex String for the model.
                   color:
                       '#${color.value.toRadixString(16).substring(2).toUpperCase()}',
                 );
 
-                // 3. Call the addItem method with the single CartItem object.
                 ref
                     .read(cartProvider.notifier)
                     .addItem(
@@ -83,7 +78,6 @@ class AddToBagButton extends ConsumerWidget {
                       productName: product.name,
                     );
 
-                // 4. Show a confirmation message.
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(

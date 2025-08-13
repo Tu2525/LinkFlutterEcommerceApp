@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
@@ -49,7 +50,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
     final cityController = ref.watch(cityControllerProvider);
     final zipCodeController = ref.watch(zipCodeControllerProvider);
 
-    final subtotal = ref.read(cartProvider.notifier).subtotal;
+    final subtotal = ref.watch(cartProvider.notifier).subtotal;
     final total = ref.watch(totalProvider);
     final checkoutState = ref.watch(checkoutProvider);
 
@@ -137,86 +138,90 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
 
           const Spacer(),
 
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                OrderSummary(subtotal: subtotal, total: total),
-                ContinueButton(
-                  row: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.placeOrder,
-                        style: const TextStyle(
-                          fontFamily: 'Circular',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        ' ${total.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                  onPressed: () async {
-                    final shipping = ShippingAddress(
-                      address: addressController.text,
-                      city: cityController.text,
-                      country: countryController.text,
-                      zipCode: zipCodeController.text,
-                    );
-
-                    final payment = PaymentMethod(
-                      cardHolderName: nameController.text,
-                      cardNumber: cardNumberController.text,
-                      cvv: cvvController.text,
-                      expiry: expiryController.text,
-                    );
-
-                    final checkout = CheckoutModel(
-                      shippingAddress: shipping,
-                      paymentMethod: payment,
-                    );
-
-                    await ref
-                        .read(checkoutControllerProvider.notifier)
-                        .placeOrder(
-                          shippingAddress: AddressInfo(
-                            address: shipping.address,
-                            city: shipping.city,
-                            state: stateController.text,
-                            zipCode: shipping.zipCode,
-                            country: shipping.country,
+          Container(
+            color: AppColors.surfaceColor(isDarkMode),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                children: [
+                  OrderSummary(subtotal: subtotal, total: total),
+                  ContinueButton(
+                    row: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.placeOrder,
+                          style: const TextStyle(
+                            fontFamily: 'Circular',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Colors.white,
                           ),
-                          paymentDetails: PaymentInfo(
-                            cardHolderName: payment.cardHolderName,
-                            cardNumber: payment.cardNumber,
-                            cvv: payment.cvv,
-                            expiryDate: payment.expiry,
-                          ),
-                          checkout: checkout,
-                        );
-
-                    if (mounted) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) =>
-                                  const OrderPlacedSuccessfullyScreen(),
                         ),
+                        Text(
+                          ' \$${total.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () async {
+                      ref.read(cartProvider.notifier).clearCart();
+                      final shipping = ShippingAddress(
+                        address: addressController.text,
+                        city: cityController.text,
+                        country: countryController.text,
+                        zipCode: zipCodeController.text,
                       );
-                    }
-                  },
-                ),
-              ],
+            
+                      final payment = PaymentMethod(
+                        cardHolderName: nameController.text,
+                        cardNumber: cardNumberController.text,
+                        cvv: cvvController.text,
+                        expiry: expiryController.text,
+                      );
+            
+                      final checkout = CheckoutModel(
+                        shippingAddress: shipping,
+                        paymentMethod: payment,
+                      );
+            
+                      await ref
+                          .read(checkoutControllerProvider.notifier)
+                          .placeOrder(
+                            shippingAddress: AddressInfo(
+                              address: shipping.address,
+                              city: shipping.city,
+                              state: stateController.text,
+                              zipCode: shipping.zipCode,
+                              country: shipping.country,
+                            ),
+                            paymentDetails: PaymentInfo(
+                              cardHolderName: payment.cardHolderName,
+                              cardNumber: payment.cardNumber,
+                              cvv: payment.cvv,
+                              expiryDate: payment.expiry,
+                            ),
+                            checkout: checkout,
+                          );
+            
+                      if (mounted) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    const OrderPlacedSuccessfullyScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ],

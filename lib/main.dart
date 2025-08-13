@@ -22,15 +22,6 @@ Future<void> firebaseMessagingBackgroundHandler(
   }
 }
 
-/*************  ✨ Windsurf Command ⭐  *************/
-/// The main entry point of the application.
-///
-/// Initializes Flutter and Firebase, ensuring Firebase is only initialized
-/// once. Catches and handles the 'duplicate-app' exception to prevent
-/// re-initialization errors. Starts the application with a ProviderScope
-/// and an instance of `EcommerceApp`.
-
-/*******  04452b9f-1050-4c15-b898-b6debc2c8778  *******/
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -68,7 +59,7 @@ class EcommerceApp extends ConsumerWidget {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('ar'),
+        locale: const Locale('en'),
         debugShowCheckedModeBanner: false,
         theme: _buildLightTheme(),
         darkTheme: _buildDarkTheme(),
@@ -99,11 +90,9 @@ class EcommerceApp extends ConsumerWidget {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: AppColors.lightSurface,
-        background: AppColors.lightBackground,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: AppColors.lightTextPrimary,
-        onBackground: AppColors.lightTextPrimary,
       ),
     );
   }
@@ -129,11 +118,9 @@ class EcommerceApp extends ConsumerWidget {
         primary: AppColors.primary,
         secondary: AppColors.secondary,
         surface: AppColors.darkSurface,
-        background: AppColors.darkBackground,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: AppColors.darkTextPrimary,
-        onBackground: AppColors.darkTextPrimary,
       ),
     );
   }

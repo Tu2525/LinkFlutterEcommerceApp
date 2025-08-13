@@ -29,42 +29,37 @@ class CartScreen extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   const TopBar(showHeartIcon: false),
+
                   Text(
-                    "Cart",
+                    AppLocalizations.of(context)!.cart,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: AppColors.textPrimaryColor(isDarkMode),
                     ),
-
-
-                  const TopBar(showHeartIcon: false,),
-                  Text(
-                    AppLocalizations.of(context)!.cart,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-
                   ),
 
-                  // if (cartItems.isNotEmpty)
-                  //   TextButton(
-                  //     onPressed:
-                  //         () => ref.read(cartProvider.notifier).clearCart(),
-                  //     child: const Text(
-                  //       'Remove All',
-                  //       style: TextStyle(color: Colors.black54),
-                  //     ),
-                  //   )
-                  // else
-
-                  const SizedBox(
-                    width: 80,
-                  ), // Placeholder with approx. width of the button
+                  if (cartItems.isNotEmpty)
+                    TextButton(
+                      onPressed:
+                          () => ref.read(cartProvider.notifier).clearCart(),
+                      child: Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.removeAll,
+                        style: TextStyle(
+                          color: AppColors.textPrimaryColor(
+                            isDarkMode,
+                          ).withValues(alpha: 0.7),
+                        ),
+                      ),
+                    )
+                  else
+                    const SizedBox(width: 80),
                 ],
               ),
             ),
-            // Main content area that expands to fill the remaining space
             Expanded(
               child:
                   cartItems.isEmpty

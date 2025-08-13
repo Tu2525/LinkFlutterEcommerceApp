@@ -8,7 +8,6 @@ import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
-import 'package:link_flutter_ecommerce_app/widgets/theme_toggle_widget.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
 import 'package:link_flutter_ecommerce_app/providers/top_selling_products_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/new_in_products_provider.dart';
@@ -102,7 +101,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               children: [
                                 Text(
                                   homeNotifier.selectedCategory,
-                                  style: AppTextStyles.sectionTitle(isDarkMode),
+                                  style: AppTextStyles.subTitle1(isDarkMode),
                                 ),
                                 const SizedBox(width: 4),
                                 Icon(

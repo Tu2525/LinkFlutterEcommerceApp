@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/models/product.dart';
-// import 'package:link_flutter_ecommerce_app/providers/product_screen_providers.dart';
 
 class ProductImageCarousel extends ConsumerWidget {
   final Product product;

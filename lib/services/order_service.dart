@@ -15,7 +15,6 @@ class OrderService {
     return '$randomNumber';
   }
 
-  /// Save a new order to Firebase
   Future<OrderModel> saveOrderToFirebase({
     required List<CartItem> cartItems,
     required ShippingInfo shipping,
