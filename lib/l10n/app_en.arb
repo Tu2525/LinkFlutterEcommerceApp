@@ -140,6 +140,7 @@
     "shippingDetails": "Shipping Details",
     "payment":"Payment",
     "save"  :"Save",
-    "somethingWentWrong": "Something went wrong"
-  
+    "somethingWentWrong": "Something went wrong",
+    "darkMode":"Dark Mode",
+    "language":"Language"
 }

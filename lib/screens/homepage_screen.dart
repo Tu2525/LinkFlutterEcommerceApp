@@ -5,7 +5,6 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
-import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/categories_section.dart';
 import 'package:link_flutter_ecommerce_app/widgets/top_selling_section.dart';
@@ -43,7 +42,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final homeNotifier = ref.watch(homePageProvider);
-    final isDarkMode = ref.watch(isDarkModeProvider);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(isDarkMode),
@@ -67,7 +66,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ),
                         ),
                         // Theme toggle button
-
                         // Category dropdown
                         PopupMenuButton<String>(
                           onSelected: (String result) {
@@ -106,7 +104,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               children: [
                                 Text(
                                   homeNotifier.selectedCategory,
-                                  style: AppTextStyles.body1(isDarkMode),
+                                  style: AppTextStyles.subTitle1(isDarkMode),
                                 ),
                                 const SizedBox(width: 4),
                                 Icon(
@@ -166,7 +164,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             IconsaxPlusBroken.search_normal_1,
                             color: AppColors.textSecondaryColor(isDarkMode),
                           ),
-                          hintText: 'Search',
+                          hintText: AppLocalizations.of(context)!.search,
                           hintStyle: TextStyle(
                             color: AppColors.textSecondaryColor(isDarkMode),
                           ),
@@ -181,7 +179,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   TopSellingSection(provider: topSellingProductsProvider),
                   const SizedBox(height: 24),
                   TopSellingSection(
-                    title: "New in",
+                    title: AppLocalizations.of(context)!.newIn,
                     provider: newInProductsProvider,
                   ),
                 ],

@@ -29,11 +29,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ref.watch(isDarkModeProvider);
-
     return Scaffold(
       backgroundColor:
-          isDarkMode ? AppColors.darkBackground : const Color(0xFF8E6CEF),
+          AppColors.primary,
       body: Center(
         child: DefaultTextStyle(
           style: const TextStyle(

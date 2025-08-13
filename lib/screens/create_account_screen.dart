@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/providers/auth_providors.dart';
+import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/user_info_screen.dart';
 import 'package:link_flutter_ecommerce_app/services/auth_services.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/providers/create_account_provider.dart';
@@ -46,15 +46,14 @@ class CreateAccountScreen extends ConsumerWidget {
               CustomTextField(
                 isdark: isDarkMode,
 
-                emailController: accountManager.firstnameController,
+                controller: accountManager.firstnameController,
                 isPassword: false,
                 hint: AppLocalizations.of(context)!.firstName,
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 isdark: isDarkMode,
-
-                emailController: accountManager.lastnameController,
+                controller: accountManager.lastnameController,
                 isPassword: false,
                 hint: AppLocalizations.of(context)!.lastName,
               ),
@@ -62,20 +61,19 @@ class CreateAccountScreen extends ConsumerWidget {
               CustomTextField(
                 isdark: isDarkMode,
 
-                emailController: accountManager.emailController,
+                controller: accountManager.emailController,
                 isPassword: false,
                 hint: AppLocalizations.of(context)!.emailAddress,
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 isdark: isDarkMode,
-
-                emailController: accountManager.passwordController,
+                controller: accountManager.passwordController,
                 isPassword: true,
                 hint: AppLocalizations.of(context)!.pass,
               ),
               const SizedBox(height: 40),
-              ContinueButton(
+              CustomButton(
                 onPressed: () async {
                   await AuthService().registerUser(
                     ref: ref,

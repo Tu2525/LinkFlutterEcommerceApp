@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/order_model.dart';
-import '../models/cartitem_model.dart';
+import '../../models/cartitem_model.dart';
 
 class OrderService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -15,7 +15,6 @@ class OrderService {
     return '$randomNumber';
   }
 
-  /// Save a new order to Firebase
   Future<OrderModel> saveOrderToFirebase({
     required List<CartItem> cartItems,
     required ShippingInfo shipping,

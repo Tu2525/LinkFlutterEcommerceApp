@@ -138,10 +138,9 @@
   "orderPlacedSuccessfully": "تم تقديم الطلب بنجاح! رقم الطلب:",
   "noAddressProvided": "لا يوجد عنوان مقدم",
   "shippingDetails": "تفاصيل الشحن",
-  "payment":"الدفع",
-  "save"  :"حفظ",
-  "somethingWentWrong": "حدث خطأ ما"
-
-  
+  "payment": "الدفع",
+  "save": "حفظ",
+  "somethingWentWrong": "حدث خطأ ما",
+  "darkMode": "الوضع الداكن",
+  "language": "اللغة"
 }
-

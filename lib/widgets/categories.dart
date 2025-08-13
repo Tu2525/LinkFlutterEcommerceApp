@@ -44,7 +44,7 @@ class Categories extends StatelessWidget {
                 borderRadius: BorderRadius.circular(screenWidth * 0.50),
                 child: Image.network(
                   imgPath,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   errorBuilder:
                       (context, error, stackTrace) => Container(
                         color: Colors.grey[300],
