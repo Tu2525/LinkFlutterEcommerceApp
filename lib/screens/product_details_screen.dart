@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations_ar.dart'; //?? shouldn't this be used?
 
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/models/product.dart';

@@ -3,9 +3,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/providers/splash_timer_provider.dart';
-import 'package:link_flutter_ecommerce_app/providers/theme_provider.dart';
-import 'package:link_flutter_ecommerce_app/services/firebase_notification_service.dart';
-import 'package:link_flutter_ecommerce_app/services/notification_service.dart';
 
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -31,7 +28,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ref.watch(isDarkModeProvider);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor:
