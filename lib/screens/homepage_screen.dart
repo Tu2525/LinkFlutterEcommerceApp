@@ -1,3 +1,5 @@
+// lib/features/home/screens/home_page.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -24,7 +26,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   void initState() {
     super.initState();
 
-    Future(() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         ref
             .read(homePageProvider)
@@ -42,7 +44,10 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final homeNotifier = ref.watch(homePageProvider);
+    final selectedCategory = ref.watch(
+      homePageProvider.select((p) => p.selectedCategory),
+    );
+    final categories = ref.watch(homePageProvider.select((p) => p.categories));
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -76,7 +81,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             ),
                           ),
                         ),
-                        // Theme toggle button
+
                         // Category dropdown
                         PopupMenuButton<String>(
                           onSelected: (String result) {
@@ -84,9 +89,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           },
                           itemBuilder:
                               (BuildContext context) =>
-                                  homeNotifier.categories.map((
-                                    String category,
-                                  ) {
+                                  categories.map((String category) {
                                     return PopupMenuItem<String>(
                                       value: category,
                                       child: Text(
@@ -99,51 +102,57 @@ class _HomePageState extends ConsumerState<HomePage> {
                                       ),
                                     );
                                   }).toList(),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.surfaceColor(isDarkMode),
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(
-                                color: AppColors.borderColor(isDarkMode),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 10,
                               ),
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  homeNotifier.selectedCategory,
-                                  style: AppTextStyles.subTitle1(isDarkMode),
+                              decoration: BoxDecoration(
+                                color: AppColors.surfaceColor(isDarkMode),
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                  color: AppColors.borderColor(isDarkMode),
                                 ),
-                                const SizedBox(width: 4),
-                                Icon(
-                                  IconsaxPlusBroken.arrow_down_2,
-                                  size: 20,
-                                  color: AppColors.textPrimaryColor(isDarkMode),
-                                ),
-                              ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    selectedCategory,
+                                    style: AppTextStyles.subTitle1(isDarkMode),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Icon(
+                                    IconsaxPlusBroken.arrow_down_2,
+                                    size: 20,
+                                    color: AppColors.textPrimaryColor(
+                                      isDarkMode,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
+
                         // Shopping bag icon
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                            color: AppColors.primary,
-                            shape: BoxShape.circle,
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const CartScreen(),
-                                ),
-                              );
-                            },
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CartScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: const BoxDecoration(
+                              color: AppColors.primary,
+                              shape: BoxShape.circle,
+                            ),
                             child: const Icon(
                               IconsaxPlusBroken.bag_2,
                               color: Colors.white,
@@ -153,7 +162,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                       ],
                     ),
                   ),
+
                   const SizedBox(height: 20),
+
                   // Search
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -184,14 +195,19 @@ class _HomePageState extends ConsumerState<HomePage> {
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 24),
+
                   const CategoriesSection(),
                   const SizedBox(height: 24),
+
                   TopSellingSection(
                     provider: topSellingProductsProvider,
                     title: AppLocalizations.of(context)!.topSelling,
                   ),
+
                   const SizedBox(height: 24),
+
                   TopSellingSection(
                     title: AppLocalizations.of(context)!.newIn,
                     provider: newInProductsProvider,
