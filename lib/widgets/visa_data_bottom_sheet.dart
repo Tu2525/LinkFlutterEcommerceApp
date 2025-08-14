@@ -2,21 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-<<<<<<< HEAD
 import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/build_text_form.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_app_bar.dart';
-import 'package:link_flutter_ecommerce_app/widgets/form_label.dart';
-=======
-
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
-
-import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
-import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
->>>>>>> 561c8c9b5da0306019cd35205379902d071f0df6
+import 'package:link_flutter_ecommerce_app/widgets/form_label.dart';
 
 class VisaDataBottomSheet extends StatelessWidget {
   const VisaDataBottomSheet({
@@ -222,7 +213,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           horizontal: 20.0,
                           vertical: 16,
                         ),
-                        child: ContinueButton(
+                        child: CustomButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               final payment = PaymentMethod(

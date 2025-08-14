@@ -195,11 +195,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search => 'Search';
 
   @override
-<<<<<<< HEAD
   String get order => 'Orders';
-=======
-  String get order => 'Order';
->>>>>>> 561c8c9b5da0306019cd35205379902d071f0df6
 
   @override
   String get notifications => 'Notifications';

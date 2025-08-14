@@ -59,8 +59,8 @@ class PopulatedCart extends ConsumerWidget {
                 onPressed: () async {
                   if (cartItems.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(ِAppLocalizations.of(context)!.emptyCart),
+                      SnackBar(
+                        content: Text(AppLocalizations.of(context)!.emptyCart),
                         backgroundColor: Colors.red,
                       ),
                     );
@@ -72,7 +72,7 @@ class PopulatedCart extends ConsumerWidget {
                       address:
                           addressController.text.isNotEmpty
                               ? addressController.text
-                              : AppLocalizations.of(context)!.noAddress,
+                              : "No Address",
                     );
 
                     showDialog(
@@ -114,7 +114,7 @@ class PopulatedCart extends ConsumerWidget {
                     }
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('${AppLocalizations.of(context)!.error}: $e'),
+                        content: Text('$Error: $e'),
                         backgroundColor: Colors.red,
                       ),
                     );

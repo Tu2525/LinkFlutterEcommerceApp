@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
-import 'package:link_flutter_ecommerce_app/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
+import 'package:link_flutter_ecommerce_app/orders/providers/orders_provider.dart';
+import 'package:link_flutter_ecommerce_app/orders/services/order_service.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
-import 'package:link_flutter_ecommerce_app/providers/order_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
-import 'package:link_flutter_ecommerce_app/services/order_service.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_card.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_app_bar.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/order_summary.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/visa_data_bottom_sheet.dart';
@@ -142,7 +142,7 @@ checkoutState.when(
             child: Column(
               children: [
                 OrderSummary(subtotal: subtotal, total: total),
-                ContinueButton(
+                CustomButton(
                   row: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

@@ -27,13 +27,8 @@ class Paymentscreen extends ConsumerStatefulWidget {
 class _PaymentscreenState extends ConsumerState<Paymentscreen> {
   final formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      ref.read(checkoutProvider.notifier).getCheckoutData();
-    });
-  }
+  // The initState is no longer needed because the CheckoutNotifier
+  // automatically handles listening to the data stream upon initialization.
 
   @override
   Widget build(BuildContext context) {
@@ -50,28 +45,37 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
     final cityController = ref.watch(cityControllerProvider);
     final zipCodeController = ref.watch(zipCodeControllerProvider);
 
+    // Cart totals
     final subtotal = ref.watch(cartProvider.notifier).subtotal;
     final total = ref.watch(totalProvider);
-    final checkoutState = ref.watch(checkoutProvider);
 
-    checkoutState.when(
-      data: (checkout) {
-        if (checkout != null) {
-          addressController.text = checkout.shippingAddress?.address ?? '';
-          cityController.text = checkout.shippingAddress?.city ?? '';
-          countryController.text = checkout.shippingAddress?.country ?? '';
-          zipCodeController.text = checkout.shippingAddress?.zipCode ?? '';
-          nameController.text = checkout.paymentMethod?.cardHolderName ?? '';
-          cardNumberController.text = checkout.paymentMethod?.cardNumber ?? '';
-          cvvController.text = checkout.paymentMethod?.cvv ?? '';
-          expiryController.text = checkout.paymentMethod?.expiry ?? '';
-        }
-      },
-      loading: () {},
-      error: (err, st) {
-        debugPrint("Error loading checkout data: $err");
-      },
-    );
+    // Listen to the checkout controller for placeOrder actions (e.g., loading, error, success)
+    ref.listen<AsyncValue<void>>(checkoutControllerProvider, (_, state) {
+      state.when(
+        error: (err, stack) {
+          // Show an error message if placing the order fails
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error placing order: $err')),
+          );
+        },
+        data: (_) {
+          // On success, navigate to the success screen.
+          // Using pushReplacement to prevent the user from going back to the payment screen.
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const OrderPlacedSuccessfullyScreen(),
+            ),
+          );
+        },
+        loading: () {
+          // Optionally, you could show a loading indicator here
+        },
+      );
+    });
+
+    // Watch the checkout data provider to populate fields
+    final checkoutState = ref.watch(checkoutProvider);
 
     return Scaffold(
       body: Column(
@@ -93,51 +97,80 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
             ),
           ),
 
-          // Address Section
-          AddressCard(
-            isDarkMode: isDarkMode,
-            ontab: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder:
-                    (_) => AddressBottomSheet(
-                      formKey: formKey,
-                      ref: ref,
-                      isDarkMode: isDarkMode,
-                      countryController: countryController,
-                      stateController: stateController,
-                      addressController: addressController,
-                      cityController: cityController,
-                      zipcodeController: zipCodeController,
-                    ),
-              );
-            },
+          // Use the checkoutState to show loading/error or the main content
+          Expanded(
+            child: checkoutState.when(
+              data: (checkoutData) {
+                // FIX: The provider returns a List<CheckoutModel>. We need to check if it's empty
+                // and then access the first element.
+                if (checkoutData.isNotEmpty) {
+                  final checkout = checkoutData.first;
+                  // Populate controllers from the fetched data
+                  // This will run on each build, but it's a simple way to ensure data is populated.
+                  addressController.text = checkout.shippingAddress!.address;
+                  cityController.text = checkout.shippingAddress!.city;
+                  countryController.text = checkout.shippingAddress!.country;
+                  zipCodeController.text = checkout.shippingAddress!.zipCode;
+                  nameController.text = checkout.paymentMethod!.cardHolderName;
+                  cardNumberController.text = checkout.paymentMethod!.cardNumber;
+                  cvvController.text = checkout.paymentMethod!.cvv;
+                  expiryController.text = checkout.paymentMethod!.expiry;
+                }
+
+                // Return the main scrollable content
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Address Section
+                      AddressCard(
+                        isDarkMode: isDarkMode,
+                        ontab: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (_) => AddressBottomSheet(
+                              formKey: formKey,
+                              ref: ref,
+                              isDarkMode: isDarkMode,
+                              countryController: countryController,
+                              stateController: stateController,
+                              addressController: addressController,
+                              cityController: cityController,
+                              zipcodeController: zipCodeController,
+                            ),
+                          );
+                        },
+                      ),
+
+                      // Payment Section
+                      PaymentCard(
+                        isDarkMode: isDarkMode,
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (_) => VisaDataBottomSheet(
+                              formKey: formKey,
+                              ref: ref,
+                              isDarkMode: isDarkMode,
+                              nameController: nameController,
+                              cardnumberController: cardNumberController,
+                              cvvController: cvvController,
+                              expiryController: expiryController,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (err, st) => Center(child: Text("Error: $err")),
+            ),
           ),
 
-          // Payment Section
-          PaymentCard(
-            isDarkMode: isDarkMode,
-            ontab: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder:
-                    (_) => VisaDataBottomSheet(
-                      formKey: formKey,
-                      ref: ref,
-                      isDarkMode: isDarkMode,
-                      nameController: nameController,
-                      cardnumberController: cardNumberController,
-                      cvvController: cvvController,
-                      expiryController: expiryController,
-                    ),
-              );
-            },
-          ),
-
-          const Spacer(),
-
+          // This container holds the summary and the place order button
           Container(
             color: AppColors.surfaceColor(isDarkMode),
             child: Padding(
@@ -159,13 +192,12 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                         ),
                       ],
                     ),
-                    onPressed: () async {
-                      ref.read(cartProvider.notifier).clearCart();
+                    onPressed: () {
                       final shipping = ShippingAddress(
                         address: addressController.text,
                         city: cityController.text,
                         country: countryController.text,
-                        zipCode: zipCodeController.text,
+                        zipCode: zipCodeController.text, state: '',
                       );
 
                       final payment = PaymentMethod(
@@ -180,9 +212,7 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                         paymentMethod: payment,
                       );
 
-                      await ref
-                          .read(checkoutControllerProvider.notifier)
-                          .placeOrder(
+                      ref.read(checkoutControllerProvider.notifier).placeOrder(
                             shippingAddress: AddressInfo(
                               address: shipping.address,
                               city: shipping.city,
@@ -198,17 +228,6 @@ class _PaymentscreenState extends ConsumerState<Paymentscreen> {
                             ),
                             checkout: checkout,
                           );
-
-                      if (mounted) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) =>
-                                    const OrderPlacedSuccessfullyScreen(),
-                          ),
-                        );
-                      }
                     },
                   ),
                 ],
