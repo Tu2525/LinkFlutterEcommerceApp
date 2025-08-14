@@ -22,8 +22,8 @@ class AddressCard extends ConsumerWidget {
     final textColor = isDarkMode ? Colors.white : Colors.black;
     final fadedTextColor =
         isDarkMode
-            ? Colors.white.withOpacity(0.5)
-            : const Color(0xff272727).withOpacity(0.5);
+            ? Colors.white.withValues(alpha: 0.5)
+            : Colors.black.withValues(alpha: 0.5);
     final address = ref.watch(addressProvider);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
@@ -33,8 +33,7 @@ class AddressCard extends ConsumerWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
           ),
-          tileColor:
-              AppColors.surfaceColor(isDarkMode),
+          tileColor: AppColors.cardBackgroundColor(isDarkMode),
           trailing: Icon(IconsaxPlusBroken.arrow_right_3, color: textColor),
           title: Text(titleText, style: TextStyle(color: fadedTextColor)),
           subtitle: Padding(

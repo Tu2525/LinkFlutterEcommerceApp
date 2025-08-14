@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
-import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/providers/address_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
@@ -36,7 +35,7 @@ class AddressBottomSheet extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
+        color: AppColors.cardBackgroundColor(isDarkMode),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20.r),
           topRight: Radius.circular(20.r),
@@ -81,10 +80,6 @@ class AddressBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
                   AppLocalizations.of(context)!.state,
-<<<<<<< HEAD
-=======
-
->>>>>>> 561c8c9b5da0306019cd35205379902d071f0df6
                   style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),

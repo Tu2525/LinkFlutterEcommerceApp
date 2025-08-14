@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/profile/providers/theme_provider.dart';
+import 'package:link_flutter_ecommerce_app/features/profile/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 import 'package:link_flutter_ecommerce_app/services/notification_service.dart';
 import 'firebase_options.dart';

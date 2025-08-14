@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-<<<<<<< HEAD
 import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/build_text_form.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_app_bar.dart';
-import 'package:link_flutter_ecommerce_app/widgets/form_label.dart';
-=======
-
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
-
-import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
-import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
->>>>>>> 561c8c9b5da0306019cd35205379902d071f0df6
+import 'package:link_flutter_ecommerce_app/widgets/form_label.dart';
 
-class VisaDataBottomSheet extends StatelessWidget {
+class VisaDataBottomSheet extends ConsumerWidget {
   const VisaDataBottomSheet({
     super.key,
     required this.nameController,
@@ -43,7 +35,7 @@ class VisaDataBottomSheet extends StatelessWidget {
   final void Function(PaymentMethod)? onSave;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final content = _buildFormContent(context);
 
     if (isBottomSheet) {
@@ -51,7 +43,7 @@ class VisaDataBottomSheet extends StatelessWidget {
         width: double.infinity,
         height: 500.h,
         decoration: BoxDecoration(
-          color: isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
+          color: AppColors.cardBackgroundColor(isDarkMode),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.r),
             topRight: Radius.circular(20.r),
@@ -62,7 +54,7 @@ class VisaDataBottomSheet extends StatelessWidget {
     } else {
       return Scaffold(
         backgroundColor:
-            isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
+            AppColors.cardBackgroundColor(isDarkMode),
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
@@ -75,9 +67,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color:
-                      isDarkMode
-                          ? const Color(0xFF342F3F)
-                          : const Color(0xffF4F4F4),
+                      AppColors.cardBackgroundColor(isDarkMode),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),
@@ -204,7 +194,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                                   inputType: TextInputType.number,
                                   validator:
                                       (value) =>
-                                          value == null || value.length != 3
+                                          value == null || value.length != 3 || int.tryParse(value) == null
                                               ? AppLocalizations.of(
                                                 context,
                                               )!.validCvv
@@ -222,7 +212,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                           horizontal: 20.0,
                           vertical: 16,
                         ),
-                        child: ContinueButton(
+                        child: CustomButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               final payment = PaymentMethod(

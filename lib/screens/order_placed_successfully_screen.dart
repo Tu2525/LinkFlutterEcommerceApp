@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/features/orders/presentation/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 
 class OrderPlacedSuccessfullyScreen extends ConsumerWidget {
-  const OrderPlacedSuccessfullyScreen({super.key});
+  final String orderId;
+  const OrderPlacedSuccessfullyScreen({super.key, required this.orderId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -67,7 +68,8 @@ class OrderPlacedSuccessfullyScreen extends ConsumerWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const OrderDetails(),
+                        builder:
+                            (context) => OrderDetails(orderId: orderId),
                       ),
                     );
                   },

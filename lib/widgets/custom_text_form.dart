@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 
 class CustomTextForm extends StatelessWidget {
   final TextEditingController controller;
@@ -14,15 +15,14 @@ class CustomTextForm extends StatelessWidget {
     required this.inputType,
     required this.hint,
     this.validator,
-    required this.isdarkmode, required this.onChanged,
+    required this.isdarkmode,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    final bordercolor =
-        isdarkmode
-            ? Colors.white.withOpacity(0.2)
-            : Colors.black.withOpacity(0.2);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final bordercolor = AppColors.borderColor(isDarkMode);
     return TextFormField(
       controller: controller,
       keyboardType: inputType,
@@ -30,7 +30,7 @@ class CustomTextForm extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor:
-            isdarkmode ? const Color(0xff342F3F) : const Color(0xffF4F4F4),
+            AppColors.surfaceColor(isDarkMode),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(color: bordercolor),
@@ -47,16 +47,15 @@ class CustomTextForm extends StatelessWidget {
         hintStyle: TextStyle(
           color:
               isdarkmode
-                  ? Colors.white.withOpacity(0.5)
-                  : Colors.black.withOpacity(0.5),
+                  ? Colors.white.withValues(alpha: 0.5)
+                  : Colors.black.withValues(alpha: 0.5),
           fontSize: 16.sp,
           fontWeight: FontWeight.w500,
         ),
       ),
 
       validator: validator,
-      onChanged: onChanged ,
-      
+      onChanged: onChanged,
     );
   }
 }

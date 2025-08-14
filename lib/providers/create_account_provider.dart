@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import "package:flutter/material.dart";
-import 'package:link_flutter_ecommerce_app/profile/models/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/features/profile/models/user_model.dart';
 
 class CreateAccountManager extends ChangeNotifier {
   final emailController = TextEditingController();
