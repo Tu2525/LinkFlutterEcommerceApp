@@ -20,7 +20,10 @@ class OrderItemsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final totalQuantity = List<OrderItem>.from(order.items).fold<int>(0, (total, item) {
+    final totalQuantity = List<OrderItem>.from(order.items).fold<int>(0, (
+      total,
+      item,
+    ) {
       return total + item.quantity;
     });
     final itemText =

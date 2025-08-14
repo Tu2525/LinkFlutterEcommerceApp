@@ -5,8 +5,8 @@ import '../models/order_model.dart';
 abstract class OrderRemoteDataSource {
   Stream<List<OrderModel>> getOrdersStream();
   Future<List<OrderModel>> getOrderDetails();
+  Future<OrderModel> getOrderById(String orderId);
   Future<void> createOrder(OrderModel order);
-  
   Future<void> updateOrderStatus(String orderId, String newStatus);
   Future<void> updateOrderStep({
     required String orderId,
@@ -14,7 +14,6 @@ abstract class OrderRemoteDataSource {
     required bool isChecked,
     required String date,
   });
-  Future<OrderModel> getOrderById(String orderId);
 }
 
 class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
@@ -38,10 +37,12 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     return _firestore
         .collection('orders')
         .where('userId', isEqualTo: user.uid)
+        .orderBy('createdAt', descending: true)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) {
-        return OrderModel.fromFireStore({...doc.data(), 'key': doc.id});
+        return OrderModel.fromFireStore(
+            {...doc.data(), 'documentId': doc.id});
       }).toList();
     });
   }
@@ -54,14 +55,32 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     try {
       final query = await _firestore
           .collection('orders')
-          .where('userId', isEqualTo: user.uid).orderBy('createdAt', descending: true)
+          .where('userId', isEqualTo: user.uid)
+          .orderBy('createdAt', descending: true)
           .get();
 
       return query.docs.map((doc) {
-        return OrderModel.fromFireStore({...doc.data(), 'key': doc.id});
+        return OrderModel.fromFireStore(
+            {...doc.data(), 'documentId': doc.id});
       }).toList();
     } catch (e) {
       throw Exception('Failed to get orders: $e');
+    }
+  }
+
+  @override
+  Future<OrderModel> getOrderById(String orderId) async {
+    try {
+      final docSnapshot =
+          await _firestore.collection('orders').doc(orderId).get();
+      if (docSnapshot.exists) {
+        return OrderModel.fromFireStore(
+            {...docSnapshot.data()!, 'documentId': docSnapshot.id});
+      } else {
+        throw Exception('Order not found');
+      }
+    } catch (e) {
+      throw Exception('Failed to get order details: $e');
     }
   }
 
@@ -73,22 +92,6 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
       });
     } catch (e) {
       throw Exception('Failed to update order status: $e');
-    }
-  }
-
-@override
-  Future<OrderModel> getOrderById(String orderId) async {
-    try {
-      final docSnapshot =
-          await _firestore.collection('orders').doc(orderId).get();
-      if (docSnapshot.exists) {
-        return OrderModel.fromFireStore(
-            {...docSnapshot.data()!, 'key': docSnapshot.id});
-      } else {
-        throw Exception('Order not found');
-      }
-    } catch (e) {
-      throw Exception('Failed to get order details: $e');
     }
   }
 

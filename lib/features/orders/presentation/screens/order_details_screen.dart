@@ -37,7 +37,7 @@ class OrderDetails extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      OrderHeader(orderIdd: activeOrder.key),
+                      OrderHeader(orderIdd: activeOrder.key.toString()),
                       SizedBox(height: 20.h),
                       OrderSteps(
                         isDarkMode: isDarkMode,
