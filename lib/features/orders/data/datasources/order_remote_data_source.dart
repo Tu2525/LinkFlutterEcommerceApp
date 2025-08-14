@@ -37,14 +37,15 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     return _firestore
         .collection('orders')
         .where('userId', isEqualTo: user.uid)
-        .orderBy('createdAt', descending: true)
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return OrderModel.fromFireStore(
-            {...doc.data(), 'documentId': doc.id});
-      }).toList();
-    });
+          return snapshot.docs.map((doc) {
+            return OrderModel.fromFireStore({
+              ...doc.data(),
+              'documentId': doc.id,
+            });
+          }).toList();
+        });
   }
 
   @override
@@ -53,36 +54,44 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     if (user == null) throw Exception('User not logged in');
 
     try {
-      final query = await _firestore
-          .collection('orders')
-          .where('userId', isEqualTo: user.uid)
-          .orderBy('createdAt', descending: true)
-          .get();
+      final query =
+          await _firestore
+              .collection('orders')
+              .where('userId', isEqualTo: user.uid)
+              .get();
 
       return query.docs.map((doc) {
-        return OrderModel.fromFireStore(
-            {...doc.data(), 'documentId': doc.id});
+        return OrderModel.fromFireStore({...doc.data(), 'documentId': doc.id});
       }).toList();
     } catch (e) {
       throw Exception('Failed to get orders: $e');
     }
   }
 
-  @override
-  Future<OrderModel> getOrderById(String orderId) async {
-    try {
-      final docSnapshot =
-          await _firestore.collection('orders').doc(orderId).get();
-      if (docSnapshot.exists) {
-        return OrderModel.fromFireStore(
-            {...docSnapshot.data()!, 'documentId': docSnapshot.id});
-      } else {
-        throw Exception('Order not found');
-      }
-    } catch (e) {
-      throw Exception('Failed to get order details: $e');
+@override
+Future<OrderModel> getOrderById(String orderId) async {
+  final user = _auth.currentUser;
+  if (user == null) throw Exception('User not logged in');
+
+  try {
+    final querySnapshot = await _firestore
+        .collection('orders')
+        .where('userId', isEqualTo: user.uid)
+        .where('key', isEqualTo: orderId) // Uses the orderId string directly
+        .limit(1)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final doc = querySnapshot.docs.first;
+      return OrderModel.fromFireStore(
+          {...doc.data(), 'documentId': doc.id});
+    } else {
+      throw Exception('Order not found');
     }
+  } catch (e) {
+    throw Exception('Failed to get order details: e.toString()');
   }
+}
 
   @override
   Future<void> updateOrderStatus(String orderId, String newStatus) async {

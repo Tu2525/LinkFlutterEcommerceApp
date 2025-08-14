@@ -17,7 +17,7 @@ class CategoriesSection extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
           child: Column(
             children: [
               Padding(
@@ -52,9 +52,11 @@ class CategoriesSection extends ConsumerWidget {
                   final categoriesAsync = ref.watch(categoryProvider(locale));
 
                   return categoriesAsync.when(
-                    data: (categories) => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: categories),
+                    data:
+                        (categories) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: categories.take(5).toList(),
+                        ),
                     loading: () => const CircularProgressIndicator(),
                     error: (e, _) => Text('Error: $e'),
                   );

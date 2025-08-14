@@ -10,7 +10,7 @@ import 'package:link_flutter_ecommerce_app/widgets/custom_app_bar.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/form_label.dart';
 
-class VisaDataBottomSheet extends StatelessWidget {
+class VisaDataBottomSheet extends ConsumerWidget {
   const VisaDataBottomSheet({
     super.key,
     required this.nameController,
@@ -35,7 +35,7 @@ class VisaDataBottomSheet extends StatelessWidget {
   final void Function(PaymentMethod)? onSave;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final content = _buildFormContent(context);
 
     if (isBottomSheet) {
@@ -194,7 +194,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                                   inputType: TextInputType.number,
                                   validator:
                                       (value) =>
-                                          value == null || value.length != 3
+                                          value == null || value.length != 3 || int.tryParse(value) == null
                                               ? AppLocalizations.of(
                                                 context,
                                               )!.validCvv
