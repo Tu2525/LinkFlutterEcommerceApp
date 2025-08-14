@@ -474,7 +474,6 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Orders'**
-  /// **'Order'**
   String get order;
 
   /// No description provided for @notifications.
@@ -944,9 +943,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong'**
   String get somethingWentWrong;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
   String get darkMode;
 
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
   String get language;
+
+  /// No description provided for @signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get signOut;
 }
 
 class _AppLocalizationsDelegate

@@ -26,14 +26,12 @@ class OnboardingScreenWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final screenWidth = size.width;
     final screenHeight = size.height;
-
-    // Font sizes scale with screen width
     final titleFontSize = screenWidth * 0.065;
     final subtitleFontSize = screenWidth * 0.04;
     final iconSize = screenWidth * 0.08;
     final imageHeight = screenHeight * 0.33;
-    final verticalSpacing = screenHeight * 0.05;
-    final largeSpacing = screenHeight * 0.1;
+    final verticalSpacing = screenHeight * 0.03;
+    final largeSpacing = screenHeight * 0.05;
 
     return Scaffold(
       body: Container(
@@ -50,77 +48,82 @@ class OnboardingScreenWidget extends StatelessWidget {
             vertical: screenHeight * 0.08,
             horizontal: screenWidth * 0.06,
           ),
-          child: Column(
-            crossAxisAlignment: getCrossAxisAlignment(index),
-            children: [
-              SizedBox(height: verticalSpacing),
-              Image.asset(
-                'images/icon.png',
-                width: iconSize,
-                height: iconSize,
-                color: color ?? Colors.white,
-              ),
-              Text(
-                AppLocalizations.of(context)!.ecommerceShop,
-                style: TextStyle(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: getCrossAxisAlignment(index),
+              children: [
+                SizedBox(height: verticalSpacing),
+                Image.asset(
+                  'images/icon.png',
+                  width: iconSize,
+                  height: iconSize,
                   color: color ?? Colors.white,
-                  fontSize: titleFontSize,
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-              SizedBox(
-                width: screenWidth * 0.6,
-                child: Divider(color: color ?? Colors.white, thickness: 1),
-              ),
-              Flexible(
-                child: Text(
-                  AppLocalizations.of(context)!.professionalAppForYour,
+                Text(
+                  AppLocalizations.of(context)!.ecommerceShop,
                   style: TextStyle(
-                    color: color2 ?? Colors.white,
-                    fontSize: subtitleFontSize,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Flexible(
-                child: Text(
-                  AppLocalizations.of(context)!.ecommerceBusiness,
-                  style: TextStyle(
-                    color: color2 ?? Colors.white,
-                    fontSize: subtitleFontSize,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(height: largeSpacing),
-              Center(
-                child: Image.asset(
-                  iconPath,
-                  height: imageHeight,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              SizedBox(height: largeSpacing),
-              Center(
-                child: Text(
-                  title,
-                  style: TextStyle(
+                    color: color ?? Colors.white,
                     fontSize: titleFontSize,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                   ),
-                  textAlign: TextAlign.center,
                 ),
-              ),
-              Flexible(
-                child: Center(
+                SizedBox(
+                  width: screenWidth * 0.6,
+                  child: Divider(color: color ?? Colors.white, thickness: 1),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
-                    subtitle1,
-                    style: TextStyle(fontSize: subtitleFontSize),
+                    AppLocalizations.of(context)!.professionalAppForYour,
+                    style: TextStyle(
+                      color: color2 ?? Colors.white,
+                      fontSize: subtitleFontSize,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    AppLocalizations.of(context)!.ecommerceBusiness,
+                    style: TextStyle(
+                      color: color2 ?? Colors.white,
+                      fontSize: subtitleFontSize,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(height: largeSpacing),
+                Center(
+                  child: Image.asset(
+                    iconPath,
+                    height: imageHeight,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                SizedBox(height: largeSpacing),
+                Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: titleFontSize,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Center(
+                    child: Text(
+                      subtitle1,
+                      style: TextStyle(fontSize: subtitleFontSize),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -130,7 +133,7 @@ class OnboardingScreenWidget extends StatelessWidget {
 
 CrossAxisAlignment getCrossAxisAlignment(int index) {
   switch (index) {
-    case 2:
+    case 0:
       return CrossAxisAlignment.start;
     case 1:
       return CrossAxisAlignment.center;

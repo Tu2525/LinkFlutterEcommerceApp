@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/see_all_products_screen.dart';
 import '../models/product.dart';
@@ -15,8 +16,10 @@ class TopSellingSection extends ConsumerWidget {
   final bool showSeeAll;
   final double? cardWidth;
   final StateNotifierProvider<
-      StateNotifier<AsyncValue<List<Product>>>,
-      AsyncValue<List<Product>>> provider;
+    StateNotifier<AsyncValue<List<Product>>>,
+    AsyncValue<List<Product>>
+  >
+  provider;
 
   const TopSellingSection({
     super.key,
@@ -49,25 +52,29 @@ class TopSellingSection extends ConsumerWidget {
               ),
               if (showSeeAll)
                 GestureDetector(
-                  onTap: onSeeAllTap ??
+                  onTap:
+                      onSeeAllTap ??
                       () {
-                        final productType = title.toLowerCase() == 'new in'
-                            ? 'newIn'
-                            : 'topSelling';
+                        final productType =
+                            title.toLowerCase() ==
+                                    AppLocalizations.of(context)!.newIn
+                                ? AppLocalizations.of(context)!.newIn
+                                : AppLocalizations.of(context)!.topSelling;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SeeAllProductsScreen(
-                              productType: productType,
-                              title: title,
-                            ),
+                            builder:
+                                (context) => SeeAllProductsScreen(
+                                  productType: productType,
+                                  title: title,
+                                ),
                           ),
                         );
                       },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      'See All',
+                      AppLocalizations.of(context)!.seeAll,
                       style: AppTextStyles.seeAll(isDarkMode),
                     ),
                   ),
@@ -79,29 +86,34 @@ class TopSellingSection extends ConsumerWidget {
         SizedBox(
           height: 260,
           child: productsAsyncValue.when(
-            data: (products) => products.isEmpty
-                ? _buildEmptyState()
-                : ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: products.length > 4 ? 4 : products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return ProductCard(
-                        product: product,
-                        width: cardWidth,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductDetailsScreen(
+            data:
+                (products) =>
+                    products.isEmpty
+                        ? _buildEmptyState()
+                        : ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: products.length > 4 ? 4 : products.length,
+                          itemBuilder: (context, index) {
+                            final product = products[index];
+                            return ProductCard(
                               product: product,
-                            ),
-                          ),
+                              width: cardWidth,
+                              onTap:
+                                  () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) => ProductDetailsScreen(
+                                            product: product,
+                                          ),
+                                    ),
+                                  ),
+                              onFavoriteToggle:
+                                  () => onFavoriteToggle?.call(product),
+                            );
+                          },
                         ),
-                        onFavoriteToggle: () => onFavoriteToggle?.call(product),
-                      );
-                    },
-                  ),
             loading: () => _buildLoadingState(),
             error: (error, stackTrace) => _buildErrorState(error),
           ),
@@ -129,7 +141,7 @@ class TopSellingSection extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'Failed to load products',
+                AppLocalizations.of(context)!.somethingWentWrong,
                 style: TextStyle(
                   fontSize: 16,
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.6),

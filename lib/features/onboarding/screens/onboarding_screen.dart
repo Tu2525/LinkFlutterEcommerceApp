@@ -55,7 +55,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextButton(
-              onPressed: () => controller.goToHomeScreen(context),
+              onPressed: () => controller.goToSignInScreen(context),
               child: Text(AppLocalizations.of(context)!.skip),
             ),
             Center(
