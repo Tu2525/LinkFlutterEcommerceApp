@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
-
+import 'package:link_flutter_ecommerce_app/providers/address_providor.dart';
+import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
+import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
 import 'package:link_flutter_ecommerce_app/providers/address_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_form.dart';
@@ -55,7 +55,6 @@ class AddressBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
                   AppLocalizations.of(context)!.country,
-
                   style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
@@ -71,13 +70,21 @@ class AddressBottomSheet extends StatelessWidget {
                           value == null || value.trim().isEmpty
                               ? AppLocalizations.of(context)!.pleaseEnterCountry
                               : null,
+                  onChanged: (value) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      ref.read(countryTextProvider.notifier).state = value;
+                    });
+                  },
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
                 child: Text(
                   AppLocalizations.of(context)!.state,
+<<<<<<< HEAD
+=======
 
+>>>>>>> 561c8c9b5da0306019cd35205379902d071f0df6
                   style: AppTextStyles.subTitle1(isDarkMode),
                 ),
               ),
@@ -93,6 +100,11 @@ class AddressBottomSheet extends StatelessWidget {
                               ? AppLocalizations.of(context)!.pleaseEnterState
                               : null,
                   isdarkmode: isDarkMode,
+                  onChanged: (value) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      ref.read(stateTextProvider.notifier).state = value;
+                    });
+                  },
                 ),
               ),
               Padding(
@@ -111,10 +123,15 @@ class AddressBottomSheet extends StatelessWidget {
                   hint: AppLocalizations.of(context)!.address,
                   validator:
                       (value) =>
-                          value == null || value.length < 16
+                          value == null || value.length < 8
                               ? AppLocalizations.of(context)!.pleaseEnterAddress
                               : null,
                   isdarkmode: isDarkMode,
+                  onChanged: (value) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      ref.read(addressTextProvider.notifier).state = value;
+                    });
+                  },
                 ),
               ),
               Row(
@@ -145,7 +162,7 @@ class AddressBottomSheet extends StatelessWidget {
                           child: CustomTextForm(
                             isdarkmode: isDarkMode,
                             controller: cityController,
-                            inputType: TextInputType.datetime,
+                            inputType: TextInputType.name,
                             hint: AppLocalizations.of(context)!.city,
                             validator:
                                 (value) =>
@@ -154,6 +171,12 @@ class AddressBottomSheet extends StatelessWidget {
                                           context,
                                         )!.pleaseEnterCity
                                         : null,
+                            onChanged: (value) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                ref.read(cityTextProvider.notifier).state =
+                                    value;
+                              });
+                            },
                           ),
                         ),
                       ],
@@ -198,6 +221,12 @@ class AddressBottomSheet extends StatelessWidget {
                                 )!.zipcodemustbe;
                               }
                               return null;
+                            },
+                            onChanged: (value) {
+                             WidgetsBinding.instance.addPostFrameCallback((_) {
+                                ref.read(zipCodeTextProvider.notifier).state =
+                                    value;
+                              });
                             },
                           ),
                         ),

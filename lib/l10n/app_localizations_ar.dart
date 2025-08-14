@@ -410,6 +410,30 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noorder => 'لا يوجد طلبات';
 
   @override
+  String get pleaseFillAllFields => 'يرجى ملء جميع الحقول';
+
+  @override
+  String get failedToPlaceOrder => 'فشل في طلب الطلب:';
+
+  @override
+  String get orderPlacedSuccessfully => 'تم تقديم الطلب بنجاح! رقم الطلب:';
+
+  @override
+  String get noAddressProvided => 'لا يوجد عنوان مقدم';
+
+  @override
+  String get shippingDetails => 'تفاصيل الشحن';
+
+  @override
+  String get payment => 'الدفع';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما';
+
+  @override
   String get darkMode => 'الوضع الداكنل';
 
   @override

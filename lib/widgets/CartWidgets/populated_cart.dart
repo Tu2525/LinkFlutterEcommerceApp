@@ -5,6 +5,7 @@ import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/orders/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/checkout_screen.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/orders/providers/orders_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/paymentscreen.dart';
@@ -59,7 +60,7 @@ class PopulatedCart extends ConsumerWidget {
                   if (cartItems.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Your cart is empty'),
+                        content: Text(ِAppLocalizations.of(context)!.emptyCart),
                         backgroundColor: Colors.red,
                       ),
                     );
@@ -71,7 +72,7 @@ class PopulatedCart extends ConsumerWidget {
                       address:
                           addressController.text.isNotEmpty
                               ? addressController.text
-                              : 'No address provided',
+                              : AppLocalizations.of(context)!.noAddress,
                     );
 
                     showDialog(
@@ -102,7 +103,7 @@ class PopulatedCart extends ConsumerWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          'Order placed successfully! Order ID: ${order.key}',
+                          '${AppLocalizations.of(context)!.orderPlaced} ${order.key}',
                         ),
                         backgroundColor: Colors.green,
                       ),
@@ -113,7 +114,7 @@ class PopulatedCart extends ConsumerWidget {
                     }
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Failed to place order: $e'),
+                        content: Text('${AppLocalizations.of(context)!.error}: $e'),
                         backgroundColor: Colors.red,
                       ),
                     );

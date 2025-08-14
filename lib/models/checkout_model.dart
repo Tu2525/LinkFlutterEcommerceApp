@@ -1,12 +1,14 @@
 class ShippingAddress {
   final String address;
   final String city;
+  final String state;
   final String country;
   final String zipCode;
 
   ShippingAddress({
     required this.address,
     required this.city,
+    required this.state,
     required this.country,
     required this.zipCode,
   });
@@ -15,6 +17,7 @@ class ShippingAddress {
     return {
       'address': address,
       'city': city,
+      'state': state,
       'country': country,
       'zipCode': zipCode,
     };
@@ -24,6 +27,7 @@ class ShippingAddress {
     return ShippingAddress(
       address: map['address'] ?? '',
       city: map['city'] ?? '',
+      state: map['state'] ?? '',
       country: map['country'] ?? '',
       zipCode: map['zipCode'] ?? '',
     );
@@ -63,10 +67,11 @@ class PaymentMethod {
 }
 
 class CheckoutModel {
+  final String? id; 
   final ShippingAddress? shippingAddress;
   final PaymentMethod? paymentMethod;
 
-  CheckoutModel({this.shippingAddress, this.paymentMethod});
+  CheckoutModel({this.id, this.shippingAddress, this.paymentMethod});
 
   Map<String, dynamic> toMap() {
     return {
@@ -75,8 +80,9 @@ class CheckoutModel {
     };
   }
 
-  factory CheckoutModel.fromMap(Map<String, dynamic> map) {
+  factory CheckoutModel.fromMap(Map<String, dynamic> map, {String? id}) {
     return CheckoutModel(
+      id: id,
       shippingAddress:
           map['shippingAddress'] != null
               ? ShippingAddress.fromMap(
@@ -92,3 +98,4 @@ class CheckoutModel {
     );
   }
 }
+

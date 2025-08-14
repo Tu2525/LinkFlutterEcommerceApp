@@ -473,6 +473,7 @@ abstract class AppLocalizations {
   /// No description provided for @order.
   ///
   /// In en, this message translates to:
+  /// **'Orders'**
   /// **'Order'**
   String get order;
 
@@ -896,6 +897,53 @@ abstract class AppLocalizations {
   /// **'No order found.'**
   String get noorder;
 
+  /// No description provided for @pleaseFillAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in all the fields'**
+  String get pleaseFillAllFields;
+
+  /// No description provided for @failedToPlaceOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to place order:'**
+  String get failedToPlaceOrder;
+
+  /// No description provided for @orderPlacedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed successfully! Order ID:'**
+  String get orderPlacedSuccessfully;
+
+  /// No description provided for @noAddressProvided.
+  ///
+  /// In en, this message translates to:
+  /// **'No address provided'**
+  String get noAddressProvided;
+
+  /// No description provided for @shippingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Details'**
+  String get shippingDetails;
+
+  /// No description provided for @payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get payment;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get somethingWentWrong;
   String get darkMode;
 
   String get language;

@@ -3,29 +3,37 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
-
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
-import 'package:link_flutter_ecommerce_app/providers/payment_provider.dart';
-
 class PaymentCard extends ConsumerWidget {
-  const PaymentCard({super.key, required this.ontab, required this.isDarkMode});
+  const PaymentCard({
+    super.key,
+    this.title,
+    this.cardNumber,
+    required this.onTap,
+    required this.isDarkMode,
+  });
 
-  final void Function()? ontab;
+  final String? title;
+  final String? cardNumber;
+  final VoidCallback onTap;
   final bool isDarkMode;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subtitleText = AppLocalizations.of(context)!.addPaymentMethod;
     final titleText = AppLocalizations.of(context)!.paymentMethod;
-    final last4Digits = ref.watch(last4DigitsProvider);
     final textColor = isDarkMode ? Colors.white : Colors.black;
+    final last4Digits =
+        cardNumber!.length > 4
+            ? cardNumber?.substring(cardNumber!.length - 4)
+            : cardNumber;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h),
       child: GestureDetector(
-        onTap: ontab,
+        onTap: onTap,
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
@@ -33,11 +41,11 @@ class PaymentCard extends ConsumerWidget {
           tileColor:
               AppColors.surfaceColor(isDarkMode),
           trailing: Icon(IconsaxPlusBroken.arrow_right_3, color: textColor),
-          title:  Text(titleText, style: AppTextStyles.faintGrey),
+          title: Text(titleText, style: AppTextStyles.faintGrey),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 4.0.h),
             child:
-                last4Digits.isNotEmpty
+                cardNumber != null
                     ? Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

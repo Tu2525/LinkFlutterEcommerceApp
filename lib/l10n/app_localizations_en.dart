@@ -195,7 +195,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search => 'Search';
 
   @override
+<<<<<<< HEAD
+  String get order => 'Orders';
+=======
   String get order => 'Order';
+>>>>>>> 561c8c9b5da0306019cd35205379902d071f0df6
 
   @override
   String get notifications => 'Notifications';
@@ -407,6 +411,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noorder => 'No order found.';
+
+  @override
+  String get pleaseFillAllFields => 'Please fill in all the fields';
+
+  @override
+  String get failedToPlaceOrder => 'Failed to place order:';
+
+  @override
+  String get orderPlacedSuccessfully => 'Order placed successfully! Order ID:';
+
+  @override
+  String get noAddressProvided => 'No address provided';
+
+  @override
+  String get shippingDetails => 'Shipping Details';
+
+  @override
+  String get payment => 'Payment';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
 
   @override
   String get darkMode => 'Dark Mode';
