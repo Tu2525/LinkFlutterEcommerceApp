@@ -6,6 +6,7 @@ import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/features/profile/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/credit_card_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/payment_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
@@ -103,21 +104,21 @@ class SettingsSection extends ConsumerWidget {
               // Add the onTap callback
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PaymentScreen()),
+                MaterialPageRoute(builder: (context) => const CreditCardScreen()),
               );
             },
           ),
           _buildSettingsTile(
             context,
             icon: IconsaxPlusBroken.box,
-            title: "Go to Screen Two", // Pass title as a String
+            title: AppLocalizations.of(context)!.addAddress,
             trailing: const Icon(
               Icons.arrow_forward_ios,
               size: 18,
-            ), // Add a trailing icon
+            ), 
             isDarkMode: isDarkMode,
             onTap: () {
-              // Add the onTap callback
+              
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const SplashScreen()),
