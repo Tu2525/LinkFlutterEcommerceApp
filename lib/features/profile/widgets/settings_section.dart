@@ -81,10 +81,10 @@ class SettingsSection extends ConsumerWidget {
           _buildSettingsTile(
   context,
   icon: IconsaxPlusBroken.activity,
-  title: "Go to Screen One", // Pass title as a String
+  title: "Go to Screen One", 
   trailing: const Icon(Icons.arrow_forward_ios, size: 18), // Add a trailing icon
   isDarkMode: isDarkMode,
-  onTap: () { // Add the onTap callback
+  onTap: () { 
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SplashScreen()),
