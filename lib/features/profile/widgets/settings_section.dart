@@ -6,6 +6,8 @@ import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/features/profile/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/payment_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 
 class SettingsSection extends ConsumerWidget {
@@ -19,7 +21,6 @@ class SettingsSection extends ConsumerWidget {
     final themeNotifier = ref.read(themeProvider.notifier);
     final localeNotifier = ref.read(localeProvider.notifier);
     final locale = ref.watch(localeProvider);
-
 
     return Container(
       decoration: BoxDecoration(
@@ -43,15 +44,25 @@ class SettingsSection extends ConsumerWidget {
             isDarkMode: isDarkMode,
           ),
           Divider(height: 1, color: AppColors.borderColor(isDarkMode)),
-          _buildSettingsTile(
-            context,
-            icon: IconsaxPlusBroken.notification,
-            title: 'Notifications',
-            trailing: Icon(
-              IconsaxPlusBroken.arrow_right_3,
-              color: AppColors.textSecondaryColor(isDarkMode),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
+                ),
+              );
+            },
+            child: _buildSettingsTile(
+              context,
+              icon: IconsaxPlusBroken.notification,
+              title: AppLocalizations.of(context)!.notifications,
+              trailing: Icon(
+                IconsaxPlusBroken.arrow_right_3,
+                color: AppColors.textSecondaryColor(isDarkMode),
+              ),
+              isDarkMode: isDarkMode,
             ),
-            isDarkMode: isDarkMode,
           ),
           Divider(height: 1, color: AppColors.borderColor(isDarkMode)),
           Divider(height: 1, color: AppColors.borderColor(isDarkMode)),
@@ -79,31 +90,40 @@ class SettingsSection extends ConsumerWidget {
             isDarkMode: isDarkMode,
           ),
           _buildSettingsTile(
-  context,
-  icon: IconsaxPlusBroken.activity,
-  title: "Go to Screen One", // Pass title as a String
-  trailing: const Icon(Icons.arrow_forward_ios, size: 18), // Add a trailing icon
-  isDarkMode: isDarkMode,
-  onTap: () { // Add the onTap callback
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const SplashScreen()),
-    );
-  },
-),
-_buildSettingsTile(
-  context,
-  icon: IconsaxPlusBroken.box,
-  title: "Go to Screen Two", // Pass title as a String
-  trailing: const Icon(Icons.arrow_forward_ios, size: 18), // Add a trailing icon
-  isDarkMode: isDarkMode,
-  onTap: () { // Add the onTap callback
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const SplashScreen()),
-    );
-  },
-),
+            context,
+            icon: IconsaxPlusBroken.activity,
+            title:
+                AppLocalizations.of(context)!.payment, // Pass title as a String
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 18,
+            ), // Add a trailing icon
+            isDarkMode: isDarkMode,
+            onTap: () {
+              // Add the onTap callback
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PaymentScreen()),
+              );
+            },
+          ),
+          _buildSettingsTile(
+            context,
+            icon: IconsaxPlusBroken.box,
+            title: "Go to Screen Two", // Pass title as a String
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 18,
+            ), // Add a trailing icon
+            isDarkMode: isDarkMode,
+            onTap: () {
+              // Add the onTap callback
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SplashScreen()),
+              );
+            },
+          ),
         ],
       ),
     );

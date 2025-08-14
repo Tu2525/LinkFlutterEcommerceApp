@@ -142,5 +142,6 @@
   "save": "حفظ",
   "somethingWentWrong": "حدث خطأ ما",
   "darkMode": "الوضع الداكن",
-  "language": "اللغة"
+  "language": "اللغة",
+  "signOut": "تسجيل الخروج"
 }

@@ -142,5 +142,6 @@
     "save"  :"Save",
     "somethingWentWrong": "Something went wrong",
     "darkMode":"Dark Mode",
-    "language":"Language"
+    "language":"Language",
+    "signOut":"Sign Out"
 }

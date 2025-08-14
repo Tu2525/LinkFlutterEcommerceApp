@@ -80,7 +80,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                         // Category dropdown
                         PopupMenuButton<String>(
                           onSelected: (String result) {
-                            ref.read(homePageProvider).selectedCategory;
+                            ref.read(homePageProvider).selectCategory(result);
                           },
                           itemBuilder:
                               (BuildContext context) =>

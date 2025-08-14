@@ -438,4 +438,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get language => 'اللغة';
+
+  @override
+  String get signOut => 'تسجيل الخروج';
 }
