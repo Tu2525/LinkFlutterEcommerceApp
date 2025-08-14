@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
@@ -42,7 +43,7 @@ class VisaDataBottomSheet extends StatelessWidget {
         width: double.infinity,
         height: 500.h,
         decoration: BoxDecoration(
-          color: isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
+          color: AppColors.cardBackgroundColor(isDarkMode),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.r),
             topRight: Radius.circular(20.r),
@@ -53,7 +54,7 @@ class VisaDataBottomSheet extends StatelessWidget {
     } else {
       return Scaffold(
         backgroundColor:
-            isDarkMode ? const Color(0xFF342F3F) : const Color(0xffF4F4F4),
+            AppColors.cardBackgroundColor(isDarkMode),
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
@@ -66,9 +67,7 @@ class VisaDataBottomSheet extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color:
-                      isDarkMode
-                          ? const Color(0xFF342F3F)
-                          : const Color(0xffF4F4F4),
+                      AppColors.cardBackgroundColor(isDarkMode),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),

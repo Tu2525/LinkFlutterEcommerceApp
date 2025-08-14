@@ -5,7 +5,7 @@ import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
-import 'package:link_flutter_ecommerce_app/onboarding/screens/onboarding_screen.dart';
+import 'package:link_flutter_ecommerce_app/features/onboarding/screens/onboarding_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
