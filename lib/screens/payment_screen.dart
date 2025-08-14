@@ -6,25 +6,28 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/features/orders/domain/entities/order.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/features/orders/presentation/providers/orders_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/order_placed_successfully_screen.dart';
+import 'package:link_flutter_ecommerce_app/widgets/address_bottom_sheet.dart';
 import 'package:link_flutter_ecommerce_app/widgets/address_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_back_icon.dart';
 import 'package:link_flutter_ecommerce_app/features/orders/presentation/widgets/order_summary.dart';
 import 'package:link_flutter_ecommerce_app/widgets/payment_card.dart';
+import 'package:link_flutter_ecommerce_app/widgets/visa_data_bottom_sheet.dart';
 
 class PaymentScreen extends ConsumerStatefulWidget {
   const PaymentScreen({super.key});
 
   @override
-  ConsumerState<PaymentScreen> createState() => _PaymentscreenState();
+  ConsumerState<PaymentScreen> createState() => _PaymentScreenState();
 }
 
-class _PaymentscreenState extends ConsumerState<PaymentScreen> {
+class _PaymentScreenState extends ConsumerState<PaymentScreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -42,6 +45,23 @@ class _PaymentscreenState extends ConsumerState<PaymentScreen> {
     final subtotal = ref.watch(cartProvider.notifier).subtotal;
     final total = ref.watch(totalProvider);
     final checkoutState = ref.watch(checkoutProvider);
+
+    ref.listen(checkoutProvider, (_, next) {
+      if (next is AsyncData<List<CheckoutModel>>) {
+        final checkout = next.value.isNotEmpty ? next.value.first : null;
+        if (mounted && checkout != null) {
+          addressController.text = checkout.shippingAddress?.address ?? '';
+          cityController.text = checkout.shippingAddress?.city ?? '';
+          stateController.text = checkout.shippingAddress?.state ?? '';
+          countryController.text = checkout.shippingAddress?.country ?? '';
+          zipCodeController.text = checkout.shippingAddress?.zipCode ?? '';
+          nameController.text = checkout.paymentMethod?.cardHolderName ?? '';
+          cardNumberController.text = checkout.paymentMethod?.cardNumber ?? '';
+          cvvController.text = checkout.paymentMethod?.cvv ?? '';
+          expiryController.text = checkout.paymentMethod?.expiry ?? '';
+        }
+      }
+    });
 
     return Scaffold(
       body: Column(
@@ -64,36 +84,61 @@ class _PaymentscreenState extends ConsumerState<PaymentScreen> {
           Expanded(
             child: checkoutState.when(
               data: (checkoutData) {
-                final paymentMethod =
-                    checkoutData.isNotEmpty
-                        ? checkoutData.first.paymentMethod
-                        : null;
-                if (checkoutData.isNotEmpty) {
-                  final checkout = checkoutData.first;
-                  addressController.text =
-                      checkout.shippingAddress?.address ?? '';
-                  cityController.text = checkout.shippingAddress?.city ?? '';
-                  stateController.text = checkout.shippingAddress?.state ?? '';
-                  countryController.text =
-                      checkout.shippingAddress?.country ?? '';
-                  zipCodeController.text =
-                      checkout.shippingAddress?.zipCode ?? '';
-                  nameController.text =
-                      checkout.paymentMethod?.cardHolderName ?? '';
-                  cardNumberController.text =
-                      checkout.paymentMethod?.cardNumber ?? '';
-                  cvvController.text = checkout.paymentMethod?.cvv ?? '';
-                  expiryController.text = checkout.paymentMethod?.expiry ?? '';
-                }
+                final checkout =
+                    checkoutData.isNotEmpty ? checkoutData.first : null;
+                final paymentMethod = checkout?.paymentMethod;
 
                 return SingleChildScrollView(
                   child: Column(
                     children: [
-                      AddressCard(isDarkMode: isDarkMode, ontab: () {}),
+                      AddressCard(
+                        isDarkMode: isDarkMode,
+                        ontab: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (_) => AddressBottomSheet(
+                              formKey: formKey,
+                              isDarkMode: isDarkMode,
+                              countryController: countryController,
+                              stateController: stateController,
+                              addressController: addressController,
+                              cityController: cityController,
+                              zipcodeController: zipCodeController, ref: ref,
+                            ),
+                          );
+                        },
+                      ),
                       PaymentCard(
                         isDarkMode: isDarkMode,
                         paymentMethod: paymentMethod,
-                        onTap: () {},
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (_) => VisaDataBottomSheet(
+                              ref: ref,
+                              formKey: formKey,
+                              isDarkMode: isDarkMode,
+                              nameController: nameController,
+                              cardnumberController: cardNumberController,
+                              cvvController: cvvController,
+                              expiryController: expiryController,
+                              onSave: (updatedPayment) async {
+                                if (checkout == null) return;
+                                final updatedCheckout = CheckoutModel(
+                                  id: checkout.id,
+                                  shippingAddress: checkout.shippingAddress,
+                                  paymentMethod: updatedPayment,
+                                );
+                                await ref
+                                    .read(checkoutServiceProvider)
+                                    .updateCheckoutData(updatedCheckout);
+                                ref.invalidate(checkoutProvider);
+                              },
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -125,11 +170,26 @@ class _PaymentscreenState extends ConsumerState<PaymentScreen> {
                       ],
                     ),
                     onPressed: () async {
+                      if (addressController.text.isEmpty ||
+                          nameController.text.isEmpty ||
+                          cardNumberController.text.isEmpty ||
+                          cvvController.text.isEmpty ||
+                          expiryController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .pleaseFillAllFields),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      }
+
                       final navigator = Navigator.of(context);
                       final scaffoldMessenger = ScaffoldMessenger.of(context);
                       final localizations = AppLocalizations.of(context)!;
-
                       final cartItems = ref.read(cartProvider);
+
                       if (cartItems.isEmpty) {
                         scaffoldMessenger.showSnackBar(
                           SnackBar(content: Text(localizations.emptyCart)),
@@ -140,10 +200,8 @@ class _PaymentscreenState extends ConsumerState<PaymentScreen> {
                       showDialog(
                         context: context,
                         barrierDismissible: false,
-                        builder:
-                            (context) => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
+                        builder: (context) =>
+                            const Center(child: CircularProgressIndicator()),
                       );
 
                       try {
@@ -157,9 +215,8 @@ class _PaymentscreenState extends ConsumerState<PaymentScreen> {
                               '${addressController.text}, ${cityController.text}, ${stateController.text}, ${countryController.text}',
                         );
 
-                        final createOrderUseCase = ref.read(
-                          createOrderUseCaseProvider,
-                        );
+                        final createOrderUseCase =
+                            ref.read(createOrderUseCaseProvider);
 
                         final newOrder = await createOrderUseCase(
                           cartItems: cartItems,
@@ -175,18 +232,16 @@ class _PaymentscreenState extends ConsumerState<PaymentScreen> {
                         scaffoldMessenger.showSnackBar(
                           SnackBar(
                             content: Text(
-                              '${localizations.orderPlaced} #${newOrder.key}',
-                            ),
+                                '${localizations.orderPlaced} #${newOrder.key}'),
                             backgroundColor: Colors.green,
                           ),
                         );
 
+                        if (!mounted) return;
                         navigator.pushReplacement(
                           MaterialPageRoute(
-                            builder:
-                                (context) => OrderPlacedSuccessfullyScreen(
-                                  orderId: newOrder.key,
-                                ),
+                            builder: (context) => OrderPlacedSuccessfullyScreen(
+                                orderId: newOrder.key),
                           ),
                         );
                       } catch (e) {
