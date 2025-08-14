@@ -6,6 +6,7 @@ import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/features/profile/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 
 class SettingsSection extends ConsumerWidget {
   final VoidCallback onSettingsTap;
@@ -77,6 +78,32 @@ class SettingsSection extends ConsumerWidget {
             ),
             isDarkMode: isDarkMode,
           ),
+          _buildSettingsTile(
+  context,
+  icon: IconsaxPlusBroken.activity,
+  title: "Go to Screen One", // Pass title as a String
+  trailing: const Icon(Icons.arrow_forward_ios, size: 18), // Add a trailing icon
+  isDarkMode: isDarkMode,
+  onTap: () { // Add the onTap callback
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SplashScreen()),
+    );
+  },
+),
+_buildSettingsTile(
+  context,
+  icon: IconsaxPlusBroken.box,
+  title: "Go to Screen Two", // Pass title as a String
+  trailing: const Icon(Icons.arrow_forward_ios, size: 18), // Add a trailing icon
+  isDarkMode: isDarkMode,
+  onTap: () { // Add the onTap callback
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const SplashScreen()),
+    );
+  },
+),
         ],
       ),
     );
