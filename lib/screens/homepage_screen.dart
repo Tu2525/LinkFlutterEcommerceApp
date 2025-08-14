@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/features/profile/screens/profile_screen.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/home_page_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/cart_screen.dart';
@@ -59,10 +60,20 @@ class _HomePageState extends ConsumerState<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Avatar
-                        const CircleAvatar(
-                          radius: 20,
-                          backgroundImage: NetworkImage(
-                            'https://picsum.photos/536/354',
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ProfilePage(),
+                              ),
+                            );
+                          },
+                          child: const CircleAvatar(
+                            radius: 20,
+                            backgroundImage: NetworkImage(
+                              'https://picsum.photos/536/354',
+                            ),
                           ),
                         ),
                         // Theme toggle button
@@ -176,7 +187,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                   const SizedBox(height: 24),
                   const CategoriesSection(),
                   const SizedBox(height: 24),
-                  TopSellingSection(provider: topSellingProductsProvider),
+                  TopSellingSection(
+                    provider: topSellingProductsProvider,
+                    title: AppLocalizations.of(context)!.topSelling,
+                  ),
                   const SizedBox(height: 24),
                   TopSellingSection(
                     title: AppLocalizations.of(context)!.newIn,

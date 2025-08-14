@@ -5,7 +5,7 @@ import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
-import 'package:link_flutter_ecommerce_app/features/onboarding/screens/onboarding_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/main_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
@@ -52,7 +52,6 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TopBar(showHeartIcon: false),
-              const SizedBox(height: 123),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
@@ -97,7 +96,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const OnBoardingScreen(),
+                            builder: (context) => const MainScreen(),
                           ),
                         );
                       } else if (error.isNotEmpty) {

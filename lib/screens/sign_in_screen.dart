@@ -4,10 +4,7 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
-import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
-import 'package:link_flutter_ecommerce_app/features/orders/presentation/screens/order_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
-import 'package:link_flutter_ecommerce_app/screens/payment_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
@@ -151,12 +148,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           height: 25,
                           width: 20,
                         ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MainScreen()),
-                  );
-                },
+                onPressed: () {},
               ),
               const SizedBox(height: 12),
               SigninWithButton(
@@ -170,14 +162,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 isdark: isDarkMode,
                 text: AppLocalizations.of(context)!.continueWithFacebook,
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PaymentScreen(),
-                    ),
-                  );
-                },
+                onPressed: () {},
               ),
             ],
           ),

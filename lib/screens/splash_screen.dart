@@ -3,6 +3,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/providers/splash_timer_provider.dart';
+import 'package:link_flutter_ecommerce_app/services/firebase_notification_service.dart';
+import 'package:link_flutter_ecommerce_app/services/notification_service.dart';
 
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -17,12 +19,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     super.initState();
     var splashAnimation = ref.read(splashAnimationProvider);
-    // FirebaseNotificationService().requestNotificationPermission();
-    // FirebaseNotificationService().getToken().then(
-    //   (value) => print('valueeeeeeeeeeeeeeeeeeeeeeeee: $value'),
-    // );
-    // FirebaseNotificationService().initFirebaseMessaging();
-    // setupFlutterNotifications();
+    FirebaseNotificationService().requestNotificationPermission();
+    FirebaseNotificationService().getToken().then(
+      (value) => print('valueeeeeeeeeeeeeeeeeeeeeeeee: $value'),
+    );
+    FirebaseNotificationService().initFirebaseMessaging();
+    setupFlutterNotifications();
     splashAnimation(context);
   }
 

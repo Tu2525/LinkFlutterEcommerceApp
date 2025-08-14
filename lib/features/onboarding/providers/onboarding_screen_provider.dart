@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/onboardingscreen_model.dart';
 import 'package:link_flutter_ecommerce_app/screens/Main_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
 
 final onboardingScreenProvider =
     Provider.family<List<OnBoardingScreenModel>, BuildContext>((ref, context) {
@@ -47,7 +48,7 @@ class OnboardingController extends StateNotifier<int> {
 
   void nextPage(BuildContext context) {
     if (state == 2) {
-      goToHomeScreen(context);
+      goToSignInScreen(context);
     } else {
       pageController.nextPage(
         duration: const Duration(milliseconds: 500),
@@ -56,10 +57,10 @@ class OnboardingController extends StateNotifier<int> {
     }
   }
 
-  void goToHomeScreen(BuildContext context) {
+  void goToSignInScreen(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const MainScreen()),
+      MaterialPageRoute(builder: (_) => const SignInScreen()),
     );
   }
 

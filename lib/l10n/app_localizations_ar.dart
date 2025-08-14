@@ -434,7 +434,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get somethingWentWrong => 'حدث خطأ ما';
 
   @override
-  String get darkMode => 'الوضع الداكنل';
+  String get darkMode => 'الوضع الداكن';
 
   @override
   String get language => 'اللغة';
