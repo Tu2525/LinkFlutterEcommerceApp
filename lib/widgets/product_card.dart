@@ -48,6 +48,7 @@ class _ProductCardState extends State<ProductCard> {
       onTap: widget.onTap,
       child: Container(
         width: widget.width ?? 160,
+        height: 250, // Slightly increased height to prevent overflow
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
           color: AppColors.cardBackgroundColor(isDarkMode),
@@ -56,8 +57,9 @@ class _ProductCardState extends State<ProductCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(
-              aspectRatio: 1.0,
+            // Image section with fixed height
+            SizedBox(
+              height: 160, // Fixed image height
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
@@ -110,28 +112,35 @@ class _ProductCardState extends State<ProductCard> {
                 ),
               ),
             ),
-            Flexible(
+            // Content section with remaining space
+            Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      widget.product.name,
-                      style: AppTextStyles.subTitle2(isDarkMode),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    // Product name with constrained height
+                    Expanded(
+                      child: Text(
+                        widget.product.name,
+                        style: AppTextStyles.subTitle2(isDarkMode),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    const SizedBox(height: 4),
+                    // Price section with minimal space
                     Row(
                       children: [
-                        Text(
-                          '\$${widget.product.price.toStringAsFixed(2)}',
-                          style: AppTextStyles.heading6(isDarkMode),
+                        Flexible(
+                          child: Text(
+                            '\$${widget.product.price.toStringAsFixed(2)}',
+                            style: AppTextStyles.heading6(isDarkMode),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         if (widget.product.isOnSale) ...[
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 4),
                           Flexible(
                             child: Text(
                               '\$${widget.product.originalPrice!.toStringAsFixed(2)}',

@@ -8,13 +8,18 @@ import '../constants/app_colors.dart';
 import 'product_details_screen.dart';
 
 class ProductsOfCategoryScreen extends ConsumerWidget {
+  final String categoryId;
   final String categoryName;
-  const ProductsOfCategoryScreen({super.key, required this.categoryName});
+  const ProductsOfCategoryScreen({
+    super.key,
+    required this.categoryId,
+    required this.categoryName,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsyncValue = ref.watch(
-      productsOfCategoryProvider(categoryName),
+      productsOfCategoryProvider(categoryId),
     );
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
@@ -47,7 +52,7 @@ class ProductsOfCategoryScreen extends ConsumerWidget {
                       height: 40,
                       child: Icon(
                         IconsaxPlusBroken.arrow_left_2,
-                        color: AppColors.backgroundColor(isDarkMode),
+                        color: isDarkMode ? Colors.white : Colors.black,
                         size: 20,
                       ),
                     ),
