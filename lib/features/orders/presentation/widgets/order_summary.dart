@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
-import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
 class OrderSummary extends ConsumerWidget {
@@ -18,11 +15,6 @@ class OrderSummary extends ConsumerWidget {
 
     // feature branch vars
     final totalFromProvider = ref.watch(totalProvider);
-    final cartItems = ref.watch(cartProvider);
-    final addressController = ref.read(addressControllerProvider);
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final user = _auth.currentUser;
 
     // develop branch constants
     const shippingCost = 8.00;
