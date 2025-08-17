@@ -441,4 +441,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signOut => 'تسجيل الخروج';
+
+  @override
+  String get favorites => 'المفضلة';
+
+  @override
+  String get noFavorites => 'لا توجد مفضلات حتى الآن';
 }

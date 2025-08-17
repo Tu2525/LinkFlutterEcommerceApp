@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:link_flutter_ecommerce_app/models/product.dart';
 
 class FavoritesNotifier extends StateNotifier<List<String>> {
   FavoritesNotifier(this.userId) : super([]) {
@@ -46,3 +49,22 @@ final favoritesProvider =
     StateNotifierProvider<FavoritesNotifier, List<String>>((ref) {
   return FavoritesNotifier(user!.uid);
 });
+
+
+
+  Stream<List<Product>> fetchProducts(List<String> ids) {
+    if (ids.isEmpty) return Stream.value([]);
+    return FirebaseFirestore.instance
+        .collection('products')
+        .where(FieldPath.documentId, whereIn: ids)
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                final data = doc.data();
+                data['id'] = doc.id;
+                log(data['imageUrls'].toString());
+                return Product.fromJson(data);
+              }).toList(),
+        );
+  }

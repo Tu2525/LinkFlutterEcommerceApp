@@ -440,4 +440,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signOut => 'Sign Out';
+
+  @override
+  String get favorites => 'Favorites';
+
+  @override
+  String get noFavorites => 'No Favorites yet';
 }

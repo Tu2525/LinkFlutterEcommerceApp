@@ -143,5 +143,7 @@
   "somethingWentWrong": "حدث خطأ ما",
   "darkMode": "الوضع الداكن",
   "language": "اللغة",
-  "signOut": "تسجيل الخروج"
+  "signOut": "تسجيل الخروج",
+  "favorites": "المفضلة",
+  "noFavorites": "لا توجد مفضلات حتى الآن"
 }

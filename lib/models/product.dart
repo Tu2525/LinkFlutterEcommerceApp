@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:link_flutter_ecommerce_app/models/review.dart';
 
 class Product {
@@ -40,9 +42,10 @@ class Product {
     }
 
     List<String> images = []; //check the comment below.
-    if (json['image_urls'] != null && json['image_urls'] is List) {
+    if (json['imageUrls'] != null && json['imageUrls'] is List) {
       //Shouldn't this be image_url? i am lost
-      images = List<String>.from(json['image_urls']);
+      images = List<String>.from(json['imageUrls']);
+      log(images.toString());
     }
     return Product(
       id: json['id']?.toString() ?? '',
