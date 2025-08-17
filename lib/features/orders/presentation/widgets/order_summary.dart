@@ -20,9 +20,9 @@ class OrderSummary extends ConsumerWidget {
     final totalFromProvider = ref.watch(totalProvider);
     final cartItems = ref.watch(cartProvider);
     final addressController = ref.read(addressControllerProvider);
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final user = _auth.currentUser;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
 
     // develop branch constants
     const shippingCost = 8.00;

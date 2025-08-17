@@ -80,7 +80,6 @@ class AppTextStyles {
       color: isDarkMode ? Colors.white : Colors.black,
     );
   }
-
   static TextStyle subTitle1(bool isDarkMode) {
     return TextStyle(
       fontSize: 16.0,

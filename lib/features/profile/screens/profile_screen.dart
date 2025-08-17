@@ -34,7 +34,6 @@ class ProfilePage extends ConsumerWidget {
             const SizedBox(height: 24),
             SettingsSection(
               onSettingsTap: () {
-                ;
               },
             ),
             const Spacer(),
