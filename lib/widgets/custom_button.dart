@@ -20,7 +20,6 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -35,7 +34,7 @@ class CustomButton extends StatelessWidget {
               ? row!
               : Text(
                 text ?? AppLocalizations.of(context)!.cont,
-                style: AppTextStyles.subTitle1(isDarkMode),
+                style: const TextStyle(color: Colors.white),
               ),
     );
   }
