@@ -57,6 +57,6 @@ class CheckoutService {
         .doc(_uid)
         .collection('checkouts')
         .doc(checkoutId)
-        .update({"address": null});
+        .update({"shippingAddress": null});
   }
 }

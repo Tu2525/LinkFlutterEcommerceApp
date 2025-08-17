@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/models/checkout_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/checkout_provider.dart';
 import 'package:link_flutter_ecommerce_app/widgets/build_text_form.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_app_bar.dart';
@@ -22,7 +23,9 @@ class AddressBottomSheet extends ConsumerWidget {
     required this.isDarkMode,
     this.isBottomSheet = true,
     this.onSave,
+    this.checkoutId,
   });
+  final String? checkoutId;
   final WidgetRef ref;
   final GlobalKey<FormState> formKey;
   final TextEditingController countryController;
@@ -32,7 +35,7 @@ class AddressBottomSheet extends ConsumerWidget {
   final TextEditingController zipcodeController;
   final bool isDarkMode;
   final bool isBottomSheet;
-  final void Function(String address)? onSave;
+  final void Function(ShippingAddress)? onSave;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,9 +59,23 @@ class AddressBottomSheet extends ConsumerWidget {
         backgroundColor: AppColors.cardBackgroundColor(isDarkMode),
         body: Column(
           children: [
-            CustomAppBar(
-              isDarkMode: isDarkMode,
-              title: AppLocalizations.of(context)!.addAddress,
+            Row(
+              children: [
+                CustomAppBar(
+                  isDarkMode: isDarkMode,
+                  title: AppLocalizations.of(context)!.address,
+                ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () async {
+                    await ref
+                        .read(checkoutServiceProvider)
+                        .deleteAddress(checkoutId!);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.delete),
+                ),
+              ],
             ),
             Expanded(
               child: Container(
@@ -238,11 +255,18 @@ class AddressBottomSheet extends ConsumerWidget {
                         child: CustomButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              onSave?.call(addressController.text);
+                              final address = ShippingAddress(
+                                country: countryController.text,
+                                state: stateController.text,
+                                address: addressController.text,
+                                city: cityController.text,
+                                zipCode: zipcodeController.text,
+                              );
+                              onSave?.call(address);
                               Navigator.pop(context);
                             }
                           },
-                          text: AppLocalizations.of(context)!.addAddress,
+                          text: AppLocalizations.of(context)!.save,
                         ),
                       ),
                     ],
