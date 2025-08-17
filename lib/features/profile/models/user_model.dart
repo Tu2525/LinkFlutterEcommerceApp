@@ -3,19 +3,22 @@ class UserModel {
   final String lastName;
   final String email;
   final String password;
+  final List<String> favorites;
 
   UserModel({
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.password,
+    this.favorites = const [],
   });
   Map<String, dynamic> toJson() {
     return {
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
-      'password': password, //TODO(Tarek): ENCRYPT THE PASSWORD
+      'password': password,
+      'favorites': favorites,
     };
   }
 
@@ -34,6 +37,7 @@ class UserModel {
       lastName: lastName,
       email: json['email'] ?? 'No Email Provided',
       password: json['password'] ?? '',
+      favorites: List<String>.from(json['favorites'] ?? []),
     );
   }
   factory UserModel.fromFirestore(Map<String, dynamic> data) {
@@ -42,6 +46,7 @@ class UserModel {
       firstName: data['firstName'] ?? 'null',
       lastName: data['lastName'] ?? 'null',
       password: data['password'] ?? '',
+      favorites: List<String>.from(data['favorites'] ?? []),
     );
   }
 }

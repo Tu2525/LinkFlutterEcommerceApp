@@ -85,7 +85,6 @@ class Product {
     return ((originalPrice! - price) / originalPrice!) * 100;
   }
 
-  // Create a copy with updated properties
   Product copyWith({
     String? id,
     String? name,

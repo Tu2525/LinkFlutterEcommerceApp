@@ -5,6 +5,7 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/features/orders/presentation/screens/orders_screen_new.dart';
 import 'package:link_flutter_ecommerce_app/features/profile/screens/profile_screen.dart';
 import 'package:link_flutter_ecommerce_app/providers/main_screen_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/fav_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
 
@@ -15,7 +16,7 @@ class MainScreen extends ConsumerWidget {
     const HomePage(),
     const NotificationScreen(),
     const OrdersScreen(),
-    const ProfilePage(),
+    const FavoritesScreen(),
   ];
 
   @override

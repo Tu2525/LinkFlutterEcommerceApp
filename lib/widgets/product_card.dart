@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/providers/favourites_provider.dart';
 import '../constants/app_colors.dart';
 import '../models/product.dart';
 
-class ProductCard extends StatefulWidget {
+class ProductCard extends ConsumerWidget {
   final Product product;
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteToggle;
@@ -19,36 +21,19 @@ class ProductCard extends StatefulWidget {
   });
 
   @override
-  State<ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<ProductCard> {
-  bool _isFavorite = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isFavorite = widget.product.isFavorite;
-  }
-
-  void _toggleFavorite() {
-    setState(() {
-      _isFavorite = !_isFavorite;
-    });
-    widget.onFavoriteToggle?.call();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
+    final favorites = ref.watch(favoritesProvider);
+    final isFav = favorites.contains(product.id);
+
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: onTap,
       child: Container(
-        width: widget.width ?? 160,
-        height: 250, // Slightly increased height to prevent overflow
+        width: width ?? 160,
+        height: 250,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
           color: AppColors.cardBackgroundColor(isDarkMode),
@@ -59,7 +44,7 @@ class _ProductCardState extends State<ProductCard> {
           children: [
             // Image section with fixed height
             SizedBox(
-              height: 160, // Fixed image height
+              height: 160,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
@@ -75,35 +60,31 @@ class _ProductCardState extends State<ProductCard> {
                         topLeft: Radius.circular(12),
                         topRight: Radius.circular(12),
                       ),
-                      child:
-                          widget.product.imageUrls != null &&
-                                  widget.product.imageUrls!.isNotEmpty
-                              ? Image.network(
-                                widget.product.imageUrls![0],
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return _buildPlaceholder();
-                                },
-                              )
-                              : _buildPlaceholder(),
+                      child: product.imageUrls != null &&
+                              product.imageUrls!.isNotEmpty
+                          ? Image.network(
+                              product.imageUrls![0],
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                              errorBuilder: (context, error, stackTrace) {
+                                return _buildPlaceholder(context);
+                              },
+                            )
+                          : _buildPlaceholder(context),
                     ),
                     Positioned(
                       top: 8,
                       right: 8,
                       child: GestureDetector(
-                        onTap: _toggleFavorite,
+                        onTap: onFavoriteToggle,
                         child: Icon(
-                          _isFavorite
+                          isFav
                               ? IconsaxPlusBold.heart
                               : IconsaxPlusBroken.heart,
-                          color:
-                              _isFavorite
-                                  ? Colors.red
-                                  : colorScheme.onSurface.withValues(
-                                    alpha: 0.7,
-                                  ),
+                          color: isFav
+                              ? Colors.red
+                              : colorScheme.onSurface.withValues(alpha: 0.7),
                           size: 24,
                         ),
                       ),
@@ -123,7 +104,7 @@ class _ProductCardState extends State<ProductCard> {
                     // Product name with constrained height
                     Expanded(
                       child: Text(
-                        widget.product.name,
+                        product.name,
                         style: AppTextStyles.subTitle2(isDarkMode),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -134,16 +115,16 @@ class _ProductCardState extends State<ProductCard> {
                       children: [
                         Flexible(
                           child: Text(
-                            '\$${widget.product.price.toStringAsFixed(2)}',
+                            '\$${product.price.toStringAsFixed(2)}',
                             style: AppTextStyles.heading6(isDarkMode),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        if (widget.product.isOnSale) ...[
+                        if (product.isOnSale) ...[
                           const SizedBox(width: 4),
                           Flexible(
                             child: Text(
-                              '\$${widget.product.originalPrice!.toStringAsFixed(2)}',
+                              '\$${product.originalPrice!.toStringAsFixed(2)}',
                               style: AppTextStyles.faintGrey2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -161,7 +142,7 @@ class _ProductCardState extends State<ProductCard> {
     );
   }
 
-  Widget _buildPlaceholder() {
+  Widget _buildPlaceholder(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final bool isDarkMode = theme.brightness == Brightness.dark;
