@@ -22,8 +22,9 @@ class VisaDataBottomSheet extends ConsumerWidget {
     required this.isDarkMode,
     this.isBottomSheet = true,
     this.onSave,
+    this.checkoutId,
   });
-
+  final String? checkoutId;
   final WidgetRef ref;
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
@@ -57,9 +58,23 @@ class VisaDataBottomSheet extends ConsumerWidget {
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-            CustomAppBar(
-              isDarkMode: isDarkMode,
-              title: AppLocalizations.of(context)!.payment,
+            Row(
+              children: [
+                CustomAppBar(
+                  isDarkMode: isDarkMode,
+                  title: AppLocalizations.of(context)!.payment,
+                ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () async {
+                    await ref
+                        .read(checkoutServiceProvider)
+                        .deletePaymentMethod(checkoutId!);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.delete),
+                ),
+              ],
             ),
             Expanded(
               child: Container(
