@@ -53,8 +53,7 @@ class VisaDataBottomSheet extends ConsumerWidget {
       );
     } else {
       return Scaffold(
-        backgroundColor:
-            AppColors.cardBackgroundColor(isDarkMode),
+        backgroundColor: AppColors.cardBackgroundColor(isDarkMode),
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
@@ -66,8 +65,7 @@ class VisaDataBottomSheet extends ConsumerWidget {
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color:
-                      AppColors.cardBackgroundColor(isDarkMode),
+                  color: AppColors.cardBackgroundColor(isDarkMode),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),
@@ -194,7 +192,9 @@ class VisaDataBottomSheet extends ConsumerWidget {
                                   inputType: TextInputType.number,
                                   validator:
                                       (value) =>
-                                          value == null || value.length != 3 || int.tryParse(value) == null
+                                          value == null ||
+                                                  value.length != 3 ||
+                                                  int.tryParse(value) == null
                                               ? AppLocalizations.of(
                                                 context,
                                               )!.validCvv
