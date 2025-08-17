@@ -52,10 +52,12 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TopBar(showHeartIcon: false),
+              const SizedBox(height: 70),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  AppLocalizations.of(context)!.signIn,
+                  AppLocalizations.of(context)!.pass,
                   style: AppTextStyles.heading2(isDarkMode),
                 ),
               ),

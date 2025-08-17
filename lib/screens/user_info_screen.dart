@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/user_info_provider.dart';
-import 'package:link_flutter_ecommerce_app/features/onboarding/screens/onboarding_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/age_range_dropdown.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/gender_selection_row.dart';
@@ -58,7 +58,7 @@ class UserInfo extends ConsumerWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const OnBoardingScreen(),
+                        builder: (context) => const SignInScreen(),
                       ),
                     );
                   }
