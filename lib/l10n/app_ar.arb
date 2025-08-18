@@ -144,6 +144,9 @@
   "darkMode": "الوضع الداكن",
   "language": "اللغة",
   "signOut": "تسجيل الخروج",
+  "favorites": "المفضلة",
+  "noFavorites": "لا توجد مفضلات حتى الآن"
+
   "whishlist": "المفضلة",
   "edit": "تعديل"
 }

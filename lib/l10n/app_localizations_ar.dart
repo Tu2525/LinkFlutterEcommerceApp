@@ -443,6 +443,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signOut => 'تسجيل الخروج';
 
   @override
+  String get favorites => 'المفضلة';
+
+  @override
+  String get noFavorites => 'لا توجد مفضلات حتى الآن';
+
   String get whishlist => 'المفضلة';
 
   @override

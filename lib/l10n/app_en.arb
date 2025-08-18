@@ -144,6 +144,8 @@
     "darkMode":"Dark Mode",
     "language":"Language",
     "signOut":"Sign Out",
+    "favorites": "Favorites",
+    "noFavorites": "No Favorites yet"
     "whishlist": "Wishlist",
     "edit": "Edit"
 }

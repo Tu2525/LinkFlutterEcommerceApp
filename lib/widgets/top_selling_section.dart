@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/providers/favourites_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/product_details_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/see_all_products_screen.dart';
 import '../models/product.dart';
@@ -11,7 +14,6 @@ class TopSellingSection extends ConsumerWidget {
   final String title;
   final VoidCallback? onSeeAllTap;
   final Function(Product)? onProductTap;
-  final Function(Product)? onFavoriteToggle;
   final bool showSeeAll;
   final double? cardWidth;
   final StateNotifierProvider<
@@ -25,7 +27,6 @@ class TopSellingSection extends ConsumerWidget {
     this.title = 'Top Selling',
     this.onSeeAllTap,
     this.onProductTap,
-    this.onFavoriteToggle,
     this.showSeeAll = true,
     this.cardWidth,
     required this.provider,
@@ -35,7 +36,6 @@ class TopSellingSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final productsAsyncValue = ref.watch(provider);
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,8 +108,11 @@ class TopSellingSection extends ConsumerWidget {
                                           ),
                                     ),
                                   ),
-                              onFavoriteToggle:
-                                  () => onFavoriteToggle?.call(product),
+                              onFavoriteToggle: () {
+                                ref
+                                    .read(favoritesProvider.notifier)
+                                    .toggleFavorite(product.id);
+                              },
                             );
                           },
                         ),

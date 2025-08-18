@@ -45,7 +45,7 @@ class _ProductDetailsView extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TopBar(),
+                    TopBar(product: product),
                     ProductImageCarousel(product: product),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
