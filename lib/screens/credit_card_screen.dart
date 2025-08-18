@@ -35,7 +35,7 @@ class _PaymentscreenState extends ConsumerState<CreditCardScreen> {
         children: [
           CustomAppBar(
             isDarkMode: isDarkMode,
-            title: AppLocalizations.of(context)!.checkout,
+            title: AppLocalizations.of(context)!.payment,
           ),
           Expanded(
             child: checkoutState.when(
@@ -43,92 +43,89 @@ class _PaymentscreenState extends ConsumerState<CreditCardScreen> {
                 if (checkoutList.isEmpty) {
                   return const Center(child: Text("No saved payment methods"));
                 }
-                return Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: checkoutList.length,
-                    itemBuilder: (context, index) {
-                      final checkout = checkoutList[index];
-                      final formKey = GlobalKey<FormState>();
+                final cardsOnly =
+                    checkoutList.where((c) => c.paymentMethod != null).toList();
+                return ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: cardsOnly.length,
+                  itemBuilder: (context, index) {
+                    final checkout = cardsOnly[index];
+                    final formKey = GlobalKey<FormState>();
+                    return PaymentCard(
+                      isDarkMode: isDarkMode,
+                      paymentMethod: checkout.paymentMethod,
+                      onTap: () {
+                        final paymentCopy =
+                            checkout.paymentMethod != null
+                                ? PaymentMethod(
+                                  cardHolderName:
+                                      checkout.paymentMethod!.cardHolderName,
+                                  cardNumber:
+                                      checkout.paymentMethod!.cardNumber,
+                                  cvv: checkout.paymentMethod!.cvv,
+                                  expiry: checkout.paymentMethod!.expiry,
+                                )
+                                : PaymentMethod(
+                                  cardHolderName: '',
+                                  cardNumber: '',
+                                  cvv: '',
+                                  expiry: '',
+                                );
 
-                      return PaymentCard(
-                        isDarkMode: isDarkMode,
-                        onTap: () {
-                          final paymentCopy =
-                              checkout.paymentMethod != null
-                                  ? PaymentMethod(
-                                    cardHolderName:
-                                        checkout.paymentMethod!.cardHolderName,
-                                    cardNumber:
-                                        checkout.paymentMethod!.cardNumber,
-                                    cvv: checkout.paymentMethod!.cvv,
-                                    expiry: checkout.paymentMethod!.expiry,
-                                  )
-                                  : PaymentMethod(
-                                    cardHolderName: '',
-                                    cardNumber: '',
-                                    cvv: '',
-                                    expiry: '',
-                                  );
+                        final nameController = TextEditingController(
+                          text: paymentCopy.cardHolderName,
+                        );
+                        final cardNumberController = TextEditingController(
+                          text: paymentCopy.cardNumber,
+                        );
+                        final cvvController = TextEditingController(
+                          text: paymentCopy.cvv,
+                        );
+                        final expiryController = TextEditingController(
+                          text: paymentCopy.expiry,
+                        );
 
-                          final nameController = TextEditingController(
-                            text: paymentCopy.cardHolderName,
-                          );
-                          final cardNumberController = TextEditingController(
-                            text: paymentCopy.cardNumber,
-                          );
-                          final cvvController = TextEditingController(
-                            text: paymentCopy.cvv,
-                          );
-                          final expiryController = TextEditingController(
-                            text: paymentCopy.expiry,
-                          );
-
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            builder:
-                                (_) => Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom:
-                                        MediaQuery.of(
-                                          context,
-                                        ).viewInsets.bottom,
-                                  ),
-                                  child: VisaDataBottomSheet(
-                                    isBottomSheet: false,
-                                    formKey: formKey,
-                                    ref: ref,
-                                    isDarkMode: isDarkMode,
-                                    nameController: nameController,
-                                    cardnumberController: cardNumberController,
-                                    cvvController: cvvController,
-                                    expiryController: expiryController,
-                                    onSave: (updatedPayment) async {
-                                      if (formKey.currentState!.validate()) {
-                                        final updatedCheckout = CheckoutModel(
-                                          id: checkout.id,
-                                          shippingAddress:
-                                              checkout.shippingAddress,
-                                          paymentMethod: updatedPayment,
-                                        );
-                                        await ref
-                                            .read(checkoutServiceProvider)
-                                            .updateCheckoutData(
-                                              updatedCheckout,
-                                            );
-                                        ref
-                                            .read(checkoutProvider.notifier)
-                                            .listenToCheckoutData();
-                                      }
-                                    },
-                                  ),
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder:
+                              (_) => Padding(
+                                padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom,
                                 ),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                                child: VisaDataBottomSheet(
+                                  isBottomSheet: false,
+                                  formKey: formKey,
+                                  ref: ref,
+                                  checkoutId: checkout.id!,
+                                  isDarkMode: isDarkMode,
+                                  nameController: nameController,
+                                  cardnumberController: cardNumberController,
+                                  cvvController: cvvController,
+                                  expiryController: expiryController,
+                                  onSave: (updatedPayment) async {
+                                    if (formKey.currentState!.validate()) {
+                                      final updatedCheckout = CheckoutModel(
+                                        id: checkout.id,
+                                        shippingAddress:
+                                            checkout.shippingAddress,
+                                        paymentMethod: updatedPayment,
+                                      );
+                                      await ref
+                                          .read(checkoutServiceProvider)
+                                          .updateCheckoutData(updatedCheckout);
+                                      ref
+                                          .read(checkoutProvider.notifier)
+                                          .listenToCheckoutData();
+                                    }
+                                  },
+                                ),
+                              ),
+                        );
+                      },
+                    );
+                  },
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),

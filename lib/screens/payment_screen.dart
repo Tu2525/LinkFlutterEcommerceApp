@@ -93,19 +93,34 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                     children: [
                       AddressCard(
                         isDarkMode: isDarkMode,
-                        ontab: () {
+                        shippingAddress: checkout?.shippingAddress,
+                        onTap: () {
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            builder: (_) => AddressBottomSheet(
-                              formKey: formKey,
-                              isDarkMode: isDarkMode,
-                              countryController: countryController,
-                              stateController: stateController,
-                              addressController: addressController,
-                              cityController: cityController,
-                              zipcodeController: zipCodeController, ref: ref,
-                            ),
+                            builder:
+                                (_) => AddressBottomSheet(
+                                  formKey: formKey,
+                                  isDarkMode: isDarkMode,
+                                  countryController: countryController,
+                                  stateController: stateController,
+                                  addressController: addressController,
+                                  cityController: cityController,
+                                  zipcodeController: zipCodeController,
+                                  ref: ref,
+                                  onSave: (updatedAddress) async {
+                                    if (checkout == null) return;
+                                    final updatedCheckout = CheckoutModel(
+                                      id: checkout.id,
+                                      shippingAddress: updatedAddress,
+                                      paymentMethod: checkout.paymentMethod,
+                                    );
+                                    await ref
+                                        .read(checkoutServiceProvider)
+                                        .saveCheckoutData(updatedCheckout);
+                                    ref.invalidate(checkoutProvider);
+                                  },
+                                ),
                           );
                         },
                       ),
@@ -116,27 +131,28 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            builder: (_) => VisaDataBottomSheet(
-                              ref: ref,
-                              formKey: formKey,
-                              isDarkMode: isDarkMode,
-                              nameController: nameController,
-                              cardnumberController: cardNumberController,
-                              cvvController: cvvController,
-                              expiryController: expiryController,
-                              onSave: (updatedPayment) async {
-                                if (checkout == null) return;
-                                final updatedCheckout = CheckoutModel(
-                                  id: checkout.id,
-                                  shippingAddress: checkout.shippingAddress,
-                                  paymentMethod: updatedPayment,
-                                );
-                                await ref
-                                    .read(checkoutServiceProvider)
-                                    .updateCheckoutData(updatedCheckout);
-                                ref.invalidate(checkoutProvider);
-                              },
-                            ),
+                            builder:
+                                (_) => VisaDataBottomSheet(
+                                  ref: ref,
+                                  formKey: formKey,
+                                  isDarkMode: isDarkMode,
+                                  nameController: nameController,
+                                  cardnumberController: cardNumberController,
+                                  cvvController: cvvController,
+                                  expiryController: expiryController,
+                                  onSave: (updatedPayment) async {
+                                    if (checkout == null) return;
+                                    final updatedCheckout = CheckoutModel(
+                                      id: checkout.id,
+                                      shippingAddress: checkout.shippingAddress,
+                                      paymentMethod: updatedPayment,
+                                    );
+                                    await ref
+                                        .read(checkoutServiceProvider)
+                                        .saveCheckoutData(updatedCheckout);
+                                    ref.invalidate(checkoutProvider);
+                                  },
+                                ),
                           );
                         },
                       ),
@@ -177,8 +193,9 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                           expiryController.text.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(AppLocalizations.of(context)!
-                                .pleaseFillAllFields),
+                            content: Text(
+                              AppLocalizations.of(context)!.pleaseFillAllFields,
+                            ),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -200,8 +217,10 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                       showDialog(
                         context: context,
                         barrierDismissible: false,
-                        builder: (context) =>
-                            const Center(child: CircularProgressIndicator()),
+                        builder:
+                            (context) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
                       );
 
                       try {
@@ -215,8 +234,9 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                               '${addressController.text}, ${cityController.text}, ${stateController.text}, ${countryController.text}',
                         );
 
-                        final createOrderUseCase =
-                            ref.read(createOrderUseCaseProvider);
+                        final createOrderUseCase = ref.read(
+                          createOrderUseCaseProvider,
+                        );
 
                         final newOrder = await createOrderUseCase(
                           cartItems: cartItems,
@@ -232,7 +252,8 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                         scaffoldMessenger.showSnackBar(
                           SnackBar(
                             content: Text(
-                                '${localizations.orderPlaced} #${newOrder.key}'),
+                              '${localizations.orderPlaced} #${newOrder.key}',
+                            ),
                             backgroundColor: Colors.green,
                           ),
                         );
@@ -240,8 +261,10 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                         if (!mounted) return;
                         navigator.pushReplacement(
                           MaterialPageRoute(
-                            builder: (context) => OrderPlacedSuccessfullyScreen(
-                                orderId: newOrder.key),
+                            builder:
+                                (context) => OrderPlacedSuccessfullyScreen(
+                                  orderId: newOrder.key,
+                                ),
                           ),
                         );
                       } catch (e) {

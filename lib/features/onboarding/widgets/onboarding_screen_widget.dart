@@ -12,7 +12,7 @@ class OnboardingScreenWidget extends StatelessWidget {
     this.color2,
     required this.index,
   });
-
+  
   final String title;
   final String subtitle1;
   final String imagePath;
