@@ -143,5 +143,7 @@
     "somethingWentWrong": "Something went wrong",
     "darkMode":"Dark Mode",
     "language":"Language",
-    "signOut":"Sign Out"
+    "signOut":"Sign Out",
+    "whishlist": "Wishlist",
+    "edit": "Edit"
 }
