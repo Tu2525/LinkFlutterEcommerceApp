@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/homepage_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/password_screen.dart';
+import 'package:link_flutter_ecommerce_app/services/auth_services.dart';
+import 'package:link_flutter_ecommerce_app/utils/showsnackbar.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
 import 'package:link_flutter_ecommerce_app/widgets/signin_with_button.dart';
@@ -150,19 +154,40 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         ),
                 onPressed: () {},
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.h),
               SigninWithButton(
                 isdark: isDarkMode,
                 text: AppLocalizations.of(context)!.continueWithGoogle,
                 icon: Image.asset('images/google.png', height: 25, width: 20),
                 onPressed: () {},
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.h),
               SigninWithButton(
                 isdark: isDarkMode,
                 text: AppLocalizations.of(context)!.continueWithFacebook,
                 icon: Image.asset('images/facebook.png', height: 25, width: 20),
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    final userCredential =
+                        await ref
+                            .read(authServiceProvider)
+                            .signInWithFacebook();
+
+                    print('Facebook User: ${userCredential.user}');
+                    if (userCredential.user != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    } else {
+                      showsnackbar(context, 'Login failed, no user returned');
+                    }
+                  } catch (e) {
+                    showsnackbar(context, e.toString());
+                  }
+                },
               ),
             ],
           ),

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthService {
   final auth = FirebaseAuth.instance;
@@ -100,4 +102,38 @@ class AuthService {
             .get();
     return snapshot.docs.isNotEmpty;
   }
+Future<UserCredential> signInWithFacebook() async {
+
+    await FacebookAuth.instance.logOut();
+    await FirebaseAuth.instance.signOut();
+
+    final LoginResult result = await FacebookAuth.instance.login(
+      permissions: ['public_profile', 'email'],
+    );
+
+    if (result.status == LoginStatus.success) {
+      final accessToken = result.accessToken!;
+      final facebookAuthCredential = FacebookAuthProvider.credential(
+        accessToken.tokenString,
+      );
+
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        facebookAuthCredential,
+      );
+
+      return userCredential;
+    } else if (result.status == LoginStatus.cancelled) {
+      throw FirebaseAuthException(
+        code: 'ERROR_FACEBOOK_LOGIN_CANCELLED',
+        message: 'Facebook login cancelled',
+      );
+    } else {
+      throw FirebaseAuthException(
+        code: 'ERROR_FACEBOOK_LOGIN_FAILED',
+        message: result.message,
+      );
+    }
+  }
+
+
 }
