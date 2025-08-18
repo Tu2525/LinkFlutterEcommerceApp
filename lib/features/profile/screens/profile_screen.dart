@@ -1,33 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/features/profile/widgets/profile_header.dart';
 import 'package:link_flutter_ecommerce_app/features/profile/widgets/settings_section.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
-import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class ProfilePage extends ConsumerWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(isDarkMode),
-      appBar: AppBar(
-        title: Text(
-          AppLocalizations.of(context)!.profile,
-          style: AppTextStyles.heading4(isDarkMode),
-        ),
-        backgroundColor: AppColors.backgroundColor(isDarkMode),
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SafeArea(
         child: Column(
           children: [
             const ProfileHeader(),
@@ -35,16 +22,31 @@ class ProfilePage extends ConsumerWidget {
             SettingsSection(
               onSettingsTap: () {
               },
+             const SizedBox(height: 70),
+             const CircleAvatar(
+              backgroundColor: Colors.white,
+              radius: 50,
+              backgroundImage: AssetImage('images/user_21.png'),
             ),
-            const Spacer(),
-            // Sign Out Button
-            CustomButton(
+            const SizedBox(height: 20),
+            const ProfileHeader(),
+            const SizedBox(height: 5),
+            const SettingsSection(),
+            TextButton(
+              child: Text(
+                AppLocalizations.of(context)!.signOut,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
+              ),
               onPressed: () async {
                 try {
                   await FirebaseAuth.instance.signOut();
                   if (context.mounted) {
                     Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
+                       MaterialPageRoute(
                         builder: (context) => const SignInScreen(),
                       ),
                       (Route<dynamic> route) => false,
@@ -54,7 +56,7 @@ class ProfilePage extends ConsumerWidget {
                   print('Error signing out: $e');
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                       SnackBar(
                         content: Text(
                           '${AppLocalizations.of(context)!.somethingWentWrong} $e',
                         ),
@@ -63,9 +65,7 @@ class ProfilePage extends ConsumerWidget {
                   }
                 }
               },
-              text: AppLocalizations.of(context)!.signOut,
             ),
-            const SizedBox(height: 20),
           ],
         ),
       ),

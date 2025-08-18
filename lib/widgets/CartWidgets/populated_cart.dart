@@ -20,7 +20,6 @@ class PopulatedCart extends ConsumerWidget {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final subtotal = ref.watch(subtotalProvider);
     final total = ref.watch(totalProvider);
-    final addressController = ref.watch(addressControllerProvider);
 
     return Column(
       children: [

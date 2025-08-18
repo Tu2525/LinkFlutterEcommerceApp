@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
-import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/price_summary_row.dart';
 
 class OrderSummary extends ConsumerWidget {
