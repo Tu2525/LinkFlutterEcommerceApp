@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
-import 'package:link_flutter_ecommerce_app/features/orders/domain/entities/order.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/models/cartitem_model.dart';
 import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
 import 'package:link_flutter_ecommerce_app/providers/controller_providors.dart';
-import 'package:link_flutter_ecommerce_app/features/orders/presentation/providers/orders_provider.dart';
 import 'package:link_flutter_ecommerce_app/screens/payment_screen.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/cart_item_card.dart';
 import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/coupon_code_input.dart';
@@ -22,7 +20,6 @@ class PopulatedCart extends ConsumerWidget {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final subtotal = ref.watch(subtotalProvider);
     final total = ref.watch(totalProvider);
-    final addressController = ref.watch(addressControllerProvider);
 
     return Column(
       children: [

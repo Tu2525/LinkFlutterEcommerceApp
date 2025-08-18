@@ -19,6 +19,7 @@ class UserModel {
       'email': email,
       'password': password,
       'favorites': favorites,
+
     };
   }
 
@@ -43,8 +44,8 @@ class UserModel {
   factory UserModel.fromFirestore(Map<String, dynamic> data) {
     return UserModel(
       email: data['email'] ?? 'No Email Provided',
-      firstName: data['firstName'] ?? 'null',
-      lastName: data['lastName'] ?? 'null',
+      firstName: data['name'] ?? 'null',
+      lastName: data['name'] ?? 'null',
       password: data['password'] ?? '',
       favorites: List<String>.from(data['favorites'] ?? []),
     );

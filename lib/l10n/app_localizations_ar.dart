@@ -447,4 +447,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noFavorites => 'لا توجد مفضلات حتى الآن';
+
+  String get whishlist => 'المفضلة';
+
+  @override
+  String get edit => 'تعديل';
 }

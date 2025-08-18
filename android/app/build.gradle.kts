@@ -25,8 +25,6 @@ android {
 
     defaultConfig {
         applicationId = "com.example.link_flutter_ecommerce_app"
-        
-        // ✅ Kotlin DSL syntax
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

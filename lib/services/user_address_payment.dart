@@ -22,9 +22,12 @@ class CheckoutService {
         .doc(_uid)
         .collection('checkouts')
         .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) {
-              return CheckoutModel.fromMap(doc.data(), id: doc.id);
-            }).toList());
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) {
+                return CheckoutModel.fromMap(doc.data(), id: doc.id);
+              }).toList(),
+        );
   }
 
   Future<void> updateCheckoutData(CheckoutModel checkout) async {
@@ -39,13 +42,21 @@ class CheckoutService {
         .update(checkout.toMap());
   }
 
-  Future<void> deleteCheckoutData(String checkoutId) async {
+  Future<void> deletePaymentMethod(String checkoutId) async {
     await _firestore
         .collection('users')
         .doc(_uid)
         .collection('checkouts')
         .doc(checkoutId)
-        .delete();
+        .update({"paymentMethod": null});
+  }
+
+  Future<void> deleteAddress(String checkoutId) async {
+    await _firestore
+        .collection('users')
+        .doc(_uid)
+        .collection('checkouts')
+        .doc(checkoutId)
+        .update({"shippingAddress": null});
   }
 }
-

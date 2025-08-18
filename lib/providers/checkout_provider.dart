@@ -37,7 +37,6 @@ class CheckoutController extends AsyncNotifier<void> {
   }) async {
     state = const AsyncValue.loading();
 
-    final cartItems = ref.read(cartProvider);
     final total = ref.read(totalProvider);
 
     state = await AsyncValue.guard(() async {

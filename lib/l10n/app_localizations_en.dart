@@ -446,4 +446,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noFavorites => 'No Favorites yet';
+  String get whishlist => 'Wishlist';
+
+  @override
+  String get edit => 'Edit';
 }

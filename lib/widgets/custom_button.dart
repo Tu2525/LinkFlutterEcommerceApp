@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
-import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 
 class CustomButton extends StatelessWidget {
@@ -20,7 +19,6 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -35,7 +33,7 @@ class CustomButton extends StatelessWidget {
               ? row!
               : Text(
                 text ?? AppLocalizations.of(context)!.cont,
-                style: AppTextStyles.subTitle1(isDarkMode),
+                style: const TextStyle(color: Colors.white),
               ),
     );
   }

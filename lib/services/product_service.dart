@@ -216,4 +216,26 @@ class ProductService {
       return [];
     }
   }
+  Stream<List<Product>> searchProductsStream(String query) {
+    return FirebaseFirestore.instance.collection('products').snapshots().map((
+      snapshot,
+    ) {
+      final lowerQuery = query.toLowerCase();
+      final List<Product> results = [];
+
+      for (var doc in snapshot.docs) {
+        final data = doc.data();
+        final name = data['name']?.toString().toLowerCase() ?? '';
+        final description = data['description']?.toString().toLowerCase() ?? '';
+
+        if (name.contains(lowerQuery) || description.contains(lowerQuery)) {
+          results.add(ProductService._mapFirebaseDataToProduct(doc.id, data));
+        }
+      }
+
+      return results;
+    });
+  }
 }
+
+

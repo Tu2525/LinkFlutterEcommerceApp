@@ -6,7 +6,6 @@ import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
 import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/features/orders/domain/entities/order.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
-import 'package:link_flutter_ecommerce_app/features/orders/data/models/order_model.dart';
 import 'package:link_flutter_ecommerce_app/widgets/without_data_widget.dart';
 import '../providers/orders_provider.dart';
 import '../widgets/order_card.dart';

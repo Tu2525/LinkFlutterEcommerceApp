@@ -973,6 +973,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Favorites yet'**
   String get noFavorites;
+
+  /// No description provided for @whishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Wishlist'**
+  String get whishlist;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
 }
 
 class _AppLocalizationsDelegate
