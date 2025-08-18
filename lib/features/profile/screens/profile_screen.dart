@@ -17,6 +17,11 @@ class ProfilePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            const ProfileHeader(),
+            const SizedBox(height: 24),
+            SettingsSection(
+              onSettingsTap: () {
+              },
              const SizedBox(height: 70),
              const CircleAvatar(
               backgroundColor: Colors.white,
