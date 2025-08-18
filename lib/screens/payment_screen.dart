@@ -93,7 +93,8 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                     children: [
                       AddressCard(
                         isDarkMode: isDarkMode,
-                        ontab: () {
+                        shippingAddress: checkout?.shippingAddress,
+                        onTap: () {
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
@@ -107,6 +108,18 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                                   cityController: cityController,
                                   zipcodeController: zipCodeController,
                                   ref: ref,
+                                  onSave: (updatedAddress) async {
+                                    if (checkout == null) return;
+                                    final updatedCheckout = CheckoutModel(
+                                      id: checkout.id,
+                                      shippingAddress: updatedAddress,
+                                      paymentMethod: checkout.paymentMethod,
+                                    );
+                                    await ref
+                                        .read(checkoutServiceProvider)
+                                        .saveCheckoutData(updatedCheckout);
+                                    ref.invalidate(checkoutProvider);
+                                  },
                                 ),
                           );
                         },

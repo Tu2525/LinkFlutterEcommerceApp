@@ -6,10 +6,9 @@ import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 import 'package:link_flutter_ecommerce_app/features/profile/providers/theme_provider.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
 import 'package:link_flutter_ecommerce_app/l10n/app_localizations_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/address_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/credit_card_screen.dart';
 import 'package:link_flutter_ecommerce_app/screens/notification_screen.dart';
-import 'package:link_flutter_ecommerce_app/screens/payment_screen.dart';
-import 'package:link_flutter_ecommerce_app/screens/splash_screen.dart';
 
 class SettingsSection extends ConsumerWidget {
   final VoidCallback onSettingsTap;
@@ -121,7 +120,7 @@ class SettingsSection extends ConsumerWidget {
               
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SplashScreen()),
+                MaterialPageRoute(builder: (context) => const AddressScreen()),
               );
             },
           ),
