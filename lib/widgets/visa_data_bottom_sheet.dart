@@ -22,8 +22,9 @@ class VisaDataBottomSheet extends ConsumerWidget {
     required this.isDarkMode,
     this.isBottomSheet = true,
     this.onSave,
+    this.checkoutId,
   });
-
+  final String? checkoutId;
   final WidgetRef ref;
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
@@ -53,21 +54,33 @@ class VisaDataBottomSheet extends ConsumerWidget {
       );
     } else {
       return Scaffold(
-        backgroundColor:
-            AppColors.cardBackgroundColor(isDarkMode),
+        backgroundColor: AppColors.cardBackgroundColor(isDarkMode),
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-            CustomAppBar(
-              isDarkMode: isDarkMode,
-              title: AppLocalizations.of(context)!.payment,
+            Row(
+              children: [
+                CustomAppBar(
+                  isDarkMode: isDarkMode,
+                  title: AppLocalizations.of(context)!.payment,
+                ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () async {
+                    await ref
+                        .read(checkoutServiceProvider)
+                        .deletePaymentMethod(checkoutId!);
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.delete),
+                ),
+              ],
             ),
             Expanded(
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color:
-                      AppColors.cardBackgroundColor(isDarkMode),
+                  color: AppColors.cardBackgroundColor(isDarkMode),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20.r),
                     topRight: Radius.circular(20.r),
@@ -194,7 +207,9 @@ class VisaDataBottomSheet extends ConsumerWidget {
                                   inputType: TextInputType.number,
                                   validator:
                                       (value) =>
-                                          value == null || value.length != 3 || int.tryParse(value) == null
+                                          value == null ||
+                                                  value.length != 3 ||
+                                                  int.tryParse(value) == null
                                               ? AppLocalizations.of(
                                                 context,
                                               )!.validCvv
