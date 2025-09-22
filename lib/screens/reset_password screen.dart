@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/screens/sign_in_screen.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
+
+class ResetPassword extends StatelessWidget {
+  const ResetPassword({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'images/2a7988bf70f4548361b00378b3d52898cf023ae2.png',
+                    height: screenWidth * 0.25,
+                    width: screenWidth * 0.25,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    AppLocalizations.of(context)!.resetPassText,
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.heading3(isDarkMode),
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.resetPassText2,
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.heading5(isDarkMode),
+                  ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: screenWidth * 0.5,
+                    height: 52,
+                    child: CustomButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignInScreen(),
+                          ),
+                        );
+                      },
+                      text: AppLocalizations.of(context)!.returnToLogin,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

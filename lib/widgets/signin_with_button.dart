@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
 class SigninWithButton extends StatelessWidget {
   const SigninWithButton({
@@ -6,39 +8,35 @@ class SigninWithButton extends StatelessWidget {
     required this.onPressed,
     required this.text,
     required this.icon,
+    required this.isdark,
   });
   final VoidCallback onPressed;
   final String text;
   final Widget icon;
+  final bool isdark;
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xffF4F4F4),
-
+        backgroundColor:
+            isdark ? const Color(0xFF444444) : const Color(0xffF4F4F4),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        minimumSize: Size(double.infinity, 49),
+        minimumSize: const Size(double.infinity, 49),
         elevation: 0, // Full width button
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           icon,
-          SizedBox(width: 40),
+          SizedBox(width: 40.w),
           Text(
             text,
-            style: TextStyle(
-              fontFamily: 'Circular',
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.subTitle1(isDarkMode),
           ),
-          SizedBox(width: 20),
         ],
       ),
     );
-    ;
   }
 }

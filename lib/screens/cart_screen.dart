@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/providers/cart_item_provider.dart';
+import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/empty_cart.dart';
+import 'package:link_flutter_ecommerce_app/widgets/CartWidgets/populated_cart.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
+
+class CartScreen extends ConsumerWidget {
+  const CartScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartItems = ref.watch(cartProvider);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor(isDarkMode),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 16.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const TopBar(showHeartIcon: false),
+
+                  Text(
+                    AppLocalizations.of(context)!.cart,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimaryColor(isDarkMode),
+                    ),
+                  ),
+
+                  if (cartItems.isNotEmpty)
+                    TextButton(
+                      onPressed:
+                          () => ref.read(cartProvider.notifier).clearCart(),
+                      child: Text(
+                        AppLocalizations.of(
+                          context,
+                        )!.removeAll,
+                        style: TextStyle(
+                          color: AppColors.textPrimaryColor(
+                            isDarkMode,
+                          ).withValues(alpha: 0.7),
+                        ),
+                      ),
+                    )
+                  else
+                    const SizedBox(width: 80),
+                ],
+              ),
+            ),
+            Expanded(
+              child:
+                  cartItems.isEmpty
+                      ? const EmptyCart()
+                      : PopulatedCart(cartItems: cartItems),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

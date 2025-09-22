@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "571571264343",
+    "project_id": "link-ecommerce-app",
+    "storage_bucket": "link-ecommerce-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571571264343:android:41ec305faeec1e8aa5bc12",
+        "android_client_info": {
+          "package_name": "com.example.link_flutter_ecommerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp0IYn4N-hD9AgUWMFSbdxINMymKacVSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

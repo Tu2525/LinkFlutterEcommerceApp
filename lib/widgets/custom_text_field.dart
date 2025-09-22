@@ -1,31 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
-    required TextEditingController emailController,
+    required this.controller,
     required this.isPassword,
     required this.hint,
-  }) : _emailController = emailController;
+    required this.isdark,
+    this.validator,
+    this.onChanged,
+  });
 
-  final TextEditingController _emailController;
+  final TextEditingController controller;
   final bool isPassword;
   final String hint;
+  final bool isdark;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isPassword;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: _emailController, // Linking the controller
-      obscureText: isPassword, // If this is a password field
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    return TextFormField(
+      validator: widget.validator,
+      controller: widget.controller,
+      obscureText: _obscureText,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
-        fillColor: Color(0xffF4F4F4),
-        filled: true, // To apply the fill color
-
-        hintText: hint,
-        hintStyle: TextStyle(color: const Color(0xff27272780)),
-        border: OutlineInputBorder(
+        fillColor:
+            widget.isdark ? const Color(0xff342F3F) : const Color(0xffF4F4F4),
+        filled: true,
+        hintText: widget.hint,
+        hintStyle: AppTextStyles.body2(isDarkMode),
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           borderSide: BorderSide.none,
         ),
+        suffixIcon:
+            widget.isPassword
+                ? IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: widget.isdark ? Colors.white70 : Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                )
+                : null,
       ),
     );
   }

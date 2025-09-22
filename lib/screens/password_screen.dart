@@ -1,78 +1,140 @@
 import 'package:flutter/material.dart';
-import 'package:link_flutter_ecommerce_app/widgets/continue_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_colors.dart';
+import 'package:link_flutter_ecommerce_app/constants/app_styles.dart';
+import 'package:link_flutter_ecommerce_app/l10n/app_localizations.dart';
+import 'package:link_flutter_ecommerce_app/providers/auth_provider.dart';
+import 'package:link_flutter_ecommerce_app/screens/forgot_password_screen.dart';
+import 'package:link_flutter_ecommerce_app/screens/main_screen.dart';
+import 'package:link_flutter_ecommerce_app/widgets/ProductDetailsWidgets/top_bar.dart';
+import 'package:link_flutter_ecommerce_app/widgets/custom_button.dart';
 import 'package:link_flutter_ecommerce_app/widgets/custom_text_field.dart';
+import 'package:link_flutter_ecommerce_app/providers/sign_in_provider.dart';
 
-class PasswordScreen extends StatefulWidget {
-  const PasswordScreen({super.key});
+class PasswordScreen extends ConsumerStatefulWidget {
+  final String email;
+  const PasswordScreen({super.key, required this.email});
 
   @override
-  State<PasswordScreen> createState() => _PasswordScreenState();
+  ConsumerState<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class _PasswordScreenState extends State<PasswordScreen> {
-  final TextEditingController _passwordController = TextEditingController();
+class _PasswordScreenState extends ConsumerState<PasswordScreen> {
+  late final TextEditingController passwordController;
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController = TextEditingController(
+      text: ref.read(signInPasswordProvider),
+    );
+    passwordController.addListener(() {
+      ref.read(signInPasswordProvider.notifier).state = passwordController.text;
+    });
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 23),
+      backgroundColor: AppColors.backgroundColor(isDarkMode),
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 123),
+              const TopBar(showHeartIcon: false),
+              const SizedBox(height: 70),
+
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  'Sign In',
-                  style: TextStyle(
-                    fontFamily: 'Circular',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 32,
+                  AppLocalizations.of(context)!.pass,
+                  style: AppTextStyles.heading2(isDarkMode),
+                ),
+              ),
+              const SizedBox(height: 32),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Form(
+                  key: _formKey,
+                  child: CustomTextField(
+                    controller: passwordController,
+                    isPassword: true,
+                    hint: AppLocalizations.of(context)!.pass,
+                    isdark: isDarkMode,
+                    validator: (value) => validatePassword(context, value),
                   ),
                 ),
               ),
-              SizedBox(height: 32),
-              CustomTextField(
-                emailController: _passwordController,
-                isPassword: true,
-                hint: 'Password',
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: CustomButton(
+                  onPressed: () async {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      await ref
+                          .read(authServiceProvider)
+                          .loginUser(
+                            ref: ref,
+                            email: widget.email,
+                            password: passwordController.text.trim(),
+                          );
+
+                      if (!context.mounted) return;
+
+                      final success = ref.read(authSuccessProvider);
+                      final error = ref.read(authErrorProvider);
+
+                      if (success) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MainScreen(),
+                          ),
+                        );
+                      } else if (error.isNotEmpty) {
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(error)));
+                      }
+                    }
+                  },
+                ),
               ),
-              SizedBox(height: 16),
-              ContinueButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PasswordScreen()),
-                  );
-                },
-              ),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  Text(
-                    'Forgot Password ?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Circular',
-                      fontSize: 12,
-                      color: Color(0xff000000),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.forgotPassword,
+                      style: AppTextStyles.subTitle2(isDarkMode),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      ' Reset',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Circular',
-                        fontSize: 12,
-                        color: Colors.black,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgotPassword(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        AppLocalizations.of(context)!.reset,
+                        style: AppTextStyles.heading6(isDarkMode),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
